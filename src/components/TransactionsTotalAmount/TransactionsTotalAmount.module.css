@@ -1,0 +1,58 @@
+.wrapper {
+  display: flex;
+  gap: 20px;
+  font-family: 'Open Sans', sans-serif;
+  margin-bottom: 32px;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+  }
+}
+
+.totalBlock {
+  flex: 1;
+  padding: 16px 24px;
+  border-radius: 16px;
+  background-color: #ffffff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.iconWrapper {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.iconWrapperIncome {
+  background-color: #EBF9F4;
+  color: #58AD8A;
+}
+
+.iconWrapperExpense {
+  background-color: #FFF0F0;
+  color: #D95C5C;
+}
+
+.info h3 {
+  margin: 0 0 4px 0;
+  color: #525252;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.info p {
+  margin: 0;
+  color: #121212;
+  font-size: 20px;
+  font-weight: 700;
+}
