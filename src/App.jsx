@@ -1,7 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
 import "./App.css";
-import TransactionsChart from "./components/TransactionsChart/TransactionsChart";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
@@ -33,8 +32,6 @@ function App() {
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
-      <TransactionsChart/>
-      <TransactionsTotalAmount/>
     </>
   );
 }

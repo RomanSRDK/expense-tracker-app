@@ -10,7 +10,7 @@ import {
   REGISTER,
 } from 'redux-persist';
 import storage from 'redux-persist/lib/storage';   
-import transactionsReducer from './transaction/slice'; 
+import transactionsReducer from './transactions/slice'; 
  
  
 export const store = configureStore({ 
