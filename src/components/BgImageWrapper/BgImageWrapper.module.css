@@ -1,0 +1,38 @@
+.bgWrapper {
+  position: relative;
+  background-image: url("./BgImage/mob.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 100vh;
+}
+
+@media screen and (min-resolution: 192dpi) {
+  .bgWrapper {
+    background-image: url("./BgImage/mob@2x.webp");
+  }
+}
+
+/* Tablet */
+@media screen and (min-width: 768px) {
+  .bgWrapper {
+    background-image: url("./BgImage/tab.webp");
+  }
+}
+@media screen and (min-width: 768px) and (min-resolution: 192dpi) {
+  .bgWrapper {
+    background-image: url("./BgImage/tab@2x.webp");
+  }
+}
+
+/* Desktop */
+@media screen and (min-width: 1440px) {
+  .bgWrapper {
+    background-image: url("./BgImage/desk.webp");
+  }
+}
+@media screen and (min-width: 1440px) and (min-resolution: 192dpi) {
+  .bgWrapper {
+    background-image: url("./BgImage/desk@2x.webp");
+  }
+}
