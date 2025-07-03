@@ -30,3 +30,22 @@ export const register = createAsyncThunk(
     }
   }
 );
+
+/*
+ * POST @ /users/login
+ * body: { email, password }
+ */
+export const logIn = createAsyncThunk(
+  "auth/login",
+  async (credentials, thunkAPI) => {
+    try {
+      const res = await axios.post("auth/login", credentials);
+      // After successful login, add the token to the HTTP header
+      console.log(" Server response:", res.data);
+      setAuthHeader(res.data.token);
+      return res.data;
+    } catch (error) {
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);

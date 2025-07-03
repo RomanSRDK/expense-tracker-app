@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 // import { register, logIn, logOut, refreshUser } from "./operations";
-import { register } from "./operations";
+import { register, logIn } from "./operations";
 
 const authSlice = createSlice({
   name: "auth",
@@ -8,22 +8,30 @@ const authSlice = createSlice({
     user: {
       name: null,
       email: null,
+      avatarUrl: null,
+      currency: "uah",
+      categories: { incomes: [] },
+      transactionsTotal: { incomes: 0, expenses: 0 },
     },
     token: null,
+    refreshToken: null,
     isLoggedIn: false,
     isRefreshing: false,
   },
   extraReducers: (builder) => {
-    builder.addCase(register.fulfilled, (state, action) => {
-      state.user = action.payload.user;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
-    });
-    //   .addCase(logIn.fulfilled, (state, action) => {
-    //     state.user = action.payload.user;
-    //     state.token = action.payload.token;
-    //     state.isLoggedIn = true;
-    //   })
+    builder
+      .addCase(register.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
+        state.isLoggedIn = true;
+      })
+      .addCase(logIn.fulfilled, (state, action) => {
+        state.user = action.payload.user;
+        state.token = action.payload.accessToken;
+        state.refreshToken = action.payload.refreshToken;
+        state.isLoggedIn = true;
+      });
     //   .addCase(logOut.fulfilled, (state) => {
     //     state.user = { name: null, email: null };
     //     state.token = null;

@@ -1,63 +1,23 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import s from "./AuthForm.module.css";
-import * as Yup from "yup";
-import { register } from "../../redux/auth/operations";
-import { useDispatch } from "react-redux";
 
-const validationSchema = Yup.object().shape({
-  name: Yup.string()
-    .min(3, "Too short")
-    .max(20, "Too long")
-    .required("required"),
-  email: Yup.string()
-    .min(4, "Too short")
-    .required("required")
-    .max(30, "Too long")
-    .matches(
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      "Please enter a valid email address"
-    ),
-  password: Yup.string()
-    .min(5, "Too short")
-    .max(20, "Too long")
-    .required("required"),
-});
-
-const AuthForm = () => {
-  const dispatch = useDispatch();
-  const handleSubmit = (values, actions) => {
-    dispatch(
-      register({
-        name: values.name,
-        email: values.email,
-        password: values.password,
-      })
-    )
-      .unwrap()
-      .then(() => {
-        console.log("login success");
-      })
-      .catch(() => {
-        console.log("login error");
-      });
-
-    actions.resetForm();
-  };
-
+const AuthForm = ({ mode, onSubmit, validationSchema, buttonLabel }) => {
   //JSX
   return (
-    <div>
+    <div className={s.background}>
       <Formik
         initialValues={{ name: "", email: "", password: "" }}
-        onSubmit={handleSubmit}
+        onSubmit={onSubmit}
         validationSchema={validationSchema}
       >
         <Form className={s.form}>
-          <div className={s.field_wrap}>
-            <label htmlFor="name">Name</label>
-            <Field type="name" name="name" />
-            <ErrorMessage name="name" component="span" />
-          </div>
+          {mode === "register" && (
+            <div className={s.field_wrap}>
+              <label htmlFor="name">Name</label>
+              <Field type="name" name="name" />
+              <ErrorMessage name="name" component="span" />
+            </div>
+          )}
 
           <div className={s.field_wrap}>
             <label htmlFor="email">Email</label>
@@ -73,11 +33,18 @@ const AuthForm = () => {
 
           <div>
             <button className={s.btn_sign_up} type="submit">
-              Sign Up
+              {buttonLabel}
             </button>
-            <p>
-              Already have account? <a>Sign in</a>
-            </p>
+            {mode === "register" && (
+              <p>
+                Already have account? <a href="/login">Sign In</a>
+              </p>
+            )}
+            {mode === "login" && (
+              <p>
+                Already have account? <a href="/register">Sign Up</a>
+              </p>
+            )}
           </div>
         </Form>
       </Formik>

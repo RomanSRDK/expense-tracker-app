@@ -1,5 +1,7 @@
-/* .form {
-} */
+.background {
+  background: #0c0d0d;
+  padding: 5px;
+}
 
 .field_wrap {
   position: relative;
