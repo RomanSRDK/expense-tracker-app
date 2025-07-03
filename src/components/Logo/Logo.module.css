@@ -1,0 +1,10 @@
+ 
+.logoLink {
+  display: inline-block;  
+  line-height: 0;  
+}
+
+.logoImage {
+  display: block;  
+  height: auto; 
+}
