@@ -1,0 +1,49 @@
+/* src/pages/MainTransactionsPage/MainTransactionsPage.module.css */
+.pageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px); /* Висота екрана мінус висота хедера */
+  padding: 20px;
+  background-color: #f0f2f5; /* Фоновий колір сторінки */
+}
+
+.mainContent {
+  display: flex;
+  gap: 40px;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.infoSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formSection {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.title {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.description {
+  font-size: 16px;
+  color: #525252;
+  margin-bottom: 24px;
+}
+
+/* Адаптивність для планшетів та мобільних */
+@media (max-width: 1024px) {
+  .mainContent {
+    flex-direction: column;
+  }
+}
