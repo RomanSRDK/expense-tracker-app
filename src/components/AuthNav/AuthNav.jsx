@@ -1,18 +1,21 @@
-import CustomNavLink from "../CustomNavLink/CustomNavLink";
+import { NavLink } from "react-router-dom";
+import css from "./AuthNav.module.css";
 
-function AuthNav() {
+const AuthNav = () => {
   return (
-    <nav>
-      <ul>
-        <li>
-          <CustomNavLink to="/register">Sign Up</CustomNavLink>
-        </li>
-        <li>
-          <CustomNavLink to="/login">Sign In</CustomNavLink>
-        </li>
-      </ul>
-    </nav>
+    <div className={css.box}>
+      <nav>
+        <ul className={css.list}>
+          <li>
+            <NavLink to="/register">Register</NavLink>
+          </li>
+          <li>
+            <NavLink to="/login">Login</NavLink>
+          </li>
+        </ul>
+      </nav>
+    </div>
   );
-}
+};
 
 export default AuthNav;

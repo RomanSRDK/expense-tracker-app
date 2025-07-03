@@ -24,4 +24,5 @@ export default SharedLayout;
 {
   /* <Route path="/" element={<SharedLayout />}>
         <Route index element={<WelcomePage />} /> */
+  export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
 }
