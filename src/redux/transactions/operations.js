@@ -1,24 +1,19 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import { instance } from '../auth/operations';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { instance } from "../auth/operations";
+
+// console.log(instance.defaults.headers.common.Authorization);
 
 /**
  Отримуємо всі транзакції користувача @route GET /transactions
  */
 export const getAllTransactions = createAsyncThunk(
-  'transactions/getAll',
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-
-    if (!token) {
-      return thunkAPI.rejectWithValue('No valid token');
-    }
-
+  "transactions/getAll",
+  async (_, { rejectWithValue }) => {
     try {
       const response = await instance.get("/transactions");
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
@@ -27,13 +22,13 @@ export const getAllTransactions = createAsyncThunk(
  Створюємо нову транзакцію @route POST /transactions
  */
 export const addTransaction = createAsyncThunk(
-  'transactions/addTransaction',
+  "transactions/addTransaction",
   async (transactionData, thunkAPI) => {
     const state = thunkAPI.getState();
     const token = state.auth.token;
 
     if (!token) {
-      return thunkAPI.rejectWithValue('No valid token');
+      return thunkAPI.rejectWithValue("No valid token");
     }
 
     try {
@@ -50,15 +45,8 @@ export const addTransaction = createAsyncThunk(
  Видаляємо транзакцію @route DELETE /transactions/{transactionId}
  */
 export const deleteTransaction = createAsyncThunk(
-  'transactions/deleteTransaction',
+  "transactions/deleteTransaction",
   async (transactionId, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-
-    if (!token) {
-      return thunkAPI.rejectWithValue('No valid token');
-    }
-
     try {
       await instance.delete(`/transactions/${transactionId}`);
       thunkAPI.dispatch(getTransactionsSummary());
@@ -73,17 +61,13 @@ export const deleteTransaction = createAsyncThunk(
 оновлюємо транзакцію @route PATCH /transactions/{transactionId}
  */
 export const updateTransaction = createAsyncThunk(
-  'transactions/updateTransaction',
+  "transactions/updateTransaction",
   async ({ transactionId, ...updateData }, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-
-    if (!token) {
-      return thunkAPI.rejectWithValue('No valid token');
-    }
-
     try {
-      const { data } = await instance.patch(`/transactions/${transactionId}`, updateData);
+      const { data } = await instance.patch(
+        `/transactions/${transactionId}`,
+        updateData
+      );
       thunkAPI.dispatch(getTransactionsSummary());
       return data;
     } catch (error) {
@@ -96,16 +80,13 @@ export const updateTransaction = createAsyncThunk(
  Оримуємо підсумкові дані по транзакціях @route GET /transactions/summary
  */
 export const getTransactionsSummary = createAsyncThunk(
-  'transactions/getSummary',
+  "transactions/getSummary",
   async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-
-    if (!token) {
-      return thunkAPI.rejectWithValue('No valid token');
-    }
-
     try {
+      console.log(
+        "Authorization header before request:",
+        instance.defaults.headers.common.Authorization
+      );
       const { data } = await instance.get("/transactions/summary");
       return data;
     } catch (error) {

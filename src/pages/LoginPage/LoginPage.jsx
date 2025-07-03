@@ -31,8 +31,8 @@ function LoginPage() {
       .then(() => {
         console.log("login success");
       })
-      .catch(() => {
-        console.log("login error");
+      .catch((error) => {
+        console.log(error);
       });
 
     actions.resetForm();

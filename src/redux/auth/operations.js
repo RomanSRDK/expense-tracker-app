@@ -1,7 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const instance = axios.create({baseURL: "https://task-manager-api.goit.global/",})
+export const instance = axios.create({
+  baseURL: "https://expense-tracker.b.goit.study/api/",
+});
 
 //  Test
 //  some@gmail.com
@@ -23,7 +25,7 @@ export const register = createAsyncThunk(
       const res = await instance.post("/auth/register", credentials);
       // After successful registration, add the token to the HTTP header
       console.log(" Server response:", res.data);
-      setAuthHeader(res.data.token);
+      setAuthHeader(res.data.accessToken);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -41,7 +43,9 @@ export const logIn = createAsyncThunk(
     try {
       const res = await instance.post("/auth/login", credentials);
       // After successful login, add the token to the HTTP header
-      setAuthHeader(res.data.token);
+      const newToken = res.data.accessToken;
+      setAuthHeader(newToken);
+      console.log("New token from server:", newToken);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
