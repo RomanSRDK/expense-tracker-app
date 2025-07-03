@@ -10,15 +10,23 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fontsource-variable/inter": "^5.2.6",
     "@reduxjs/toolkit": "^2.8.2",
     "axios": "^1.10.0",
     "clsx": "^2.1.1",
+    "date-fns": "^4.1.0",
     "formik": "^2.4.6",
+    "modern-normalize": "^3.0.1",
+    "nanoid": "^5.1.5",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "react-hot-toast": "^2.5.2",
+    "react-icons": "^5.5.0",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.6.3",
+    "recharts": "^3.0.2",
     "redux-persist": "^6.0.0",
+    "styled-components": "^6.1.19",
     "yup": "^1.6.1"
   },
   "devDependencies": {
