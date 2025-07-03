@@ -1,0 +1,46 @@
+.guest {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header {
+  display: flex;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+.barsContainer {
+  display: flex;
+  align-items: center;
+}
+.authDesktop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+@media screen and (max-width: 768px) {
+  .headerContainer {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+  .guest {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+  .barsContainer {
+    display: flex;
+    align-items: center;
+  }
+  .authDesktop {
+    padding-top: 24px;
+    padding-bottom: 24px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .header {
+    padding-top: 32px;
+    padding-bottom: 32px;
+  }
+}
