@@ -1,0 +1,62 @@
+.decorationTab {
+  display: none;
+}
+@media screen and (min-width: 1440px) {
+  .decorationTab {
+    width: 303px;
+    height: 121px;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-family: var(--font-family);
+  }
+
+  .iconBox {
+    width: 43px;
+    height: 43px;
+    border-radius: 13px;
+    background: #0ef387;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    user-select: none;
+  }
+  .amountPercent {
+    display: flex;
+    align-items: center;
+    gap: 23px;
+  }
+  .label {
+    font-weight: 400;
+    font-size: 16px;
+    color: rgba(17, 16, 28, 0.5);
+    margin: 0 0 7px 0;
+  }
+
+  .amount {
+    font-weight: 700;
+    font-size: 24px;
+    color: #11101c;
+    margin: 0;
+  }
+
+  .percent {
+    font-weight: 400;
+    font-size: 12px;
+    color: #02b15a;
+    background: rgba(2, 177, 90, 0.15);
+    border-radius: 13px;
+    width: 58px;
+    height: 22px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0;
+    user-select: none;
+  }
+}
