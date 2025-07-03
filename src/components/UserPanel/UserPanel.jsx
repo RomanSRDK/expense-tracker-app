@@ -13,12 +13,14 @@ const UserPanel = ({ onOpenModal, onOpenLogoutModal }) => {
           Profile settings
         </button>
       </li>
-      <button className={style.userPanelBtn} onClick={onOpenLogoutModal}>
-        <span>
-          <FiLogOut className={style.userPanelIcon} size={16} />
-        </span>
-        Log out
-      </button>
+      <li>
+        <button className={style.userPanelBtn} onClick={onOpenLogoutModal}>
+          <span>
+            <FiLogOut className={style.userPanelIcon} size={16} />
+          </span>
+          Log out
+        </button>
+      </li>
     </ul>
   );
 };
