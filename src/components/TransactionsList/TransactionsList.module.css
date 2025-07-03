@@ -1,0 +1,13 @@
+.titles {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1.5fr 1fr 1fr 1.5fr;
+  padding: 20px 40px;
+  font-weight: 400;
+  color: rgba(250, 250, 250, 0.4);
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+}
