@@ -83,10 +83,6 @@ export const getTransactionsSummary = createAsyncThunk(
   "transactions/getSummary",
   async (_, thunkAPI) => {
     try {
-      console.log(
-        "Authorization header before request:",
-        instance.defaults.headers.common.Authorization
-      );
       const { data } = await instance.get("/transactions/summary");
       return data;
     } catch (error) {
