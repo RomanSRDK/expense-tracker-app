@@ -1,10 +1,14 @@
+import { useDispatch, useSelector } from 'react-redux';
 import TransactionsItem from '../TransactionsItem/TransactionsItem';
 import s from './TransactionsList.module.css';
+import { selectAllTransactions } from '../../redux/transactions/selectors';
+import { getAllTransactions } from '../../redux/transactions/operations';
+import { useEffect } from 'react';
 
 const TransactionsList = () => {
   const transactions = [
     {
-      _id: '6529eff94ceb918e15a171f1',
+      _id: '6529eff94ceb918e15a171f1d',
       type: 'incomes',
       date: '2022-12-28',
       time: '19:45',
@@ -16,7 +20,7 @@ const TransactionsList = () => {
       comment: 'December salary',
     },
     {
-      _id: '6529eff94ceb918e15a171f1',
+      _id: '6529eff94ceb918e15a171f1w',
       type: 'incomes',
       date: '2022-12-28',
       time: '19:45',
@@ -40,6 +44,13 @@ const TransactionsList = () => {
       comment: 'December salaryмвіавммімаа',
     },
   ];
+
+  // const dispatch = useDispatch();
+  // const transactions = useSelector(selectAllTransactions);
+
+  // useEffect(() => {
+  //   dispatch(getAllTransactions());
+  // }, [dispatch]);
 
   return (
     <div>

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import axios from 'axios';
- 
+
 const BASE_URL = 'https://expense-tracker.b.goit.study/api';
 
 /**
@@ -43,11 +43,15 @@ export const addTransaction = createAsyncThunk(
     }
 
     try {
-      const response = await axios.post(`${BASE_URL}/transactions`, transactionData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.post(
+        `${BASE_URL}/transactions`,
+        transactionData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       thunkAPI.dispatch(getTransactionsSummary());
       return response.data;
     } catch (error) {
@@ -97,11 +101,15 @@ export const updateTransaction = createAsyncThunk(
     }
 
     try {
-      const response = await axios.patch(`${BASE_URL}/transactions/${transactionId}`, updateData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await axios.patch(
+        `${BASE_URL}/transactions/${transactionId}`,
+        updateData,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
       thunkAPI.dispatch(getTransactionsSummary());
       return response.data;
     } catch (error) {
