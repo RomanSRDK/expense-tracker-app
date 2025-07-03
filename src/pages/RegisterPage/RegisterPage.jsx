@@ -2,6 +2,7 @@ import { useDispatch } from "react-redux";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import { register } from "../../redux/auth/operations";
 import * as Yup from "yup";
+import s from "./RegisterPage.module.css";
 
 const registerSchema = Yup.object().shape({
   name: Yup.string()
@@ -46,6 +47,14 @@ function RegisterPage() {
   //JSX
   return (
     <div>
+      <div className={s.content_box}>
+        <h2>Sign Up</h2>
+        <p>
+          Step into a world of hassle-free expense management! Your journey
+          towards financial mastery begins here.
+        </p>
+      </div>
+
       <AuthForm
         mode="register"
         onSubmit={handleSubmit}

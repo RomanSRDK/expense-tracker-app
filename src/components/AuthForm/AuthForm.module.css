@@ -1,23 +1,7 @@
-.background {
-  background: #0c0d0d;
-  padding: 5px;
-}
-
 .field_wrap {
+  max-width: 399px;
   position: relative;
   margin-bottom: 24px;
-}
-
-.field_wrap label {
-  position: absolute;
-  top: 12px;
-  left: 18px;
-
-  font-family: var(--font-family);
-  font-weight: 400;
-  font-size: 16px;
-  line-height: 150%;
-  color: rgba(250, 250, 250, 0.4);
 }
 
 .field_wrap:nth-child(3) {
@@ -30,6 +14,12 @@
   border-radius: 12px;
   width: 399px;
   height: 48px;
+  padding-left: 18px;
+  color: #fafafa;
+
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
 
   background-color: transparent;
   transition: border 250ms ease-in-out;
@@ -40,6 +30,14 @@
   border: 1px solid #0ef387;
 }
 
+.toggle_password {
+  /* color: rgb(0, 255, 64); */
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  color: inherit;
+}
+
 .btn_sign_up {
   border-radius: 40px;
   display: flex;
@@ -47,7 +45,7 @@
   align-items: center;
   width: 146px;
   height: 47px;
-  background-color: #0ef387;
+  background-color: var(--color-primary);
   margin-bottom: 20px;
   font-family: var(--font-family);
 
@@ -60,7 +58,7 @@
   background-color: #0ebb69;
 }
 
-input + span {
+.form span {
   padding-left: 18px;
   color: red;
   font-size: 14px;
@@ -78,4 +76,13 @@ input + span {
     text-decoration-skip-ink: none;
     color: #fafafa;
   }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  box-shadow: 0 0 0px 1000px #1e1e1e inset !important;
+  -webkit-text-fill-color: #fafafa !important;
+  transition: background-color 9999s ease-in-out 0s; /* Chrome fix */
 }
