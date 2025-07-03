@@ -1,0 +1,86 @@
+.box {
+  width: 291px;
+  height: 45px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Buttons common */
+.list li a {
+  display: inline-block;
+  text-align: center;
+  border-radius: 40px;
+  padding: 14px 44px;
+  font-family: var(--font-family);
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  transition: background 0.3s, color 0.3s, border 0.3s;
+  height: 45px;
+}
+
+/* Sign Up button */
+.list li:first-child a {
+  background-color: #0ef387;
+  color: #0c0d0d;
+  width: 139px;
+}
+
+/* Sign In button */
+.list li:last-child a {
+  background-color: transparent;
+  border: 1px solid rgba(250, 250, 250, 0.4);
+  color: #fafafa;
+  width: 132px;
+}
+
+/* Hover / focus */
+.list li:first-child a:hover,
+.list li:first-child a:focus {
+  background-color: #0ebb69;
+}
+
+.list li:last-child a:hover,
+.list li:last-child a:focus {
+  border: 1px solid #0ef387;
+}
+
+/* Tablet: min-width 768px */
+@media screen and (min-width: 768px) {
+  .box {
+    width: 304px;
+    height: 47px;
+    justify-content: flex-start;
+  }
+
+  .list li:first-child a {
+    width: 146px;
+    height: 47px;
+    font-size: 16px;
+  }
+
+  .list li:last-child a {
+    width: 138px;
+    height: 47px;
+    font-size: 16px;
+  }
+}
+
+/* Desktop: min-width 1440px */
+@media screen and (min-width: 1440px) {
+  .box {
+    width: 304px;
+    height: 47px;
+    justify-content: flex-start;
+  }
+}

@@ -3,9 +3,9 @@ import { Outlet } from "react-router-dom";
 import Header from "../Header/Header";
 import BgImageWrapper from "../BgImageWrapper/BgImageWrapper";
 import { useSelector } from "react-redux";
-import { selectIsLoggedIn } from "../../redux/auth/authSelectors";
+import { selectIsLoggedIn } from "../../redux/auth/selectors";
 
-const SharedLayout = () => {
+const SharedLayout = ({ children }) => {
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   return (
@@ -20,9 +20,3 @@ const SharedLayout = () => {
 };
 
 export default SharedLayout;
-
-{
-  /* <Route path="/" element={<SharedLayout />}>
-        <Route index element={<WelcomePage />} /> */
-  export const selectIsLoggedIn = (state) => state.auth.isLoggedIn;
-}

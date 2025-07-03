@@ -1,5 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense } from "react";
+import SharedLayout from "./components/SharedLayout/SharedLayout";
 import "./App.css";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
@@ -18,7 +19,11 @@ function App() {
     <>
       <Suspense fallback={null}>
         <Routes>
-          <Route path="/" element={<WelcomePage />} />
+          <Route index element={<WelcomePage />} />
+          <SharedLayout>
+            <Header />
+          </SharedLayout>
+
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route
