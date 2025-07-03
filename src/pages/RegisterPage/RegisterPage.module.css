@@ -1,0 +1,19 @@
+/*  */
+.content_box {
+  max-width: 500px;
+  margin-bottom: 37px;
+}
+
+.content_box h2 {
+  font-weight: var(--font-vweight-regular);
+  font-size: 56px;
+  letter-spacing: -0.02em;
+  color: #fafafa;
+  margin-bottom: 20px;
+}
+
+.content_box p {
+  font-weight: var(--font-vweight-regular);
+  letter-spacing: -0.02em;
+  color: rgba(250, 250, 250, 0.4);
+}
