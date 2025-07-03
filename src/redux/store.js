@@ -1,4 +1,7 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { authReducer } from './auth/slice';
+import transactionsReducer from './transactions/slice';
+
 import {
   persistStore,
   persistReducer,
@@ -7,23 +10,28 @@ import {
   PAUSE,
   PERSIST,
   PURGE,
-  REGISTER,
+  REGISTER
 } from 'redux-persist';
-import storage from 'redux-persist/lib/storage';   
-import transactionsReducer from './transactions/slice'; 
- 
- 
-export const store = configureStore({ 
-  reducer: { 
-    transactions: transactionsReducer,  
-  }, 
+import storage from 'redux-persist/lib/storage';
+
+const authPersistConfig = {
+  key: 'auth',
+  storage,
+  whitelist: ['token', 'refreshToken', 'sid'],
+};
+
+export const store = configureStore({
+  reducer: {
+    auth: persistReducer(authPersistConfig, authReducer),
+    transactions: transactionsReducer,
+  },
   middleware: getDefaultMiddleware =>
     getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
-    }), 
+    }),
   devTools: process.env.NODE_ENV === 'development',
 });
- 
+
 export const persistor = persistStore(store);
