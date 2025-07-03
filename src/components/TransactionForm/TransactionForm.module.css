@@ -1,0 +1,156 @@
+.container {
+  padding: 0 20px;
+  margin: 0 auto;
+}
+
+.form {
+  background-color: #171719;
+  border-radius: 30px;
+  padding: 28px 20px;
+  width: 335px;
+  color: #fafafa;
+  margin: 0 auto;
+}
+
+.transactionType {
+  display: flex;
+  position: relative;
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.customRadioLabel {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: #fafafa;
+  position: relative;
+  height: 24px;
+}
+
+.inputRadio {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.radioIcon {
+  margin-right: 8px;
+}
+
+.iconOn {
+  width: 24px;
+  height: 24px;
+  color: #0ef387;
+}
+
+.iconOff {
+  width: 24px;
+  height: 24px;
+  color: #29292b;
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 8px;
+}
+
+.input {
+  resize: none;
+  width: 100%;
+  background-color: transparent;
+  outline: transparent;
+  border: 1px solid rgba(250, 250, 250, 0.2);
+  border-radius: 12px;
+  height: 48px;
+  padding: 12px 18px;
+  color: #fafafa;
+  scrollbar-width: none;
+  /* scrollbar-color: #444446 #0c0d0d; */
+}
+
+.input[type="number"]::-webkit-outer-spin-button,
+.input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.textarea {
+  height: 97px;
+}
+
+.input::placeholder {
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: rgba(250, 250, 250, 0.4);
+}
+
+.dateTime {
+  display: flex;
+  gap: 20px;
+}
+
+.inputWrapper {
+  width: 100%;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.category {
+  cursor: pointer;
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0ef387;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: #0c0d0d;
+  text-align: center;
+  border: none;
+  border-radius: 40px;
+  width: 119px;
+  height: 47px;
+  transition: background-color var(--animation);
+}
+
+.button:hover {
+  background-color: #0ebb69;
+}
+
+.error {
+  font-size: 12px;
+  position: absolute;
+  bottom: -15px;
+}
+
+@media screen and (min-width: 768px) {
+  .container {
+    padding: 0 32px;
+  }
+
+  .form {
+    padding: 40px 108px;
+    width: 704px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .container {
+    padding: 0 100px;
+  }
+
+  .form {
+    padding: 40px 36px;
+    width: 566px;
+    margin: 0;
+  }
+}

@@ -1,0 +1,54 @@
+.userAvatar,
+.countText {
+  display: none;
+}
+@media (min-width: 768px) {
+  .userAvatar,
+  .countText {
+    display: none;
+  }
+}
+/* === DESKTOP (1280px): === */
+@media (min-width: 1440px) {
+  .alUsersTab {
+    display: flex;
+    flex-direction: row;
+    padding-top: 140px;
+    justify-content: flex-start;
+    align-items: center;
+  }
+  .userAvatar {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+  }
+
+  .countText {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: column;
+    gap: 4px;
+    width: 210px;
+    height: 84px;
+    padding-left: 32px;
+  }
+
+  .usersCount {
+    font-weight: 400;
+    font-size: 28px;
+    letter-spacing: -0.02em;
+    color: white;
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .usersNote {
+    font-weight: 400;
+    font-size: 16px;
+    letter-spacing: -0.02em;
+    color: #666;
+    margin: 0;
+    text-align: left;
+  }
+}
