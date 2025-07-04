@@ -1,13 +1,14 @@
-// import { createPortal } from "react-dom";
+import { createPortal } from "react-dom";
 import css from "./UserSetsModal.module.css";
 
 function UserSetsModal() {
-  return (
+  return createPortal(
     <div className={css.backdrop}>
       <div className={css.modal}>
-        <h2>Profile settings</h2>
+        <h2 style={{ color: "red" }}>Profile settings</h2>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
