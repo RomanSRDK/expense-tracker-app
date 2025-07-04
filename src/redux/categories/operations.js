@@ -6,7 +6,6 @@ export const getCategories = createAsyncThunk(
   async (_, { rejectWithVaue }) => {
     try {
       const { data } = await instance.get("/categories");
-
       return data;
     } catch (error) {
       return rejectWithVaue(error.message);

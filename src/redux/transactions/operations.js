@@ -26,7 +26,7 @@ export const addTransaction = createAsyncThunk(
     // const token = state.auth.token;
 
     // if (!token) {
-    //   return thunkAPI.rejectWithValue("No valid token");
+    //   return thunkAPI.rejectWithValue('No valid token');
     // }
 
     try {

@@ -57,7 +57,7 @@ const AuthForm = ({ mode, onSubmit, validationSchema, buttonLabel }) => {
             <ErrorMessage name="password" component="span" />
           </div>
 
-          <div>
+          <div className={s.sign_box}>
             <button className={s.btn_sign_up} type="submit">
               {buttonLabel}
             </button>

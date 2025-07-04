@@ -1,11 +1,13 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  height: 337px;
+}
+
 .field_wrap {
   max-width: 399px;
   position: relative;
   margin-bottom: 24px;
-}
-
-.field_wrap:nth-child(3) {
-  margin-bottom: 60px;
 }
 
 .form input {
@@ -62,6 +64,10 @@
   padding-left: 18px;
   color: red;
   font-size: 14px;
+}
+
+.sign_box {
+  margin-top: auto;
 }
 
 .btn_sign_up + p {
