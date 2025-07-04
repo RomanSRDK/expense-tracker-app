@@ -1,11 +1,11 @@
-import React, { useRef } from "react";
+// import React, { useRef } from "react";
 import s from "./WelcomePage.module.css";
 import AuthNav from "../../components/AuthNav/AuthNav";
 import AllUsersTab from "../../components/AllUsersTab/AllUsersTab";
 import BgImageWrapper from "../../components/BgImageWrapper/BgImageWrapper";
 
 const WelcomePage = () => {
-  const imageRef = useRef(null);
+  // const imageRef = useRef(null);
 
   return (
     <div className="container">
@@ -33,7 +33,7 @@ const WelcomePage = () => {
         </div>
 
         <div className={s.imageSection}>
-          <BgImageWrapper parentRef={imageRef} />
+          {/* <BgImageWrapper parentRef={imageRef} /> */}
         </div>
       </section>
     </div>

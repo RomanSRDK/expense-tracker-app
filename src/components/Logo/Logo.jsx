@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
  
 import { selectIsLoggedIn } from '../../redux/auth/selectors'; 
-import logoIconUrl from '../../../public/ExpenseTracker.svg'; 
+import logoIconUrl from '../../assets/ExpenseTracker.svg'; 
 
 import styles from './Logo.module.css';
 
