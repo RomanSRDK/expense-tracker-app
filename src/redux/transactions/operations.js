@@ -1,55 +1,40 @@
-import { createAsyncThunk } from '@reduxjs/toolkit';
-import axios from 'axios';
- 
-const BASE_URL = 'https://expense-tracker.b.goit.study/api';
+import { createAsyncThunk } from "@reduxjs/toolkit";
+import { instance } from "../auth/operations";
+
+// console.log(instance.defaults.headers.common.Authorization);
 
 /**
- отримуємо всі транзакції користувача @route GET /transactions
+ Отримуємо всі транзакції користувача @route GET /transactions
  */
 export const getAllTransactions = createAsyncThunk(
-  'transactions/getAll',
-  async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-
-    if (!token) {
-      return thunkAPI.rejectWithValue('No valid token');
-    }
-
+  "transactions/getAll",
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await axios.get(`${BASE_URL}/transactions`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await instance.get("/transactions");
       return response.data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
 
 /**
- сттворюємо нову транзакцію @route POST /transactions
+ Створюємо нову транзакцію @route POST /transactions
  */
 export const addTransaction = createAsyncThunk(
-  'transactions/addTransaction',
+  "transactions/addTransaction",
   async (transactionData, thunkAPI) => {
     const state = thunkAPI.getState();
     const token = state.auth.token;
 
     if (!token) {
-      return thunkAPI.rejectWithValue('No valid token');
+      return thunkAPI.rejectWithValue("No valid token");
     }
 
     try {
-      const response = await axios.post(`${BASE_URL}/transactions`, transactionData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await instance.post("/transactions", transactionData);
       thunkAPI.dispatch(getTransactionsSummary());
-      return response.data;
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -60,21 +45,10 @@ export const addTransaction = createAsyncThunk(
  Видаляємо транзакцію @route DELETE /transactions/{transactionId}
  */
 export const deleteTransaction = createAsyncThunk(
-  'transactions/deleteTransaction',
+  "transactions/deleteTransaction",
   async (transactionId, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-
-    if (!token) {
-      return thunkAPI.rejectWithValue('No valid token');
-    }
-
     try {
-      await axios.delete(`${BASE_URL}/transactions/${transactionId}`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await instance.delete(`/transactions/${transactionId}`);
       thunkAPI.dispatch(getTransactionsSummary());
       return transactionId;
     } catch (error) {
@@ -87,23 +61,15 @@ export const deleteTransaction = createAsyncThunk(
 оновлюємо транзакцію @route PATCH /transactions/{transactionId}
  */
 export const updateTransaction = createAsyncThunk(
-  'transactions/updateTransaction',
+  "transactions/updateTransaction",
   async ({ transactionId, ...updateData }, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-
-    if (!token) {
-      return thunkAPI.rejectWithValue('No valid token');
-    }
-
     try {
-      const response = await axios.patch(`${BASE_URL}/transactions/${transactionId}`, updateData, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const { data } = await instance.patch(
+        `/transactions/${transactionId}`,
+        updateData
+      );
       thunkAPI.dispatch(getTransactionsSummary());
-      return response.data;
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
@@ -111,25 +77,14 @@ export const updateTransaction = createAsyncThunk(
 );
 
 /**
- оримуємо підсумкові дані по транзакціях @route GET /transactions/summary
+ Оримуємо підсумкові дані по транзакціях @route GET /transactions/summary
  */
 export const getTransactionsSummary = createAsyncThunk(
-  'transactions/getSummary',
+  "transactions/getSummary",
   async (_, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
-
-    if (!token) {
-      return thunkAPI.rejectWithValue('No valid token');
-    }
-
     try {
-      const response = await axios.get(`${BASE_URL}/transactions/summary`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      return response.data;
+      const { data } = await instance.get("/transactions/summary");
+      return data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
