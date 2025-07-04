@@ -1,0 +1,59 @@
+.userBarBtnContainer {
+  position: relative;
+  min-width: 194px;
+  height: 56px;
+}
+
+.userBarBtn {
+  background-color: #171719;
+  display: flex;
+  align-items: center;
+  border-radius: 30px;
+  padding: 6px 16px;
+  gap: 8px;
+}
+
+.userBarBtnAvatar {
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+.userBarDefAvatar {
+  font-weight: var(--font-weight-bold);
+  font-size: 20px;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-transform: uppercase;
+  background-color: var(--color-primary);
+  border-radius: 50%;
+}
+
+.userBarBtnName {
+  width: 105px;
+  font-weight: var(--font-weight-regular);
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: var(--color-secondary);
+  overflow: hidden;
+}
+
+.userBarBtnIconWrap {
+  margin-left: auto;
+}
+
+.userBarBtnIcon {
+  color: var(--color-primary);
+  overflow: hidden;
+  transition: transform 300ms ease;
+}
+
+.userBarBtn.open .userBarBtnIcon {
+  transform: rotate(180deg);
+}

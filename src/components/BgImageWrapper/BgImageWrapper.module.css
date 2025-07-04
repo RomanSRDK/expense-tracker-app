@@ -4,7 +4,10 @@
   background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
-  min-height: 100vh;
+  border-radius: 20px;
+  width: 335px;
+  height: 381px;
+  margin: 29px 20px 20px 20px;
 }
 
 @media screen and (min-resolution: 192dpi) {
@@ -17,6 +20,9 @@
 @media screen and (min-width: 768px) {
   .bgWrapper {
     background-image: url("./BgImage/tab.webp");
+    width: 704px;
+    height: 482px;
+    margin: 10px 32px 32px 32px;
   }
 }
 @media screen and (min-width: 768px) and (min-resolution: 192dpi) {
@@ -29,6 +35,9 @@
 @media screen and (min-width: 1440px) {
   .bgWrapper {
     background-image: url("./BgImage/desk.webp");
+    width: 611px;
+    height: 568px;
+    margin: 0 54px 100px 100px;
   }
 }
 @media screen and (min-width: 1440px) and (min-resolution: 192dpi) {

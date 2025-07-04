@@ -1,4 +1,4 @@
-// import DecorationTab from "../DecorationTab/DecorationTab";
+import DecorationTab from "../DecorationTab/DecorationTab";
 import css from "./BgImageWrapper.module.css";
 import { useLocation } from "react-router-dom";
 
@@ -12,7 +12,7 @@ const BgImageWrapper = ({ children }) => {
   }
   return (
     <div className={css.bgWrapper}>
-      {/* <DecorationTab /> */}
+      <DecorationTab />
       {children}
     </div>
   );
