@@ -22,7 +22,7 @@ const TransactionsChart = ({ expenseData = [], totalExpense = 0, categoryColors 
   if (!expenseData || expenseData.length === 0 || totalExpense === 0) {
     return (
       <div className={styles.chartWrapper}>
-        <div className={styles.emptyState}>Немає даних про витрати за цей період.</div>
+        <div className={styles.emptyState}>No data for this period.</div>
       </div>
     );
   }
@@ -34,7 +34,7 @@ const TransactionsChart = ({ expenseData = [], totalExpense = 0, categoryColors 
 
   return (
     <div className={styles.chartWrapper}>
-      <h3>Витрати - Категорії</h3>
+      <h3>Expenses categories</h3>
       <div className={styles.contentContainer}>
         <div className={styles.chartContainer}>
           <ResponsiveContainer width="100%" height={100}>
