@@ -1,10 +1,10 @@
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
-import "./App.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoggedIn, selectIsRefreshing } from "./redux/auth/selectors";
 import { refreshUser } from "./redux/auth/operations";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
+import "./App.css";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
