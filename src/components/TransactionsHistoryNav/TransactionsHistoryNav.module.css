@@ -1,0 +1,39 @@
+.nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  font-weight: 400;
+  font-size: 16px;
+}
+
+.link {
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  padding: 8px 16px;
+  color: #fafafa;
+  border-radius: 40px;  
+  text-decoration: none;
+  align-items: center;
+  width: 126px;
+  height: 43px;
+  background-color: transparent;
+  border: 1px solid rgba(250, 250, 250, 0.4);
+  transition: all 0.3s ease;
+}
+
+.link:hover {
+  border: 1px solid #0ef387;
+}
+
+.activeLink {
+  color: #0c0d0d; 
+  background-color: #0ef387;   
+  border-color: #0ef387;
+}
+
+@media screen and (max-width: 768px) {
+  .nav {
+    font-size: 14px;
+  }
+}
