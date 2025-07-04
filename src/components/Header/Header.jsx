@@ -53,7 +53,10 @@ const Header = () => {
     setIsModalOpen((prev) => !prev);
   };
 
-  const handleOpenModal = () => setIsModalOpen(true);
+  const handleOpenModal = () => {
+    if (isBurgerOpen) closeBurger();
+    setIsModalOpen(true);
+  };
 
   const openLogoutModal = () => {
     closeBurger();
@@ -103,7 +106,7 @@ const Header = () => {
             )}
           </>
         )}
-        {isModalOpen && <UserSetsModal user={user} onClose={toggleModal} />}
+        {isModalOpen && <UserSetsModal />}
         {isLogoutModalOpen && (
           <LogoutConfirmModal
             onConfirm={confirmLogout}
