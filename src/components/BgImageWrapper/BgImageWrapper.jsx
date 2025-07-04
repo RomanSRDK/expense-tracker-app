@@ -21,11 +21,6 @@ const BgImageWrapper = ({ children }) => {
     return null;
   }
 
-  // Render nothing on mobile/tablet if NOT WelcomePage
-  // Always render on desktop (CSS controls visibility)
-  // if (location.pathname !== "/" && window.innerWidth < 1440) {
-  //   return <>{children}</>;
-  // }
   return (
     <div className={css.bgWrapper}>
       <DecorationTab />

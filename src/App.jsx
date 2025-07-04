@@ -1,7 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import { lazy, Suspense, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsLoggedIn, selectIsRefreshing } from "./redux/auth/selectors";
+import { selectIsRefreshing } from "./redux/auth/selectors";
 import { refreshUser } from "./redux/auth/operations";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
 import "./App.css";
@@ -20,7 +20,6 @@ const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
-  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
     dispatch(refreshUser());
@@ -32,7 +31,7 @@ function App() {
       <>
         <Suspense fallback={null}>
           <Routes>
-            <Route isLoggedIn={isLoggedIn} element={<SharedLayout />}>
+            <Route element={<SharedLayout />}>
               <Route index element={<WelcomePage />} />
               <Route path="/register" element={<RegisterPage />} />
               <Route path="/login" element={<LoginPage />} />
