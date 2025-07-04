@@ -1,3 +1,6 @@
+# pullrequests-list
+pullrequests-list.txt
+
 # Logs
 logs
 *.log
@@ -22,6 +25,3 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
-
-# pullrequests-list
-pullrequests-list.txt
