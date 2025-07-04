@@ -9,12 +9,24 @@
 .item {
   color: #fafafa;
   height: 43px;
-  padding-top: 8px;
   transition: var(--animation);
+  display: flex;
 }
 
 .item:hover {
   background: rgba(0, 0, 0, 0.2);
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 40px;
+  width: 100%;
+}
+
+.textWrapper {
+  position: relative;
 }
 
 .category {
@@ -25,16 +37,6 @@
 .type {
   font-size: 9px;
   position: sticky;
-}
-
-.wrapper {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 40px;
-}
-
-.textWrapper {
-  display: block;
 }
 
 .buttons {

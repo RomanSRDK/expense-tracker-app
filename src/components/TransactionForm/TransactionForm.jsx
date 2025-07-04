@@ -1,19 +1,24 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { IoMdRadioButtonOff, IoMdRadioButtonOn } from "react-icons/io";
+import { useId } from "react";
+import toast from "react-hot-toast";
 import { validationTransactionSchema } from "../../validation/validation";
 import { useDispatch, useSelector } from "react-redux";
-import { useId } from "react";
+import {
+  selectIsLoading,
+  selectModalIsOpen,
+} from "../../redux/transactions/selectors";
 import { addTransaction } from "../../redux/transactions/operations";
-import Button from "../Button/Button";
-import toast from "react-hot-toast";
-import { selectModalIsOpen } from "../../redux/transactions/selectors";
-import CategoriesModal from "../CategoriesModal/CategoriesModal";
 import SyncTransactionType from "../SyncTransactionType/SyncTransactionType";
-import css from "./TransactionForm.module.css";
+import CategoriesModal from "../CategoriesModal/CategoriesModal";
 import CategoryField from "../CategoryField/CategoryField";
+import Button from "../Button/Button";
+import css from "./TransactionForm.module.css";
+import Loader from "../Loader/Loader";
 
 const TransactionForm = () => {
   const isModalOpen = useSelector(selectModalIsOpen);
+  const isLoading = useSelector(selectIsLoading);
 
   const dateId = useId();
   const timeId = useId();
@@ -23,11 +28,13 @@ const TransactionForm = () => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, { resetForm }) => {
     try {
       await dispatch(addTransaction(values)).unwrap();
-      toast.success("Transaction add");
-    } catch {
+      toast.success("Transaction added");
+      resetForm();
+    } catch (error) {
+      console.log(error);
       toast.error("Something went wrong, please try different data.");
     }
   };
@@ -36,7 +43,8 @@ const TransactionForm = () => {
   const currentTime = new Date().toISOString().split("T")[1].slice(0, 5);
 
   return (
-    <div className={css.container}>
+    <div>
+      {isLoading && <Loader />}
       <Formik
         initialValues={{
           type: "",

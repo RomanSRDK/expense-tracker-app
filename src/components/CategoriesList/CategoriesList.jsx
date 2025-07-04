@@ -5,28 +5,28 @@ import { LuPen } from "react-icons/lu";
 import { RiDeleteBinLine } from "react-icons/ri";
 import { deleteCategory } from "../../redux/categories/operations";
 import toast from "react-hot-toast";
-import css from "./CategoriesList.module.css";
-import { selectError } from "../../redux/transactions/selectors";
-import { setCategory } from "../../redux/categories/slice";
+import { setCategory, setEditCategory } from "../../redux/categories/slice";
 import { closeCategoriesModal } from "../../redux/transactions/slice";
+import { selctsetTransactionType } from "../../redux/transactions/selectors";
+import css from "./CategoriesList.module.css";
 
 const CategoriesList = () => {
   const dispatch = useDispatch();
   const filteredCategories = useSelector(selectFilteredCategories);
-  const error = useSelector(selectError);
-
-  const handleDelete = async ({ id, type }) => {
-    try {
-      await dispatch(deleteCategory({ id, type })).unwrap();
-      toast.success(`Category sucsesfully deleted`);
-    } catch {
-      toast.error(error);
-    }
-  };
+  const selectedTransactionType = useSelector(selctsetTransactionType);
 
   const handleSubmit = ({ id, name }) => {
     dispatch(setCategory({ id, name }));
     dispatch(closeCategoriesModal());
+  };
+
+  const handleDelete = async ({ id, type, name }) => {
+    try {
+      await dispatch(deleteCategory({ id, type })).unwrap();
+      toast.success(`Category "${name}" sucsesfully deleted`);
+    } catch (error) {
+      toast.error(error);
+    }
   };
 
   return (
@@ -37,7 +37,9 @@ const CategoriesList = () => {
             <div className={css.wrapper}>
               <div className={css.textWrapper}>
                 <div className={css.category}>{category.categoryName}</div>
-                <div className={css.type}>({category.type})</div>
+                {selectedTransactionType === "all" && (
+                  <div className={css.type}>({category.type})</div>
+                )}
               </div>
               <div className={css.buttons}>
                 <button
@@ -51,13 +53,28 @@ const CategoriesList = () => {
                 >
                   <FaCheck className={css.icon} />
                 </button>
-                <button className={css.button}>
+                <button
+                  className={css.button}
+                  onClick={() =>
+                    dispatch(
+                      setEditCategory({
+                        id: category._id,
+                        type: category.type,
+                        name: category.categoryName,
+                      })
+                    )
+                  }
+                >
                   <LuPen className={css.icon} />
                 </button>
                 <button
                   className={css.button}
                   onClick={() =>
-                    handleDelete({ id: category._id, type: category.type })
+                    handleDelete({
+                      id: category._id,
+                      type: category.type,
+                      name: category.categoryName,
+                    })
                   }
                 >
                   <RiDeleteBinLine className={css.icon} />

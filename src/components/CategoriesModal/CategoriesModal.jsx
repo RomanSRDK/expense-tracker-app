@@ -1,14 +1,31 @@
 import { createPortal } from "react-dom";
-import { closeCategoriesModal } from "../../redux/transactions/slice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { CgClose } from "react-icons/cg";
-import css from "./CategoriesModal.module.css";
 import CategoriesList from "../CategoriesList/CategoriesList";
 import { getCategories } from "../../redux/categories/operations";
+import CategoriesForm from "../CategoriesForm/CategoriesForm";
+import { selctsetTransactionType } from "../../redux/transactions/selectors";
+import {
+  selectEditCategory,
+  selectIsLoading,
+} from "../../redux/categories/selectors";
+import Loader from "../Loader/Loader";
+import { closeCategoriesModal } from "../../redux/transactions/slice";
+import EditCategoriesForm from "../EditCategoriesForm/EditCategoriesForm";
+import css from "./CategoriesModal.module.css";
 
 const CategoriesModal = () => {
   const dispatch = useDispatch();
+  const selectedTransactionType = useSelector(selctsetTransactionType);
+  const isLoading = useSelector(selectIsLoading);
+  const categoryToEdit = useSelector(selectEditCategory);
+
+  const typeNames = {
+    all: "All categories",
+    expenses: "Expenses",
+    incomes: "Incomes",
+  };
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -37,6 +54,7 @@ const CategoriesModal = () => {
       aria-modal="true"
       onClick={() => dispatch(closeCategoriesModal())}
     >
+      {isLoading && <Loader />}
       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
         <button
           className={css.closeButton}
@@ -45,12 +63,16 @@ const CategoriesModal = () => {
         >
           <CgClose className={css.closeIcon} />
         </button>
-        <div className={css.container}>
-          <h2 className={css.title}>Expenses</h2>
+        <div className={css.modalContainer}>
+          <h2 className={css.title}>
+            {typeNames[selectedTransactionType] || selectedTransactionType}
+          </h2>
           <h3 className={css.subtitle}>All Category</h3>
         </div>
         <CategoriesList />
-        <div className={css.container}></div>
+        <div className={`${css.modalContainer} ${css.form}`}>
+          {categoryToEdit ? <EditCategoriesForm /> : <CategoriesForm />}
+        </div>
       </div>
     </div>,
     document.body
