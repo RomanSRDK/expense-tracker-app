@@ -56,3 +56,9 @@
   letter-spacing: -0.02em;
   color: #fafafa;
 }
+
+@media (max-width: 768px) {
+}
+
+@media (max-width: 1440px) {
+}

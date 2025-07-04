@@ -8,7 +8,7 @@ const BASE_URL = 'https://expense-tracker.b.goit.study/api';
  */
 export const getAllTransactions = createAsyncThunk(
   'transactions/getAll',
-  async (_, thunkAPI) => {
+  async (type = '', thunkAPI) => {
     const state = thunkAPI.getState();
     const token = state.auth.token;
 
@@ -17,7 +17,10 @@ export const getAllTransactions = createAsyncThunk(
     }
 
     try {
-      const response = await axios.get(`${BASE_URL}/transactions`, {
+      const url = type
+        ? `${BASE_URL}/transactions/${type}`
+        : `${BASE_URL}/transactions`;
+      const response = await axios.get(url, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

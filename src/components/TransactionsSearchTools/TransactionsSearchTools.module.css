@@ -1,0 +1,95 @@
+.tools {
+  display: flex;
+  row-gap: 10px;
+  padding: 20px 13px 20px 20px;
+  background: #171719;
+  align-items: center;
+  flex-wrap: wrap;
+  max-width: 335px;
+}
+
+.input,
+.date {
+  position: relative;
+  display: inline-block;
+  padding: 15px 30px;
+  width: 100%;
+  height: 50px;
+  border-radius: 30px;
+}
+
+.input {
+  background: #0c0d0d;
+}
+
+.date {
+  border: 1px solid rgba(250, 250, 250, 0.2);
+}
+
+.searchInput {
+  border: none;
+  background: #0c0d0d;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: rgba(250, 250, 250, 0.4);
+}
+
+.search,
+.calendar {
+  position: absolute;
+  right: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  color: #0ef387;
+}
+
+.datePicker {
+  border: none;
+  background-color: inherit;
+  font-weight: 400;
+  font-size: 16px;
+  letter-spacing: -0.02em;
+  color: #0c0d0d;
+}
+
+.datePicker:focus,
+.searchInput:focus {
+  outline: none;
+}
+
+@media (min-width: 768px) {
+  .tools {
+    column-gap: 13px;
+    row-gap: 0;
+    padding: 32px 32px 16px 32px;
+    flex-wrap: nowrap;
+  }
+
+  .input {
+    width: 261px;
+  }
+
+  .date {
+    width: 187px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .tools {
+    column-gap: 13px;
+
+    padding: 20px 40px;
+    flex-wrap: nowrap;
+  }
+
+  .input {
+    width: 261px;
+  }
+
+  .date {
+    width: 187px;
+  }
+}

@@ -1,9 +1,16 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { useEffect, useState } from 'react';
 import TransactionsItem from '../TransactionsItem/TransactionsItem';
 import s from './TransactionsList.module.css';
-import { selectAllTransactions } from '../../redux/transactions/selectors';
+
+import {
+  selectAllTransactions,
+  selectIsLoading,
+  selectError,
+} from '../../redux/transactions/selectors';
+
 import { getAllTransactions } from '../../redux/transactions/operations';
-import { useEffect } from 'react';
+import Loader from '../Loader/Loader';
 
 const TransactionsList = () => {
   const transactions = [
@@ -47,13 +54,21 @@ const TransactionsList = () => {
 
   // const dispatch = useDispatch();
   // const transactions = useSelector(selectAllTransactions);
+  // const isLoading = useSelector(selectIsLoading);
+  // const error = useSelector(selectError);
+
+  // const [filterType, setFilterType] = useState('incomes'); // incomes | expenses
 
   // useEffect(() => {
-  //   dispatch(getAllTransactions());
-  // }, [dispatch]);
+  //   if (filterType === 'all') {
+  //     dispatch(getAllTransactions());
+  //   } else {
+  //     dispatch(getAllTransactions(filterType));
+  //   }
+  // }, [dispatch, filterType]);
 
   return (
-    <div>
+    <div className={s.wrapper}>
       <div className={s.titles}>
         <p>Category</p>
         <p>Comment</p>
@@ -62,6 +77,10 @@ const TransactionsList = () => {
         <p>Sum</p>
         <p>Actions</p>
       </div>
+
+      {/* {isLoading && <Loader />}
+      {error && <p className={s.error}>Error: {error}</p>} */}
+
       <div className={s.items}>
         {transactions.map(
           ({ _id, sum, date, time, comment, category: { categoryName } }) => (

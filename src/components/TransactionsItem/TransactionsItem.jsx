@@ -6,7 +6,18 @@ import { FaRegTrashAlt } from 'react-icons/fa';
 
 const TransactionsItem = ({ id, sum, date, time, comment, categoryName }) => {
   const dispatch = useDispatch();
-  const handleDelete = () => dispatch(deleteContact(id));
+  const handleDelete = () => {
+    dispatch(deleteTransaction(id))
+      .unwrap()
+      .then(() => {
+        // опціонально: показати toast.success
+        toast.success('Contact deleted successfully');
+      })
+      .catch(() => {
+        // опціонально: показати toast.error
+        toast.error('Something went wrong. Try again');
+      });
+  };
   const handleChange = () => dispatch();
 
   return (
