@@ -112,10 +112,11 @@
     flex-shrink: 0;
   }
   .main {
-    display: flex;
+    /* display: flex;
     flex-direction: row-reverse;
     justify-content: center;
-    gap: 54px;
+    gap: 54px; */
+    margin-top: 0;
   }
   .subheading {
     text-align: left;
