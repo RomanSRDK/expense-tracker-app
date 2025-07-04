@@ -1,24 +1,23 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import s from './TransactionsItem.module.css';
 import { LuPen } from 'react-icons/lu';
 import { FaRegTrashAlt } from 'react-icons/fa';
+import TransactionForm from '../TransactionForm/TransactionForm';
 
 const TransactionsItem = ({ id, sum, date, time, comment, categoryName }) => {
   const dispatch = useDispatch();
+
   const handleDelete = () => {
     dispatch(deleteTransaction(id))
       .unwrap()
       .then(() => {
-        // опціонально: показати toast.success
         toast.success('Contact deleted successfully');
       })
       .catch(() => {
-        // опціонально: показати toast.error
         toast.error('Something went wrong. Try again');
       });
   };
-  const handleChange = () => dispatch();
 
   return (
     <div className={s.container} key={id}>
@@ -29,13 +28,13 @@ const TransactionsItem = ({ id, sum, date, time, comment, categoryName }) => {
         <p className={s.time}>{time}</p>
         <p className={s.sum}>{sum}</p>
         <div className={s.btn}>
-          <button className={s.edit} type="button" onClick={handleChange}>
+          <button className={s.edit} type="button">
             <LuPen />
-            Edit
+            <p className={s.text}>Edit</p>
           </button>
           <button className={s.delete} type="button" onClick={handleDelete}>
             <FaRegTrashAlt />
-            Delete
+            <p className={s.text}>Delete</p>
           </button>
         </div>
       </div>

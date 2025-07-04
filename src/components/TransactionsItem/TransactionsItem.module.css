@@ -1,13 +1,14 @@
 .container {
   background-color: #1a1a1a;
-  padding: 20px 40px;
+  padding: 20px 20px;
 }
 
 .wrapper {
   display: grid;
-  grid-template-columns: 1fr 2fr 1.5fr 1fr 1fr 1.5fr;
+  grid-template-columns: 80px 89px 70px 60px 95px 96px;
   align-items: center;
   color: #fff;
+  min-width: 100%; /* ширина для скролу */
 }
 
 .categoryName,
@@ -15,10 +16,17 @@
 .date,
 .time,
 .sum {
-  max-width: 123px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.comment {
+  max-width: 56px;
+}
+
+.date {
+  max-width: 53px;
 }
 
 .btn {
@@ -35,7 +43,7 @@
   color: #000;
   border: none;
   border-radius: 40px;
-  padding: 14px 32px;
+  padding: 14px 14px;
   cursor: pointer;
   font-weight: 400;
   font-size: 16px;
@@ -49,7 +57,7 @@
   color: #fff;
   border: none;
   border-radius: 40px;
-  padding: 14px 30px;
+  padding: 14px 14px;
   cursor: pointer;
   font-weight: 400;
   font-size: 16px;
@@ -57,8 +65,53 @@
   color: #fafafa;
 }
 
-@media (max-width: 768px) {
+.text {
+  display: none;
 }
 
-@media (max-width: 1440px) {
+@media (min-width: 768px) {
+  .container {
+    padding: 20px 32px;
+  }
+
+  .wrapper {
+    grid-template-columns: 100px 120px 100px 90px 120px 100px;
+  }
+
+  .comment {
+    max-width: 89px;
+  }
+
+  .date {
+    max-width: 74px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .container {
+    padding: 20px 40px;
+  }
+
+  .wrapper {
+    grid-template-columns: 100px 200px 180px 150px 220px 180px;
+  }
+
+  .comment {
+    max-width: 123px;
+  }
+
+  .date {
+    max-width: 145px;
+  }
+  .text {
+    display: block;
+  }
+
+  .edit {
+    padding: 14px 32px;
+  }
+
+  .delete {
+    padding: 14px 32px;
+  }
 }
