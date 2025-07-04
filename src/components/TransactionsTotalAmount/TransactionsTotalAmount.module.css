@@ -1,0 +1,53 @@
+.wrapper {
+  display: flex;
+  gap: 24px;
+   font-family: var(--font-base);
+  font-weight: var(--font-weight-regular);
+
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+  }
+}
+
+.totalBlock {
+  flex: 1;
+  padding: 32px 23px;
+  border-radius: 30px;
+  background-color: #171719;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.iconWrapper {
+  width: 43px;
+  height: 43px;
+  border-radius: 13px;
+  font-size: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center; 
+}
+
+.iconWrapperIncome, .iconWrapperExpense  {
+  background-color: #0ef387;;
+  color: #0c0d0d;;
+}
+ 
+.info h3 {
+     font-family: var(--font-base);
+font-weight: var(--font-weight-regular);
+font-size: 16px; 
+color:  var(--color-secondary);
+}
+
+.info p { 
+      font-family: var(--font-base);
+font-weight: var(--font-weight-bold);
+font-size: 24px; 
+color:  var(--color-text);
+}

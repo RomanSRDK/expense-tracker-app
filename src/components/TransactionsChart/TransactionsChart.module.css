@@ -1,0 +1,83 @@
+.chartWrapper {
+  padding: 24px;
+   background-color: #171719;
+  border-radius: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  font-family: 'Open Sans', sans-serif;
+}
+
+.chartWrapper h3 {
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  color: #121212;
+  text-align: center;
+}
+
+.contentContainer {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+@media (max-width: 768px) {
+  .contentContainer {
+    flex-direction: column;
+    gap: 24px;
+  }
+}
+
+.chartContainer {
+  width: 200px;
+  height: 120px;  
+  position: relative;
+}
+
+.totalAmountInChart {
+  position: absolute;
+  top: 65%;  
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  font-weight: 700;
+  font-size: 18px;
+  color: #121212;
+}
+
+.categoriesList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.categoryItem {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: #525252;
+}
+
+.colorMarker {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+
+.categoryName {
+  flex-grow: 1;
+}
+
+.categoryPercentage {
+  font-weight: 600;
+  color: #121212;
+}
+
+.emptyState {
+  text-align: center;
+  color: #888;
+  padding: 40px 0;
+}
