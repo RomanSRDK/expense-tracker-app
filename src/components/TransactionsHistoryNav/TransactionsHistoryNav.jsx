@@ -1,5 +1,5 @@
 function TransactionsHistoryNav() {
-  return <div>TransactionsHistoryNav</div>;
+  return <div></div>;
 }
 
 export default TransactionsHistoryNav;
