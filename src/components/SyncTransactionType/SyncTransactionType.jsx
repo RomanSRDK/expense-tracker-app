@@ -1,20 +1,24 @@
-import { useFormikContext } from "formik";
-import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useRef } from "react";
+import { useFormikContext } from "formik";
+import { clearCategory } from "../../redux/categories/slice";
+import { selectCategory } from "../../redux/categories/selectors";
 import {
   setTransactionType,
   clearTransactionType,
 } from "../../redux/transactions/slice";
-import { clearCategory } from "../../redux/categories/slice";
-import { selectTransactionType } from "../../redux/transactions/selectors";
-import { selectCategory } from "../../redux/categories/selectors";
+import {
+  selectSelectedRadioType,
+  selectTransactionType,
+} from "../../redux/transactions/selectors";
 
 const SyncTransactionType = () => {
   const dispatch = useDispatch();
-  const { values } = useFormikContext();
+  const { values, setFieldValue } = useFormikContext();
 
   const prevType = useRef(values.type);
   const selectedTransactionType = useSelector(selectTransactionType);
+  const selectedRadioType = useSelector(selectSelectedRadioType);
   const selectedCategory = useSelector(selectCategory);
 
   useEffect(() => {
@@ -22,6 +26,12 @@ const SyncTransactionType = () => {
       dispatch(setTransactionType(values.type));
     }
   }, [values.type, selectedTransactionType, dispatch]);
+
+  useEffect(() => {
+    if (selectedRadioType && selectedRadioType !== values.type) {
+      setFieldValue("type", selectedRadioType);
+    }
+  }, [selectedRadioType, values.type, setFieldValue]);
 
   useEffect(() => {
     const typeChanged = prevType.current && prevType.current !== values.type;

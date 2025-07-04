@@ -27,3 +27,7 @@ export const selectModalIsOpen = (state) => state.transactions.modalIsOpen;
 
 // Повертає тип обраної транзакції
 export const selectTransactionType = (state) => state.transactions.selectedType;
+
+// Повертає обраний тип з модалки
+export const selectSelectedRadioType = (state) =>
+  state.transactions.selectedRadioType;

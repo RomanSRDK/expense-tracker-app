@@ -29,6 +29,7 @@ const initialState = {
   error: null,
   modalIsOpen: false,
   selectedType: "all",
+  selectedRadioType: "",
 };
 
 const transactionsSlice = createSlice({
@@ -46,6 +47,12 @@ const transactionsSlice = createSlice({
     },
     clearTransactionType(state) {
       state.selectedType = "all";
+    },
+    setTransactionRadioType(state, { payload }) {
+      state.selectedRadioType = payload;
+    },
+    clearTransactionRadioType(state) {
+      state.selectedRadioType = "all";
     },
   },
   extraReducers: (builder) => {
@@ -104,5 +111,7 @@ export const {
   closeCategoriesModal,
   setTransactionType,
   clearTransactionType,
+  setTransactionRadioType,
+  clearTransactionRadioType,
 } = transactionsSlice.actions;
 export const transactionsReducer = transactionsSlice.reducer;

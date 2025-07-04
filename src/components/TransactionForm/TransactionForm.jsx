@@ -5,19 +5,22 @@ import toast from "react-hot-toast";
 import { validationTransactionSchema } from "../../validation/validation";
 import { useDispatch, useSelector } from "react-redux";
 import { addTransaction } from "../../redux/transactions/operations";
+import { clearCategory } from "../../redux/categories/slice";
+import {
+  clearTransactionRadioType,
+  clearTransactionType,
+  setTransactionRadioType,
+} from "../../redux/transactions/slice";
 import {
   selectIsLoading,
   selectModalIsOpen,
 } from "../../redux/transactions/selectors";
-import SyncSelectedCategoryType from "../SyncSelectedCategoryType/SyncSelectedCategoryType";
 import SyncTransactionType from "../SyncTransactionType/SyncTransactionType";
 import CategoriesModal from "../CategoriesModal/CategoriesModal";
 import CategoryField from "../CategoryField/CategoryField";
 import Loader from "../Loader/Loader";
 import Button from "../Button/Button";
 import css from "./TransactionForm.module.css";
-import { clearCategory } from "../../redux/categories/slice";
-import { clearTransactionType } from "../../redux/transactions/slice";
 
 const TransactionForm = () => {
   const isModalOpen = useSelector(selectModalIsOpen);
@@ -37,6 +40,7 @@ const TransactionForm = () => {
       toast.success("Transaction added");
       dispatch(clearCategory());
       dispatch(clearTransactionType());
+      dispatch(clearTransactionRadioType());
       resetForm();
     } catch (error) {
       console.log(error);
@@ -65,15 +69,20 @@ const TransactionForm = () => {
         {({ values, setFieldValue }) => (
           <>
             <SyncTransactionType />
-            {/* <SyncSelectedCategoryType /> */}
             <Form className={css.form}>
               <div className={css.transactionType}>
                 <label className={css.customRadioLabel}>
-                  <Field
-                    className={css.inputRadio}
+                  <input
                     type="radio"
                     name="type"
                     value="expenses"
+                    checked={values.type === "expenses"}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFieldValue("type", value);
+                      dispatch(setTransactionRadioType(value));
+                    }}
+                    className={css.inputRadio}
                   />
                   <span className={css.radioIcon}>
                     {values.type === "expenses" ? (
@@ -84,12 +93,19 @@ const TransactionForm = () => {
                   </span>
                   Expense
                 </label>
+
                 <label className={css.customRadioLabel}>
-                  <Field
-                    className={css.inputRadio}
+                  <input
                     type="radio"
                     name="type"
                     value="incomes"
+                    checked={values.type === "incomes"}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFieldValue("type", value);
+                      dispatch(setTransactionRadioType(value));
+                    }}
+                    className={css.inputRadio}
                   />
                   <span className={css.radioIcon}>
                     {values.type === "incomes" ? (
@@ -106,6 +122,7 @@ const TransactionForm = () => {
                   component="div"
                 />
               </div>
+
               <div className={css.dateTime}>
                 <div className={css.inputWrapper}>
                   <label className={css.label} htmlFor={dateId}>

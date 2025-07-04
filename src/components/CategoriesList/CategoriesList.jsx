@@ -8,7 +8,7 @@ import toast from "react-hot-toast";
 import { setCategory, setEditCategory } from "../../redux/categories/slice";
 import {
   closeCategoriesModal,
-  setTransactionType,
+  setTransactionRadioType,
 } from "../../redux/transactions/slice";
 import css from "./CategoriesList.module.css";
 
@@ -19,7 +19,7 @@ const CategoriesList = () => {
 
   const handleSubmit = ({ id, name, type }) => {
     dispatch(setCategory({ id, name }));
-    dispatch(setTransactionType(type));
+    dispatch(setTransactionRadioType(type));
     dispatch(closeCategoriesModal());
   };
 
