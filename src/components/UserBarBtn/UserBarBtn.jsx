@@ -45,8 +45,8 @@ const UserBarBtn = ({ onOpenModal, onOpenLogoutModal }) => {
             alt="user avatar"
           />
         ) : (
-          <span className={css.userBarDefAvatar}>{userSelectInfo.name}</span>
-//           <span className={css.userBarDefAvatar}>{userName[0]}</span>
+          // <span className={css.userBarDefAvatar}>{userSelectInfo.name}</span>
+          <span className={css.userBarDefAvatar}>{userName[0]}</span>
         )}
         <span className={css.userBarBtnName}>{userName}</span>
         <span className={css.userBarBtnIconWrap}>
