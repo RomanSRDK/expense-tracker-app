@@ -1,8 +1,8 @@
-
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux'; 
 import { getTransactionsSummary } from '../../redux/transactions/operations'; 
 import { selectIsLoading } from '../../redux/transactions/selectors';
+import TransactionForm from "../../components/TransactionForm/TransactionForm";
 
 // Імпортуємо дочірні компоненти
 import TransactionsTotalAmount from '../../components/TransactionsTotalAmount/TransactionsTotalAmount';
@@ -51,8 +51,11 @@ const MainTransactionsPage = () => {
 
         {/* Права колонка з формою */}
         <section className={styles.formSection}>
-           
-           <TransactionForm />
+          <h1 className={styles.title}>Створення транзакції</h1>
+          <p className={styles.description}>
+            Внесіть дані про ваші доходи або витрати.
+          </p>
+          <TransactionForm />
         </section>
       </main>
     </div>

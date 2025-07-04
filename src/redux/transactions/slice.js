@@ -1,38 +1,51 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import {
   getAllTransactions,
   addTransaction,
   deleteTransaction,
   updateTransaction,
   getTransactionsSummary,
-} from './operations';
+} from "./operations";
 
-const handlePending = state => {
+const handlePending = (state) => {
   state.isLoading = true;
   state.error = null;
 };
 
-const handleRejected = (state, action) => {
+const handleRejected = (state, { payload }) => {
   state.isLoading = false;
-  state.error = action.payload;
+  state.error = payload;
 };
 
-const initialState = { 
-  items: [], 
+const initialState = {
+  items: [],
   summary: {
     categoriesSummary: [],
     expenseSummary: 0,
     incomeSummary: 0,
-    periodTotal: 0,  
+    periodTotal: 0,
   },
   isLoading: false,
   error: null,
+  modalIsOpen: false,
+  selectedType: "all",
 };
 
 const transactionsSlice = createSlice({
-  name: 'transactions',
+  name: "transactions",
   initialState,
-  extraReducers: builder => {
+  reducers: {
+    openCategoriesModal(state) {
+      state.modalIsOpen = true;
+    },
+    closeCategoriesModal(state) {
+      state.modalIsOpen = false;
+    },
+    setTransactionType(state, { payload }) {
+      state.selectedType = payload;
+    },
+  },
+  extraReducers: (builder) => {
     builder
       // Отримання всіх транзакцій
       .addCase(getAllTransactions.pending, handlePending)
@@ -54,7 +67,7 @@ const transactionsSlice = createSlice({
       .addCase(deleteTransaction.pending, handlePending)
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = state.items.filter(item => item.id !== action.payload);
+        state.items = state.items.filter((item) => item.id !== action.payload);
       })
       .addCase(deleteTransaction.rejected, handleRejected)
 
@@ -62,7 +75,9 @@ const transactionsSlice = createSlice({
       .addCase(updateTransaction.pending, handlePending)
       .addCase(updateTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
-        const index = state.items.findIndex(item => item.id === action.payload.id);
+        const index = state.items.findIndex(
+          (item) => item.id === action.payload.id
+        );
         if (index !== -1) {
           state.items[index] = action.payload;
         }
@@ -79,4 +94,6 @@ const transactionsSlice = createSlice({
   },
 });
 
-export default transactionsSlice.reducer;
+export const { openCategoriesModal, closeCategoriesModal, setTransactionType } =
+  transactionsSlice.actions;
+export const transactionsReducer = transactionsSlice.reducer;
