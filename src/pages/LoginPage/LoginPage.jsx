@@ -1,7 +1,8 @@
 import { useDispatch } from "react-redux";
-import { logIn } from "../../redux/auth/operations";
+import { logIn, logOut } from "../../redux/auth/operations";
 import * as Yup from "yup";
 import AuthForm from "../../components/AuthForm/AuthForm";
+import s from "./RegisterPage.module.css";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -36,11 +37,30 @@ function LoginPage() {
       });
 
     actions.resetForm();
+
+    //
   };
 
   //JSX
   return (
     <div>
+      <div className={s.content_box}>
+        <h2>Sign In</h2>
+        <p>
+          Welcome back to effortless expense tracking! Your financial dashboard
+          awaits.
+        </p>
+      </div>
+
+      {/* {next button is for a while} */}
+      <button
+        type="button"
+        onClick={() => dispatch(logOut())}
+        className={s.log_out}
+      >
+        Log out
+      </button>
+
       <AuthForm
         mode="login"
         onSubmit={handleSubmit}
