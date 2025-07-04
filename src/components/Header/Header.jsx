@@ -12,7 +12,7 @@ import UserSetsModal from "../UserSetsModal/UserSetsModal";
 
 import { selectIsLoggedIn } from "../../redux/auth/selectors";
 import { selectUser } from "../../redux/user/selectors";
-// import { logOut } from "../../redux/auth/operations";
+import { logOut } from "../../redux/auth/operations";
 
 import s from "./Header.module.css";
 
