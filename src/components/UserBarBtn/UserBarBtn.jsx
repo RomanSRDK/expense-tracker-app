@@ -6,14 +6,14 @@ import { useSelector } from "react-redux";
 import clsx from "clsx";
 import css from "./UserBarBtn.module.css";
 
-import { selectAvatarUrl, selectUser } from "../../redux/auth/selectors";
+import { selectUserAvatar, selectUserName } from "../../redux/user/selectors";
 
 const UserBarBtn = ({ onOpenModal, onOpenLogoutModal }) => {
   const [isUserPanelOpen, setIsUserPanelOpen] = useState(false);
   const containerRef = useRef(null);
 
-  const avatarUrl = useSelector(selectAvatarUrl);
-  const userSelectInfo = useSelector(selectUser);
+  const avatarUrl = useSelector(selectUserAvatar);
+  const userName = useSelector(selectUserName);
 
   const toggleUserPanel = () => setIsUserPanelOpen((prevState) => !prevState);
 
@@ -46,9 +46,9 @@ const UserBarBtn = ({ onOpenModal, onOpenLogoutModal }) => {
             alt="user avatar"
           />
         ) : (
-          <span className={css.userBarDefAvatar}>{userSelectInfo.name[0]}</span>
+          <span className={css.userBarDefAvatar}>{userName[0]}</span>
         )}
-        <span className={css.userBarBtnName}>{userSelectInfo.name}</span>
+        <span className={css.userBarBtnName}>{userName}</span>
         <span className={css.userBarBtnIconWrap}>
           <IoChevronUp className={css.userBarBtnIcon} size={20} />
         </span>

@@ -13,6 +13,11 @@
   margin-top: 8px;
 }
 
+.userPanelBtn span {
+  display: flex;
+  align-items: center;
+}
+
 .userPanelBtn {
   display: flex;
   align-items: center;
