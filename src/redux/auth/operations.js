@@ -1,7 +1,9 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
-axios.defaults.baseURL = "https://expense-tracker.b.goit.study/api";
+export const instance = axios.create({
+  baseURL: "https://expense-tracker.b.goit.study/api/",
+});
 
 //  Test
 //  some@gmail.com
@@ -9,7 +11,7 @@ axios.defaults.baseURL = "https://expense-tracker.b.goit.study/api";
 
 // Utility to add JWT
 const setAuthHeader = (token) => {
-  axios.defaults.headers.common.Authorization = `Bearer ${token}`;
+  instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
 /*
@@ -20,10 +22,10 @@ export const register = createAsyncThunk(
   "auth/register",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post("/auth/register", credentials);
+      const res = await instance.post("/auth/register", credentials);
       // After successful registration, add the token to the HTTP header
       console.log(" Server response:", res.data);
-      setAuthHeader(res.data.token);
+      setAuthHeader(res.data.accessToken);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -39,9 +41,9 @@ export const logIn = createAsyncThunk(
   "auth/login",
   async (credentials, thunkAPI) => {
     try {
-      const res = await axios.post("/auth/login", credentials);
+      const res = await instance.post("/auth/login", credentials);
       // After successful login, add the token to the HTTP header
-      setAuthHeader(res.data.token);
+      setAuthHeader(res.data.accessToken);
       return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
@@ -69,7 +71,7 @@ export const refreshUser = createAsyncThunk(
     try {
       // If there is a token, add it to the HTTP header and perform the request
       setAuthHeader(refreshToken);
-      const res = await axios.post("/auth/refresh", { sid });
+      const res = await instance.post("/auth/refresh", { sid });
 
       return res.data;
     } catch (error) {
