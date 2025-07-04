@@ -7,8 +7,8 @@ import { selectIsLoading } from '../../redux/transactions/selectors';
 // Імпортуємо дочірні компоненти
 import TransactionsTotalAmount from '../../components/TransactionsTotalAmount/TransactionsTotalAmount';
 import TransactionsChart from '../../components/TransactionsChart/TransactionsChart';
-//import TransactionForm from '../../components/TransactionForm/TransactionForm';
-//import Loader from '../../components/Loader/Loader';  
+import TransactionForm from '../../components/TransactionForm/TransactionForm';
+import Loader from '../../components/Loader/Loader';  
  
 import styles from './MainTransactionsPage.module.css';
 
@@ -33,26 +33,26 @@ const MainTransactionsPage = () => {
   }, [dispatch]);
 
   //   спінер завантаження
- // if (isLoading) {
- //   return <Loader />;
- // }
+  if (isLoading) {
+    return <Loader />;
+  }
 
   return (
     <div className={styles.pageWrapper}>
       <main className={styles.mainContent}>
+
         {/* Ліва колонка з інформацією */}
         <section className={styles.infoSection}>
+          <h1  className={styles.infoHeader}>Expense Log</h1>
+          <p className={styles.infoText}>Capture and organize every penny spent with ease! A clear view of your financial habits at your fingertips.</p>
           <TransactionsTotalAmount />
           <TransactionsChart categoryColors={CATEGORY_COLORS} />
         </section>
 
         {/* Права колонка з формою */}
         <section className={styles.formSection}>
-          <h1 className={styles.title}>Створення транзакції</h1>
-          <p className={styles.description}>
-            Внесіть дані про ваші доходи або витрати.
-          </p>
-          {/*<TransactionForm />*/}
+           
+           <TransactionForm />
         </section>
       </main>
     </div>
