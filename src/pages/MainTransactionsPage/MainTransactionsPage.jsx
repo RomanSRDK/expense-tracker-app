@@ -1,13 +1,15 @@
+import React, { useEffect, useMemo } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTransactionsSummary } from '../../redux/transactions/operations';
+import { getCategories } from '../../redux/categories/operations'; // <-- 1. Імпортуємо операцію
+import { selectAllTransactions, selectTransactionsSummary } from '../../redux/transactions/selectors';
+import { selectCategoriesList } from '../../redux/categories/selectors'; // <-- 2. Імпортуємо селектор
+import { generateCategoryColors } from '../../utils/colorGenerator'; // <-- 3. Імпортуємо утиліту
 
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux'; 
-import { getTransactionsSummary } from '../../redux/transactions/operations'; 
-import { selectIsLoading } from '../../redux/transactions/selectors';
-
-// Імпортуємо дочірні компоненти
 import TransactionsTotalAmount from '../../components/TransactionsTotalAmount/TransactionsTotalAmount';
 import TransactionsChart from '../../components/TransactionsChart/TransactionsChart';
-import TransactionForm from '../../components/TransactionForm/TransactionForm';
+import TransactionForm from "../../components/TransactionForm/TransactionForm";
+import styles from './MainTransactionsPage.module.css';
 import Loader from '../../components/Loader/Loader';  
  
 import styles from './MainTransactionsPage.module.css';
