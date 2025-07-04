@@ -2,34 +2,33 @@ import { useFormikContext } from "formik";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setTransactionType } from "../../redux/transactions/slice";
-import { selectCategory } from "../../redux/categories/selectors";
-import { selectTransactionType } from "../../redux/transactions/selectors";
+import {
+  selectCategory,
+  // selectSelectedCategoryType,
+} from "../../redux/categories/selectors";
 
 const SyncSelectedCategoryType = () => {
   const dispatch = useDispatch();
   const { values, setFieldValue } = useFormikContext();
 
-  const selectedCategoryType = useSelector(selectTransactionType);
   const selectedCategory = useSelector(selectCategory);
+  const selectedCategoryType = useSelector(selectSelectedCategoryType);
 
+  // Синхронизация типа категории в форму
   useEffect(() => {
-    if (selectedCategoryType && values.type !== selectedCategoryType) {
+    if (selectedCategoryType) {
       setFieldValue("type", selectedCategoryType);
+    } else {
+      setFieldValue("type", "");
     }
-    if (!selectedCategoryType && values.type !== "all") {
-      setFieldValue("type", "all");
-    }
-  }, [selectedCategoryType, setFieldValue, values.type]);
+  }, [selectedCategoryType, setFieldValue]);
 
+  // Диспатч в redux, если выбран type
   useEffect(() => {
-    if (
-      values.type !== "" &&
-      selectedCategory &&
-      Object.keys(selectedCategory).length > 0
-    ) {
+    if (values.type) {
       dispatch(setTransactionType(values.type));
     }
-  }, [values.type, selectedCategory, dispatch]);
+  }, [values.type, dispatch]);
 
   return null;
 };

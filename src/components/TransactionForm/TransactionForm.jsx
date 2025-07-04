@@ -65,7 +65,7 @@ const TransactionForm = () => {
         {({ values, setFieldValue }) => (
           <>
             <SyncTransactionType />
-            <SyncSelectedCategoryType />
+            {/* <SyncSelectedCategoryType /> */}
             <Form className={css.form}>
               <div className={css.transactionType}>
                 <label className={css.customRadioLabel}>
