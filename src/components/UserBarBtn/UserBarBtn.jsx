@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from "react";
-import { selectAvatarUrl, selectUser } from "../redux/user/selectors";
+
 import UserPanel from "../UserPanel/UserPanel";
 import { IoChevronUp } from "react-icons/io5";
 import { useSelector } from "react-redux";
 import clsx from "clsx";
 import css from "./UserBarBtn.module.css";
+import { selectAvatarUrl, selectUser } from "../../redux/auth/selectors";
 
 const UserBarBtn = ({ onOpenModal, onOpenLogoutModal }) => {
   const [isUserPanelOpen, setIsUserPanelOpen] = useState(false);

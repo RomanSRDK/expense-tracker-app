@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Navigate } from "react-router-dom";
 import clsx from "clsx";
@@ -10,9 +10,7 @@ import BurgerMenuBtn from "../BurgerMenuBtn/BurgerMenuBtn";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import UserSetsModal from "../UserSetsModal/UserSetsModal";
 
-import { selectIsLoggedIn } from "../../redux/auth/selectors";
-import { selectUser } from "../../redux/user/selectors";
-// import { logOut } from "../../redux/auth/operations";
+import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
 
 import s from "./Header.module.css";
 
