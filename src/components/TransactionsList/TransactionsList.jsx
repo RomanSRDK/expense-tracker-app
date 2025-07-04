@@ -13,73 +13,79 @@ import { getAllTransactions } from '../../redux/transactions/operations';
 import Loader from '../Loader/Loader';
 
 const TransactionsList = () => {
-  const transactions = [
-    {
-      _id: '6529eff94ceb918e15a171f1d',
-      type: 'incomes',
-      date: '2022-12-28',
-      time: '19:45',
-      category: {
-        _id: '6522bf1f9027bb7d55d6512b',
-        categoryName: 'Salary',
-      },
-      sum: 700,
-      comment: 'December salary',
-    },
-    {
-      _id: '6529eff94ceb918e15a171f1w',
-      type: 'incomes',
-      date: '2022-12-28',
-      time: '19:45',
-      category: {
-        _id: '6522bf1f9027bb7d55d6512b',
-        categoryName: 'Salary',
-      },
-      sum: 700,
-      comment: 'December salary',
-    },
-    {
-      _id: '6529eff94ceb918e15a171f1',
-      type: 'incomes',
-      date: '2022-12-28',
-      time: '19:45',
-      category: {
-        _id: '6522bf1f9027bb7d55d6512b',
-        categoryName: 'Salary',
-      },
-      sum: 700,
-      comment: 'December salaryмвіавммімаа',
-    },
-    {
-      _id: '6529eff94ceb918e15a171f531',
-      type: 'incomes',
-      date: '2022-12-28',
-      time: '19:45',
-      category: {
-        _id: '6522bf1f9027bb7d55d6512b',
-        categoryName: 'Salary',
-      },
-      sum: 700,
-      comment: 'December salaryмвіавммімаа',
-    },
-    {
-      _id: '6529eff94ceb918e15a171f134d',
-      type: 'incomes',
-      date: '2022-12-28',
-      time: '19:45',
-      category: {
-        _id: '6522bf1f9027bb7d55d6512bwd',
-        categoryName: 'Salary',
-      },
-      sum: '700 / UAH',
-      comment: 'December salaryмвіавммімаа',
-    },
-  ];
+  // const transactions = [
+  //   {
+  //     _id: '6529eff94ceb918e15a171f1d',
+  //     type: 'incomes',
+  //     date: '2022-12-28',
+  //     time: '19:45',
+  //     category: {
+  //       _id: '6522bf1f9027bb7d55d6512b',
+  //       categoryName: 'Salary',
+  //     },
+  //     sum: 700,
+  //     comment: 'December salary',
+  //   },
+  //   {
+  //     _id: '6529eff94ceb918e15a171f1w',
+  //     type: 'incomes',
+  //     date: '2022-12-28',
+  //     time: '19:45',
+  //     category: {
+  //       _id: '6522bf1f9027bb7d55d6512b',
+  //       categoryName: 'Salary',
+  //     },
+  //     sum: 700,
+  //     comment: 'December salary',
+  //   },
+  //   {
+  //     _id: '6529eff94ceb918e15a171f1',
+  //     type: 'incomes',
+  //     date: '2022-12-28',
+  //     time: '19:45',
+  //     category: {
+  //       _id: '6522bf1f9027bb7d55d6512b',
+  //       categoryName: 'Salary',
+  //     },
+  //     sum: 700,
+  //     comment: 'December salaryмвіавммімаа',
+  //   },
+  //   {
+  //     _id: '6529eff94ceb918e15a171f531',
+  //     type: 'incomes',
+  //     date: '2022-12-28',
+  //     time: '19:45',
+  //     category: {
+  //       _id: '6522bf1f9027bb7d55d6512b',
+  //       categoryName: 'Salary',
+  //     },
+  //     sum: 700,
+  //     comment: 'December salaryмвіавммімаа',
+  //   },
+  //   {
+  //     _id: '6529eff94ceb918e15a171f134d',
+  //     type: 'incomes',
+  //     date: '2022-12-28',
+  //     time: '19:45',
+  //     category: {
+  //       _id: '6522bf1f9027bb7d55d6512bwd',
+  //       categoryName: 'Salary',
+  //     },
+  //     sum: '700 / UAH',
+  //     comment: 'December salaryмвіавммімаа',
+  //   },
+  // ];
 
-  // const dispatch = useDispatch();
-  // const transactions = useSelector(selectAllTransactions);
-  // const isLoading = useSelector(selectIsLoading);
-  // const error = useSelector(selectError);
+  const dispatch = useDispatch();
+  const transactions = useSelector(selectAllTransactions);
+  console.log(transactions);
+
+  const isLoading = useSelector(selectIsLoading);
+  const error = useSelector(selectError);
+
+  useEffect(() => {
+    dispatch(getAllTransactions());
+  }, [dispatch]);
 
   // const [filterType, setFilterType] = useState('incomes'); // incomes | expenses
 
