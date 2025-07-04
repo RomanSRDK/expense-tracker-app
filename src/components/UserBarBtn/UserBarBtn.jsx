@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "react";
-
 import UserPanel from "../UserPanel/UserPanel";
 import { IoChevronUp } from "react-icons/io5";
 import { useSelector } from "react-redux";
@@ -46,7 +45,8 @@ const UserBarBtn = ({ onOpenModal, onOpenLogoutModal }) => {
             alt="user avatar"
           />
         ) : (
-          <span className={css.userBarDefAvatar}>{userName[0]}</span>
+          <span className={css.userBarDefAvatar}>{userSelectInfo.name}</span>
+//           <span className={css.userBarDefAvatar}>{userName[0]}</span>
         )}
         <span className={css.userBarBtnName}>{userName}</span>
         <span className={css.userBarBtnIconWrap}>
