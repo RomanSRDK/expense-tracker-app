@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { useSelector } from "react-redux"; //useDispatch,
+
 import clsx from "clsx";
 
 import Logo from "../Logo/Logo";
@@ -15,7 +15,7 @@ import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
 import s from "./Header.module.css";
 
 const Header = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
 
@@ -63,7 +63,7 @@ const Header = () => {
   const closeLogoutModal = () => setIsLogoutModalOpen(false);
 
   const confirmLogout = () => {
-    dispatch(logOut());
+    // dispatch(logOut());
     closeLogoutModal();
   };
 
