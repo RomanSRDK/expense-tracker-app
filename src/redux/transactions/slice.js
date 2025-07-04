@@ -44,6 +44,9 @@ const transactionsSlice = createSlice({
     setTransactionType(state, { payload }) {
       state.selectedType = payload;
     },
+    clearTransactionType(state) {
+      state.selectedType = "all";
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -60,6 +63,7 @@ const transactionsSlice = createSlice({
       .addCase(addTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.items.push(action.payload); // Додавання нової транзакції в список
+        state.selectedType = "all";
       })
       .addCase(addTransaction.rejected, handleRejected)
 
@@ -68,6 +72,7 @@ const transactionsSlice = createSlice({
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.items = state.items.filter((item) => item.id !== action.payload);
+        state.selectedType = "all";
       })
       .addCase(deleteTransaction.rejected, handleRejected)
 
@@ -94,6 +99,10 @@ const transactionsSlice = createSlice({
   },
 });
 
-export const { openCategoriesModal, closeCategoriesModal, setTransactionType } =
-  transactionsSlice.actions;
+export const {
+  openCategoriesModal,
+  closeCategoriesModal,
+  setTransactionType,
+  clearTransactionType,
+} = transactionsSlice.actions;
 export const transactionsReducer = transactionsSlice.reducer;

@@ -4,14 +4,14 @@ import { useId } from "react";
 import toast from "react-hot-toast";
 import Button from "../Button/Button";
 import { validationCategorySchema } from "../../validation/validation";
-import { selctsetTransactionType } from "../../redux/transactions/selectors";
+import { selectTransactionType } from "../../redux/transactions/selectors";
 import { addCategory } from "../../redux/categories/operations";
 import css from "./CategoriesForm.module.css";
 
 const CategoriesForm = () => {
   const dispatch = useDispatch();
   const textId = useId();
-  const selectedTransactionType = useSelector(selctsetTransactionType);
+  const selectedTransactionType = useSelector(selectTransactionType);
 
   const handleSubmit = async (values, { resetForm }) => {
     const payload = {

@@ -6,20 +6,19 @@ import { RiDeleteBinLine } from "react-icons/ri";
 import { deleteCategory } from "../../redux/categories/operations";
 import toast from "react-hot-toast";
 import { setCategory, setEditCategory } from "../../redux/categories/slice";
-import {
-  closeCategoriesModal,
-  setTransactionType,
-} from "../../redux/transactions/slice";
+import { closeCategoriesModal } from "../../redux/transactions/slice";
+import { selctsetTransactionType } from "../../redux/transactions/selectors";
 import css from "./CategoriesList.module.css";
 
 const CategoriesList = () => {
   const dispatch = useDispatch();
   const filteredCategories = useSelector(selectFilteredCategories);
-  const showTitles = filteredCategories.length === 2;
+  const selectedTransactionType = useSelector(selctsetTransactionType);
+
+  console.log(filteredCategories);
 
   const handleSubmit = ({ id, name, type }) => {
-    dispatch(setCategory({ id, name }));
-    dispatch(setTransactionType(type));
+    dispatch(setCategory({ id, name, type }));
     dispatch(closeCategoriesModal());
   };
 
@@ -36,21 +35,25 @@ const CategoriesList = () => {
     <div>
       {filteredCategories.map((group) => (
         <div key={group.type}>
-          {showTitles && (
-            <div className={css.title}>
-              {group.type === "incomes" && "Incomes"}
-              {group.type === "expenses" && "Expenses"}
-              {group.type !== "incomes" &&
-                group.type !== "expenses" &&
-                group.type}
-            </div>
-          )}
+          <div className={css.groupTitle}>
+            {group.type === "incomes" && "Incomes"}
+            {group.type === "expenses" && "Expenses"}
+            {group.type !== "incomes" &&
+              group.type !== "expenses" &&
+              group.type}
+          </div>
           <ul className={css.list}>
-            {group.items.map((category) => (
+            {filteredCategories.map((category) => (
               <li className={css.item} key={category._id}>
                 <div className={css.wrapper}>
                   <div className={css.textWrapper}>
                     <div className={css.category}>{category.categoryName}</div>
+                    {selectedTransactionType === "all" && (
+                      <div className={css.type}>
+                        {category.type.trim().charAt(0).toUpperCase() +
+                          category.type.trim().slice(1)}
+                      </div>
+                    )}
                   </div>
                   <div className={css.buttons}>
                     <button

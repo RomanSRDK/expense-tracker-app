@@ -4,17 +4,20 @@ import { useId } from "react";
 import toast from "react-hot-toast";
 import { validationTransactionSchema } from "../../validation/validation";
 import { useDispatch, useSelector } from "react-redux";
+import { addTransaction } from "../../redux/transactions/operations";
 import {
   selectIsLoading,
   selectModalIsOpen,
 } from "../../redux/transactions/selectors";
-import { addTransaction } from "../../redux/transactions/operations";
+import SyncSelectedCategoryType from "../SyncSelectedCategoryType/SyncSelectedCategoryType";
 import SyncTransactionType from "../SyncTransactionType/SyncTransactionType";
 import CategoriesModal from "../CategoriesModal/CategoriesModal";
 import CategoryField from "../CategoryField/CategoryField";
+import Loader from "../Loader/Loader";
 import Button from "../Button/Button";
 import css from "./TransactionForm.module.css";
-import Loader from "../Loader/Loader";
+import { clearCategory } from "../../redux/categories/slice";
+import { clearTransactionType } from "../../redux/transactions/slice";
 
 const TransactionForm = () => {
   const isModalOpen = useSelector(selectModalIsOpen);
@@ -32,6 +35,8 @@ const TransactionForm = () => {
     try {
       await dispatch(addTransaction(values)).unwrap();
       toast.success("Transaction added");
+      dispatch(clearCategory());
+      dispatch(clearTransactionType());
       resetForm();
     } catch (error) {
       console.log(error);
@@ -50,7 +55,7 @@ const TransactionForm = () => {
           type: "",
           date: today,
           time: currentTime,
-          category: "6865bc93f1df95584aaf59ff",
+          category: "",
           sum: "",
           comment: "",
         }}
@@ -60,6 +65,7 @@ const TransactionForm = () => {
         {({ values, setFieldValue }) => (
           <>
             <SyncTransactionType />
+            <SyncSelectedCategoryType />
             <Form className={css.form}>
               <div className={css.transactionType}>
                 <label className={css.customRadioLabel}>

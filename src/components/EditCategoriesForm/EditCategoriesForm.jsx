@@ -1,6 +1,5 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
-import { CgClose } from "react-icons/cg";
 import { useId } from "react";
 import toast from "react-hot-toast";
 import Button from "../Button/Button";

@@ -1,21 +1,12 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
-// import { instance } from "../auth/operations";
-
-const token = import.meta.env.VITE_API_TOKEN;
-
-export const testInsatnce = axios.create({
-  baseURL: "https://expense-tracker.b.goit.study/api/",
-  headers: {
-    Authorization: `Bearer ${token}`,
-  },
-});
+import { instance } from "../auth/operations";
 
 export const getCategories = createAsyncThunk(
   "categories/get",
   async (_, { rejectWithVaue }) => {
     try {
-      const { data } = await testInsatnce.get("/categories");
+      const { data } = await instance.get("/categories");
+
       return data;
     } catch (error) {
       return rejectWithVaue(error.message);
@@ -27,7 +18,7 @@ export const addCategory = createAsyncThunk(
   "categories/add",
   async (categoryData, { rejectWithValue }) => {
     try {
-      const { data } = await testInsatnce.post("/categories", categoryData);
+      const { data } = await instance.post("/categories", categoryData);
       getCategories();
       return data;
     } catch (error) {
@@ -40,7 +31,7 @@ export const deleteCategory = createAsyncThunk(
   "categories/delete",
   async ({ id, type }, { rejectWithValue }) => {
     try {
-      const { data } = await testInsatnce.delete(`/categories/${id}`);
+      const { data } = await instance.delete(`/categories/${id}`);
       return { id, type, ...data };
     } catch (error) {
       if (
@@ -59,7 +50,7 @@ export const editCategory = createAsyncThunk(
   "categories/edit",
   async ({ id, categoryName, type }, { rejectWithValue }) => {
     try {
-      const { data } = await testInsatnce.patch(`/categories/${id}`, {
+      const { data } = await instance.patch(`/categories/${id}`, {
         categoryName: categoryName,
       });
       return { type, ...data };

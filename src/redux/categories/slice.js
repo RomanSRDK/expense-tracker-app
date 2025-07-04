@@ -12,12 +12,15 @@ const categoriesSlice = createSlice({
     categoriesList: [],
     isLoading: false,
     error: null,
-    selectedCategory: "",
+    selectedCategory: [],
     categotyToEdit: null,
   },
   reducers: {
     setCategory(state, { payload }) {
       state.selectedCategory = payload;
+    },
+    clearCategory(state) {
+      state.selectedCategory = [];
     },
     setEditCategory(state, { payload }) {
       state.categotyToEdit = payload;
@@ -94,7 +97,13 @@ const categoriesSlice = createSlice({
   },
 });
 
-export const { setCategory, setEditCategory, cancelEditCategory } =
-  categoriesSlice.actions;
+export const {
+  setCategory,
+  setEditCategory,
+  cancelEditCategory,
+  clearCategory,
+  setSelectedCategoryType,
+  clearSelectedCategoryType,
+} = categoriesSlice.actions;
 
 export const categoriesReducer = categoriesSlice.reducer;

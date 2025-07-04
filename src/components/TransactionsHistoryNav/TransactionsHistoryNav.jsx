@@ -1,5 +1,5 @@
-const TransactionsHistoryNav = () => {
+function TransactionsHistoryNav() {
   return <div>TransactionsHistoryNav</div>;
-};
+}
 
 export default TransactionsHistoryNav;

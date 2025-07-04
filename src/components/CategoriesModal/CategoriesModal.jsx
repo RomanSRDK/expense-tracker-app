@@ -5,7 +5,7 @@ import { CgClose } from "react-icons/cg";
 import CategoriesList from "../CategoriesList/CategoriesList";
 import { getCategories } from "../../redux/categories/operations";
 import CategoriesForm from "../CategoriesForm/CategoriesForm";
-import { selctsetTransactionType } from "../../redux/transactions/selectors";
+import { selectTransactionType } from "../../redux/transactions/selectors";
 import {
   selectEditCategory,
   selectIsLoading,
@@ -17,7 +17,7 @@ import css from "./CategoriesModal.module.css";
 
 const CategoriesModal = () => {
   const dispatch = useDispatch();
-  const selectedTransactionType = useSelector(selctsetTransactionType);
+  const selectedTransactionType = useSelector(selectTransactionType);
   const isLoading = useSelector(selectIsLoading);
   const categoryToEdit = useSelector(selectEditCategory);
 
@@ -67,7 +67,6 @@ const CategoriesModal = () => {
           <h2 className={css.title}>
             {typeNames[selectedTransactionType] || selectedTransactionType}
           </h2>
-          <h3 className={css.subtitle}>All Category</h3>
         </div>
         <CategoriesList />
         <div className={`${css.modalContainer} ${css.form}`}>
