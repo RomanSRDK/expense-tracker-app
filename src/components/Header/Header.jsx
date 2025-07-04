@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Navigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux"; //useDispatch,
+
 import clsx from "clsx";
 
 import Logo from "../Logo/Logo";
@@ -10,14 +10,12 @@ import BurgerMenuBtn from "../BurgerMenuBtn/BurgerMenuBtn";
 import BurgerMenu from "../BurgerMenu/BurgerMenu";
 import UserSetsModal from "../UserSetsModal/UserSetsModal";
 
-import { selectIsLoggedIn } from "../../redux/auth/selectors";
-import { selectUser } from "../../redux/user/selectors";
-import { logOut } from "../../redux/auth/operations";
+import { selectIsLoggedIn, selectUser } from "../../redux/auth/selectors";
 
 import s from "./Header.module.css";
 
 const Header = () => {
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const user = useSelector(selectUser);
 
@@ -65,7 +63,7 @@ const Header = () => {
   const closeLogoutModal = () => setIsLogoutModalOpen(false);
 
   const confirmLogout = () => {
-    dispatch(logOut());
+    // dispatch(logOut());
     closeLogoutModal();
   };
 
