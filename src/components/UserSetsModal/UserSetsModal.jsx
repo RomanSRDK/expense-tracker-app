@@ -1,8 +1,8 @@
-import { createPortal } from "react-dom";
+// import { createPortal } from "react-dom";
 import css from "./UserSetsModal.module.css";
 
 function UserSetsModal() {
-  return createPortal(
+  return (
     <div className={css.backdrop}>
       <div className={css.modal}>
         <h2>Profile settings</h2>

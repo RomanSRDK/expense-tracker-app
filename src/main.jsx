@@ -5,6 +5,9 @@ import { Toaster } from "react-hot-toast";
 import { persistor, store } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { BrowserRouter } from "react-router-dom";
+
+import "@fontsource-variable/inter";
+import "modern-normalize/modern-normalize.css";
 import App from "./App.jsx";
 import "./index.css";
 
