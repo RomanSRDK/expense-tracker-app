@@ -1,0 +1,131 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 30px;
+  width: 100%;
+  margin-bottom: 186px;
+  margin-top: 126px;
+}
+
+.listInfo {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  flex-direction: column;
+  width: 100%;
+}
+
+.subheading {
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(250, 250, 250, 0.4);
+  text-align: left;
+  margin: 0;
+  padding-bottom: 10px;
+}
+
+.heading {
+  font-weight: 400;
+  font-size: 32px;
+  letter-spacing: -0.02em;
+  color: #fafafa;
+  white-space: normal;
+  text-align: left;
+  padding-bottom: 14px;
+  width: 100%;
+}
+.heading br {
+  display: none;
+}
+.spanHeading {
+  text-decoration: underline;
+  text-decoration-skip-ink: none;
+  color: #0ef387;
+}
+.breakMobile {
+  display: inline;
+}
+.breakTabletDesktop {
+  display: none;
+}
+
+.description {
+  font-weight: 400;
+  font-size: 14px;
+  letter-spacing: -0.02em;
+  color: rgba(250, 250, 250, 0.4);
+  text-align: left;
+  width: 100%;
+  margin: 0;
+  padding-bottom: 30px;
+}
+
+.imageSection {
+  position: relative;
+  border-radius: 20px;
+  width: 100%;
+
+  height: auto;
+  overflow: visible;
+  padding-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+  .main {
+    align-items: flex-start;
+    gap: 10px;
+    margin-top: 40px;
+  }
+
+  .heading br {
+    display: inline;
+  }
+  .noBreak {
+    white-space: normal;
+  }
+
+  .description {
+    width: 533px;
+    font-size: 16px;
+  }
+
+  .breakMobile {
+    display: none;
+  }
+
+  .breakTabletDesktop {
+    display: inline;
+    margin-top: 4px;
+  }
+  .heading {
+    font-size: 56px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .imageSection {
+    width: 50%;
+    max-width: 580px;
+    flex-shrink: 0;
+  }
+  .main {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: center;
+    gap: 54px;
+  }
+  .subheading {
+    text-align: left;
+    margin: 0;
+    padding-bottom: 10px;
+  }
+  .heading {
+    font-size: 56px;
+  }
+  .description {
+    padding-bottom: 40px;
+  }
+}
