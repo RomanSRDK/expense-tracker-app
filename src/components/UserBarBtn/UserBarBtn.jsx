@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { selectAvatarUrl, selectUser } from "../redux/user/selectors";
+import { selectAvatarUrl, selectUser } from "../../redux/auth/selectors";
+
 import UserPanel from "../UserPanel/UserPanel";
 import { IoChevronUp } from "react-icons/io5";
 import { useSelector } from "react-redux";
