@@ -1,0 +1,21 @@
+.wrapper {
+  margin: 0 auto;
+}
+
+.transactionsWrapper {
+  width: 335px;
+  border-radius: 30px;
+  overflow: hidden;
+}
+
+@media (min-width: 768px) {
+  .transactionsWrapper {
+    width: 704px;
+  }
+}
+
+@media (min-width: 1440px) {
+  .transactionsWrapper {
+    width: 1240px;
+  }
+}

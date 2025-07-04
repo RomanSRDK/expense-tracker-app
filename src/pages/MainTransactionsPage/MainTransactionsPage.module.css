@@ -54,8 +54,32 @@ color:  var(--color-secondary);
 }
 
 /* Адаптивність для планшетів та мобільних */
-@media (max-width: 1024px) {
+
+@media (max-width: 1440px) {
   .mainContent {
     flex-direction: column;
   }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1440px) {
+  .mainContent {   
+  gap: 40px;   
+  max-width: 704px;
+}
+}
+@media screen and (max-width: 768px) {
+  .mainContent {   
+  gap: 40px;   
+  max-width: 335px;
+  }
+  .infoHeader { 
+font-size: 32px;  
+} 
+
+.infoText { 
+font-size: 14px;  
+}
+.infoSection { 
+  gap: 12px;
+}
 }
