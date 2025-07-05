@@ -43,9 +43,7 @@ function UserSetsModal({ toggleUserModal }) {
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (!file) return;
-
     setSelectedFile(file);
-
     const formData = new FormData();
     formData.append("avatar", file);
 
@@ -54,7 +52,7 @@ function UserSetsModal({ toggleUserModal }) {
 
   const handleButtonClick = () => {
     if (inputRef.current) {
-      inputRef.current.click(); // ← симулируем клик
+      inputRef.current.click();
     }
   };
 
@@ -90,9 +88,7 @@ function UserSetsModal({ toggleUserModal }) {
         </div>
         <select name="currency">
           <option value="UAH">₴ {currency}</option>
-          <option value="USD" selected>
-            $ USD
-          </option>
+          <option value="USD">$ USD</option>
           <option value="EUR">€ EUR</option>
         </select>
         <input type="text" name="username" placeholder={userName} />
