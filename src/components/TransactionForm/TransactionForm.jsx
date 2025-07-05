@@ -48,8 +48,7 @@ const TransactionForm = () => {
       dispatch(clearTransactionType());
       dispatch(clearTransactionRadioType());
       resetForm();
-    } catch (error) {
-      console.log(error);
+    } catch {
       toast.error("Something went wrong, please try different data.");
     }
   };

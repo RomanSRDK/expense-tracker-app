@@ -58,10 +58,6 @@
   transition: var(--animation);
 }
 
-.fieldIcon {
-  color: #fafafa;
-}
-
 .label {
   display: flex;
   flex-direction: column;
@@ -115,12 +111,6 @@
   display: flex;
   gap: 20px;
 }
-
-/* .inputWrapper,
-.inputWrapper .label,
-.inputWrapper .input {
-  cursor: pointer;
-} */
 
 .inputWrapper {
   width: 100%;

@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getAllTransactions } from "../../redux/transactions/operations";
-import { getCategories } from "../../redux/categories/operations";
 import { selectAllTransactions } from "../../redux/transactions/selectors";
 import { selectCategoriesList } from "../../redux/categories/selectors";
 import { generateCategoryColors } from "../../utils/colorGenerator";
