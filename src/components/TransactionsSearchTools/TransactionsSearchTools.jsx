@@ -1,20 +1,21 @@
-import { useDispatch, useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
-import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
-import s from './TransactionsSearchTools.module.css';
-import { getAllTransactions } from '../../redux/transactions/operations';
-import { selectAllTransactions } from '../../redux/transactions/selectors';
-import { CiSearch } from 'react-icons/ci';
-import { CiCalendar } from 'react-icons/ci';
-import './CustomDatePicker.css';
+import { useDispatch, useSelector } from "react-redux";
+import { useState, useEffect } from "react";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import s from "./TransactionsSearchTools.module.css";
+import { getAllTransactions } from "../../redux/transactions/operations";
+import { selectAllTransactions } from "../../redux/transactions/selectors";
+import { CiSearch } from "react-icons/ci";
+
+import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
+import { FiCalendar } from "react-icons/fi";
 
 const TransactionsSearchTools = ({ type }) => {
   //   const dispatch = useDispatch();
   //   const allTransactions = useSelector(selectAllTransactions);
 
   //   const [searchQuery, setSearchQuery] = useState('');
-  //   const [selectedDate, setSelectedDate] = useState(null);
+  // const [selectedDate, setSelectedDate] = useState(null);
   //   const [filteredTransactions, setFilteredTransactions] = useState([]);
 
   //   // Fetch transactions when date or type changes
@@ -56,30 +57,28 @@ const TransactionsSearchTools = ({ type }) => {
   //     // або прокинь: props.onFilter(filteredTransactions)
   //   }, [filteredTransactions]);
 
+  const [selectedDate, setSelectedDate] = useState(new Date());
+
   return (
     <div className={s.tools}>
-      <div className={s.input}>
+      <div className={s.input_wrap}>
         <input
+          className={s.searchInput}
           type="text"
           placeholder="Search for anything.."
           // value={searchQuery}
           // onChange={e => setSearchQuery(e.target.value)}
-          className={s.searchInput}
         />
-        <CiSearch className={s.search} />
+        <CiSearch className={s.search_icon} />
       </div>
 
-      <div className={s.date}>
-        <DatePicker
-          // selected={selectedDate}
-          // onChange={date => setSelectedDate(date)}
-          placeholderText="dd/mm/yyyy"
+      <div className={s.date_wrap}>
+        <CustomDatePicker
           className={s.datePicker}
-          dateFormat="yyyy-MM-dd"
-          isClearable
-          showPopperArrow={false}
+          selectedDate={selectedDate}
+          onChange={(date) => setSelectedDate(date)}
+          icon={<FiCalendar className={s.calendar_icon} />}
         />
-        <CiCalendar className={s.calendar} />
       </div>
     </div>
   );

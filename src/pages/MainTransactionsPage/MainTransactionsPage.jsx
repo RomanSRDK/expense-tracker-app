@@ -67,6 +67,7 @@ const MainTransactionsPage = () => {
     <>
       <MainTransactionsHeader />
       <div className={styles.pageWrapper}>
+        
         <main className={styles.mainContent}>
           <section className={styles.infoSection}>
             <h1 className={styles.infoHeader}>Expense Log</h1>
