@@ -8,21 +8,21 @@ import styles from './MainTransactionsHeader.module.css';
 const MainTransactionsHeader = () => {
   return (
     <header className={styles.header}>
-      <Logo />
+      {/* 1. Добавляем внутренний контейнер-обертку */}
+      <div className={styles.headerContainer}>
+        <Logo />
 
-      {/* Навигация, видимая только на десктопе */}
-      <div className={styles.desktopNav}>
-        <TransactionsHistoryNav />
-      </div>
+        <div className={styles.desktopNav}>
+          <TransactionsHistoryNav />
+        </div>
 
-      {/* Кнопка пользователя, видимая только на десктопе */}
-      <div className={styles.desktopUserBar}>
-        <UserBarBtn />
-      </div>
+        <div className={styles.desktopUserBar}>
+          <UserBarBtn />
+        </div>
 
-      {/* Кнопка бургер-меню, видимая только на мобильных/планшетах */}
-      <div className={styles.mobileNav}>
-        <BurgerMenuBtn />
+        <div className={styles.mobileNav}>
+          <BurgerMenuBtn />
+        </div>
       </div>
     </header>
   );

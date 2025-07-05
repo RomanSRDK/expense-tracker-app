@@ -26,6 +26,7 @@ import clsx from "clsx";
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
 import "react-datepicker/dist/react-datepicker.css";
 import CustomTimePicker from "../CustomTimePicker/CustomTimePicker";
+import { FiCalendar } from "react-icons/fi";
 
 const TransactionForm = () => {
   const isModalOpen = useSelector(selectModalIsOpen);
@@ -140,6 +141,7 @@ const TransactionForm = () => {
                         className={clsx(css.input)}
                         field={field}
                         form={form}
+                        icon={<FiCalendar />}
                       />
                     )}
                   </Field>
