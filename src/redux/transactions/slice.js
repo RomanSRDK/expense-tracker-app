@@ -85,7 +85,7 @@ const transactionsSlice = createSlice({
       .addCase(deleteTransaction.pending, handlePending)
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = state.items.filter(item => item.id !== action.payload);
+        state.items = state.items.filter(item => item._id !== action.payload);
         state.selectedType = 'all';
       })
       .addCase(deleteTransaction.rejected, handleRejected)

@@ -4,18 +4,23 @@ import s from './TransactionsItem.module.css';
 import { LuPen } from 'react-icons/lu';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import TransactionForm from '../TransactionForm/TransactionForm';
+import { useSelector } from 'react-redux';
+import { selectCurrency } from '../../redux/user/selectors';
+import { deleteTransaction } from '../../redux/transactions/operations';
+import toast from 'react-hot-toast';
 
 const TransactionsItem = ({ id, sum, date, time, comment, categoryName }) => {
   const dispatch = useDispatch();
+  const currency = useSelector(selectCurrency);
 
   const handleDelete = () => {
     dispatch(deleteTransaction(id))
       .unwrap()
       .then(() => {
-        toast.success('Contact deleted successfully');
+        toast.success('Transaction deleted successfully');
       })
       .catch(() => {
-        toast.error('Something went wrong. Try again');
+        toast.error(`Error: ${error}`);
       });
   };
 
@@ -26,7 +31,9 @@ const TransactionsItem = ({ id, sum, date, time, comment, categoryName }) => {
         <p className={s.comment}>{comment}</p>
         <p className={s.date}>{date}</p>
         <p className={s.time}>{time}</p>
-        <p className={s.sum}>{sum}</p>
+        <p className={s.sum}>
+          {sum} / {currency}
+        </p>
         <div className={s.btn}>
           <button className={s.edit} type="button">
             <LuPen />

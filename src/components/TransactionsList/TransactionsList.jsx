@@ -15,6 +15,7 @@ import {
   getQueryTransactions,
 } from '../../redux/transactions/operations';
 import Loader from '../Loader/Loader';
+import { useLocation } from 'react-router-dom';
 
 const TransactionsList = () => {
   // const transactions = [
@@ -83,10 +84,11 @@ const TransactionsList = () => {
   //////////////////////////////////////////////////////////////////////
 
   const dispatch = useDispatch();
+  const location = useLocation();
 
   // Функція щоб дістати тип з URL
   const getTransactionTypeFromURL = () => {
-    const path = window.location.pathname.split('/').filter(Boolean);
+    const path = location.pathname.split('/').filter(Boolean);
     const last = path[path.length - 1];
     return last === 'incomes' || last === 'expenses' ? last : 'all';
   };
@@ -103,7 +105,7 @@ const TransactionsList = () => {
     if (transactionType !== 'all') {
       dispatch(getQueryTransactions(transactionType));
     }
-  }, [dispatch, transactionType]);
+  }, [dispatch, transactionType, location]);
 
   return (
     <div className={s.wrapper}>
