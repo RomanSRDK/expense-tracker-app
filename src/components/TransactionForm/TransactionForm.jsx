@@ -12,8 +12,8 @@ import {
   setTransactionRadioType,
 } from "../../redux/transactions/slice";
 import {
+  selectCategoriesModalIsOpen,
   selectIsLoading,
-  selectModalIsOpen,
 } from "../../redux/transactions/selectors";
 import SyncTransactionType from "../SyncTransactionType/SyncTransactionType";
 import CategoriesModal from "../CategoriesModal/CategoriesModal";
@@ -29,7 +29,7 @@ import CustomTimePicker from "../CustomTimePicker/CustomTimePicker";
 import { FiCalendar } from "react-icons/fi";
 
 const TransactionForm = () => {
-  const isModalOpen = useSelector(selectModalIsOpen);
+  const isModalOpen = useSelector(selectCategoriesModalIsOpen);
   const isLoading = useSelector(selectIsLoading);
 
   const dateId = useId();

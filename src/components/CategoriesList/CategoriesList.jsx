@@ -47,7 +47,7 @@ const CategoriesList = () => {
                 group.type}
             </div>
           )}
-          <ul>
+          <ul className={css.categoriesList}>
             {group.items.map((category) => (
               <li className={css.item} key={category._id}>
                 <div className={css.wrapper}>

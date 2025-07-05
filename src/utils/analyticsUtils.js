@@ -1,6 +1,6 @@
 import { subMonths, format, parseISO, getDay } from "date-fns";
 
-// Функция для графика "Доходы vs. Расходы"
+// "Доходы vs. Расходы"
 export const calculateIncomeVsExpense = (transactions, months = 6) => {
   const data = {};
   const endDate = new Date();
@@ -33,7 +33,7 @@ export const calculateIncomeVsExpense = (transactions, months = 6) => {
   return Object.values(data).reverse();
 };
 
-// ✅ Исправленная функция для графика "Траты по категориям"
+// "Траты по категориям"
 export const calculateCategorySpending = (transactions, categories, type) => {
   if (!Array.isArray(categories) || !Array.isArray(transactions)) return [];
 
@@ -49,10 +49,6 @@ export const calculateCategorySpending = (transactions, categories, type) => {
 
   transactions.forEach((t) => {
     const categoryIdInTransaction = t.category?._id;
-
-    // console.log('Категория транзакции:', t.category);
-    // console.log('Есть ли такая категория в map:', !!categoryMap[categoryIdInTransaction]);
-
     if (
       t.type &&
       t.type.toLowerCase() === type.toLowerCase() &&

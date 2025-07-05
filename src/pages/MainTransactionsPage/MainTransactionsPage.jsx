@@ -16,15 +16,9 @@ import styles from "./MainTransactionsPage.module.css";
 const MainTransactionsPage = () => {
   const dispatch = useDispatch();
 
-  // --- ШАГ 1: Проверяем, что приходит из Redux ---
   const allTransactions = useSelector(selectAllTransactions);
   const { expenses: expenseCategories = [] } =
     useSelector(selectCategoriesList) || {};
-
-  // console.log('--- ШАГ 1: ДАННЫЕ ИЗ REDUX ---');
-  // console.log('Сырые транзакции из Redux:', allTransactions);
-  // console.log('Сырые категории расходов из Redux:', expenseCategories);
-  // console.log('---------------------------------');
 
   useEffect(() => {
     dispatch(getAllTransactions());
@@ -32,9 +26,7 @@ const MainTransactionsPage = () => {
   }, [dispatch]);
 
   const summaryData = useMemo(() => {
-    // console.log("--- ШАГ 2: НАЧИНАЕМ РАСЧЕТ summaryData ---");
     if (!allTransactions || allTransactions.length === 0) {
-      // console.log("Расчет прерван: транзакций нет.");
       return { expenseSummary: 0, incomeSummary: 0, categoriesSummary: [] };
     }
 
@@ -52,25 +44,12 @@ const MainTransactionsPage = () => {
       "expenses"
     );
 
-    // console.log("Результат расчетов:", {
-    //   expenseSummary,
-    //   incomeSummary,
-    //   categoriesSummary,
-    // });
-    // console.log("------------------------------------");
-
     return { expenseSummary, incomeSummary, categoriesSummary };
   }, [allTransactions, expenseCategories]);
 
   const categoryColors = useMemo(() => {
     return generateCategoryColors(expenseCategories);
   }, [expenseCategories]);
-
-  // --- ШАГ 3: Проверяем, что передается в компонент графика ---
-  // console.log('--- ШАГ 3: ПРОПСЫ ДЛЯ ГРАФИКА ---');
-  // console.log('expenseData (для графика):', summaryData.categoriesSummary);
-  // console.log('totalExpense (для графика):', summaryData.expenseSummary);
-  // console.log('--------------------------------');
 
   return (
     <>
