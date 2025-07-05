@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { logIn, logOut } from "../../redux/auth/operations";
+import { logIn } from "../../redux/auth/operations";
 import * as Yup from "yup";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import s from "./RegisterPage.module.css";
@@ -57,15 +57,6 @@ function LoginPage() {
           awaits.
         </p>
       </div>
-
-      {/* {next button is for a while} */}
-      <button
-        type="button"
-        onClick={() => dispatch(logOut())}
-        className={s.log_out}
-      >
-        Log out
-      </button>
 
       <AuthForm
         mode="login"
