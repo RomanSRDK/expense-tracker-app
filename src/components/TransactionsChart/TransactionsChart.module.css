@@ -1,16 +1,18 @@
 .chartWrapper {
   padding: 24px;
-   background-color: #171719;
-  border-radius: 16px;
+  background-color: #171719;
+  border-radius: 30px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font-base, 'Open Sans', sans-serif);
+  color: var(--color-text, #fafafa);
 }
 
-.chartWrapper h3 {
+.chartTitle {
   margin: 0 0 20px 0;
-  font-size: 18px;
-  color: #121212;
-  text-align: center;
+  font-size: 16px;
+  text-align: left;
+  font-weight: var(--font-weight-regular); /* UNIFIED */
+  color: var(--color-secondary);
 }
 
 .contentContainer {
@@ -19,28 +21,10 @@
   gap: 32px;
 }
 
-@media (max-width: 768px) {
-  .contentContainer {
-    flex-direction: column;
-    gap: 24px;
-  }
-}
-
 .chartContainer {
-  width: 200px;
-  height: 120px;  
   position: relative;
-}
-
-.totalAmountInChart {
-  position: absolute;
-  top: 65%;  
-  left: 50%;
-  transform: translate(-50%, -50%);
-  text-align: center;
-  font-weight: 700;
-  font-size: 18px;
-  color: #121212;
+  flex: 3;
+  height: 200px;
 }
 
 .categoriesList {
@@ -57,27 +41,62 @@
   display: flex;
   align-items: center;
   font-size: 14px;
-  color: #525252;
+  padding: 4px; /* ANIMATION: Добавим внутренний отступ для фона */
+  border-radius: 6px; /* ANIMATION: Скруглим углы для ховера */
+  transition: background-color var(--animation); /* ANIMATION */
+}
+
+/* ANIMATION: Добавим эффект при наведении на элемент списка */
+.categoryItem:hover {
+  background-color: rgba(255, 255, 255, 0.05);
 }
 
 .colorMarker {
   width: 12px;
   height: 12px;
-  border-radius: 50%;
+  border-radius: 3px;
   margin-right: 12px;
+  flex-shrink: 0;
 }
 
 .categoryName {
-  flex-grow: 1;
+  color: var(--color-secondary); /* UNIFIED */
 }
 
 .categoryPercentage {
-  font-weight: 600;
-  color: #121212;
+  font-weight: var(--font-weight-bold); /* UNIFIED */
+  color: var(--color-text);
+  margin-left: auto;
 }
 
 .emptyState {
   text-align: center;
-  color: #888;
+  color: var(--color-secondary);
   padding: 40px 0;
+}
+
+.totalAmountInChart {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: var(--font-weight-bold); /* UNIFIED */
+  font-size: 16px;
+}
+
+@media screen and (max-width: 767px) {
+  .contentContainer {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 24px;
+  }
+  .chartContainer {
+    height: 180px;
+    width: 100%;
+    margin: 0 auto;
+  }
+  .categoriesList {
+    flex: none;
+    width: 100%;
+  }
 }

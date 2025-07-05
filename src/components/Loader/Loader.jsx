@@ -1,13 +1,16 @@
 import { CircleLoader } from "react-spinners";
+import css from "./Loader.module.css";
 
-const Loader = () => {
+export const Loader = () => {
   return (
-    <CircleLoader
-      loading
-      size={60}
-      speedMultiplier={2}
-      color={"var(--color-accent)"}
-    />
+    <div className={css.loaderBackdrop}>
+      <CircleLoader
+        loading
+        size={60}
+        speedMultiplier={2}
+        color={"var(--color-primary)"}
+      />
+    </div>
   );
 };
 

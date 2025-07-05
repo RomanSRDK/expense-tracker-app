@@ -1,84 +1,65 @@
 import React from 'react';
-import styles from './TransactionsChart.module.css';
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
- 
-const needle = (value, data, cx, cy, iR, oR, color) => {
-  const ang = 180.0;  
-  const length = (iR + 2 * oR) / 3;
-  const sin = Math.sin(-Math.PI / 180 * ang);
-  const cos = Math.cos(-Math.PI / 180 * ang);
-  const x0 = cx;
-  const y0 = cy;
-  const xp = x0 + length * cos;
-  const yp = y0 + length * sin;
+import styles from './TransactionsChart.module.css';
 
-  return [
-    <circle key="needle-circle" cx={x0} cy={y0} r={5} fill={color} stroke="none" />,
-    <path key="needle-path" d={`M${x0},${y0}L${xp},${yp}`} stroke={color} strokeWidth={3} />,
-  ];
-};
-
-const TransactionsChart = ({ expenseData = [], totalExpense = 0, categoryColors }) => {
-  if (!expenseData || expenseData.length === 0 || totalExpense === 0) {
+const TransactionsChart = ({ expenseData, totalExpense, categoryColors }) => {
+  if (!expenseData || expenseData.length === 0 || !totalExpense) {
     return (
       <div className={styles.chartWrapper}>
-        <div className={styles.emptyState}>No data for this period.</div>
+        <h3 className={styles.chartTitle}>Expense Statistics</h3>
+        <div className={styles.emptyState}>Нет данных о расходах за этот период.</div>
       </div>
     );
   }
 
- const chartData = expenseData.map(item => ({
-  name: item.name,  
-  value: item.total, 
-}));
+  const chartData = expenseData.map(item => ({
+    ...item,
+    percentage: totalExpense > 0 ? ((item.total / totalExpense) * 100) : 0,
+  }));
 
   return (
     <div className={styles.chartWrapper}>
-      <h3>Expenses categories</h3>
+      <h3 className={styles.chartTitle}>Expense Statistics</h3>
       <div className={styles.contentContainer}>
+        {/* Контейнер для графика */}
         <div className={styles.chartContainer}>
-          <ResponsiveContainer width="100%" height={100}>
+          <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
-                dataKey="value"
+                data={chartData}
+                // ВАЖНО: Возвращаем эти свойства для создания полукруга
                 startAngle={180}
                 endAngle={0}
-                data={chartData}
+                innerRadius="130%"
+                outerRadius="200%"
+                paddingAngle={2}
+                dataKey="total"
+                nameKey="name"
+                // Позиционируем полукруг внизу контейнера
                 cx="50%"
                 cy="100%"
-                outerRadius={80}
-                innerRadius={50}
-                fill="#8884d8"
-                stroke="none"
-                paddingAngle={2}
               >
-                {chartData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={categoryColors?.[entry.name] || '#C9CBCF'} />
+                {chartData.map((entry) => (
+                  <Cell key={`cell-${entry.name}`} fill={categoryColors[entry.name]} />
                 ))}
               </Pie>
-              {needle(totalExpense, chartData, 100, 100, 50, 80, '#474747')}
             </PieChart>
           </ResponsiveContainer>
           <div className={styles.totalAmountInChart}>
-            ₴ {totalExpense.toLocaleString('uk-UA')}
+            ₴{totalExpense.toFixed(2)}
           </div>
         </div>
 
-       <ul className={styles.categoriesList}>
-  {expenseData.map((item, index) => (
-    <li key={index} className={styles.categoryItem}>
-      <span
-        className={styles.colorMarker}
-        style={{ backgroundColor: categoryColors?.[item.name] || '#C9CBCF' }}  
-      />
-      <span className={styles.categoryName}>{item.name}</span>  
-      <span className={styles.categoryPercentage}>
-        
-        {((item.total / totalExpense) * 100).toFixed(1)}%
-      </span>
-    </li>
-  ))}
-</ul>
+        {/* Легенда */}
+        <ul className={styles.categoriesList}>
+          {chartData.map((item) => (
+            <li key={item.name} className={styles.categoryItem}>
+              <span className={styles.colorMarker} style={{ backgroundColor: categoryColors[item.name] }}></span>
+              <span className={styles.categoryName}>{item.name}</span>
+              <span className={styles.categoryPercentage}>{item.percentage.toFixed(0)}%</span>
+            </li>
+          ))}
+        </ul>
       </div>
     </div>
   );

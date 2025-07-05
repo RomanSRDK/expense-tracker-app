@@ -1,0 +1,104 @@
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal {
+  position: relative;
+  padding: 40px 40px 60px 40px;
+  width: 500px;
+  height: 477px;
+  border-radius: 30px;
+  background-color: rgba(23, 23, 25, 1);
+  padding: 24px;
+}
+
+.closeButton {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  color: #fafafa;
+  line-height: 0;
+}
+
+.closeButton:hover,
+.closeButton:focus {
+  color: var(--color-primary);
+}
+
+.title {
+  font-size: 28px;
+  font-weight: var(--font-weight-regular);
+  margin-top: 40px;
+  margin-left: 40px;
+}
+
+.avatarImage {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin: 38px auto 20px;
+  display: block;
+  border: 2px solid #2a2a2a;
+}
+
+.buttonsGroup {
+  display: flex;
+}
+
+.selectButton {
+  background-color: #2a2a2a;
+  color: #fafafa;
+  border: none;
+  border-radius: 16px;
+  padding: 10px 16px;
+  margin: 8px 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+select {
+  background-color: transparent;
+  color: #fafafa;
+  border: 1px solid #3a3a3a;
+  border-radius: 16px;
+  padding: 12px;
+  width: 100%;
+  margin-top: 16px;
+  font-size: 16px;
+  appearance: none;
+}
+
+input[type="text"] {
+  background-color: transparent;
+  color: #fafafa;
+  border: 1px solid #3a3a3a;
+  border-radius: 16px;
+  padding: 12px;
+  width: 100%;
+  margin-top: 16px;
+  font-size: 16px;
+}
+
+/* Специальная кнопка сохранения */
+.saveButton {
+  background-color: #0ef387;
+  color: #000000;
+  font-weight: 500;
+  margin-top: 24px;
+  width: 100%;
+  border-radius: 16px;
+  padding: 12px;
+  font-size: 16px;
+}

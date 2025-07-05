@@ -1,0 +1,43 @@
+/* Этот класс-обертка центрирует контент по горизонтали и вертикали */
+.pageWrapper {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start; /* Выравниваем по верху, а не по центру */
+  min-height: 100vh;
+  padding: 20px;
+  /* Добавляем отступ сверху, чтобы контент не залезал под хедер */
+  padding-top: 111px; /* 91px (высота хедера) + 20px */
+}
+
+/* Этот класс ограничивает максимальную ширину контента,
+   чтобы он совпадал с хедером */
+.mainContent {
+  width: 100%;
+  max-width: 1240px; /* Максимальная ширина для десктопа */
+}
+
+/* Стили для вашего блока с транзакциями */
+.transactionsWrapper {
+  width: 100%; /* Теперь он занимает всю ширину родителя (.mainContent) */
+  border-radius: 30px;
+  overflow: hidden;
+  background-color: #171719; /* Добавим фон, как у других блоков */
+}
+
+/* Адаптивность для планшетов */
+@media (max-width: 1439px) {
+  .mainContent {
+    max-width: 704px;
+  }
+}
+
+/* Адаптивность для мобильных */
+@media (max-width: 767px) {
+  .mainContent {
+    max-width: 335px;
+  }
+  .pageWrapper {
+    padding: 10px;
+    padding-top: 101px;
+  }
+}

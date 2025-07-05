@@ -1,5 +1,6 @@
-import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { ErrorMessage } from "formik";
+import { useEffect } from "react";
 import { openCategoriesModal } from "../../redux/transactions/slice";
 import { selectCategory } from "../../redux/categories/selectors";
 import css from "../TransactionForm/TransactionForm.module.css";
@@ -29,6 +30,7 @@ const CategoryField = ({ setFieldValue, id }) => {
         readOnly
         onClick={() => dispatch(openCategoriesModal())}
       />
+      <ErrorMessage className={css.error} name="category" component="div" />
     </div>
   );
 };

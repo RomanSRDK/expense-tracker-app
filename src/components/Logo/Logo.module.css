@@ -1,26 +1,31 @@
- 
 .logoLink {
-  display: flex;  
-  align-items: center;  
-  gap: 12px;  
-  text-decoration: none;  
-  color: #eae5e5;  
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--color-text); /* UNIFIED */
+  transition: color var(--animation); /* ANIMATION */
 }
 
-.logoIcon { 
+/* ANIMATION: Добавим эффект при наведении на логотип */
+.logoLink:hover {
+  color: var(--color-primary);
+}
+
+.logoIcon {
   width: 32px;
   height: 32px;
 }
 
 .logoText {
-  font-family: 'Open Sans', sans-serif;  
-  font-weight: 700;
-  letter-spacing: 0.02em; 
-  font-size: 18px; 
+  font-family: var(--font-base); /* UNIFIED */
+  font-weight: var(--font-weight-bold); /* UNIFIED */
+  letter-spacing: 0.02em;
+  font-size: 18px;
 }
- 
+
 @media (min-width: 768px) {
-  .logoText { 
+  .logoText {
     font-size: 20px;
   }
 }

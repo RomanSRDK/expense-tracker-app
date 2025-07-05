@@ -12,6 +12,13 @@ export const validationTransactionSchema = Yup.object({
     .required("Sum is required"),
   comment: Yup.string()
     .min(3, "Too short")
-    .max(48, "Too long")
+    .max(48, "Max 48")
     .required("Comment is required"),
+});
+
+export const validationCategorySchema = Yup.object({
+  text: Yup.string()
+    .required("Category is required")
+    .min(2, "Too short")
+    .max(16, "Max 16"),
 });

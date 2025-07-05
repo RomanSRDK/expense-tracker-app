@@ -1,5 +1,26 @@
+import MainTransactionsHeader from '../../components/MainTransactionsHeader/MainTransactionsHeader';
+import TransactionsList from '../../components/TransactionsList/TransactionsList';
+import TransactionsSearchTools from '../../components/TransactionsSearchTools/TransactionsSearchTools';
+// Используем 's' как и раньше, но применим новые классы
+import s from './TransactionsHistoryPage.module.css';
+
 function TransactionsHistoryPage() {
-  return <div>TransactionsHistoryPage</div>;
+  return (
+    <>
+      <MainTransactionsHeader />
+      {/* 1. Добавляем обертку, как на главной странице */}
+      <div className={s.pageWrapper}>
+        {/* 2. Добавляем контейнер для контента */}
+        <main className={s.mainContent}>
+          {/* 3. Вся логика страницы теперь внутри этого контейнера */}
+          <div className={s.transactionsWrapper}>
+            <TransactionsSearchTools />
+            <TransactionsList />
+          </div>
+        </main>
+      </div>
+    </>
+  );
 }
 
 export default TransactionsHistoryPage;

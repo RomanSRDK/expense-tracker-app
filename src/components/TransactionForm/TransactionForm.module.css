@@ -73,6 +73,12 @@
   /* scrollbar-color: #444446 #0c0d0d; */
 }
 
+/*  */
+.dateTime input {
+  margin-top: 0;
+}
+/*  */
+
 .input[type="number"]::-webkit-outer-spin-button,
 .input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
@@ -144,10 +150,6 @@
 }
 
 @media screen and (min-width: 1440px) {
-  .container {
-    padding: 0 100px;
-  }
-
   .form {
     padding: 40px 36px;
     width: 566px;

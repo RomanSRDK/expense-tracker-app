@@ -1,9 +1,8 @@
 .wrapper {
   display: flex;
   gap: 24px;
-   font-family: var(--font-base);
+  font-family: var(--font-base);
   font-weight: var(--font-weight-regular);
-
 }
 
 @media (max-width: 768px) {
@@ -30,24 +29,26 @@
   font-size: 28px;
   display: flex;
   align-items: center;
-  justify-content: center; 
+  justify-content: center;
 }
 
-.iconWrapperIncome, .iconWrapperExpense  {
-  background-color: #0ef387;;
-  color: #0c0d0d;;
+/* DUPLICATE: Стили для .iconWrapperIncome и .iconWrapperExpense идентичны */
+.iconWrapperIncome,
+.iconWrapperExpense {
+  background-color: var(--color-primary); /* UNIFIED */
+  color: var(--color-bg); /* UNIFIED */
 }
- 
+
 .info h3 {
-     font-family: var(--font-base);
-font-weight: var(--font-weight-regular);
-font-size: 16px; 
-color:  var(--color-secondary);
+  font-family: var(--font-base);
+  font-weight: var(--font-weight-regular);
+  font-size: 16px;
+  color: var(--color-secondary);
 }
 
-.info p { 
-      font-family: var(--font-base);
-font-weight: var(--font-weight-bold);
-font-size: 24px; 
-color:  var(--color-text);
+.info p {
+  font-family: var(--font-base);
+  font-weight: var(--font-weight-bold);
+  font-size: 24px;
+  color: var(--color-text);
 }
