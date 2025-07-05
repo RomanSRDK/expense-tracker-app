@@ -1,17 +1,10 @@
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  selectCurrency,
-  selectUserAvatar,
-  selectUserName,
-} from "../../redux/user/selectors";
-import {
-  fetchUserInfo,
-  removeUsersAvatar,
-  updatesAvatar,
-} from "../../redux/user/operations";
+import { selectUserAvatar } from "../../redux/user/selectors";
+import { removeUsersAvatar, updatesAvatar } from "../../redux/user/operations";
 import { useEffect, useRef, useState } from "react";
 import defaultAvatar from "../../pictures/avatar.png";
+import { IoCloseOutline } from "react-icons/io5";
 import css from "./UserSetsModal.module.css";
 
 function UserSetsModal({ toggleUserModal }) {
@@ -19,13 +12,13 @@ function UserSetsModal({ toggleUserModal }) {
   const inputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
 
-  const userName = useSelector(selectUserName);
+  // const userName = useSelector(selectUserName);
   const avatarUrl = useSelector(selectUserAvatar);
-  const currency = useSelector(selectCurrency);
+  // const currency = useSelector(selectCurrency);
 
-  useEffect(() => {
-    dispatch(fetchUserInfo());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchUserInfo());
+  // }, [dispatch]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -73,34 +66,41 @@ function UserSetsModal({ toggleUserModal }) {
           aria-label="Close modal"
           onClick={() => toggleUserModal(false)}
         >
-          ✕
+          <IoCloseOutline size={24} />
         </button>
         <h2 className={css.title}>Profile settings</h2>
-        <img
-          src={avatarUrl || defaultAvatar}
-          alt="User avatar"
-          className={css.avatarImage}
-        />
+        <div className={css.avatarContainer}>
+          <img
+            src={avatarUrl || defaultAvatar}
+            alt="User avatar"
+            className={css.avatarImage}
+          />
 
-        <input
-          type="file"
-          accept="image/*"
-          style={{ display: "none" }}
-          ref={inputRef}
-          onChange={handleFileChange}
-        />
-        <div className={css.buttonsGroup}>
-          <button onClick={handleButtonClick} className={css.selectButton}>
-            Upload new photo
-          </button>
-          <button onClick={handleRemovePhoto}>Remove</button>
+          <input
+            type="file"
+            accept="image/*"
+            style={{ display: "none" }}
+            ref={inputRef}
+            onChange={handleFileChange}
+          />
+          <div className={css.buttonsGroup}>
+            <button onClick={handleButtonClick} className={css.uploadPhoto}>
+              Upload new photo
+            </button>
+            <button onClick={handleRemovePhoto} className={css.removePhoto}>
+              Remove
+            </button>
+          </div>
         </div>
-        <select name="currency">
-          <option value="UAH">₴ {currency}</option>
-          <option value="USD">$ USD</option>
-          <option value="EUR">€ EUR</option>
-        </select>
-        <input type="text" name="username" placeholder={userName} />
+        <div className={css.identityAndCurrency}>
+          <select name="currency">
+            <option value="UAH">₴ UAH</option>
+            <option value="USD">$ USD</option>
+            <option value="EUR">€ EUR</option>
+          </select>
+          <input type="text" name="username" className={css.userName} />
+        </div>
+        <button className={css.saveButton}>Save</button>
       </div>
     </div>,
     document.body
