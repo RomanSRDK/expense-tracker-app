@@ -1,15 +1,19 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { instance } from "../auth/operations";
+import { instance } from "../auth/operations"; // <-- Импортируем instance
 
 /**
- Отримуємо всі транзакції користувача @route GET /transactions
+ * Получает ВСЕ транзакции (и доходы, и расходы)
  */
 export const getAllTransactions = createAsyncThunk(
   "transactions/getAll",
   async (_, { rejectWithValue }) => {
     try {
-      const response = await instance.get("/transactions");
-      return response.data;
+      // Делаем два запроса и объединяем результаты
+      const [incomesResponse, expensesResponse] = await Promise.all([
+        instance.get("/transactions/incomes"),
+        instance.get("/transactions/expenses"),
+      ]);
+      return [...incomesResponse.data, ...expensesResponse.data];
     } catch (error) {
       return rejectWithValue(error.message);
     }
@@ -17,74 +21,52 @@ export const getAllTransactions = createAsyncThunk(
 );
 
 /**
- Створюємо нову транзакцію @route POST /transactions
+ * Создает новую транзакцию
  */
 export const addTransaction = createAsyncThunk(
   "transactions/addTransaction",
-  async (transactionData, thunkAPI) => {
-    // const state = thunkAPI.getState();
-    // const token = state.auth.token;
-
-    // if (!token) {
-    //   return thunkAPI.rejectWithValue('No valid token');
-    // }
-
+  async (transactionData, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await instance.post("/transactions", transactionData);
-      thunkAPI.dispatch(getTransactionsSummary());
+      dispatch(getAllTransactions()); // Обновляем список транзакций
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
 
 /**
- Видаляємо транзакцію @route DELETE /transactions/{transactionId}
+ * Удаляет транзакцию
  */
 export const deleteTransaction = createAsyncThunk(
   "transactions/deleteTransaction",
-  async (transactionId, thunkAPI) => {
+  async (transactionId, { dispatch, rejectWithValue }) => {
     try {
       await instance.delete(`/transactions/${transactionId}`);
-      thunkAPI.dispatch(getTransactionsSummary());
+      dispatch(getAllTransactions()); // Обновляем список
       return transactionId;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );
 
 /**
-оновлюємо транзакцію @route PATCH /transactions/{transactionId}
+ * Обновляет транзакцию
  */
 export const updateTransaction = createAsyncThunk(
   "transactions/updateTransaction",
-  async ({ transactionId, ...updateData }, thunkAPI) => {
+  async ({ type, id, ...updateData }, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await instance.patch(
-        `/transactions/${transactionId}`,
+        `/transactions/${type}/${id}`,
         updateData
       );
-      thunkAPI.dispatch(getTransactionsSummary());
+      dispatch(getAllTransactions()); // Обновляем список
       return data;
     } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-/**
- Оримуємо підсумкові дані по транзакціях @route GET /transactions/summary
- */
-export const getTransactionsSummary = createAsyncThunk(
-  "transactions/getSummary",
-  async (_, thunkAPI) => {
-    try {
-      const { data } = await instance.get("/transactions/summary");
-      return data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
+      return rejectWithValue(error.message);
     }
   }
 );

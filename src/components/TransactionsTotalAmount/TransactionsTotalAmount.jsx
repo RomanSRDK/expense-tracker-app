@@ -1,16 +1,15 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectTotalIncome, selectTotalExpense } from '../../redux/transactions/selectors';  
+// Убираем useSelector и селекторы, они больше не нужны
 import { HiMiniArrowUpRight, HiMiniArrowDownLeft } from 'react-icons/hi2'; 
 import styles from './TransactionsTotalAmount.module.css';
 
-const TransactionsTotalAmount = () => {
-  // отримуємо дані напряму зі стору
-  const totalIncome = useSelector(selectTotalIncome);
-  const totalExpense = useSelector(selectTotalExpense);
+// 1. Компонент теперь принимает totalIncome и totalExpense как props
+const TransactionsTotalAmount = ({ totalIncome = 0, totalExpense = 0 }) => {
 
   const formatCurrency = (amount) => {
-    return `₴ ${amount.toLocaleString('uk-UA', { minimumFractionDigits: 2 })}`;
+    // Добавим проверку, чтобы amount не был null или undefined
+    const validAmount = amount || 0;
+    return `₴ ${validAmount.toLocaleString('uk-UA', { minimumFractionDigits: 2 })}`;
   };
 
   return (
