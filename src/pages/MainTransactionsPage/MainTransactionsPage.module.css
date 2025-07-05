@@ -1,10 +1,9 @@
-
 .pageWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 80px);  
-  padding: 20px; 
+  min-height: calc(100vh - 80px);
+  padding: 20px;
 }
 
 .mainContent {
@@ -22,25 +21,18 @@
 }
 
 .infoHeader {
-font-family: var(--font-base);
-font-weight: var(--font-weight-regular);
-font-size: 38px; 
-color:  var(--color-text);
-} 
+  font-family: var(--font-base);
+  font-weight: var(--font-weight-regular);
+  font-size: 38px;
+  color: var(--color-text);
+}
 
 .infoText {
-    font-family: var(--font-base);
-font-weight: var(--font-weight-regular);
-font-size: 16px; 
-color:  var(--color-secondary);
+  font-family: var(--font-base);
+  font-weight: var(--font-weight-regular);
+  font-size: 16px;
+  color: var(--color-secondary);
 }
-/*.formSection {
-  flex: 1;
-  background-color: #ffffff;
-  padding: 40px;
-  border-radius: 16px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
-}*/
 
 .title {
   font-size: 24px;
@@ -53,8 +45,6 @@ color:  var(--color-secondary);
   margin-bottom: 24px;
 }
 
-/* Адаптивність для планшетів та мобільних */
-
 @media (max-width: 1440px) {
   .mainContent {
     flex-direction: column;
@@ -62,24 +52,24 @@ color:  var(--color-secondary);
 }
 
 @media screen and (min-width: 768px) and (max-width: 1440px) {
-  .mainContent {   
-  gap: 40px;   
-  max-width: 704px;
-}
+  .mainContent {
+    gap: 40px;
+    max-width: 704px;
+  }
 }
 @media screen and (max-width: 768px) {
-  .mainContent {   
-  gap: 40px;   
-  max-width: 335px;
+  .mainContent {
+    gap: 40px;
+    max-width: 335px;
   }
-  .infoHeader { 
-font-size: 32px;  
-} 
+  .infoHeader {
+    font-size: 32px;
+  }
 
-.infoText { 
-font-size: 14px;  
-}
-.infoSection { 
-  gap: 12px;
-}
+  .infoText {
+    font-size: 14px;
+  }
+  .infoSection {
+    gap: 12px;
+  }
 }

@@ -1,11 +1,101 @@
 import { createPortal } from "react-dom";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  selectCurrency,
+  selectUserAvatar,
+  selectUserName,
+} from "../../redux/user/selectors";
+import { fetchUserInfo, updatesAvatar } from "../../redux/user/operations";
+import { useEffect, useRef, useState } from "react";
 import css from "./UserSetsModal.module.css";
 
-function UserSetsModal() {
+function UserSetsModal({ toggleUserModal }) {
+  const dispatch = useDispatch();
+  const inputRef = useRef(null);
+  const [selectedFile, setSelectedFile] = useState(null);
+
+  const userName = useSelector(selectUserName);
+  const avatarUrl = useSelector(selectUserAvatar);
+  const currency = useSelector(selectCurrency);
+
+  useEffect(() => {
+    dispatch(fetchUserInfo());
+  }, [dispatch]);
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === "Escape") {
+        toggleUserModal(false);
+      }
+    };
+    document.addEventListener("keydown", handleKeyDown);
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [toggleUserModal]);
+
+  const handleBackdropClick = (e) => {
+    if (e.target === e.currentTarget) {
+      toggleUserModal(false);
+    }
+  };
+
+  const handleFileChange = (e) => {
+    const file = e.target.files[0];
+    if (!file) return;
+
+    setSelectedFile(file);
+
+    const formData = new FormData();
+    formData.append("avatar", file);
+
+    dispatch(updatesAvatar(formData));
+  };
+
+  const handleButtonClick = () => {
+    if (inputRef.current) {
+      inputRef.current.click(); // ← симулируем клик
+    }
+  };
+
   return createPortal(
-    <div className={css.backdrop}>
+    <div className={css.backdrop} onClick={handleBackdropClick}>
       <div className={css.modal}>
-        <h2 style={{ color: "red" }}>Profile settings</h2>
+        <button
+          className={css.closeButton}
+          aria-label="Close modal"
+          onClick={() => toggleUserModal(false)}
+        >
+          ✕
+        </button>
+        <h2 className={css.title}>Profile settings</h2>
+        <img
+          src={avatarUrl ? avatarUrl : "../../pictures/avatar.png"}
+          alt="User avatar"
+          className={css.avatarImage}
+        />
+
+        <input
+          type="file"
+          accept="image/*"
+          style={{ display: "none" }}
+          ref={inputRef}
+          onChange={handleFileChange}
+        />
+        <div className={css.buttonsGroup}>
+          <button onClick={handleButtonClick} className={css.selectButton}>
+            Upload new photo
+          </button>
+          <button>Remove</button>
+        </div>
+        <select name="currency">
+          <option value="UAH">₴ {currency}</option>
+          <option value="USD" selected>
+            $ USD
+          </option>
+          <option value="EUR">€ EUR</option>
+        </select>
+        <input type="text" name="username" placeholder={userName} />
       </div>
     </div>,
     document.body

@@ -1,8 +1,9 @@
 import { useDispatch } from "react-redux";
-import { logIn, logOut } from "../../redux/auth/operations";
+import { logIn } from "../../redux/auth/operations";
 import * as Yup from "yup";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import s from "./RegisterPage.module.css";
+import { useNavigate } from "react-router-dom";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -21,6 +22,8 @@ const loginSchema = Yup.object().shape({
 
 function LoginPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const handleSubmit = (values, actions) => {
     dispatch(
       logIn({
@@ -31,12 +34,15 @@ function LoginPage() {
       .unwrap()
       .then(() => {
         console.log("login success");
+        navigate("/transactions/expenses");
       })
       .catch((error) => {
         console.log(error);
       });
 
     actions.resetForm();
+
+    //
 
     //
   };
@@ -51,15 +57,6 @@ function LoginPage() {
           awaits.
         </p>
       </div>
-
-      {/* {next button is for a while} */}
-      <button
-        type="button"
-        onClick={() => dispatch(logOut())}
-        className={s.log_out}
-      >
-        Log out
-      </button>
 
       <AuthForm
         mode="login"
