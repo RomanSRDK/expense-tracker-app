@@ -35,7 +35,7 @@
   z-index: 1002;
 }
 
-.burgerMenuOpen .burgerMenu {
+.burgerMenuBackdrop.burgerMenuOpen .burgerMenu {
   transform: translateX(0);
 }
 
