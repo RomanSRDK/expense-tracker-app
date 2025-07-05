@@ -12,7 +12,7 @@ const categoriesSlice = createSlice({
     categoriesList: [],
     isLoading: false,
     error: null,
-    selectedCategory: [],
+    selectedCategory: "",
     categotyToEdit: null,
   },
   reducers: {
@@ -20,7 +20,7 @@ const categoriesSlice = createSlice({
       state.selectedCategory = payload;
     },
     clearCategory(state) {
-      state.selectedCategory = [];
+      state.selectedCategory = "";
     },
     setEditCategory(state, { payload }) {
       state.categotyToEdit = payload;

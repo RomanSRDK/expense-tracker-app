@@ -11,11 +11,13 @@ import {
   setTransactionRadioType,
 } from "../../redux/transactions/slice";
 import css from "./CategoriesList.module.css";
+import { selectTransactionType } from "../../redux/transactions/selectors";
 
 const CategoriesList = () => {
   const dispatch = useDispatch();
   const filteredCategories = useSelector(selectFilteredCategories);
-  const showTitles = filteredCategories.length === 2;
+  const selectedTransactionType = useSelector(selectTransactionType);
+  const showTitles = selectedTransactionType === "all";
 
   const handleSubmit = ({ id, name, type }) => {
     dispatch(setCategory({ id, name }));
@@ -33,7 +35,7 @@ const CategoriesList = () => {
   };
 
   return (
-    <div>
+    <div className={css.list}>
       {filteredCategories.map((group) => (
         <div key={group.type}>
           {showTitles && (
@@ -45,7 +47,7 @@ const CategoriesList = () => {
                 group.type}
             </div>
           )}
-          <ul className={css.list}>
+          <ul>
             {group.items.map((category) => (
               <li className={css.item} key={category._id}>
                 <div className={css.wrapper}>
