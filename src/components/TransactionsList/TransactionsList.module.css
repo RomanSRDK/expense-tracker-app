@@ -1,0 +1,77 @@
+.wrapper {
+  overflow-x: auto; /* горизонтальний скрол */
+  padding-bottom: 10px;
+}
+
+.titles {
+  display: grid;
+  grid-template-columns: 80px 89px 70px 60px 95px 96px;
+  padding: 20px 20px;
+  font-weight: 400;
+  color: rgba(250, 250, 250, 0.4);
+  background: rgba(0, 0, 0, 0.2);
+  min-width: 550px; /* ширина для скролу */
+}
+
+.items {
+  display: flex;
+  flex-direction: column;
+  min-width: 550px; /* ширина для скролу */
+}
+
+@media (min-width: 768px) {
+  .wrapper {
+    overflow-x: none; /* горизонтальний скрол */
+    padding-bottom: 0;
+  }
+
+  .titles {
+    padding: 20px 32px;
+    grid-template-columns: 100px 120px 100px 90px 120px 100px;
+  }
+
+  .items {
+    height: 300px;
+    overflow-y: auto;
+  }
+
+  /* Ширина самого скролбару */
+  .items::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  /* Трек (фон скролу) */
+  .items::-webkit-scrollbar-track {
+    background: #1a1a1a; /* або твій фон */
+  }
+
+  /* Повзунок (ручка скролу) */
+  .items::-webkit-scrollbar-thumb {
+    background-color: rgba(250, 250, 250, 0.2); /* колір повзунка */
+    border-radius: 8px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+  }
+
+  /* Наведення */
+  .items::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(250, 250, 250, 0.4);
+  }
+
+  /* Кут у разі одночасного горизонтального і вертикального скролу */
+  .items::-webkit-scrollbar-corner {
+    background: transparent;
+  }
+}
+
+@media (min-width: 1440px) {
+  .titles {
+    padding: 20px 40px;
+    grid-template-columns: 100px 200px 180px 150px 220px 180px;
+  }
+
+  .items {
+    height: 300px;
+    overflow-y: auto;
+  }
+}

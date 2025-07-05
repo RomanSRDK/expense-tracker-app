@@ -1,8 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { instance } from "../auth/operations";
 
-// console.log(instance.defaults.headers.common.Authorization);
-
 /**
  Отримуємо всі транзакції користувача @route GET /transactions
  */
@@ -24,12 +22,12 @@ export const getAllTransactions = createAsyncThunk(
 export const addTransaction = createAsyncThunk(
   "transactions/addTransaction",
   async (transactionData, thunkAPI) => {
-    const state = thunkAPI.getState();
-    const token = state.auth.token;
+    // const state = thunkAPI.getState();
+    // const token = state.auth.token;
 
-    if (!token) {
-      return thunkAPI.rejectWithValue("No valid token");
-    }
+    // if (!token) {
+    //   return thunkAPI.rejectWithValue('No valid token');
+    // }
 
     try {
       const { data } = await instance.post("/transactions", transactionData);

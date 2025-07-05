@@ -1,0 +1,46 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 91px;
+  background-color: var(--color-bg);
+  border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  z-index: 1000;
+}
+ 
+.desktopNav,
+.desktopUserBar {
+  display: none;
+}
+
+.mobileNav {
+  display: block;
+}
+
+ 
+@media screen and (min-width: 1440px) {
+  .header {
+    justify-content: flex-start; 
+    gap: 40px;
+    padding: 0 100px;
+  }
+
+  .desktopNav {
+    display: block; 
+    margin-left: 200px;  
+    margin-right: 40px; 
+  }
+
+  .desktopUserBar {
+    display: block;  
+  }
+
+  .mobileNav {
+    display: none;  
+  }
+}

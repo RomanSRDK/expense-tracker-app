@@ -37,7 +37,10 @@
     background-image: url("./BgImage/desk.webp");
     width: 611px;
     height: 568px;
-    margin: 0 54px 100px 100px;
+    margin: 0;
+
+    border-radius: 20px;
+    flex-shrink: 0;
   }
 }
 @media screen and (min-width: 1440px) and (min-resolution: 192dpi) {

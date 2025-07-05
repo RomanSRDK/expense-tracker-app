@@ -1,16 +1,26 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { IoMdRadioButtonOff, IoMdRadioButtonOn } from "react-icons/io";
+import { useId } from "react";
+import toast from "react-hot-toast";
 import { validationTransactionSchema } from "../../validation/validation";
 import { useDispatch, useSelector } from "react-redux";
-import { useId } from "react";
 import { addTransaction } from "../../redux/transactions/operations";
-import Button from "../Button/Button";
-import toast from "react-hot-toast";
-import { selectModalIsOpen } from "../../redux/transactions/selectors";
-import CategoriesModal from "../CategoriesModal/CategoriesModal";
+import { clearCategory } from "../../redux/categories/slice";
+import {
+  clearTransactionRadioType,
+  clearTransactionType,
+  setTransactionRadioType,
+} from "../../redux/transactions/slice";
+import {
+  selectIsLoading,
+  selectModalIsOpen,
+} from "../../redux/transactions/selectors";
 import SyncTransactionType from "../SyncTransactionType/SyncTransactionType";
-import css from "./TransactionForm.module.css";
+import CategoriesModal from "../CategoriesModal/CategoriesModal";
 import CategoryField from "../CategoryField/CategoryField";
+import Loader from "../Loader/Loader";
+import Button from "../Button/Button";
+import css from "./TransactionForm.module.css";
 
 import clsx from "clsx";
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
@@ -18,6 +28,7 @@ import "react-datepicker/dist/react-datepicker.css";
 
 const TransactionForm = () => {
   const isModalOpen = useSelector(selectModalIsOpen);
+  const isLoading = useSelector(selectIsLoading);
 
   const dateId = useId();
   const timeId = useId();
@@ -27,11 +38,16 @@ const TransactionForm = () => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values, { resetForm }) => {
     try {
       await dispatch(addTransaction(values)).unwrap();
-      toast.success("Transaction add");
-    } catch {
+      toast.success("Transaction added");
+      dispatch(clearCategory());
+      dispatch(clearTransactionType());
+      dispatch(clearTransactionRadioType());
+      resetForm();
+    } catch (error) {
+      console.log(error);
       toast.error("Something went wrong, please try different data.");
     }
   };
@@ -40,13 +56,14 @@ const TransactionForm = () => {
   const currentTime = new Date().toISOString().split("T")[1].slice(0, 5);
 
   return (
-    <div className={css.container}>
+    <div>
+      {isLoading && <Loader />}
       <Formik
         initialValues={{
           type: "",
           date: today,
           time: currentTime,
-          category: "6865bc93f1df95584aaf59ff",
+          category: "",
           sum: "",
           comment: "",
         }}
@@ -59,11 +76,17 @@ const TransactionForm = () => {
             <Form className={css.form}>
               <div className={css.transactionType}>
                 <label className={css.customRadioLabel}>
-                  <Field
-                    className={css.inputRadio}
+                  <input
                     type="radio"
                     name="type"
                     value="expenses"
+                    checked={values.type === "expenses"}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFieldValue("type", value);
+                      dispatch(setTransactionRadioType(value));
+                    }}
+                    className={css.inputRadio}
                   />
                   <span className={css.radioIcon}>
                     {values.type === "expenses" ? (
@@ -74,12 +97,19 @@ const TransactionForm = () => {
                   </span>
                   Expense
                 </label>
+
                 <label className={css.customRadioLabel}>
-                  <Field
-                    className={css.inputRadio}
+                  <input
                     type="radio"
                     name="type"
                     value="incomes"
+                    checked={values.type === "incomes"}
+                    onChange={(e) => {
+                      const value = e.target.value;
+                      setFieldValue("type", value);
+                      dispatch(setTransactionRadioType(value));
+                    }}
+                    className={css.inputRadio}
                   />
                   <span className={css.radioIcon}>
                     {values.type === "incomes" ? (
@@ -96,6 +126,7 @@ const TransactionForm = () => {
                   component="div"
                 />
               </div>
+
               <div className={css.dateTime}>
                 <div className={css.inputWrapper}>
                   <label className={css.label} htmlFor={dateId}>
