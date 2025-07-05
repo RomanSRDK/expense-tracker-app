@@ -49,7 +49,7 @@ const CategoriesForm = () => {
                 New Category
               </label>
               <Field
-                className={css.input}
+                className={css.categoryInput}
                 type="text"
                 name="text"
                 placeholder="Enter the text"

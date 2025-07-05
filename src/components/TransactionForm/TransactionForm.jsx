@@ -6,6 +6,7 @@ import { validationTransactionSchema } from "../../validation/validation";
 import { useDispatch, useSelector } from "react-redux";
 import { addTransaction } from "../../redux/transactions/operations";
 import { clearCategory } from "../../redux/categories/slice";
+import { FiCalendar } from "react-icons/fi";
 import {
   clearTransactionRadioType,
   clearTransactionType,
@@ -16,17 +17,15 @@ import {
   selectIsLoading,
 } from "../../redux/transactions/selectors";
 import SyncTransactionType from "../SyncTransactionType/SyncTransactionType";
+import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
+import CustomTimePicker from "../CustomTimePicker/CustomTimePicker";
 import CategoriesModal from "../CategoriesModal/CategoriesModal";
 import CategoryField from "../CategoryField/CategoryField";
 import Loader from "../Loader/Loader";
 import Button from "../Button/Button";
-import css from "./TransactionForm.module.css";
-
 import clsx from "clsx";
-import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
+import css from "./TransactionForm.module.css";
 import "react-datepicker/dist/react-datepicker.css";
-import CustomTimePicker from "../CustomTimePicker/CustomTimePicker";
-import { FiCalendar } from "react-icons/fi";
 
 const TransactionForm = () => {
   const isModalOpen = useSelector(selectCategoriesModalIsOpen);
@@ -79,6 +78,7 @@ const TransactionForm = () => {
               <div className={css.transactionType}>
                 <label className={css.customRadioLabel}>
                   <input
+                    className={css.inputRadio}
                     type="radio"
                     name="type"
                     value="expenses"
@@ -88,7 +88,6 @@ const TransactionForm = () => {
                       setFieldValue("type", value);
                       dispatch(setTransactionRadioType(value));
                     }}
-                    className={css.inputRadio}
                   />
                   <span className={css.radioIcon}>
                     {values.type === "expenses" ? (
@@ -102,6 +101,7 @@ const TransactionForm = () => {
 
                 <label className={css.customRadioLabel}>
                   <input
+                    className={css.inputRadio}
                     type="radio"
                     name="type"
                     value="incomes"
@@ -111,7 +111,6 @@ const TransactionForm = () => {
                       setFieldValue("type", value);
                       dispatch(setTransactionRadioType(value));
                     }}
-                    className={css.inputRadio}
                   />
                   <span className={css.radioIcon}>
                     {values.type === "incomes" ? (
@@ -138,8 +137,9 @@ const TransactionForm = () => {
                   <Field name="date">
                     {({ field, form }) => (
                       <CustomDatePicker
+                        {...field}
                         className={clsx(css.input)}
-                        field={field}
+                        id={dateId}
                         form={form}
                         icon={<FiCalendar />}
                       />
@@ -160,8 +160,10 @@ const TransactionForm = () => {
                   <Field name="date">
                     {({ field, form }) => (
                       <CustomTimePicker
+                        {...field}
                         className={clsx(css.input)}
-                        field={field}
+                        // field={field}
+                        id={timeId}
                         form={form}
                       />
                     )}
