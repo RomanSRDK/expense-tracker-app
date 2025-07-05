@@ -20,6 +20,6 @@ createRoot(document.getElementById("root")).render(
         </BrowserRouter>
       </PersistGate>
     </Provider>
-    <Toaster />
+    <Toaster position="top-right" />
   </StrictMode>
 );

@@ -10,7 +10,7 @@ export const instance = axios.create({
 //  qwer1234
 
 // Utility to add JWT
-const setAuthHeader = (token) => {
+export const setAuthHeader = (token) => {
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
