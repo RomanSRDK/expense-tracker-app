@@ -36,6 +36,7 @@ const MainTransactionsPage = () => {
     <>
       <MainTransactionsHeader />
       <div className={styles.pageWrapper}>
+        
         <main className={styles.mainContent}>
           {/* Ліва колонка з інформацією */}
           <section className={styles.infoSection}>
