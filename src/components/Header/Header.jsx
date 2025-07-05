@@ -91,14 +91,13 @@ const Header = () => {
             {(isMobile || isTablet) && (
               <div>
                 <BurgerMenuBtn onClick={toggleBurger} />
-                {isBurgerOpen && (
-                  <BurgerMenu
-                    isBurgerOpen={isBurgerOpen}
-                    onClose={closeBurger}
-                    onOpenModal={handleOpenModal}
-                    onOpenLogoutModal={openLogoutModal}
-                  />
-                )}
+
+                <BurgerMenu
+                  isBurgerOpen={isBurgerOpen}
+                  onClose={closeBurger}
+                  onOpenModal={handleOpenModal}
+                  onOpenLogoutModal={openLogoutModal}
+                />
               </div>
             )}
           </>
