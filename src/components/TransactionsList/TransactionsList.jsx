@@ -16,73 +16,9 @@ import {
 } from '../../redux/transactions/operations';
 import Loader from '../Loader/Loader';
 import { useLocation } from 'react-router-dom';
+import toast from 'react-hot-toast';
 
-const TransactionsList = () => {
-  // const transactions = [
-  //   {
-  //     _id: '6529eff94ceb918e15a171f1d',
-  //     type: 'incomes',
-  //     date: '2022-12-28',
-  //     time: '19:45',
-  //     category: {
-  //       _id: '6522bf1f9027bb7d55d6512b',
-  //       categoryName: 'Salary',
-  //     },
-  //     sum: 700,
-  //     comment: 'December salary',
-  //   },
-  //   {
-  //     _id: '6529eff94ceb918e15a171f1w',
-  //     type: 'incomes',
-  //     date: '2022-12-28',
-  //     time: '19:45',
-  //     category: {
-  //       _id: '6522bf1f9027bb7d55d6512b',
-  //       categoryName: 'Salary',
-  //     },
-  //     sum: 700,
-  //     comment: 'December salary',
-  //   },
-  //   {
-  //     _id: '6529eff94ceb918e15a171f1',
-  //     type: 'incomes',
-  //     date: '2022-12-28',
-  //     time: '19:45',
-  //     category: {
-  //       _id: '6522bf1f9027bb7d55d6512b',
-  //       categoryName: 'Salary',
-  //     },
-  //     sum: 700,
-  //     comment: 'December salaryмвіавммімаа',
-  //   },
-  //   {
-  //     _id: '6529eff94ceb918e15a171f531',
-  //     type: 'incomes',
-  //     date: '2022-12-28',
-  //     time: '19:45',
-  //     category: {
-  //       _id: '6522bf1f9027bb7d55d6512b',
-  //       categoryName: 'Salary',
-  //     },
-  //     sum: 700,
-  //     comment: 'December salaryмвіавммімаа',
-  //   },
-  //   {
-  //     _id: '6529eff94ceb918e15a171f134d',
-  //     type: 'incomes',
-  //     date: '2022-12-28',
-  //     time: '19:45',
-  //     category: {
-  //       _id: '6522bf1f9027bb7d55d6512bwd',
-  //       categoryName: 'Salary',
-  //     },
-  //     sum: '700 / UAH',
-  //     comment: 'December salaryмвіавммімаа',
-  //   },
-  // ];
-
-  //////////////////////////////////////////////////////////////////////
-
+const TransactionsList = ({ searchQuery, selectedDate }) => {
   const dispatch = useDispatch();
   const location = useLocation();
 
@@ -101,11 +37,50 @@ const TransactionsList = () => {
   const error = useSelector(selectError);
 
   // Отправка запиту при монтуванні
+  // useEffect(() => {
+  //   if (transactionType !== 'all') {
+  //     dispatch(getQueryTransactions(transactionType));
+  //   }
+  // }, [dispatch, transactionType, location]);
+
+  const formatDateLocal = date => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Місяці від 0 до 11
+    const day = date.getDate().toString().padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
+  };
+
   useEffect(() => {
     if (transactionType !== 'all') {
-      dispatch(getQueryTransactions(transactionType));
+      let queryParam = transactionType;
+      if (selectedDate) {
+        const formattedDate = formatDateLocal(selectedDate);
+        queryParam = `${transactionType}?date=${formattedDate}`;
+        console.log(queryParam);
+      }
+      dispatch(getQueryTransactions(queryParam))
+        .unwrap()
+        .then(data => {
+          if (Array.isArray(data) && data.length === 0) {
+            toast.error('There are no transactions for the selected date.');
+            dispatch(getQueryTransactions(transactionType));
+          }
+        })
+        .catch(err => {
+          toast.error('Error loading transactions');
+        });
     }
-  }, [dispatch, transactionType, location]);
+  }, [dispatch, transactionType, selectedDate, location]);
+
+  console.log(searchQuery);
+  console.log(selectedDate);
+
+  const filteredTransactions = searchQuery.trim()
+    ? transactions.filter(query =>
+        query.comment.toLowerCase().includes(searchQuery.toLowerCase())
+      )
+    : transactions;
 
   return (
     <div className={s.wrapper}>
@@ -122,7 +97,7 @@ const TransactionsList = () => {
       {error && <p className={s.error}>Error: {error}</p>}
 
       <div className={s.items}>
-        {transactions.map(
+        {filteredTransactions.map(
           ({ _id, sum, date, time, comment, category: { categoryName } }) => (
             <TransactionsItem
               key={_id}

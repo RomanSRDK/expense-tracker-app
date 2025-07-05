@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import MainTransactionsHeader from '../../components/MainTransactionsHeader/MainTransactionsHeader';
 import TransactionsList from '../../components/TransactionsList/TransactionsList';
 import TransactionsSearchTools from '../../components/TransactionsSearchTools/TransactionsSearchTools';
@@ -5,6 +6,9 @@ import TransactionsSearchTools from '../../components/TransactionsSearchTools/Tr
 import s from './TransactionsHistoryPage.module.css';
 
 function TransactionsHistoryPage() {
+  const [searchQuery, setSearchQuery] = useState('');
+  const [selectedDate, setSelectedDate] = useState(null);
+
   return (
     <>
       <MainTransactionsHeader />
@@ -14,8 +18,16 @@ function TransactionsHistoryPage() {
         <main className={s.mainContent}>
           {/* 3. Вся логика страницы теперь внутри этого контейнера */}
           <div className={s.transactionsWrapper}>
-            <TransactionsSearchTools />
-            <TransactionsList />
+            <TransactionsSearchTools
+              earchQuery={searchQuery}
+              setSearchQuery={setSearchQuery}
+              selectedDate={selectedDate}
+              setSelectedDate={setSelectedDate}
+            />
+            <TransactionsList
+              searchQuery={searchQuery}
+              selectedDate={selectedDate}
+            />
           </div>
         </main>
       </div>

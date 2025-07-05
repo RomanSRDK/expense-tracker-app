@@ -1,18 +1,13 @@
 const PREDEFINED_COLORS = [
-  '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
-  '#FF9F40', '#FFCD56', '#C45850', '#8E5EA2', '#3CBA9F'
+   '#0EBB69', '#0EF387', '#FAFAFA', '#444446',
+  '#13D08F', '#10A875', '#D6D6D6', '#2C2C2E'
 ];
 
-/**
- * Генерує карту кольорів для категорій
- * @param {Array} categories - Масив об'єктів категорій з бекенду
- * @returns {Object} - Об'єкт, де ключ - назва категорії, а значення - колір
- */
 export const generateCategoryColors = (categories) => {
   const colorMap = {};
   categories.forEach((category, index) => {
-    // Використовуємо колір з палітри по колу
-    colorMap[category.name] = PREDEFINED_COLORS[index % PREDEFINED_COLORS.length];
+    const key = category.name || category.categoryName;
+    colorMap[key] = PREDEFINED_COLORS[index % PREDEFINED_COLORS.length];
   });
   return colorMap;
 };
