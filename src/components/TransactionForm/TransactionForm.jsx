@@ -12,6 +12,10 @@ import SyncTransactionType from "../SyncTransactionType/SyncTransactionType";
 import css from "./TransactionForm.module.css";
 import CategoryField from "../CategoryField/CategoryField";
 
+import clsx from "clsx";
+import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
+import "react-datepicker/dist/react-datepicker.css";
+
 const TransactionForm = () => {
   const isModalOpen = useSelector(selectModalIsOpen);
 
@@ -97,18 +101,23 @@ const TransactionForm = () => {
                   <label className={css.label} htmlFor={dateId}>
                     Date
                   </label>
-                  <Field
-                    className={css.input}
-                    type="date"
-                    name="date"
-                    id={dateId}
-                  />
+
+                  <Field name="date">
+                    {({ field, form }) => (
+                      <CustomDatePicker
+                        className={clsx(css.input)}
+                        field={field}
+                        form={form}
+                      />
+                    )}
+                  </Field>
                   <ErrorMessage
                     className={css.error}
                     name="date"
                     component="div"
                   />
                 </div>
+
                 <div className={css.inputWrapper}>
                   <label className={css.label} htmlFor={timeId}>
                     Time
