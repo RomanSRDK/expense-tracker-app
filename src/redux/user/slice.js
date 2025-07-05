@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { fetchUserInfo, updatesAvatar } from "./operations";
+import { fetchUserInfo, removeUsersAvatar, updatesAvatar } from "./operations";
 
 const slice = createSlice({
   name: "user",
@@ -22,6 +22,10 @@ const slice = createSlice({
       .addCase(updatesAvatar.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user.avatarUrl = action.payload.avatarUrl;
+      })
+      .addCase(removeUsersAvatar.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.user.avatarUrl = action.payload?.avatarUrl || null;
       });
   },
 });

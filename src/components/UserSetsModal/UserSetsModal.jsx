@@ -5,8 +5,13 @@ import {
   selectUserAvatar,
   selectUserName,
 } from "../../redux/user/selectors";
-import { fetchUserInfo, updatesAvatar } from "../../redux/user/operations";
+import {
+  fetchUserInfo,
+  removeUsersAvatar,
+  updatesAvatar,
+} from "../../redux/user/operations";
 import { useEffect, useRef, useState } from "react";
+import defaultAvatar from "../../pictures/avatar.png";
 import css from "./UserSetsModal.module.css";
 
 function UserSetsModal({ toggleUserModal }) {
@@ -56,6 +61,10 @@ function UserSetsModal({ toggleUserModal }) {
     }
   };
 
+  const handleRemovePhoto = () => {
+    dispatch(removeUsersAvatar());
+  };
+
   return createPortal(
     <div className={css.backdrop} onClick={handleBackdropClick}>
       <div className={css.modal}>
@@ -68,7 +77,7 @@ function UserSetsModal({ toggleUserModal }) {
         </button>
         <h2 className={css.title}>Profile settings</h2>
         <img
-          src={avatarUrl ? avatarUrl : "../../pictures/avatar.png"}
+          src={avatarUrl || defaultAvatar}
           alt="User avatar"
           className={css.avatarImage}
         />
@@ -84,7 +93,7 @@ function UserSetsModal({ toggleUserModal }) {
           <button onClick={handleButtonClick} className={css.selectButton}>
             Upload new photo
           </button>
-          <button>Remove</button>
+          <button onClick={handleRemovePhoto}>Remove</button>
         </div>
         <select name="currency">
           <option value="UAH">₴ {currency}</option>

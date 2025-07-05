@@ -19,7 +19,19 @@ export const updatesAvatar = createAsyncThunk(
   async (formData, ThunkAPI) => {
     try {
       const { data } = await instance.patch("users/avatar", formData);
-      console.log(data);
+      // console.log(data);
+      return data;
+    } catch (error) {
+      return ThunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
+export const removeUsersAvatar = createAsyncThunk(
+  "user/removeAvatar",
+  async (_, ThunkAPI) => {
+    try {
+      const { data } = await instance.delete("users/avatar");
       return data;
     } catch (error) {
       return ThunkAPI.rejectWithValue(error);
