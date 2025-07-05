@@ -73,6 +73,12 @@
   /* scrollbar-color: #444446 #0c0d0d; */
 }
 
+/*  */
+.dateTime input {
+  margin-top: 0;
+}
+/*  */
+
 .input[type="number"]::-webkit-outer-spin-button,
 .input[type="number"]::-webkit-inner-spin-button {
   -webkit-appearance: none;
