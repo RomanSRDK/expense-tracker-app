@@ -25,6 +25,7 @@ import css from "./TransactionForm.module.css";
 import clsx from "clsx";
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
 import "react-datepicker/dist/react-datepicker.css";
+import CustomTimePicker from "../CustomTimePicker/CustomTimePicker";
 
 const TransactionForm = () => {
   const isModalOpen = useSelector(selectModalIsOpen);
@@ -153,12 +154,16 @@ const TransactionForm = () => {
                   <label className={css.label} htmlFor={timeId}>
                     Time
                   </label>
-                  <Field
-                    className={css.input}
-                    type="time"
-                    name="time"
-                    id={timeId}
-                  />
+
+                  <Field name="date">
+                    {({ field, form }) => (
+                      <CustomTimePicker
+                        className={clsx(css.input)}
+                        field={field}
+                        form={form}
+                      />
+                    )}
+                  </Field>
                   <ErrorMessage
                     className={css.error}
                     name="time"
