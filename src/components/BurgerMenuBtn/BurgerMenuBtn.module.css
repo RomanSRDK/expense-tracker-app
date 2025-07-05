@@ -1,12 +1,28 @@
 .burgerMenuBtn {
   width: 36px;
   height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 0.3s ease;
+  color: var(--color-text);
+}
+
+.burgerMenuBtn:hover,
+.burgerMenuBtn:focus {
+  color: #f0f0f0;
 }
 
 .burgerMenuIcon {
-  color: var(--color-text);
+  color: currentColor;
   width: 24px;
   height: 24px;
+  pointer-events: none;
+  transition: inherit;
 }
 
 @media screen and (min-width: 768px) {
