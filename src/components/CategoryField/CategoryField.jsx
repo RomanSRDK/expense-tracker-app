@@ -12,7 +12,7 @@ const CategoryField = ({ setFieldValue, id }) => {
   useEffect(() => {
     if (category?.id) {
       setFieldValue("category", category.id);
-    }
+    } else setFieldValue("category", "");
   }, [category, setFieldValue]);
 
   return (

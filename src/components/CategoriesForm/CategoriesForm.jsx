@@ -24,8 +24,8 @@ const CategoriesForm = () => {
       await dispatch(addCategory(payload)).unwrap();
       toast.success(`Category "${payload.categoryName}" was added`);
       resetForm();
-    } catch (error) {
-      toast.error(error);
+    } catch {
+      toast.error("Something went wrong");
     }
   };
 

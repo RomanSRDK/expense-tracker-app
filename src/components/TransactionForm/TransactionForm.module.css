@@ -116,11 +116,11 @@
   gap: 20px;
 }
 
-.inputWrapper,
+/* .inputWrapper,
 .inputWrapper .label,
 .inputWrapper .input {
   cursor: pointer;
-}
+} */
 
 .inputWrapper {
   width: 100%;

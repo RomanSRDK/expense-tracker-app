@@ -26,6 +26,7 @@ import Button from "../Button/Button";
 import clsx from "clsx";
 import css from "./TransactionForm.module.css";
 import "react-datepicker/dist/react-datepicker.css";
+import { FaRegClock } from "react-icons/fa";
 
 const TransactionForm = () => {
   const isModalOpen = useSelector(selectCategoriesModalIsOpen);
@@ -161,10 +162,10 @@ const TransactionForm = () => {
                     {({ field, form }) => (
                       <CustomTimePicker
                         {...field}
-                        className={clsx(css.input)}
-                        // field={field}
                         id={timeId}
+                        className={clsx(css.input)}
                         form={form}
+                        icon={<FaRegClock className="clock_icon" />}
                       />
                     )}
                   </Field>

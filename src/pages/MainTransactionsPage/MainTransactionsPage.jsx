@@ -22,7 +22,6 @@ const MainTransactionsPage = () => {
 
   useEffect(() => {
     dispatch(getAllTransactions());
-    dispatch(getCategories());
   }, [dispatch]);
 
   const summaryData = useMemo(() => {

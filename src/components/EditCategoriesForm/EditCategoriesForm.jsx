@@ -26,8 +26,8 @@ const EditCategoriesForm = () => {
       await dispatch(editCategory(payload)).unwrap();
       toast.success(`Category "${categoryToEdit.name}" sucsesfully edited`);
       resetForm();
-    } catch (error) {
-      console.log(error);
+    } catch {
+      toast.error("Something went wrong");
     }
   };
 
@@ -64,7 +64,7 @@ const EditCategoriesForm = () => {
             </Button>
             <Button
               className={css.cancelButton}
-              type="bytton"
+              type="button"
               size="small"
               variant="cancel"
               handleClick={() => dispatch(cancelEditCategory())}
