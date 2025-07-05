@@ -7,9 +7,13 @@ import {
   selectAllTransactions,
   selectIsLoading,
   selectError,
+  selectQueryTransactions,
 } from '../../redux/transactions/selectors';
 
-import { getAllTransactions } from '../../redux/transactions/operations';
+import {
+  getAllTransactions,
+  getQueryTransactions,
+} from '../../redux/transactions/operations';
 import Loader from '../Loader/Loader';
 
 const TransactionsList = () => {
@@ -76,26 +80,30 @@ const TransactionsList = () => {
   //   },
   // ];
 
-  const dispatch = useDispatch();
-  const transactions = useSelector(selectAllTransactions);
-  console.log(transactions);
+  //////////////////////////////////////////////////////////////////////
 
+  const dispatch = useDispatch();
+
+  // Функція щоб дістати тип з URL
+  const getTransactionTypeFromURL = () => {
+    const path = window.location.pathname.split('/').filter(Boolean);
+    const last = path[path.length - 1];
+    return last === 'incomes' || last === 'expenses' ? last : 'all';
+  };
+
+  const transactionType = getTransactionTypeFromURL();
+
+  // Отримуємо транзакції з Redux
+  const transactions = useSelector(selectQueryTransactions);
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
+  // Отправка запиту при монтуванні
   useEffect(() => {
-    dispatch(getAllTransactions());
-  }, [dispatch]);
-
-  // const [filterType, setFilterType] = useState('incomes'); // incomes | expenses
-
-  // useEffect(() => {
-  //   if (filterType === 'all') {
-  //     dispatch(getAllTransactions());
-  //   } else {
-  //     dispatch(getAllTransactions(filterType));
-  //   }
-  // }, [dispatch, filterType]);
+    if (transactionType !== 'all') {
+      dispatch(getQueryTransactions(transactionType));
+    }
+  }, [dispatch, transactionType]);
 
   return (
     <div className={s.wrapper}>
@@ -108,8 +116,8 @@ const TransactionsList = () => {
         <p>Actions</p>
       </div>
 
-      {/* {isLoading && <Loader />}
-      {error && <p className={s.error}>Error: {error}</p>} */}
+      {isLoading && <Loader />}
+      {error && <p className={s.error}>Error: {error}</p>}
 
       <div className={s.items}>
         {transactions.map(

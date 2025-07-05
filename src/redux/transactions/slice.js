@@ -1,13 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 import {
   getAllTransactions,
   addTransaction,
   deleteTransaction,
   updateTransaction,
   getTransactionsSummary,
-} from "./operations";
+  getQueryTransactions,
+} from './operations';
 
-const handlePending = (state) => {
+const handlePending = state => {
   state.isLoading = true;
   state.error = null;
 };
@@ -28,12 +29,12 @@ const initialState = {
   isLoading: false,
   error: null,
   modalIsOpen: false,
-  selectedType: "all",
-  selectedRadioType: "",
+  selectedType: 'all',
+  selectedRadioType: '',
 };
 
 const transactionsSlice = createSlice({
-  name: "transactions",
+  name: 'transactions',
   initialState,
   reducers: {
     openCategoriesModal(state) {
@@ -46,16 +47,16 @@ const transactionsSlice = createSlice({
       state.selectedType = payload;
     },
     clearTransactionType(state) {
-      state.selectedType = "all";
+      state.selectedType = 'all';
     },
     setTransactionRadioType(state, { payload }) {
       state.selectedRadioType = payload;
     },
     clearTransactionRadioType(state) {
-      state.selectedRadioType = "all";
+      state.selectedRadioType = 'all';
     },
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
       // Отримання всіх транзакцій
       .addCase(getAllTransactions.pending, handlePending)
@@ -65,12 +66,18 @@ const transactionsSlice = createSlice({
       })
       .addCase(getAllTransactions.rejected, handleRejected)
 
+      // Отримання обраних транзакцій
+      .addCase(getQueryTransactions.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = action.payload;
+      })
+
       // Додавання транзакції
       .addCase(addTransaction.pending, handlePending)
       .addCase(addTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         state.items.push(action.payload); // Додавання нової транзакції в список
-        state.selectedType = "all";
+        state.selectedType = 'all';
       })
       .addCase(addTransaction.rejected, handleRejected)
 
@@ -78,8 +85,8 @@ const transactionsSlice = createSlice({
       .addCase(deleteTransaction.pending, handlePending)
       .addCase(deleteTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.items = state.items.filter((item) => item.id !== action.payload);
-        state.selectedType = "all";
+        state.items = state.items.filter(item => item.id !== action.payload);
+        state.selectedType = 'all';
       })
       .addCase(deleteTransaction.rejected, handleRejected)
 
@@ -88,7 +95,7 @@ const transactionsSlice = createSlice({
       .addCase(updateTransaction.fulfilled, (state, action) => {
         state.isLoading = false;
         const index = state.items.findIndex(
-          (item) => item.id === action.payload.id
+          item => item.id === action.payload.id
         );
         if (index !== -1) {
           state.items[index] = action.payload;
