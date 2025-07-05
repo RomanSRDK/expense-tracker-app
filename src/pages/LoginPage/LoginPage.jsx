@@ -41,10 +41,6 @@ function LoginPage() {
       });
 
     actions.resetForm();
-
-    //
-
-    //
   };
 
   //JSX

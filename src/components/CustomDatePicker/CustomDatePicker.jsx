@@ -1,17 +1,41 @@
-import { FiCalendar } from "react-icons/fi";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+import { FiCalendar } from "react-icons/fi";
 import "./datepicker-overrides.css";
 
-const CustomDatePicker = ({ className, field, form }) => {
+const CustomDatePicker = ({
+  className,
+  field, //  Formik
+  form, //  Formik
+  selectedDate, // useState
+  onChange, // useState
+  ...rest // додаткові пропси
+}) => {
+  const isFormik = !!field && !!form;
+
+  const selected = isFormik
+    ? field.value
+      ? new Date(field.value)
+      : null
+    : selectedDate;
+
+  const handleChange = (date) => {
+    if (isFormik) {
+      form.setFieldValue(field.name, date);
+    } else {
+      onChange?.(date);
+    }
+  };
+
   return (
     <DatePicker
       className={className}
-      selected={new Date(field.value)}
-      onChange={(date) => form.setFieldValue("date", date)}
-      dateFormat="mm/dd/yyyy"
+      selected={selected}
+      onChange={handleChange}
+      dateFormat="MM/dd/yyyy"
       showIcon
-      icon={<FiCalendar />}
+      placeholderText="Select a date"
+      {...rest}
     />
   );
 };
