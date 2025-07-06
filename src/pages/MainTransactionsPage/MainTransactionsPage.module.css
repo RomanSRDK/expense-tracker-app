@@ -39,6 +39,30 @@
   margin-bottom: 24px;
 }
 
+.formSection {
+  background-color: var(--color-bg-secondary);
+  border-radius: 30px;
+  padding: 28px 20px;
+  width: 335px;
+  color: var(--color-text);
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+  .formSection {
+    padding: 40px 108px;
+    width: 704px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .formSection {
+    padding: 40px 36px;
+    width: 566px;
+    margin: 0;
+  }
+}
+
 @media (max-width: 1440px) {
   .mainContent {
     flex-direction: column;

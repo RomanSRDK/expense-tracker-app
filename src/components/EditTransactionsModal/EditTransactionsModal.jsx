@@ -8,12 +8,13 @@ import {
   closeTransactionsEditModal,
 } from "../../redux/transactions/slice";
 import { CgClose } from "react-icons/cg";
-import TransactionForm from "../TransactionForm/TransactionForm";
 import toast from "react-hot-toast";
 import { clearCategory } from "../../redux/categories/slice";
 import { updateTransaction } from "../../redux/transactions/operations";
-import css from "./EditTransactionsModal.module.css";
 import { selectTransactionToEdit } from "../../redux/transactions/selectors";
+import EditTransactionForm from "../EditTransactionForm/EditTransactionForm";
+import css from "./EditTransactionsModal.module.css";
+import TransactionForm from "../TransactionForm/TransactionForm";
 
 const EditTransactionsModal = () => {
   const dispatch = useDispatch();
@@ -74,12 +75,12 @@ const EditTransactionsModal = () => {
         >
           <CgClose className={css.closeIcon} />
         </button>
+
         <TransactionForm
           onSubmit={handleSubmit}
           initialValues={TransactionToEdit}
           buttonText={buttonText}
         />
-        <h2 className={css.test}>Edit Transaction Modal</h2>
       </div>
     </div>,
     document.body
