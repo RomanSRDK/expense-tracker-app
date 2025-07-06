@@ -4,8 +4,9 @@
   align-items: flex-start;
   gap: 30px;
   width: 100%;
+  /* margin-bottom: 186px; */
+/*   margin-top: 126px; */
 }
-
 .sharedWrapper {
   width: 575px;
 }
