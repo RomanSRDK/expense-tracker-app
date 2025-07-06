@@ -39,3 +39,7 @@ export const selectQueryTransactions = (state) => state.transactions.items;
 // Повертає стату відкриття/закриття модалки редагування транзакції
 export const selectIsOpenTransactionEdit = (state) =>
   state.transactions.editModalIsOpen;
+
+// Повертає транзакію вибріну для редагування
+export const selectTransactionToEdit = (state) =>
+  state.transactions.transactionToEdit;

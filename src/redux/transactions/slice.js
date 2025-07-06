@@ -24,6 +24,7 @@ const initialState = {
   categoriesModalIsOpen: false,
   selectedType: "all",
   selectedRadioType: "",
+  transactionToEdit: {},
   editModalIsOpen: false,
 };
 
@@ -54,6 +55,12 @@ const transactionsSlice = createSlice({
     },
     closeTransactionsEditModal(state) {
       state.editModalIsOpen = false;
+    },
+    setTransactionToEdit(state, { payload }) {
+      state.transactionToEdit = payload;
+    },
+    clearTransactionToEdit(state) {
+      state.transactionToEdit = {};
     },
   },
   extraReducers: (builder) => {
@@ -108,5 +115,7 @@ export const {
   clearTransactionRadioType,
   openTransactionsEditModal,
   closeTransactionsEditModal,
+  setTransactionToEdit,
+  clearTransactionToEdit,
 } = transactionsSlice.actions;
 export const transactionsReducer = transactionsSlice.reducer;

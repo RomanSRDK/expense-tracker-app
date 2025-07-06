@@ -94,15 +94,16 @@ const TransactionsList = ({ searchQuery, selectedDate }) => {
 
       <div className={s.items}>
         {filteredTransactions.map(
-          ({ _id, sum, date, time, comment, category: { categoryName } }) => (
+          ({ type, _id, sum, date, time, comment, category }) => (
             <TransactionsItem
               key={_id}
+              type={type}
               id={_id}
               sum={sum}
               date={date}
               time={time}
               comment={comment}
-              categoryName={categoryName}
+              category={category}
             />
           )
         )}

@@ -3,7 +3,6 @@
   display: flex;
   justify-content: center;
   align-items: flex-start; /* Выравниваем по верху, а не по центру */
-  min-height: 100vh;
   padding: 20px;
 }
 

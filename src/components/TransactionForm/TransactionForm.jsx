@@ -1,21 +1,15 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { IoMdRadioButtonOff, IoMdRadioButtonOn } from "react-icons/io";
 import { useId } from "react";
-import toast from "react-hot-toast";
 import { validationTransactionSchema } from "../../validation/validation";
 import { useDispatch, useSelector } from "react-redux";
-import { addTransaction } from "../../redux/transactions/operations";
-import { clearCategory } from "../../redux/categories/slice";
+import { setTransactionRadioType } from "../../redux/transactions/slice";
 import { FiCalendar } from "react-icons/fi";
-import {
-  clearTransactionRadioType,
-  clearTransactionType,
-  setTransactionRadioType,
-} from "../../redux/transactions/slice";
 import {
   selectCategoriesModalIsOpen,
   selectIsLoading,
 } from "../../redux/transactions/selectors";
+import { selectCurrency } from "../../redux/user/selectors";
 import SyncTransactionType from "../SyncTransactionType/SyncTransactionType";
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
 import CustomTimePicker from "../CustomTimePicker/CustomTimePicker";
@@ -23,14 +17,11 @@ import CategoriesModal from "../CategoriesModal/CategoriesModal";
 import CategoryField from "../CategoryField/CategoryField";
 import Loader from "../Loader/Loader";
 import Button from "../Button/Button";
-import { FaRegClock } from "react-icons/fa";
-import { selectCurrency } from "../../redux/user/selectors";
 import clsx from "clsx";
 import css from "./TransactionForm.module.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { Link } from "react-router-dom";
 
-const TransactionForm = () => {
+const TransactionForm = ({ onSubmit, initialValues, buttonText }) => {
   const isModalOpen = useSelector(selectCategoriesModalIsOpen);
   const isLoading = useSelector(selectIsLoading);
   const currencySelect = useSelector(selectCurrency);
@@ -48,35 +39,12 @@ const TransactionForm = () => {
   );
   const currency = currencySelect ? currencySelect : user.currency;
 
-  const handleSubmit = async (values, { resetForm }) => {
-    try {
-      await dispatch(addTransaction(values)).unwrap();
-      toast.success("Transaction added");
-      dispatch(clearCategory());
-      dispatch(clearTransactionType());
-      dispatch(clearTransactionRadioType());
-      resetForm();
-    } catch {
-      toast.error("Something went wrong, please try different data.");
-    }
-  };
-
-  // const today = new Date().toISOString().split("T")[0];
-  // const currentTime = new Date().toISOString().split("T")[1].slice(0, 5);
-
   return (
     <div>
       {isLoading && <Loader />}
       <Formik
-        initialValues={{
-          type: "",
-          date: "",
-          time: "",
-          category: "",
-          sum: "",
-          comment: "",
-        }}
-        onSubmit={handleSubmit}
+        initialValues={initialValues}
+        onSubmit={onSubmit}
         validationSchema={validationTransactionSchema}
       >
         {({ values, setFieldValue }) => (
@@ -242,7 +210,7 @@ const TransactionForm = () => {
               </div>
 
               <Button type="submit" size="small" variant="confirm">
-                Add
+                {buttonText}
               </Button>
             </Form>
           </>

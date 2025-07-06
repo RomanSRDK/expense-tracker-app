@@ -5,12 +5,18 @@ import { useSelector } from "react-redux";
 import { selectCurrency } from "../../redux/user/selectors";
 import { deleteTransaction } from "../../redux/transactions/operations";
 import toast from "react-hot-toast";
-import { openTransactionsEditModal } from "../../redux/transactions/slice";
+import {
+  openTransactionsEditModal,
+  setTransactionRadioType,
+  setTransactionToEdit,
+  setTransactionType,
+} from "../../redux/transactions/slice";
 import { selectIsOpenTransactionEdit } from "../../redux/transactions/selectors";
 import EditTransactionsModal from "../EditTransactionsModal/EditTransactionsModal";
 import s from "./TransactionsItem.module.css";
+import { setCategory } from "../../redux/categories/slice";
 
-const TransactionsItem = ({ id, sum, date, time, comment, categoryName }) => {
+const TransactionsItem = ({ id, sum, date, time, comment, category, type }) => {
   const dispatch = useDispatch();
   const currencySelect = useSelector(selectCurrency);
   const isEditingTransaction = useSelector(selectIsOpenTransactionEdit);
@@ -20,8 +26,21 @@ const TransactionsItem = ({ id, sum, date, time, comment, categoryName }) => {
   );
   const currency = currencySelect ? currencySelect : user.currency;
 
+  const transactionValues = {
+    date: date,
+    time: time,
+    sum: sum,
+    comment: comment,
+    type: type,
+    id: id,
+  };
+
   const handleEditClick = () => {
+    dispatch(setTransactionToEdit(transactionValues));
     dispatch(openTransactionsEditModal());
+    dispatch(setTransactionType(type));
+    dispatch(setTransactionRadioType(type));
+    dispatch(setCategory({ id: category._id, name: category.categoryName }));
   };
 
   const handleDelete = () => {
@@ -47,7 +66,7 @@ const TransactionsItem = ({ id, sum, date, time, comment, categoryName }) => {
     <>
       <div className={s.container} key={id}>
         <div className={s.wrapper}>
-          <p className={s.categoryName}>{categoryName}</p>
+          <p className={s.categoryName}>{category.categoryName}</p>
           <p className={s.comment}>{comment}</p>
           <p className={s.date}>{formattedDate}</p>
           <p className={s.time}>{time}</p>
@@ -67,22 +86,6 @@ const TransactionsItem = ({ id, sum, date, time, comment, categoryName }) => {
         </div>
       </div>
       {isEditingTransaction && <EditTransactionsModal />}
-      {/* {isEditing && (
-        <TransactionForm
-          initialValues={
-            {
-              id,
-              type,
-              sum,
-              date,
-              time,
-              comment,
-              category: categoryName,
-            }
-          }
-          isEditMode={true}
-        />
-      )} */}
     </>
   );
 };
