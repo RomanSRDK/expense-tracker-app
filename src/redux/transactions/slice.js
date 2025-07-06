@@ -1,13 +1,13 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 import {
   getAllTransactions,
   addTransaction,
   deleteTransaction,
   updateTransaction,
   getQueryTransactions,
-} from './operations';
+} from "./operations";
 
-const handlePending = state => {
+const handlePending = (state) => {
   state.isLoading = true;
   state.error = null;
 };
@@ -21,35 +21,35 @@ const initialState = {
   items: [],
   isLoading: false,
   error: null,
-  modalIsOpen: false,
-  selectedType: 'all',
-  selectedRadioType: '',
+  categoriesModalIsOpen: false,
+  selectedType: "all",
+  selectedRadioType: "",
 };
 
 const transactionsSlice = createSlice({
-  name: 'transactions',
+  name: "transactions",
   initialState,
   reducers: {
     openCategoriesModal(state) {
-      state.modalIsOpen = true;
+      state.categoriesModalIsOpen = true;
     },
     closeCategoriesModal(state) {
-      state.modalIsOpen = false;
+      state.categoriesModalIsOpen = false;
     },
     setTransactionType(state, { payload }) {
       state.selectedType = payload;
     },
     clearTransactionType(state) {
-      state.selectedType = 'all';
+      state.selectedType = "all";
     },
     setTransactionRadioType(state, { payload }) {
       state.selectedRadioType = payload;
     },
     clearTransactionRadioType(state) {
-      state.selectedRadioType = 'all';
+      state.selectedRadioType = "all";
     },
   },
-  extraReducers: builder => {
+  extraReducers: (builder) => {
     builder
       .addCase(getAllTransactions.pending, handlePending)
       .addCase(getAllTransactions.fulfilled, (state, action) => {
@@ -59,7 +59,7 @@ const transactionsSlice = createSlice({
       .addCase(getAllTransactions.rejected, handleRejected)
 
       // Отримання обраних транзакцій
-      .addCase(getQueryTransactions.pending, state => {
+      .addCase(getQueryTransactions.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
@@ -73,19 +73,19 @@ const transactionsSlice = createSlice({
       })
 
       .addCase(addTransaction.pending, handlePending)
-      .addCase(addTransaction.fulfilled, state => {
+      .addCase(addTransaction.fulfilled, (state) => {
         state.isLoading = false;
       })
       .addCase(addTransaction.rejected, handleRejected)
 
       .addCase(deleteTransaction.pending, handlePending)
-      .addCase(deleteTransaction.fulfilled, state => {
+      .addCase(deleteTransaction.fulfilled, (state) => {
         state.isLoading = false;
       })
       .addCase(deleteTransaction.rejected, handleRejected)
 
       .addCase(updateTransaction.pending, handlePending)
-      .addCase(updateTransaction.fulfilled, state => {
+      .addCase(updateTransaction.fulfilled, (state) => {
         state.isLoading = false;
       })
       .addCase(updateTransaction.rejected, handleRejected);

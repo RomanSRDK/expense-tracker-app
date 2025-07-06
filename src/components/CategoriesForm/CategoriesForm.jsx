@@ -25,7 +25,8 @@ const CategoriesForm = () => {
       toast.success(`Category "${payload.categoryName}" was added`);
       resetForm();
     } catch (error) {
-      toast.error(error);
+      console.log(error);
+      toast.error("Something went wrong");
     }
   };
 
@@ -49,7 +50,7 @@ const CategoriesForm = () => {
                 New Category
               </label>
               <Field
-                className={css.input}
+                className={css.categoryInput}
                 type="text"
                 name="text"
                 placeholder="Enter the text"
