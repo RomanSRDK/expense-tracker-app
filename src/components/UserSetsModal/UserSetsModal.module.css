@@ -80,7 +80,7 @@ select {
   appearance: none;
 }
 
-input[type="text"] {
+.buttonsGroup + select + input[type="text"] {
   background-color: transparent;
   color: #fafafa;
   border: 1px solid #3a3a3a;
