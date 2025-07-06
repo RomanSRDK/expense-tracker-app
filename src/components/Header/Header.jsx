@@ -27,7 +27,6 @@ const Header = () => {
   const isMobile = windowWidth < 768;
   const isTablet = windowWidth >= 768 && windowWidth < 1440;
   const isDesktop = windowWidth >= 1440;
-  console.log({ windowWidth, isMobile, isTablet, isDesktop });
 
   useEffect(() => {
     const handleResize = () => {

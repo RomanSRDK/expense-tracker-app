@@ -1,14 +1,11 @@
-// import React, { useRef } from "react";
 import s from "./WelcomePage.module.css";
 import AuthNav from "../../components/AuthNav/AuthNav";
 import AllUsersTab from "../../components/AllUsersTab/AllUsersTab";
-import BgImageWrapper from "../../components/BgImageWrapper/BgImageWrapper";
+import Container from "../../components/Container/Container";
 
 const WelcomePage = () => {
-  // const imageRef = useRef(null);
-
   return (
-    <div className="container">
+    <Container>
       <section className={s.main}>
         <div className={s.textSection}>
           <div className={s.listInfo}>
@@ -31,12 +28,8 @@ const WelcomePage = () => {
           </div>
           <AllUsersTab />
         </div>
-
-        <div className={s.imageSection}>
-          {/* <BgImageWrapper parentRef={imageRef} /> */}
-        </div>
       </section>
-    </div>
+    </Container>
   );
 };
 

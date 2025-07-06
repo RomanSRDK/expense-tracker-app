@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
-import { logIn } from "../../redux/auth/operations";
+import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 import * as Yup from "yup";
+import { logIn } from "../../redux/auth/operations";
+import Container from "../../components/Container/Container";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import s from "./RegisterPage.module.css";
-import { useNavigate } from "react-router-dom";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -37,8 +39,8 @@ function LoginPage() {
         console.log("login success");
         navigate("/transactions/expenses");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        toast.error("Login error");
       });
 
     actions.resetForm();
@@ -46,7 +48,7 @@ function LoginPage() {
 
   //JSX
   return (
-    <div>
+    <Container>
       <div className={s.content_box}>
         <h2>Sign In</h2>
         <p>
@@ -61,7 +63,7 @@ function LoginPage() {
         validationSchema={loginSchema}
         buttonLabel="Sign In"
       />
-    </div>
+    </Container>
   );
 }
 

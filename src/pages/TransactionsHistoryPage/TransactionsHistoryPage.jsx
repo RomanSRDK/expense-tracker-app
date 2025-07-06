@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import MainTransactionsHeader from '../../components/MainTransactionsHeader/MainTransactionsHeader';
-import TransactionsList from '../../components/TransactionsList/TransactionsList';
-import TransactionsSearchTools from '../../components/TransactionsSearchTools/TransactionsSearchTools';
+import { useState } from "react";
+import MainTransactionsHeader from "../../components/MainTransactionsHeader/MainTransactionsHeader";
+import TransactionsList from "../../components/TransactionsList/TransactionsList";
+import TransactionsSearchTools from "../../components/TransactionsSearchTools/TransactionsSearchTools";
 // Используем 's' как и раньше, но применим новые классы
-import s from './TransactionsHistoryPage.module.css';
+import s from "./TransactionsHistoryPage.module.css";
+import Container from "../../components/Container/Container";
 
 function TransactionsHistoryPage() {
-  const [searchQuery, setSearchQuery] = useState('');
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
 
   return (
-    <>
-      <MainTransactionsHeader />
+    <Container>
       {/* 1. Добавляем обертку, как на главной странице */}
       <div className={s.pageWrapper}>
         {/* 2. Добавляем контейнер для контента */}
@@ -31,7 +31,7 @@ function TransactionsHistoryPage() {
           </div>
         </main>
       </div>
-    </>
+    </Container>
   );
 }
 

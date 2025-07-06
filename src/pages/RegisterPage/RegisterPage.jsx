@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
-import AuthForm from "../../components/AuthForm/AuthForm";
-import { register } from "../../redux/auth/operations";
-import * as Yup from "yup";
-import s from "./RegisterPage.module.css";
 import { useNavigate } from "react-router-dom";
+import * as Yup from "yup";
+import { register } from "../../redux/auth/operations";
+import Container from "../../components/Container/Container";
+import AuthForm from "../../components/AuthForm/AuthForm";
+import s from "./RegisterPage.module.css";
+import toast from "react-hot-toast";
 
 const registerSchema = Yup.object().shape({
   name: Yup.string()
@@ -29,7 +31,6 @@ function RegisterPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  // handlers
   const handleSubmit = (values, actions) => {
     dispatch(
       register({
@@ -45,8 +46,7 @@ function RegisterPage() {
       })
       .catch((error) => {
         console.log(error);
-
-        // console.log("login error");
+        toast.error("Login Error");
       });
 
     actions.resetForm();
@@ -61,7 +61,7 @@ function RegisterPage() {
 
   //JSX
   return (
-    <div>
+    <Container>
       <div className={s.content_box}>
         <h2>Sign Up</h2>
         <p>
@@ -77,7 +77,7 @@ function RegisterPage() {
         buttonLabel="Sign Up"
         handleResetInput={handleResetInput}
       />
-    </div>
+    </Container>
   );
 }
 

@@ -5,6 +5,8 @@ import { selectIsRefreshing } from "./redux/auth/selectors";
 import { refreshUser } from "./redux/auth/operations";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
 import "./App.css";
+import Loader from "./components/Loader/Loader";
+import Layout from "./components/Layout/Layout";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
@@ -26,10 +28,12 @@ function App() {
   }, [dispatch]);
 
   //JSX
-  return (
-    !isRefreshing && (
-      <>
-        <Suspense fallback={null}>
+  return isRefreshing ? (
+    <Loader />
+  ) : (
+    <>
+      <Layout>
+        <div className="pageWrapper">
           <Routes>
             <Route element={<SharedLayout />}>
               <Route index element={<WelcomePage />} />
@@ -46,9 +50,9 @@ function App() {
             />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
-        </Suspense>
-      </>
-    )
+        </div>
+      </Layout>
+    </>
   );
 }
 
