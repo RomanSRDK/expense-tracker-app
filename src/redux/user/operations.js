@@ -38,3 +38,18 @@ export const removeUsersAvatar = createAsyncThunk(
     }
   }
 );
+
+export const setCurrencyAndName = createAsyncThunk(
+  "user/currencyAndName",
+  async ({ name, currency }, ThunkAPI) => {
+    try {
+      const { data } = await instance.patch("users/info", {
+        name: name,
+        currency: currency,
+      });
+      return data;
+    } catch (error) {
+      return ThunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
+  }
+);
