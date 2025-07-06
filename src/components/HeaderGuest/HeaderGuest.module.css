@@ -1,0 +1,35 @@
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 91px;
+  background-color: var(--color-bg, #171719);
+  border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+
+  z-index: 999;
+}
+
+.headerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  height: 100%;
+  margin: 0 auto;
+  max-width: 335px;
+  padding: 0 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .headerContainer {
+    padding: 0 32px;
+    max-width: 704px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
+  .headerContainer {
+    max-width: 1200px;
+  }
+}

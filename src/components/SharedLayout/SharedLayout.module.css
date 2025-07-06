@@ -1,13 +1,13 @@
 .layoutWrapper {
-  display: block;
+  display: flex;
 }
+
 @media screen and (min-width: 1440px) {
   .authLayout {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     justify-content: center;
-    padding: 40px 100px;
     gap: 54px;
   }
 

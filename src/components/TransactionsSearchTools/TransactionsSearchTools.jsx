@@ -1,14 +1,9 @@
-import { useDispatch, useSelector } from "react-redux";
-import { useState, useEffect, useId } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import s from "./TransactionsSearchTools.module.css";
-import { getAllTransactions } from "../../redux/transactions/operations";
-import { selectAllTransactions } from "../../redux/transactions/selectors";
+import { useId } from "react";
 import { CiSearch } from "react-icons/ci";
-
 import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
 import { FiCalendar } from "react-icons/fi";
+import "react-datepicker/dist/react-datepicker.css";
+import s from "./TransactionsSearchTools.module.css";
 
 const TransactionsSearchTools = ({
   searchQuery,
