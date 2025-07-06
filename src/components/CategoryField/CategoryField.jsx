@@ -16,8 +16,8 @@ const CategoryField = ({ setFieldValue, id }) => {
   }, [category, setFieldValue]);
 
   return (
-    <div className={css.inputWrapper}>
-      <label className={css.label} htmlFor={id}>
+    <div className={`${css.inputWrapper} ${css.category}`}>
+      <label className={`${css.label} ${css.category}`} htmlFor={id}>
         Category
       </label>
       <input
