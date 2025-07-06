@@ -10,13 +10,14 @@ const loginSchema = Yup.object().shape({
     .min(4, "Too short")
     .required("required")
     .max(30, "Too long")
-    .matches(
-      /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
-      "Please enter a valid email address"
-    ),
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Enter a valid Email"),
   password: Yup.string()
     .min(5, "Too short")
     .max(20, "Too long")
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
+      "At least one letter and one number"
+    )
     .required("required"),
 });
 
@@ -34,7 +35,7 @@ function LoginPage() {
       .unwrap()
       .then(() => {
         console.log("login success");
-        // navigate("/transactions/expenses");
+        navigate("/transactions/expenses");
       })
       .catch((error) => {
         console.log(error);
