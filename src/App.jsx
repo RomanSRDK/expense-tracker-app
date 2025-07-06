@@ -9,7 +9,7 @@ import Layout from "./components/Layout/Layout";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./App.css";
-import RefreshngUser from "./components/RefreshingUser/RefreshingUser";
+import RefreshingUser from "./components/RefreshingUser/RefreshingUser";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));

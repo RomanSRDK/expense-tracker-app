@@ -2,7 +2,7 @@ import Container from "../Container/Container";
 import Section from "../Section/Section";
 import css from "./RefreshingUser.module.css";
 
-const RefreshngUser = () => {
+const RefreshingUser = () => {
   return (
     <Section>
       <Container>
@@ -12,4 +12,4 @@ const RefreshngUser = () => {
   );
 };
 
-export default RefreshngUser;
+export default RefreshingUser;

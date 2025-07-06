@@ -35,3 +35,7 @@ export const selectSelectedRadioType = (state) =>
 
 // Повертає масив обраних транзакцій
 export const selectQueryTransactions = (state) => state.transactions.items;
+
+// Повертає стату відкриття/закриття модалки редагування транзакції
+export const selectIsOpenTransactionEdit = (state) =>
+  state.transactions.editModalIsOpen;

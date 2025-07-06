@@ -1,19 +1,15 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import TransactionsItem from "../TransactionsItem/TransactionsItem";
 import s from "./TransactionsList.module.css";
 
 import {
-  selectAllTransactions,
   selectIsLoading,
   selectError,
   selectQueryTransactions,
 } from "../../redux/transactions/selectors";
 
-import {
-  getAllTransactions,
-  getQueryTransactions,
-} from "../../redux/transactions/operations";
+import { getQueryTransactions } from "../../redux/transactions/operations";
 import Loader from "../Loader/Loader";
 import { useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -67,7 +63,7 @@ const TransactionsList = ({ searchQuery, selectedDate }) => {
             dispatch(getQueryTransactions(transactionType));
           }
         })
-        .catch((err) => {
+        .catch(() => {
           toast.error("Error loading transactions");
         });
     }

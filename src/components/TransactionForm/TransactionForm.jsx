@@ -164,6 +164,22 @@ const TransactionForm = () => {
                   <label className={css.label} htmlFor={timeId}>
                     Time
                   </label>
+                  <Field
+                    className={css.input}
+                    type="time"
+                    name="time"
+                    id={timeId}
+                  />
+                  <ErrorMessage
+                    className={css.error}
+                    name="time"
+                    component="div"
+                  />
+                </div>
+                {/* <div className={css.inputWrapper}>
+                  <label className={css.label} htmlFor={timeId}>
+                    Time
+                  </label>
 
                   <Field name="date">
                     {({ field, form }) => (
@@ -181,7 +197,7 @@ const TransactionForm = () => {
                     name="time"
                     component="div"
                   />
-                </div>
+                </div> */}
               </div>
 
               <CategoryField setFieldValue={setFieldValue} id={categoryId} />
