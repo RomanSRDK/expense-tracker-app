@@ -111,6 +111,7 @@ const MainTransactionsPage = () => {
               onSubmit={handleSubmit}
               initialValues={formInitialValues}
               buttonText={buttonText}
+              isDisabled={false}
             />
           </section>
         </div>
