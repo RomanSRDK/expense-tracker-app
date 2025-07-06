@@ -18,10 +18,10 @@ import CategoryField from "../CategoryField/CategoryField";
 import Loader from "../Loader/Loader";
 import Button from "../Button/Button";
 import clsx from "clsx";
-import css from "./TransactionForm.module.css";
+import css from "./EditTransactionForm.module.css";
 import "react-datepicker/dist/react-datepicker.css";
 
-const TransactionForm = ({ onSubmit, initialValues, buttonText }) => {
+const EditTransactionForm = ({ onSubmit, initialValues, buttonText }) => {
   const isModalOpen = useSelector(selectCategoriesModalIsOpen);
   const isLoading = useSelector(selectIsLoading);
   const currencySelect = useSelector(selectCurrency);
@@ -38,7 +38,6 @@ const TransactionForm = ({ onSubmit, initialValues, buttonText }) => {
     JSON.parse(localStorage.getItem("persist:auth")).user
   );
   const currency = currencySelect ? currencySelect : user.currency;
-
   return (
     <div>
       {isLoading && <Loader />}
@@ -64,6 +63,7 @@ const TransactionForm = ({ onSubmit, initialValues, buttonText }) => {
                       setFieldValue("type", value);
                       dispatch(setTransactionRadioType(value));
                     }}
+                    enabled
                   />
                   <span className={css.radioIcon}>
                     {values.type === "expenses" ? (
@@ -87,6 +87,7 @@ const TransactionForm = ({ onSubmit, initialValues, buttonText }) => {
                       setFieldValue("type", value);
                       dispatch(setTransactionRadioType(value));
                     }}
+                    enabled
                   />
                   <span className={css.radioIcon}>
                     {values.type === "incomes" ? (
@@ -145,27 +146,27 @@ const TransactionForm = ({ onSubmit, initialValues, buttonText }) => {
                   />
                 </div>
                 {/* <div className={css.inputWrapper}>
-                  <label className={css.label} htmlFor={timeId}>
-                    Time
-                  </label>
+                <label className={css.label} htmlFor={timeId}>
+                  Time
+                </label>
 
-                  <Field name="date">
-                    {({ field, form }) => (
-                      <CustomTimePicker
-                        id={timeId}
-                        className={clsx(css.input)}
-                        field={field}
-                        form={form}
-                        icon={<FaRegClock className="clock_icon" />}
-                      />
-                    )}
-                  </Field>
-                  <ErrorMessage
-                    className={css.error}
-                    name="time"
-                    component="div"
-                  />
-                </div> */}
+                <Field name="date">
+                  {({ field, form }) => (
+                    <CustomTimePicker
+                      id={timeId}
+                      className={clsx(css.input)}
+                      field={field}
+                      form={form}
+                      icon={<FaRegClock className="clock_icon" />}
+                    />
+                  )}
+                </Field>
+                <ErrorMessage
+                  className={css.error}
+                  name="time"
+                  component="div"
+                />
+              </div> */}
               </div>
 
               <CategoryField setFieldValue={setFieldValue} id={categoryId} />
@@ -221,4 +222,4 @@ const TransactionForm = ({ onSubmit, initialValues, buttonText }) => {
   );
 };
 
-export default TransactionForm;
+export default EditTransactionForm;

@@ -4,7 +4,6 @@ import * as Yup from "yup";
 import { logIn } from "../../redux/auth/operations";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import s from "./LoginPage.module.css";
-import { useNavigate } from "react-router-dom";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -24,23 +23,19 @@ const loginSchema = Yup.object().shape({
 
 function LoginPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleSubmit = (values, actions) => {
-    dispatch(
-      logIn({
-        email: values.email,
-        password: values.password,
-      })
-    )
-      .unwrap()
-      .then(() => {
-        toast.success("login success");
-        navigate("/transactions/expenses");
-      })
-      .catch((error) => {
-        toast.error(error);
-      });
+    try {
+      dispatch(
+        logIn({
+          email: values.email,
+          password: values.password,
+        })
+      ).unwrap();
+      toast.success("login success");
+    } catch {
+      toast.error("Login error");
+    }
 
     actions.resetForm();
   };

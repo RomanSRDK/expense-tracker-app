@@ -9,7 +9,7 @@ import Layout from "./components/Layout/Layout";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./App.css";
-import RefreshngUser from "./components/RefreshingUser/RefreshingUser";
+import RefreshingUser from "./components/RefreshingUser/RefreshingUser";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
@@ -44,7 +44,7 @@ function App() {
                 path="/register"
                 element={
                   <RestrictedRoute
-                    redirectTo="/transactions/:transactionsType"
+                    redirectTo="/transactions"
                     component={<RegisterPage />}
                   />
                 }
@@ -53,17 +53,17 @@ function App() {
                 path="/login"
                 element={
                   <RestrictedRoute
-                    redirectTo="/transactions/:transactionsType"
+                    redirectTo="/transactions"
                     component={<LoginPage />}
                   />
                 }
               />
             </Route>
             <Route
-              path="/transactions/:transactionsType"
+              path="/transactions"
               element={
                 <PrivateRoute
-                  redirectTo="/login"
+                  redirectTo="/"
                   component={<MainTransactionsPage />}
                 />
               }
@@ -77,7 +77,11 @@ function App() {
                 />
               }
             />
-            <Route path="*" element={<Navigate to="/" />} />
+            <Route
+              path="/transactions/history"
+              element={<Navigate to="/transactions/history/expenses" />}
+            />
+            <Route path="*" element={<Navigate to="/transactions" />} />
           </Routes>
         </div>
       </Layout>

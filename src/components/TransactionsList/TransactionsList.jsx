@@ -1,19 +1,15 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import TransactionsItem from "../TransactionsItem/TransactionsItem";
 import s from "./TransactionsList.module.css";
 
 import {
-  selectAllTransactions,
   selectIsLoading,
   selectError,
   selectQueryTransactions,
 } from "../../redux/transactions/selectors";
 
-import {
-  getAllTransactions,
-  getQueryTransactions,
-} from "../../redux/transactions/operations";
+import { getQueryTransactions } from "../../redux/transactions/operations";
 import Loader from "../Loader/Loader";
 import { useLocation } from "react-router-dom";
 import toast from "react-hot-toast";
@@ -67,7 +63,7 @@ const TransactionsList = ({ searchQuery, selectedDate }) => {
             dispatch(getQueryTransactions(transactionType));
           }
         })
-        .catch((err) => {
+        .catch(() => {
           toast.error("Error loading transactions");
         });
     }
@@ -98,15 +94,16 @@ const TransactionsList = ({ searchQuery, selectedDate }) => {
 
       <div className={s.items}>
         {filteredTransactions.map(
-          ({ _id, sum, date, time, comment, category: { categoryName } }) => (
+          ({ type, _id, sum, date, time, comment, category }) => (
             <TransactionsItem
               key={_id}
+              type={type}
               id={_id}
               sum={sum}
               date={date}
               time={time}
               comment={comment}
-              categoryName={categoryName}
+              category={category}
             />
           )
         )}

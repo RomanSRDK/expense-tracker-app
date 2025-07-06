@@ -25,6 +25,7 @@ const EditCategoriesForm = () => {
     try {
       await dispatch(editCategory(payload)).unwrap();
       toast.success(`Category "${categoryToEdit.name}" sucsesfully edited`);
+      dispatch(cancelEditCategory());
       resetForm();
     } catch {
       toast.error("Something went wrong");

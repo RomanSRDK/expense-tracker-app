@@ -29,24 +29,18 @@ function RegisterPage() {
   const dispatch = useDispatch();
 
   const handleSubmit = (values, actions) => {
-    dispatch(
-      register({
-        name: values.name,
-        email: values.email,
-        password: values.password,
-      })
-    )
-      .unwrap()
-      .then(() => {
-        toast.success("Registration and Login success", {
-          position: "top-left",
-        });
-      })
-      .catch((error) => {
-        toast.error(error, {
-          position: "top-left",
-        });
-      });
+    try {
+      dispatch(
+        register({
+          name: values.name,
+          email: values.email,
+          password: values.password,
+        })
+      ).unwrap();
+      toast.success(`Welcome ${values.name}`);
+    } catch {
+      toast.error("Login Error");
+    }
 
     actions.resetForm();
   };

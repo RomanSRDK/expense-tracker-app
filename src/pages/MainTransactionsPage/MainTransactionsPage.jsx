@@ -1,6 +1,9 @@
 import React, { useEffect, useMemo } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllTransactions } from "../../redux/transactions/operations";
+import {
+  addTransaction,
+  getAllTransactions,
+} from "../../redux/transactions/operations";
 import { selectAllTransactions } from "../../redux/transactions/selectors";
 import { selectCategoriesList } from "../../redux/categories/selectors";
 import { generateCategoryColors } from "../../utils/colorGenerator";
@@ -11,6 +14,12 @@ import TransactionForm from "../../components/TransactionForm/TransactionForm";
 import Container from "../../components/Container/Container";
 import Section from "../../components/Section/Section";
 import styles from "./MainTransactionsPage.module.css";
+import toast from "react-hot-toast";
+import { clearCategory } from "../../redux/categories/slice";
+import {
+  clearTransactionRadioType,
+  clearTransactionType,
+} from "../../redux/transactions/slice";
 
 const MainTransactionsPage = () => {
   const dispatch = useDispatch();
@@ -49,6 +58,33 @@ const MainTransactionsPage = () => {
     return generateCategoryColors(expenseCategories);
   }, [expenseCategories]);
 
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      await dispatch(addTransaction(values)).unwrap();
+      toast.success("Transaction added");
+      dispatch(clearCategory());
+      dispatch(clearTransactionType());
+      dispatch(clearTransactionRadioType());
+      resetForm();
+    } catch {
+      toast.error("Something went wrong, please try different data.");
+    }
+  };
+
+  const today = new Date().toISOString().split("T")[0];
+  const currentTime = new Date().toISOString().split("T")[1].slice(0, 5);
+
+  const formInitialValues = {
+    type: "",
+    date: today,
+    time: currentTime,
+    category: "",
+    sum: "",
+    comment: "",
+  };
+
+  const buttonText = "Add";
+
   return (
     <Container>
       <Section>
@@ -71,7 +107,11 @@ const MainTransactionsPage = () => {
           </section>
 
           <section className={styles.formSection}>
-            <TransactionForm />
+            <TransactionForm
+              onSubmit={handleSubmit}
+              initialValues={formInitialValues}
+              buttonText={buttonText}
+            />
           </section>
         </div>
       </Section>
