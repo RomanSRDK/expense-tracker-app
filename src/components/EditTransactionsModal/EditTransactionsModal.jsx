@@ -80,6 +80,7 @@ const EditTransactionsModal = () => {
           onSubmit={handleSubmit}
           initialValues={TransactionToEdit}
           buttonText={buttonText}
+          isDisabled={true}
         />
       </div>
     </div>,

@@ -41,6 +41,10 @@
   margin-right: 8px;
 }
 
+.customRadioLabel input:disabled + .radioIcon .iconOff {
+  opacity: 1;
+}
+
 .iconOn {
   width: 24px;
   height: 24px;

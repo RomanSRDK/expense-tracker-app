@@ -21,7 +21,12 @@ import clsx from "clsx";
 import css from "./TransactionForm.module.css";
 import "react-datepicker/dist/react-datepicker.css";
 
-const TransactionForm = ({ onSubmit, initialValues, buttonText }) => {
+const TransactionForm = ({
+  onSubmit,
+  initialValues,
+  buttonText,
+  isDisabled,
+}) => {
   const isModalOpen = useSelector(selectCategoriesModalIsOpen);
   const isLoading = useSelector(selectIsLoading);
   const currencySelect = useSelector(selectCurrency);
@@ -64,6 +69,7 @@ const TransactionForm = ({ onSubmit, initialValues, buttonText }) => {
                       setFieldValue("type", value);
                       dispatch(setTransactionRadioType(value));
                     }}
+                    disabled={isDisabled}
                   />
                   <span className={css.radioIcon}>
                     {values.type === "expenses" ? (
@@ -87,6 +93,7 @@ const TransactionForm = ({ onSubmit, initialValues, buttonText }) => {
                       setFieldValue("type", value);
                       dispatch(setTransactionRadioType(value));
                     }}
+                    disabled={isDisabled}
                   />
                   <span className={css.radioIcon}>
                     {values.type === "incomes" ? (
