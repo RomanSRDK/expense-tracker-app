@@ -8,7 +8,7 @@ import s from "./LoginPage.module.css";
 const loginSchema = Yup.object().shape({
   email: Yup.string()
     .min(4, "Too short")
-    .required("required")
+    .required("Email is required")
     .max(30, "Too long")
     .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Enter a valid Email"),
   password: Yup.string()
@@ -18,7 +18,7 @@ const loginSchema = Yup.object().shape({
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
       "At least one letter and one number"
     )
-    .required("required"),
+    .required("Password is required"),
 });
 
 function LoginPage() {
@@ -42,7 +42,7 @@ function LoginPage() {
 
   //JSX
   return (
-    <>
+    <div className={s.sharedWrapper}>
       <div className={s.content_box}>
         <h2>Sign In</h2>
         <p>
@@ -57,7 +57,7 @@ function LoginPage() {
         validationSchema={loginSchema}
         buttonLabel="Sign In"
       />
-    </>
+    </div>
   );
 }
 

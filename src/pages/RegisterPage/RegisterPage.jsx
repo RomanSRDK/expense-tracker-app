@@ -9,12 +9,12 @@ const registerSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Too short")
     .max(20, "Too long")
-    .required("required"),
+    .required("Name is required"),
   email: Yup.string()
     .min(4, "Too short")
-    .required("required")
+    .required("Email is required")
     .max(30, "Too long")
-    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Enter a valid Password"),
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Enter a valid Email"),
   password: Yup.string()
     .min(5, "Too short")
     .max(20, "Too long")
@@ -22,7 +22,7 @@ const registerSchema = Yup.object().shape({
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
       "At least one letter and one number"
     )
-    .required("required"),
+    .required("Password is required"),
 });
 
 function RegisterPage() {
@@ -54,7 +54,7 @@ function RegisterPage() {
 
   //JSX
   return (
-    <>
+    <div className={s.sharedWrapper}>
       <div className={s.content_box}>
         <h2>Sign Up</h2>
         <p>
@@ -70,7 +70,7 @@ function RegisterPage() {
         buttonLabel="Sign Up"
         handleResetInput={handleResetInput}
       />
-    </>
+    </div>
   );
 }
 

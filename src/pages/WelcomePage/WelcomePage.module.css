@@ -6,6 +6,10 @@
   width: 100%;
 }
 
+.sharedWrapper {
+  width: 575px;
+}
+
 .listInfo {
   display: flex;
   align-items: flex-start;

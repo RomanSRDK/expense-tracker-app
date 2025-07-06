@@ -4,7 +4,7 @@ import s from "./WelcomePage.module.css";
 
 const WelcomePage = () => {
   return (
-    <>
+    <div className={s.sharedWrapper}>
       <section className={s.main}>
         <div className={s.textSection}>
           <div className={s.listInfo}>
@@ -28,7 +28,7 @@ const WelcomePage = () => {
           <AllUsersTab />
         </div>
       </section>
-    </>
+    </div>
   );
 };
 
