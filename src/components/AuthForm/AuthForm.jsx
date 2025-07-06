@@ -32,7 +32,17 @@ const AuthForm = ({ mode, onSubmit, validationSchema, buttonLabel }) => {
           {mode === "register" && (
             <div className={s.field_wrap}>
               <label htmlFor={nameId}></label>
-              <Field type="name" name="name" placeholder="Name" id={nameId} />
+              <Field
+                type="name"
+                name="name"
+                placeholder="Name"
+                id={nameId}
+                className={clsx(
+                  s.input,
+                  touched.password && errors.password && s.input_invalid,
+                  touched.password && !errors.password && s.input_valid
+                )}
+              />
               <ErrorMessage name="name" component="span" />
             </div>
           )}

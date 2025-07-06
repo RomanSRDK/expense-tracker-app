@@ -1,5 +1,4 @@
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
 import { logIn } from "../../redux/auth/operations";
@@ -15,32 +14,28 @@ const loginSchema = Yup.object().shape({
   password: Yup.string()
     .min(5, "Too short")
     .max(20, "Too long")
-    // .matches(
-    //   /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
-    //   "At least one letter and one number"
-    // )
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
+      "At least one letter and one number"
+    )
     .required("required"),
 });
 
 function LoginPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleSubmit = (values, actions) => {
-    dispatch(
-      logIn({
-        email: values.email,
-        password: values.password,
-      })
-    )
-      .unwrap()
-      .then(() => {
-        console.log("login success");
-        navigate("/transactions/expenses");
-      })
-      .catch(() => {
-        toast.error("Login error");
-      });
+    try {
+      dispatch(
+        logIn({
+          email: values.email,
+          password: values.password,
+        })
+      ).unwrap();
+      toast.success("login success");
+    } catch {
+      toast.error("Login error");
+    }
 
     actions.resetForm();
   };

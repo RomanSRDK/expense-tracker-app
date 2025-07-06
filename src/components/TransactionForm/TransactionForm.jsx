@@ -128,41 +128,6 @@ const TransactionForm = () => {
                 />
               </div>
 
-              {/* <div className={css.dateTime}>
-                <div className={css.inputWrapper}>
-                  <label className={css.label} htmlFor={dateId}>
-                    Date
-                  </label>
-                  <Field
-                    className={css.input}
-                    type="date"
-                    name="date"
-                    id={dateId}
-                  />
-                  <ErrorMessage
-                    className={css.error}
-                    name="date"
-                    component="div"
-                  />
-                </div>
-                <div className={css.inputWrapper}>
-                  <label className={css.label} htmlFor={timeId}>
-                    Time
-                  </label>
-                  <Field
-                    className={css.input}
-                    type="time"
-                    name="time"
-                    id={timeId}
-                  />
-                  <ErrorMessage
-                    className={css.error}
-                    name="time"
-                    component="div"
-                  />
-                </div>
-              </div> */}
-
               <div className={css.dateTime}>
                 <div className={css.inputWrapper}>
                   <label className={css.label} htmlFor={dateId}>
@@ -172,8 +137,8 @@ const TransactionForm = () => {
                   <Field name="date">
                     {({ field, form }) => (
                       <CustomDatePicker
-                        {...field}
                         className={clsx(css.input)}
+                        field={field}
                         id={dateId}
                         form={form}
                         icon={<FiCalendar />}
@@ -195,9 +160,9 @@ const TransactionForm = () => {
                   <Field name="date">
                     {({ field, form }) => (
                       <CustomTimePicker
-                        {...field}
                         id={timeId}
                         className={clsx(css.input)}
+                        field={field}
                         form={form}
                         icon={<FaRegClock className="clock_icon" />}
                       />
