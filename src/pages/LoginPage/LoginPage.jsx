@@ -4,6 +4,7 @@ import * as Yup from "yup";
 import AuthForm from "../../components/AuthForm/AuthForm";
 import s from "./RegisterPage.module.css";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -34,11 +35,11 @@ function LoginPage() {
     )
       .unwrap()
       .then(() => {
-        console.log("login success");
+        toast.success("login success");
         navigate("/transactions/expenses");
       })
       .catch((error) => {
-        console.log(error);
+        toast.error(error);
       });
 
     actions.resetForm();

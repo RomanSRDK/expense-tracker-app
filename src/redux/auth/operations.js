@@ -34,8 +34,11 @@ export const logIn = createAsyncThunk(
 
       return res.data;
     } catch (error) {
-      console.log(error.message);
-
+      if (error.response?.status === 403 || error.response?.status === 400) {
+        return thunkAPI.rejectWithValue(
+          "Access is prohibited: Incorrect password or login"
+        );
+      }
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -50,9 +53,8 @@ export const register = createAsyncThunk(
   async (credentials, thunkAPI) => {
     try {
       await instance.post("/auth/register", credentials);
-      // After successful registration, add the token to the HTTP header
 
-      await thunkAPI
+      const data = await thunkAPI
         .dispatch(
           logIn({
             email: credentials.email,
@@ -60,10 +62,13 @@ export const register = createAsyncThunk(
           })
         )
         .unwrap();
-
-      // setAuthHeader(res.data.accessToken);
-      // return res.data;
+      return data;
     } catch (error) {
+      if (error.response?.status === 400 || error.response?.status === 409) {
+        return thunkAPI.rejectWithValue(
+          "Invalid request body  or Provided email already exists"
+        );
+      }
       return thunkAPI.rejectWithValue(error.message);
     }
   }
