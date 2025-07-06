@@ -2,7 +2,7 @@ import { useDispatch } from "react-redux";
 import { logIn } from "../../redux/auth/operations";
 import * as Yup from "yup";
 import AuthForm from "../../components/AuthForm/AuthForm";
-import s from "./RegisterPage.module.css";
+import s from "./LoginPage.module.css";
 import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 
