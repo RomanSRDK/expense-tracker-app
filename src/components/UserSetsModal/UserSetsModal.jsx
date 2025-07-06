@@ -52,7 +52,7 @@ function UserSetsModal({ toggleUserModal }) {
   const handleSave = () => {
     dispatch(
       setCurrencyAndName({
-        name: editedUserName,
+        name: editedUserName.trim(),
         currency: editetCurrency,
       })
     );
