@@ -28,6 +28,7 @@ import { selectCurrency } from "../../redux/user/selectors";
 import clsx from "clsx";
 import css from "./TransactionForm.module.css";
 import "react-datepicker/dist/react-datepicker.css";
+import { Link } from "react-router-dom";
 
 const TransactionForm = () => {
   const isModalOpen = useSelector(selectCategoriesModalIsOpen);
