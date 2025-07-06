@@ -13,19 +13,15 @@ const TransactionsSearchTools = ({
 }) => {
   const dateId = useId();
   const searchId = useId();
-  const dateId = useId();
-  const searchId = useId();
   return (
     <div className={s.tools}>
       <div className={s.input_wrap}>
         <input
           id={searchId}
-          id={searchId}
           className={s.searchInput}
           type="text"
           placeholder="Search for anything.."
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
         <CiSearch className={s.search_icon} />
@@ -34,12 +30,10 @@ const TransactionsSearchTools = ({
       <div className={s.date_wrap}>
         <CustomDatePicker
           id={dateId}
-          id={dateId}
           className={s.datePicker}
           placeholderText="dd/mm/yyyy"
           dateFormat="dd/MM/yyyy"
           selectedDate={selectedDate}
-          onChange={(date) => setSelectedDate(date)}
           onChange={(date) => setSelectedDate(date)}
           icon={<FiCalendar className={s.calendar_icon} />}
         />
