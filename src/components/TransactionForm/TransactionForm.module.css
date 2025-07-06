@@ -41,7 +41,8 @@
   margin-right: 8px;
 }
 
-.customRadioLabel input:disabled + .radioIcon .iconOff {
+.customRadioLabel:hover input:disabled + .radioIcon .iconOff {
+  color: #29292b;
   opacity: 1;
 }
 
