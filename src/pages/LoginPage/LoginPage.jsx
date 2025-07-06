@@ -14,10 +14,10 @@ const loginSchema = Yup.object().shape({
   password: Yup.string()
     .min(5, "Too short")
     .max(20, "Too long")
-    .matches(
-      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
-      "At least one letter and one number"
-    )
+    // .matches(
+    //   /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
+    //   "At least one letter and one number"
+    // )
     .required("required"),
 });
 

@@ -1,5 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { removeUsersAvatar, updatesAvatar } from "./operations";
+import { fetchUserInfo, removeUsersAvatar, updatesAvatar } from "./operations";
+import { logIn } from "../auth/operations";
 
 const slice = createSlice({
   name: "user",
@@ -9,16 +10,16 @@ const slice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      // .addCase(fetchUserInfo.pending, (state) => {
-      //   state.isLoading = true;
-      // })
-      // .addCase(fetchUserInfo.fulfilled, (state, action) => {
-      //   state.isLoading = false;
-      //   const { name, avatarUrl, currency } = action.payload;
-      //   state.user.name = name;
-      //   state.user.avatarUrl = avatarUrl;
-      //   state.user.currency = currency;
-      // })
+      .addCase(fetchUserInfo.pending, (state) => {
+        state.isLoading = true;
+      })
+      .addCase(fetchUserInfo.fulfilled, (state, action) => {
+        state.isLoading = false;
+        const { name, avatarUrl, currency } = action.payload;
+        state.user.name = name;
+        state.user.avatarUrl = avatarUrl;
+        state.user.currency = currency;
+      })
       .addCase(updatesAvatar.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user.avatarUrl = action.payload.avatarUrl;
@@ -26,6 +27,12 @@ const slice = createSlice({
       .addCase(removeUsersAvatar.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user.avatarUrl = action.payload?.avatarUrl || null;
+      })
+      .addCase(logIn.fulfilled, (state, { payload }) => {
+        const { name, avatarUrl, currency } = payload.user;
+        state.user.name = name;
+        state.user.avatarUrl = avatarUrl;
+        state.user.currency = currency;
       });
   },
 });

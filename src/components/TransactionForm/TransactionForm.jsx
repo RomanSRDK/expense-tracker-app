@@ -53,8 +53,8 @@ const TransactionForm = () => {
     }
   };
 
-  const today = new Date().toISOString().split("T")[0];
-  const currentTime = new Date().toISOString().split("T")[1].slice(0, 5);
+  // const today = new Date().toISOString().split("T")[0];
+  // const currentTime = new Date().toISOString().split("T")[1].slice(0, 5);
 
   return (
     <div>
@@ -62,8 +62,8 @@ const TransactionForm = () => {
       <Formik
         initialValues={{
           type: "",
-          date: today,
-          time: currentTime,
+          date: "",
+          time: "",
           category: "",
           sum: "",
           comment: "",
@@ -128,7 +128,7 @@ const TransactionForm = () => {
                 />
               </div>
 
-              <div className={css.dateTime}>
+              {/* <div className={css.dateTime}>
                 <div className={css.inputWrapper}>
                   <label className={css.label} htmlFor={dateId}>
                     Date
@@ -161,9 +161,9 @@ const TransactionForm = () => {
                     component="div"
                   />
                 </div>
-              </div>
+              </div> */}
 
-              {/* <div className={css.dateTime}>
+              <div className={css.dateTime}>
                 <div className={css.inputWrapper}>
                   <label className={css.label} htmlFor={dateId}>
                     Date
@@ -209,7 +209,7 @@ const TransactionForm = () => {
                     component="div"
                   />
                 </div>
-              </div> */}
+              </div>
 
               <CategoryField setFieldValue={setFieldValue} id={categoryId} />
 

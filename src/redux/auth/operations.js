@@ -33,7 +33,6 @@ export const logIn = createAsyncThunk(
 
       setAuthHeader(res.data.accessToken);
 
-      await thunkAPI.dispatch(fetchUserInfo());
       return res.data;
     } catch (error) {
       console.log(error.message);
