@@ -1,6 +1,7 @@
 import { Outlet, useLocation } from "react-router-dom";
 import BgImageWrapper from "../BgImageWrapper/BgImageWrapper";
 import Container from "../Container/Container";
+import Section from "../Section/Section";
 import s from "./SharedLayout.module.css";
 
 const SharedLayout = () => {
@@ -12,14 +13,16 @@ const SharedLayout = () => {
     location.pathname === "/";
   return (
     <Container>
-      <div className={`${s.layoutWrapper} ${isAuthPage ? s.authLayout : ""}`}>
-        <div className={s.imageContainer}>
-          <BgImageWrapper />
+      <Section>
+        <div className={`${s.layoutWrapper} ${isAuthPage ? s.authLayout : ""}`}>
+          <div className={s.imageContainer}>
+            <BgImageWrapper />
+          </div>
+          <main className={s.main}>
+            <Outlet />
+          </main>
         </div>
-        <main className={s.main}>
-          <Outlet />
-        </main>
-      </div>
+      </Section>
     </Container>
   );
 };

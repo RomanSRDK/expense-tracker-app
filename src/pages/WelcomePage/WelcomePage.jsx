@@ -1,11 +1,10 @@
-import s from "./WelcomePage.module.css";
 import AuthNav from "../../components/AuthNav/AuthNav";
 import AllUsersTab from "../../components/AllUsersTab/AllUsersTab";
-import Container from "../../components/Container/Container";
+import s from "./WelcomePage.module.css";
 
 const WelcomePage = () => {
   return (
-    <Container>
+    <>
       <section className={s.main}>
         <div className={s.textSection}>
           <div className={s.listInfo}>
@@ -29,7 +28,7 @@ const WelcomePage = () => {
           <AllUsersTab />
         </div>
       </section>
-    </Container>
+    </>
   );
 };
 

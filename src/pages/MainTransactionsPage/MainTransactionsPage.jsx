@@ -9,8 +9,8 @@ import TransactionsTotalAmount from "../../components/TransactionsTotalAmount/Tr
 import TransactionsChart from "../../components/TransactionsChart/TransactionsChart";
 import TransactionForm from "../../components/TransactionForm/TransactionForm";
 import Container from "../../components/Container/Container";
-import styles from "./MainTransactionsPage.module.css";
 import Section from "../../components/Section/Section";
+import styles from "./MainTransactionsPage.module.css";
 
 const MainTransactionsPage = () => {
   const dispatch = useDispatch();

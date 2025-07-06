@@ -1,8 +1,8 @@
 #root {
   max-width: 1440px;
+  margin: 0 auto;
 }
 
 .pageWrapper {
   padding-top: 91px;
-  margin: 0 auto;
 }

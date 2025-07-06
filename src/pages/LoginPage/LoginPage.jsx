@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import * as Yup from "yup";
 import { logIn } from "../../redux/auth/operations";
-import Container from "../../components/Container/Container";
 import AuthForm from "../../components/AuthForm/AuthForm";
-import s from "./RegisterPage.module.css";
+import s from "./LoginPage.module.css";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
@@ -48,7 +47,7 @@ function LoginPage() {
 
   //JSX
   return (
-    <Container>
+    <>
       <div className={s.content_box}>
         <h2>Sign In</h2>
         <p>
@@ -63,7 +62,7 @@ function LoginPage() {
         validationSchema={loginSchema}
         buttonLabel="Sign In"
       />
-    </Container>
+    </>
   );
 }
 

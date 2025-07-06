@@ -1,11 +1,9 @@
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
 import * as Yup from "yup";
 import { register } from "../../redux/auth/operations";
-import Container from "../../components/Container/Container";
 import AuthForm from "../../components/AuthForm/AuthForm";
-import s from "./RegisterPage.module.css";
 import toast from "react-hot-toast";
+import s from "./RegisterPage.module.css";
 
 const registerSchema = Yup.object().shape({
   name: Yup.string()
@@ -29,25 +27,20 @@ const registerSchema = Yup.object().shape({
 
 function RegisterPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleSubmit = (values, actions) => {
-    dispatch(
-      register({
-        name: values.name,
-        email: values.email,
-        password: values.password,
-      })
-    )
-      .unwrap()
-      .then(() => {
-        console.log("login success");
-        navigate("/transactions/expenses");
-      })
-      .catch((error) => {
-        console.log(error);
-        toast.error("Login Error");
-      });
+    try {
+      dispatch(
+        register({
+          name: values.name,
+          email: values.email,
+          password: values.password,
+        })
+      ).unwrap();
+      toast.success(`Welcome ${values.name}`);
+    } catch {
+      toast.error("Login Error");
+    }
 
     actions.resetForm();
   };
@@ -61,7 +54,7 @@ function RegisterPage() {
 
   //JSX
   return (
-    <Container>
+    <>
       <div className={s.content_box}>
         <h2>Sign Up</h2>
         <p>
@@ -77,7 +70,7 @@ function RegisterPage() {
         buttonLabel="Sign Up"
         handleResetInput={handleResetInput}
       />
-    </Container>
+    </>
   );
 }
 

@@ -3,8 +3,9 @@ import MainTransactionsHeader from "../../components/MainTransactionsHeader/Main
 import TransactionsList from "../../components/TransactionsList/TransactionsList";
 import TransactionsSearchTools from "../../components/TransactionsSearchTools/TransactionsSearchTools";
 // Используем 's' как и раньше, но применим новые классы
-import s from "./TransactionsHistoryPage.module.css";
 import Container from "../../components/Container/Container";
+import s from "./TransactionsHistoryPage.module.css";
+import Section from "../../components/Section/Section";
 
 function TransactionsHistoryPage() {
   const [searchQuery, setSearchQuery] = useState("");
@@ -12,25 +13,27 @@ function TransactionsHistoryPage() {
 
   return (
     <Container>
-      {/* 1. Добавляем обертку, как на главной странице */}
-      <div className={s.pageWrapper}>
-        {/* 2. Добавляем контейнер для контента */}
-        <main className={s.mainContent}>
-          {/* 3. Вся логика страницы теперь внутри этого контейнера */}
-          <div className={s.transactionsWrapper}>
-            <TransactionsSearchTools
-              earchQuery={searchQuery}
-              setSearchQuery={setSearchQuery}
-              selectedDate={selectedDate}
-              setSelectedDate={setSelectedDate}
-            />
-            <TransactionsList
-              searchQuery={searchQuery}
-              selectedDate={selectedDate}
-            />
-          </div>
-        </main>
-      </div>
+      <Section>
+        {/* 1. Добавляем обертку, как на главной странице */}
+        <div className={s.pageWrapper}>
+          {/* 2. Добавляем контейнер для контента */}
+          <main className={s.mainContent}>
+            {/* 3. Вся логика страницы теперь внутри этого контейнера */}
+            <div className={s.transactionsWrapper}>
+              <TransactionsSearchTools
+                earchQuery={searchQuery}
+                setSearchQuery={setSearchQuery}
+                selectedDate={selectedDate}
+                setSelectedDate={setSelectedDate}
+              />
+              <TransactionsList
+                searchQuery={searchQuery}
+                selectedDate={selectedDate}
+              />
+            </div>
+          </main>
+        </div>
+      </Section>
     </Container>
   );
 }

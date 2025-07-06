@@ -3,12 +3,12 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100%;  
+  width: 100%;
   height: 91px;
   background-color: var(--color-bg, #171719);
-   
-  z-index: 1000;
-  /* Мы убрали отсюда padding, justify-content и align-items */
+  border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+
+  z-index: 999;
 }
 
 /* Внутренний контейнер. Отвечает за ограничение ширины и расположение элементов. */
@@ -16,13 +16,13 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid rgba(250, 250, 250, 0.1);
+
   height: 100%;
-  margin: 0 auto; /* Центрирует контейнер по горизонтали */
+  margin: 0 auto;
 
   /* ВАЖНО: Устанавливаем ту же максимальную ширину, что и у .mainContent */
   max-width: 335px;
-  
+
   /* Устанавливаем те же боковые отступы, что и у .pageWrapper */
   padding: 0 20px;
 }
@@ -36,7 +36,7 @@
 .mobileNav {
   display: block;
 }
- 
+
 /* Медиа-запросы теперь могут быть проще */
 @media screen and (min-width: 768px) {
   .headerContainer {
@@ -49,12 +49,8 @@
   /* В десктопной версии мы больше не управляем justify-content хедера,
      а просто показываем/скрываем нужные блоки внутри контейнера.
      .headerContainer уже все правильно расставит. */
- .headerContainer {
-     
+  .headerContainer {
     max-width: 1200px;
-  }
-  .header { 
-   width: 1440px;
   }
   .desktopNav {
     display: block;
@@ -62,12 +58,10 @@
   }
 
   .desktopUserBar {
-    display: block;  
+    display: block;
   }
 
   .mobileNav {
-    display: none;  
+    display: none;
   }
 }
-
-  
