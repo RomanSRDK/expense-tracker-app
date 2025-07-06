@@ -16,7 +16,7 @@ import defaultAvatar from "../../pictures/avatar.png";
 import { IoCloseOutline } from "react-icons/io5";
 import css from "./UserSetsModal.module.css";
 
-function UserSetsModal({ toggleUserModal }) {
+function UserSetsModal({ closeModal }) {
   const dispatch = useDispatch();
 
   const avatarUrl = useSelector(selectUserAvatar);
@@ -56,7 +56,7 @@ function UserSetsModal({ toggleUserModal }) {
         currency: editetCurrency,
       })
     );
-    toggleUserModal(false);
+    closeModal();
   };
 
   useEffect(() => {
@@ -66,18 +66,18 @@ function UserSetsModal({ toggleUserModal }) {
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
-        toggleUserModal(false);
+        closeModal();
       }
     };
     document.addEventListener("keydown", handleKeyDown);
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
     };
-  }, [toggleUserModal]);
+  }, [closeModal]);
 
   const handleBackdropClick = (e) => {
     if (e.target === e.currentTarget) {
-      toggleUserModal(false);
+      closeModal();
     }
   };
 
@@ -103,11 +103,11 @@ function UserSetsModal({ toggleUserModal }) {
 
   return createPortal(
     <div className={css.backdrop} onClick={handleBackdropClick}>
-      <div className={css.modal}>
+      <div className={css.modal} onClick={(e) => e.stopPropagation()}>
         <button
           className={css.closeButton}
           aria-label="Close modal"
-          onClick={() => toggleUserModal(false)}
+          onClick={() => closeModal()}
         >
           <IoCloseOutline size={24} />
         </button>

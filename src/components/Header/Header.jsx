@@ -107,7 +107,7 @@ const Header = () => {
             )}
           </>
         )}
-        {isModalOpen && <UserSetsModal toggleUserModal={setIsModalOpen} />}
+        {isModalOpen && <UserSetsModal />}
         {isLogoutModalOpen && (
           <LogoutConfirmModal
           // onConfirm={confirmLogout}
