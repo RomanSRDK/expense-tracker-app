@@ -32,7 +32,7 @@ import "react-datepicker/dist/react-datepicker.css";
 const TransactionForm = () => {
   const isModalOpen = useSelector(selectCategoriesModalIsOpen);
   const isLoading = useSelector(selectIsLoading);
-  const currency = useSelector(selectCurrency);
+  const currencySelect = useSelector(selectCurrency);
 
   const dateId = useId();
   const timeId = useId();
@@ -41,6 +41,11 @@ const TransactionForm = () => {
   const commentId = useId();
 
   const dispatch = useDispatch();
+
+  const user = JSON.parse(
+    JSON.parse(localStorage.getItem("persist:auth")).user
+  );
+  const currency = currencySelect ? currencySelect : user.currency;
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
