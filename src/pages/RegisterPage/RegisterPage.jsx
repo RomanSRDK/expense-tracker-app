@@ -3,7 +3,7 @@ import AuthForm from "../../components/AuthForm/AuthForm";
 import { register } from "../../redux/auth/operations";
 import * as Yup from "yup";
 import s from "./RegisterPage.module.css";
-import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const registerSchema = Yup.object().shape({
   name: Yup.string()
@@ -27,7 +27,6 @@ const registerSchema = Yup.object().shape({
 
 function RegisterPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   // handlers
   const handleSubmit = (values, actions) => {
@@ -40,13 +39,14 @@ function RegisterPage() {
     )
       .unwrap()
       .then(() => {
-        console.log("login success");
-        navigate("/transactions/expenses");
+        toast.success("Registration and Login success", {
+          position: "top-left",
+        });
       })
       .catch((error) => {
-        console.log(error);
-
-        // console.log("login error");
+        toast.error(error, {
+          position: "top-left",
+        });
       });
 
     actions.resetForm();
