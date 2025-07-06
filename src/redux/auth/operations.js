@@ -1,6 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
-import { fetchUserInfo } from "../user/operations";
 
 export const instance = axios.create({
   baseURL: "https://expense-tracker.b.goit.study/api/",
@@ -33,7 +32,6 @@ export const logIn = createAsyncThunk(
 
       setAuthHeader(res.data.accessToken);
 
-      await thunkAPI.dispatch(fetchUserInfo());
       return res.data;
     } catch (error) {
       console.log(error.message);

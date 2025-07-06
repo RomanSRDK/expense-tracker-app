@@ -1,7 +1,15 @@
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { selectUserAvatar } from "../../redux/user/selectors";
-import { removeUsersAvatar, updatesAvatar } from "../../redux/user/operations";
+import {
+  selectCurrency,
+  selectUserAvatar,
+  selectUserName,
+} from "../../redux/user/selectors";
+import {
+  fetchUserInfo,
+  removeUsersAvatar,
+  updatesAvatar,
+} from "../../redux/user/operations";
 import { useEffect, useRef, useState } from "react";
 import defaultAvatar from "../../pictures/avatar.png";
 import { IoCloseOutline } from "react-icons/io5";
@@ -12,13 +20,13 @@ function UserSetsModal({ toggleUserModal }) {
   const inputRef = useRef(null);
   const [selectedFile, setSelectedFile] = useState(null);
 
-  // const userName = useSelector(selectUserName);
+  const userName = useSelector(selectUserName);
   const avatarUrl = useSelector(selectUserAvatar);
-  // const currency = useSelector(selectCurrency);
+  const currency = useSelector(selectCurrency);
 
-  // useEffect(() => {
-  //   dispatch(fetchUserInfo());
-  // }, [dispatch]);
+  useEffect(() => {
+    dispatch(fetchUserInfo());
+  }, [dispatch]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {

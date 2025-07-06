@@ -36,6 +36,7 @@ function LoginPage() {
       .then(() => {
         console.log("login success");
         navigate("/transactions/expenses");
+        navigate("/transactions/expenses");
       })
       .catch((error) => {
         console.log(error);
