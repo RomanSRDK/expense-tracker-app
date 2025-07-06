@@ -4,6 +4,7 @@ import {
   addTransaction,
   deleteTransaction,
   updateTransaction,
+  getQueryTransactions,
 } from "./operations";
 
 const handlePending = (state) => {
@@ -20,7 +21,7 @@ const initialState = {
   items: [],
   isLoading: false,
   error: null,
-  modalIsOpen: false,
+  categoriesModalIsOpen: false,
   selectedType: "all",
   selectedRadioType: "",
 };
@@ -30,10 +31,10 @@ const transactionsSlice = createSlice({
   initialState,
   reducers: {
     openCategoriesModal(state) {
-      state.modalIsOpen = true;
+      state.categoriesModalIsOpen = true;
     },
     closeCategoriesModal(state) {
-      state.modalIsOpen = false;
+      state.categoriesModalIsOpen = false;
     },
     setTransactionType(state, { payload }) {
       state.selectedType = payload;
@@ -56,6 +57,20 @@ const transactionsSlice = createSlice({
         state.items = action.payload;
       })
       .addCase(getAllTransactions.rejected, handleRejected)
+
+      // Отримання обраних транзакцій
+      .addCase(getQueryTransactions.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getQueryTransactions.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = action.payload;
+      })
+      .addCase(getQueryTransactions.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
 
       .addCase(addTransaction.pending, handlePending)
       .addCase(addTransaction.fulfilled, (state) => {

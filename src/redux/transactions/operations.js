@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { instance } from "../auth/operations"; // <-- Импортируем instance
+import toast from "react-hot-toast";
 
 /**
  * Получает ВСЕ транзакции (и доходы, и расходы)
@@ -66,6 +67,22 @@ export const updateTransaction = createAsyncThunk(
       dispatch(getAllTransactions()); // Обновляем список
       return data;
     } catch (error) {
+      return rejectWithValue(error.message);
+    }
+  }
+);
+
+/**
+ Отримуємо транзакції за обраним типом користувача @route GET /transactions
+ */
+export const getQueryTransactions = createAsyncThunk(
+  "transactions/getQuery",
+  async (type, { rejectWithValue }) => {
+    try {
+      const response = await instance.get(`/transactions/${type}`);
+      return response.data;
+    } catch (error) {
+      toast.error("Failed to fetch transactions. Please try again.");
       return rejectWithValue(error.message);
     }
   }

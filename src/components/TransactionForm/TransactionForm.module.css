@@ -31,6 +31,10 @@
   height: 24px;
 }
 
+.customRadioLabel:hover .iconOff {
+  color: #0ef387;
+}
+
 .inputRadio {
   position: absolute;
   opacity: 0;
@@ -51,6 +55,7 @@
   width: 24px;
   height: 24px;
   color: #29292b;
+  transition: var(--animation);
 }
 
 .label {
@@ -71,6 +76,12 @@
   color: #fafafa;
   scrollbar-width: none;
   /* scrollbar-color: #444446 #0c0d0d; */
+  transition: var(--animation);
+}
+
+.input:hover,
+.input:focus {
+  border: 1px solid #0ef387;
 }
 
 /*  */
@@ -107,7 +118,8 @@
   margin-bottom: 20px;
 }
 
-.category {
+.category,
+.pointer {
   cursor: pointer;
 }
 

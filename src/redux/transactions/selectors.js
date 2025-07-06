@@ -23,7 +23,8 @@ export const selectIsLoading = (state) => state.transactions.isLoading;
 export const selectError = (state) => state.transactions.error;
 
 // Повертає статус модального вікна
-export const selectModalIsOpen = (state) => state.transactions.modalIsOpen;
+export const selectCategoriesModalIsOpen = (state) =>
+  state.transactions.categoriesModalIsOpen;
 
 // Повертає тип обраної транзакції
 export const selectTransactionType = (state) => state.transactions.selectedType;
@@ -31,3 +32,6 @@ export const selectTransactionType = (state) => state.transactions.selectedType;
 // Повертає обраний тип з модалки
 export const selectSelectedRadioType = (state) =>
   state.transactions.selectedRadioType;
+
+// Повертає масив обраних транзакцій
+export const selectQueryTransactions = (state) => state.transactions.items;

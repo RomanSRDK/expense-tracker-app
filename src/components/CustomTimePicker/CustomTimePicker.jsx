@@ -4,10 +4,11 @@ import "react-datepicker/dist/react-datepicker.css";
 import { FaRegClock } from "react-icons/fa";
 import "./timepicker-overrides.css";
 
-const CustomTimePicker = () => {
+const CustomTimePicker = ({ className, ...rest }) => {
   const [selectedDateTime, setSelectedDateTime] = useState(new Date());
   return (
     <DatePicker
+      className={className}
       selected={selectedDateTime}
       onChange={(date) => setSelectedDateTime(date)}
       showTimeSelect
@@ -16,7 +17,7 @@ const CustomTimePicker = () => {
       dateFormat="HH:mm:ss"
       showTimeCaption={false}
       showIcon
-      icon={<FaRegClock className="clock_icon" />}
+      {...rest}
     />
   );
 };
