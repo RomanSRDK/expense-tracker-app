@@ -3,9 +3,11 @@ import { FiLogOut } from "react-icons/fi";
 import style from "./UserPanel.module.css";
 import { useState } from "react";
 import LogoutModal from "../LogoutModal/LogoutModal";
+import UserSetsModal from "../UserSetsModal/UserSetsModal";
 
-const UserPanel = ({ onOpenModal }) => {
+const UserPanel = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
   //handlers
   const handleOpenLogoutModal = () => {
@@ -16,12 +18,23 @@ const UserPanel = ({ onOpenModal }) => {
     setIsModalOpen(false);
   };
 
+  const handleOpenProfileModal = () => {
+    setIsProfileModalOpen(true);
+  };
+
+  const handleCloseProfileModal = () => {
+    setIsProfileModalOpen(false);
+  };
+
   //JSX
   return (
     <>
       <ul className={style.userPanel}>
         <li>
-          <button className={style.userPanelBtn} onClick={onOpenModal}>
+          <button
+            className={style.userPanelBtn}
+            onClick={handleOpenProfileModal}
+          >
             <span>
               <GoPerson className={style.userPanelIcon} size={16} />
             </span>
@@ -41,6 +54,9 @@ const UserPanel = ({ onOpenModal }) => {
         </li>
       </ul>
 
+      {isProfileModalOpen && (
+        <UserSetsModal closeModal={handleCloseProfileModal} />
+      )}
       {isModalOpen && <LogoutModal onCancel={handleCloseLogoutModal} />}
     </>
   );
