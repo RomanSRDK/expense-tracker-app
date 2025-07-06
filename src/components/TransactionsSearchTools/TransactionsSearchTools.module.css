@@ -45,6 +45,9 @@
   padding: 15px 30px;
   width: 187px;
   height: 50px;
+  background-color: transparent;
+  border: 1px solid rgba(250, 250, 250, 0.2);
+  color: #fafafa;
 }
 
 .calendar_icon {
