@@ -20,11 +20,19 @@ const EditTransactionsModal = () => {
   const dispatch = useDispatch();
   const TransactionToEdit = useSelector(selectTransactionToEdit);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const resetValueForm = () => {
+    dispatch(clearCategory());
+    dispatch(clearTransactionType());
+    dispatch(clearTransactionRadioType());
+    dispatch(clearTransactionToEdit());
+  };
+
   useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
         dispatch(closeTransactionsEditModal());
-        dispatch(clearTransactionToEdit());
+        resetValueForm();
       }
     };
 
@@ -35,16 +43,13 @@ const EditTransactionsModal = () => {
       document.removeEventListener("keydown", handleKeyDown);
       document.body.style.overflow = "";
     };
-  }, [dispatch]);
+  }, [dispatch, resetValueForm]);
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
       await dispatch(updateTransaction(values)).unwrap();
       toast.success("Transaction edited");
-      dispatch(clearCategory());
-      dispatch(clearTransactionType());
-      dispatch(clearTransactionRadioType());
-      dispatch(clearTransactionToEdit());
+      resetValueForm();
       resetForm();
       dispatch(closeTransactionsEditModal());
     } catch {
@@ -61,7 +66,7 @@ const EditTransactionsModal = () => {
       aria-modal="true"
       onClick={() => {
         dispatch(closeTransactionsEditModal());
-        dispatch(clearTransactionToEdit());
+        resetValueForm();
       }}
     >
       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
@@ -70,7 +75,7 @@ const EditTransactionsModal = () => {
           aria-label="Close modal"
           onClick={() => {
             dispatch(closeTransactionsEditModal());
-            dispatch(clearTransactionToEdit());
+            resetValueForm();
           }}
         >
           <CgClose className={css.closeIcon} />

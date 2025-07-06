@@ -14,7 +14,7 @@ const CustomTimePicker = ({ className, ...rest }) => {
       showTimeSelect
       showTimeSelectOnly
       timeIntervals={15}
-      dateFormat="HH:mm:ss"
+      dateFormat="HH:mm"
       showTimeCaption={false}
       showIcon
       {...rest}

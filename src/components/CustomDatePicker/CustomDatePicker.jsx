@@ -21,7 +21,7 @@ const CustomDatePicker = ({
 
   const handleChange = (date) => {
     if (isFormik) {
-      form.setFieldValue(field.name, date);
+      form.setFieldValue(field.name, date.toISOString().split("T")[0]);
     } else {
       onChange?.(date);
     }
