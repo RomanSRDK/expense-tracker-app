@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { fetchUserInfo } from "../user/operations";
 
 export const instance = axios.create({
   baseURL: "https://expense-tracker.b.goit.study/api/",
@@ -20,24 +21,6 @@ const clearAuthHeader = () => {
 };
 
 /*
- * POST @ /auth/register
- * body: { name, email, password }
- */
-export const register = createAsyncThunk(
-  "auth/register",
-  async (credentials, thunkAPI) => {
-    try {
-      const res = await instance.post("/auth/register", credentials);
-      // After successful registration, add the token to the HTTP header
-      setAuthHeader(res.data.accessToken);
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-/*
  * POST @ /auth/login
  * body: { email, password }
  */
@@ -47,8 +30,41 @@ export const logIn = createAsyncThunk(
     try {
       const res = await instance.post("/auth/login", credentials);
       // After successful login, add the token to the HTTP header
+
       setAuthHeader(res.data.accessToken);
+
+      await thunkAPI.dispatch(fetchUserInfo());
       return res.data;
+    } catch (error) {
+      console.log(error.message);
+
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+/*
+ * POST @ /auth/register
+ * body: { name, email, password }
+ */
+export const register = createAsyncThunk(
+  "auth/register",
+  async (credentials, thunkAPI) => {
+    try {
+      await instance.post("/auth/register", credentials);
+      // After successful registration, add the token to the HTTP header
+
+      await thunkAPI
+        .dispatch(
+          logIn({
+            email: credentials.email,
+            password: credentials.password,
+          })
+        )
+        .unwrap();
+
+      // setAuthHeader(res.data.accessToken);
+      // return res.data;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }

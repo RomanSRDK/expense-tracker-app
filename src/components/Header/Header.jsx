@@ -27,6 +27,7 @@ const Header = () => {
   const isMobile = windowWidth < 768;
   const isTablet = windowWidth >= 768 && windowWidth < 1440;
   const isDesktop = windowWidth >= 1440;
+  console.log({ windowWidth, isMobile, isTablet, isDesktop });
 
   useEffect(() => {
     const handleResize = () => {
@@ -41,7 +42,9 @@ const Header = () => {
   }, []);
 
   const toggleBurger = () => {
+    console.log("toggleBurger called");
     if (!isModalOpen) {
+      console.log("Burger toggle clicked");
       setIsBurgerOpen((prev) => !prev);
     }
   };
@@ -63,12 +66,12 @@ const Header = () => {
     setIsLogoutModalOpen(true);
   };
 
-  const closeLogoutModal = () => setIsLogoutModalOpen(false);
+  // const closeLogoutModal = () => setIsLogoutModalOpen(false);
 
-  const confirmLogout = () => {
-    // dispatch(logOut());
-    closeLogoutModal();
-  };
+  // const confirmLogout = () => {
+  //   dispatch(logOut());
+  //   closeLogoutModal();
+  // };
 
   return (
     <div className={s.headerContainer}>
@@ -94,14 +97,13 @@ const Header = () => {
             {(isMobile || isTablet) && (
               <div>
                 <BurgerMenuBtn onClick={toggleBurger} />
-                {isBurgerOpen && (
-                  <BurgerMenu
-                    isBurgerOpen={isBurgerOpen}
-                    onClose={closeBurger}
-                    onOpenModal={handleOpenModal}
-                    onOpenLogoutModal={openLogoutModal}
-                  />
-                )}
+                <span>DEBUG: Burger button visible</span>
+                <BurgerMenu
+                  isBurgerOpen={isBurgerOpen}
+                  onClose={closeBurger}
+                  onOpenModal={handleOpenModal}
+                  onOpenLogoutModal={openLogoutModal}
+                />
               </div>
             )}
           </>
@@ -109,8 +111,8 @@ const Header = () => {
         {isModalOpen && <UserSetsModal toggleUserModal={setIsModalOpen} />}
         {isLogoutModalOpen && (
           <LogoutConfirmModal
-            onConfirm={confirmLogout}
-            onCancel={closeLogoutModal}
+          // onConfirm={confirmLogout}
+          // onCancel={closeLogoutModal}
           />
         )}
       </header>
