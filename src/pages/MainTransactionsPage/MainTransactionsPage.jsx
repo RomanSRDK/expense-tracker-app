@@ -5,11 +5,11 @@ import { selectAllTransactions } from "../../redux/transactions/selectors";
 import { selectCategoriesList } from "../../redux/categories/selectors";
 import { generateCategoryColors } from "../../utils/colorGenerator";
 import { calculateCategorySpending } from "../../utils/analyticsUtils";
-
-import MainTransactionsHeader from "../../components/MainTransactionsHeader/MainTransactionsHeader";
 import TransactionsTotalAmount from "../../components/TransactionsTotalAmount/TransactionsTotalAmount";
 import TransactionsChart from "../../components/TransactionsChart/TransactionsChart";
 import TransactionForm from "../../components/TransactionForm/TransactionForm";
+import Container from "../../components/Container/Container";
+import Section from "../../components/Section/Section";
 import styles from "./MainTransactionsPage.module.css";
 
 const MainTransactionsPage = () => {
@@ -50,10 +50,9 @@ const MainTransactionsPage = () => {
   }, [expenseCategories]);
 
   return (
-    <>
-      <MainTransactionsHeader />
-      <div className={styles.pageWrapper}>
-        <main className={styles.mainContent}>
+    <Container>
+      <Section>
+        <div className={styles.pageWrapper}>
           <section className={styles.infoSection}>
             <h1 className={styles.infoHeader}>Expense Log</h1>
             <p className={styles.infoText}>
@@ -74,9 +73,9 @@ const MainTransactionsPage = () => {
           <section className={styles.formSection}>
             <TransactionForm />
           </section>
-        </main>
-      </div>
-    </>
+        </div>
+      </Section>
+    </Container>
   );
 };
 

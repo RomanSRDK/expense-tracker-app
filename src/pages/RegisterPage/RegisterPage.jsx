@@ -1,20 +1,20 @@
 import { useDispatch } from "react-redux";
-import AuthForm from "../../components/AuthForm/AuthForm";
-import { register } from "../../redux/auth/operations";
 import * as Yup from "yup";
-import s from "./RegisterPage.module.css";
+import { register } from "../../redux/auth/operations";
+import AuthForm from "../../components/AuthForm/AuthForm";
 import toast from "react-hot-toast";
+import s from "./RegisterPage.module.css";
 
 const registerSchema = Yup.object().shape({
   name: Yup.string()
     .min(3, "Too short")
     .max(20, "Too long")
-    .required("required"),
+    .required("Name is required"),
   email: Yup.string()
     .min(4, "Too short")
-    .required("required")
+    .required("Email is required")
     .max(30, "Too long")
-    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Enter a valid Password"),
+    .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Enter a valid Email"),
   password: Yup.string()
     .min(5, "Too short")
     .max(20, "Too long")
@@ -22,13 +22,12 @@ const registerSchema = Yup.object().shape({
       /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
       "At least one letter and one number"
     )
-    .required("required"),
+    .required("Password is required"),
 });
 
 function RegisterPage() {
   const dispatch = useDispatch();
 
-  // handlers
   const handleSubmit = (values, actions) => {
     dispatch(
       register({
@@ -61,7 +60,7 @@ function RegisterPage() {
 
   //JSX
   return (
-    <div>
+    <div className={s.sharedWrapper}>
       <div className={s.content_box}>
         <h2>Sign Up</h2>
         <p>
