@@ -1,52 +1,48 @@
 import { useDispatch } from "react-redux";
-import { logIn } from "../../redux/auth/operations";
+import toast from "react-hot-toast";
 import * as Yup from "yup";
+import { logIn } from "../../redux/auth/operations";
 import AuthForm from "../../components/AuthForm/AuthForm";
-import s from "./RegisterPage.module.css";
-import { useNavigate } from "react-router-dom";
+import s from "./LoginPage.module.css";
 
 const loginSchema = Yup.object().shape({
   email: Yup.string()
     .min(4, "Too short")
-    .required("required")
+    .required("Email is required")
     .max(30, "Too long")
     .matches(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Enter a valid Email"),
   password: Yup.string()
     .min(5, "Too short")
     .max(20, "Too long")
-    // .matches(
-    //   /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
-    //   "At least one letter and one number"
-    // )
-    .required("required"),
+    .matches(
+      /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]+$/,
+      "At least one letter and one number"
+    )
+    .required("Password is required"),
 });
 
 function LoginPage() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   const handleSubmit = (values, actions) => {
-    dispatch(
-      logIn({
-        email: values.email,
-        password: values.password,
-      })
-    )
-      .unwrap()
-      .then(() => {
-        console.log("login success");
-        navigate("/transactions/expenses");
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    try {
+      dispatch(
+        logIn({
+          email: values.email,
+          password: values.password,
+        })
+      ).unwrap();
+      toast.success("login success");
+    } catch {
+      toast.error("Login error");
+    }
 
     actions.resetForm();
   };
 
   //JSX
   return (
-    <div>
+    <div className={s.sharedWrapper}>
       <div className={s.content_box}>
         <h2>Sign In</h2>
         <p>
