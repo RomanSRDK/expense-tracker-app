@@ -11,8 +11,15 @@ const UserBarBtn = ({ onOpenModal, onOpenLogoutModal }) => {
   const [isUserPanelOpen, setIsUserPanelOpen] = useState(false);
   const containerRef = useRef(null);
 
-  const avatarUrl = useSelector(selectUserAvatar);
-  const userName = useSelector(selectUserName);
+  const avatarUrlState = useSelector(selectUserAvatar);
+  const userNameState = useSelector(selectUserName);
+
+  const user = JSON.parse(
+    JSON.parse(localStorage.getItem("persist:auth")).user
+  );
+
+  const avatarUrl = avatarUrlState ? avatarUrlState : user.avatarUrl;
+  const userName = userNameState ? userNameState : user.name;
 
   const toggleUserPanel = () => setIsUserPanelOpen((prevState) => !prevState);
 
