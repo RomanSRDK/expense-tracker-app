@@ -96,6 +96,20 @@
   margin: 0;
 }
 
+.sumInput {
+  padding: 12px 70px 12px 18px;
+}
+
+.currency {
+  position: absolute;
+  right: 20px;
+  transform: translateY(-35px);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  color: rgba(250, 250, 250, 0.4);
+}
+
 .textarea {
   height: 97px;
 }

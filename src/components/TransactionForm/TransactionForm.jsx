@@ -23,14 +23,16 @@ import CategoriesModal from "../CategoriesModal/CategoriesModal";
 import CategoryField from "../CategoryField/CategoryField";
 import Loader from "../Loader/Loader";
 import Button from "../Button/Button";
+import { FaRegClock } from "react-icons/fa";
+import { selectCurrency } from "../../redux/user/selectors";
 import clsx from "clsx";
 import css from "./TransactionForm.module.css";
 import "react-datepicker/dist/react-datepicker.css";
-import { FaRegClock } from "react-icons/fa";
 
 const TransactionForm = () => {
   const isModalOpen = useSelector(selectCategoriesModalIsOpen);
   const isLoading = useSelector(selectIsLoading);
+  const currency = useSelector(selectCurrency);
 
   const dateId = useId();
   const timeId = useId();
@@ -183,12 +185,13 @@ const TransactionForm = () => {
                   Sum
                 </label>
                 <Field
-                  className={css.input}
+                  className={`${css.input} ${css.sumInput}`}
                   type="number"
                   name="sum"
                   placeholder="Entert the sum"
                   id={sumId}
                 />
+                <p className={css.currency}>{currency.toUpperCase()}</p>
                 <ErrorMessage
                   className={css.error}
                   name="sum"
