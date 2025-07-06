@@ -8,6 +8,7 @@ import {
 import {
   fetchUserInfo,
   removeUsersAvatar,
+  setCurrencyAndName,
   updatesAvatar,
 } from "../../redux/user/operations";
 import { useEffect, useRef, useState } from "react";
@@ -17,12 +18,46 @@ import css from "./UserSetsModal.module.css";
 
 function UserSetsModal({ toggleUserModal }) {
   const dispatch = useDispatch();
-  const inputRef = useRef(null);
-  const [selectedFile, setSelectedFile] = useState(null);
 
-  const userName = useSelector(selectUserName);
   const avatarUrl = useSelector(selectUserAvatar);
+  const userName = useSelector(selectUserName);
   const currency = useSelector(selectCurrency);
+
+  const inputRef = useRef(null);
+
+  const [selectedFile, setSelectedFile] = useState(null);
+  const [editetCurrency, setEditedCurrency] = useState(currency);
+  const [editedUserName, setEditedUserName] = useState(userName);
+
+  // useEffect для имени
+  useEffect(() => {
+    setEditedUserName(userName);
+  }, [userName]);
+
+  // useEffect для валюты
+  useEffect(() => {
+    setEditedCurrency(currency);
+  }, [currency]);
+
+  // Обработчик изменения имени
+  const handleNameChange = (e) => {
+    setEditedUserName(e.target.value);
+  };
+
+  // Обработчик изменения валюты
+  const handleCurrencyChange = (e) => {
+    setEditedCurrency(e.target.value);
+  };
+
+  const handleSave = () => {
+    dispatch(
+      setCurrencyAndName({
+        name: editedUserName.trim(),
+        currency: editetCurrency,
+      })
+    );
+    toggleUserModal(false);
+  };
 
   useEffect(() => {
     dispatch(fetchUserInfo());
@@ -101,14 +136,27 @@ function UserSetsModal({ toggleUserModal }) {
           </div>
         </div>
         <div className={css.identityAndCurrency}>
-          <select name="currency">
-            <option value="UAH">₴ UAH</option>
-            <option value="USD">$ USD</option>
-            <option value="EUR">€ EUR</option>
+          <select
+            name="currency"
+            value={editetCurrency}
+            onChange={handleCurrencyChange}
+            className={css.currencySelector}
+          >
+            <option value="uah">₴ UAH</option>
+            <option value="usd">$ USD</option>
+            <option value="eur">€ EUR</option>
           </select>
-          <input type="text" name="username" className={css.userName} />
+          <input
+            type="text"
+            name="username"
+            value={editedUserName}
+            className={css.userName}
+            onChange={handleNameChange}
+          />
         </div>
-        <button className={css.saveButton}>Save</button>
+        <button className={css.saveButton} onClick={handleSave}>
+          Save
+        </button>
       </div>
     </div>,
     document.body
