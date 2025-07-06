@@ -1,18 +1,15 @@
 import { GoPerson } from "react-icons/go";
 import { FiLogOut } from "react-icons/fi";
-import style from "./UserPanel.module.css";
 import { logOut } from "../../redux/auth/operations";
 import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import style from "./UserPanel.module.css";
 
 const UserPanel = ({ onOpenModal }) => {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
 
   //handle
   const logoutHandle = () => {
     dispatch(logOut());
-    navigate("/");
   };
 
   //JSX

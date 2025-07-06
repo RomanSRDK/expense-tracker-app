@@ -5,7 +5,10 @@
   gap: 30px;
   width: 100%;
   /* margin-bottom: 186px; */
-  margin-top: 126px;
+/*   margin-top: 126px; */
+}
+.sharedWrapper {
+  width: 575px;
 }
 
 .listInfo {
@@ -37,17 +40,21 @@
   padding-bottom: 14px;
   width: 100%;
 }
+
 .heading br {
   display: none;
 }
+
 .spanHeading {
   text-decoration: underline;
   text-decoration-skip-ink: none;
   color: #0ef387;
 }
+
 .breakMobile {
   display: inline;
 }
+
 .breakTabletDesktop {
   display: none;
 }

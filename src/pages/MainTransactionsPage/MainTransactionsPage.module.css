@@ -2,16 +2,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 80px);
-  padding: 20px; 
-}
-
-.mainContent {
   display: flex;
   gap: 44px;
   width: 100%;
-  max-width: 1200px;
-  margin-top: 100px;
 }
 
 .infoSection {
