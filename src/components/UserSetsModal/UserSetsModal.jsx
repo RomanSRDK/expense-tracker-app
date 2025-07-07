@@ -67,6 +67,7 @@ function UserSetsModal({ closeModal, onClose }) {
     dispatch(fetchUserInfo());
   }, [dispatch]);
 
+  // useEffect для скрытия бургера
   useEffect(() => {
     if (window.innerWidth >= 1440) {
       return;
