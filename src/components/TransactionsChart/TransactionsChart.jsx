@@ -7,7 +7,7 @@ const TransactionsChart = ({ expenseData, totalExpense, categoryColors }) => {
     return (
       <div className={styles.chartWrapper}>
         <h3 className={styles.chartTitle}>Expense Statistics</h3>
-        <div className={styles.emptyState}>Нет данных о расходах за этот период.</div>
+        <div className={styles.emptyState}>No data for this period.</div>
       </div>
     );
   }
@@ -20,22 +20,19 @@ const TransactionsChart = ({ expenseData, totalExpense, categoryColors }) => {
   return (
     <div className={styles.chartWrapper}>
       <h3 className={styles.chartTitle}>Expense Statistics</h3>
-      <div className={styles.contentContainer}>
-        {/* Контейнер для графика */}
+      <div className={styles.contentContainer}> 
         <div className={styles.chartContainer}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
-                data={chartData}
-                // ВАЖНО: Возвращаем эти свойства для создания полукруга
+                data={chartData} 
                 startAngle={180}
                 endAngle={0}
                 innerRadius="130%"
                 outerRadius="200%"
                 paddingAngle={2}
                 dataKey="total"
-                nameKey="name"
-                // Позиционируем полукруг внизу контейнера
+                nameKey="name" 
                 cx="50%"
                 cy="100%"
               >
