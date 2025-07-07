@@ -1,19 +1,19 @@
 .customSelect {
   position: absolute;
   cursor: pointer;
-  width: 110px;
-  transform: translateY(-20.5%);
+  width: 70px;
+  transform: translateY(-20%);
   top: 50%;
-  right: 122px;
+  right: 85px;
 }
 
 .openButton {
   display: flex;
   justify-content: center;
-  gap: 8px;
+  gap: 4px;
 
-  width: 110px;
-  height: 47px;
+  width: 70px;
+  height: 41px;
 
   text-align: center;
 
@@ -51,7 +51,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 9px;
   letter-spacing: -0.02em;
   color: var(--color-text);
 }
@@ -64,7 +64,7 @@
 .dropdown {
   cursor: pointer;
   position: absolute;
-  top: -160%;
+  top: -180%;
   overflow: hidden;
   width: 122px;
   z-index: 999;
@@ -82,4 +82,27 @@
 
 .option:hover {
   background-color: var(--color-bg-secondary);
+}
+
+@media screen and (min-width: 768px) {
+  .customSelect {
+    width: 110px;
+    transform: translateY(-20.5%);
+    top: 50%;
+    right: 122px;
+  }
+
+  .openButton {
+    width: 110px;
+    height: 47px;
+    gap: 8px;
+  }
+
+  .title {
+    font-size: 12px;
+  }
+
+  .dropdown {
+    top: -160%;
+  }
 }

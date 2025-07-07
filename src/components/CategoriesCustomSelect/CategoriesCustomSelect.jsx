@@ -49,7 +49,7 @@ const CategoriesCustomSelect = ({ value, setFieldValue, name }) => {
           {typeNames[displayValue] || displayValue}
         </div>
         <span className={css.iconWrap}>
-          <IoChevronUp className={css.icon} size={20} />
+          <IoChevronUp className={css.icon} size={12} />
         </span>
       </button>
 
