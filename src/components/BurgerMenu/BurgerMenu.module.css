@@ -89,6 +89,33 @@
   margin-bottom: auto;
 }
 
+.navInBurger {
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  width: 100%;
+}
+ 
+.navInBurger a {
+  width: 100%;
+  max-width: 280px;
+  color: var(--color-bg);
+  border-color: var(--color-bg);
+}
+
+.navInBurger a:hover {
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  border-color: var(--color-bg);
+}
+ 
+.navInBurger .activeLink {
+  color: var(--color-text);
+  background-color: var(--color-bg);
+  border-color: var(--color-bg);
+}
+
+
 @media screen and (min-width: 768px) {
   .burgerMenuBackdrop {
     background-color: rgba(0, 0, 0, 0.7);
