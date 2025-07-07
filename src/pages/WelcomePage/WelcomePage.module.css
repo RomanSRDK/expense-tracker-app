@@ -7,7 +7,8 @@
 }
 
 .sharedWrapper {
-  width: 575px;
+  width: 335px;
+  margin: 0 auto;
 }
 
 .listInfo {
@@ -84,6 +85,10 @@
     align-items: flex-start;
     gap: 10px;
     margin-top: 40px;
+  }
+  .sharedWrapper {
+    width: 575px;
+    margin: 0;
   }
 
   .heading br {
