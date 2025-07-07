@@ -15,6 +15,14 @@ import { selectIsOpenTransactionEdit } from '../../redux/transactions/selectors'
 import EditTransactionsModal from '../EditTransactionsModal/EditTransactionsModal';
 import s from './TransactionsItem.module.css';
 import { setCategory } from '../../redux/categories/slice';
+import {
+  FaHome,
+  FaUtensils,
+  FaPhoneAlt,
+  FaCar,
+  FaCartPlus,
+  FaQuestionCircle,
+} from 'react-icons/fa';
 
 const TransactionsItem = ({ id, sum, date, time, comment, category, type }) => {
   const dispatch = useDispatch();
@@ -62,12 +70,32 @@ const TransactionsItem = ({ id, sum, date, time, comment, category, type }) => {
 
   const formattedDate = `${getWeekday(date)}, ${date}`;
 
+  const categoryIcons = {
+    Home: <FaHome />,
+    Food: <FaUtensils />,
+    Phone: <FaPhoneAlt />,
+    Transport: <FaCar />,
+    Car: <FaCar />,
+    Shopping: <FaCartPlus />,
+    Other: <FaQuestionCircle />,
+  };
+
+  const categoryName = category?.categoryName || 'Other';
+  const icon = categoryIcons[categoryName] || categoryIcons['Other'];
+
   return (
     <>
       <div className={s.container} key={id}>
         <div className={s.wrapper}>
-          <p className={s.categoryName}>{category.categoryName}</p>
-          <p className={s.comment}>{comment}</p>
+          <p className={s.categoryName}>
+            <span className={s.icon}>{icon}</span>
+            <span className={s.categoryText} title={categoryName}>
+              {category.categoryName}
+            </span>
+          </p>
+          <p className={s.comment} title={comment}>
+            {comment}
+          </p>
           <p className={s.date}>{formattedDate}</p>
           <p className={s.time}>{time}</p>
           <p className={s.sum}>
