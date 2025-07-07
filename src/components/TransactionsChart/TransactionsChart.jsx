@@ -5,7 +5,7 @@ import { selectCurrency } from '../../redux/user/selectors'; // 2. Импорт�
 import { getCurrencySymbol } from '../../utils/currencyUtils'; // 3. Импортируем утилиту
 import styles from './TransactionsChart.module.css';
 
-const TransactionsChart = ({ expenseData, totalExpense, categoryColors }) => {
+const TransactionsChart = ({ type, expenseData, totalExpense, categoryColors }) => {
   const currencyCode = useSelector(selectCurrency);
   const currencySymbol = getCurrencySymbol(currencyCode);
 
@@ -23,9 +23,11 @@ const TransactionsChart = ({ expenseData, totalExpense, categoryColors }) => {
     percentage: totalExpense > 0 ? ((item.total / totalExpense) * 100) : 0,
   }));
 
+   const chartTitle = type === 'incomes' ? 'Income Statistics' : 'Expense Statistics';
+
   return (
     <div className={styles.chartWrapper}>
-      <h3 className={styles.chartTitle}>Expense Statistics</h3>
+      <h3 className={styles.chartTitle}>{chartTitle}</h3>
       <div className={styles.contentContainer}> 
         <div className={styles.chartContainer}>
           <ResponsiveContainer width="100%" height="100%">
