@@ -1,36 +1,36 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import { IoMdRadioButtonOff, IoMdRadioButtonOn } from "react-icons/io";
 import { useId } from "react";
-import toast from "react-hot-toast";
 import { validationTransactionSchema } from "../../validation/validation";
 import { useDispatch, useSelector } from "react-redux";
-import { addTransaction } from "../../redux/transactions/operations";
-import { clearCategory } from "../../redux/categories/slice";
+import { setTransactionRadioType } from "../../redux/transactions/slice";
+import { FiCalendar, FiClock } from "react-icons/fi";
 import {
-  clearTransactionRadioType,
-  clearTransactionType,
-  setTransactionRadioType,
-} from "../../redux/transactions/slice";
-import {
+  selectCategoriesModalIsOpen,
   selectIsLoading,
-  selectModalIsOpen,
 } from "../../redux/transactions/selectors";
+import { selectCurrency } from "../../redux/user/selectors";
 import SyncTransactionType from "../SyncTransactionType/SyncTransactionType";
+import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
+import CustomTimePicker from "../CustomTimePicker/CustomTimePicker";
 import CategoriesModal from "../CategoriesModal/CategoriesModal";
 import CategoryField from "../CategoryField/CategoryField";
 import Loader from "../Loader/Loader";
 import Button from "../Button/Button";
-import css from "./TransactionForm.module.css";
-
 import clsx from "clsx";
-import CustomDatePicker from "../CustomDatePicker/CustomDatePicker";
+import css from "./TransactionForm.module.css";
 import "react-datepicker/dist/react-datepicker.css";
-import CustomTimePicker from "../CustomTimePicker/CustomTimePicker";
-import { FiCalendar } from "react-icons/fi";
+import { FaRegClock } from "react-icons/fa6";
 
-const TransactionForm = () => {
-  const isModalOpen = useSelector(selectModalIsOpen);
+const TransactionForm = ({
+  onSubmit,
+  initialValues,
+  buttonText,
+  isDisabled,
+}) => {
+  const isModalOpen = useSelector(selectCategoriesModalIsOpen);
   const isLoading = useSelector(selectIsLoading);
+  const currencySelect = useSelector(selectCurrency);
 
   const dateId = useId();
   const timeId = useId();
@@ -40,36 +40,17 @@ const TransactionForm = () => {
 
   const dispatch = useDispatch();
 
-  const handleSubmit = async (values, { resetForm }) => {
-    try {
-      await dispatch(addTransaction(values)).unwrap();
-      toast.success("Transaction added");
-      dispatch(clearCategory());
-      dispatch(clearTransactionType());
-      dispatch(clearTransactionRadioType());
-      resetForm();
-    } catch (error) {
-      console.log(error);
-      toast.error("Something went wrong, please try different data.");
-    }
-  };
-
-  const today = new Date().toISOString().split("T")[0];
-  const currentTime = new Date().toISOString().split("T")[1].slice(0, 5);
+  const user = JSON.parse(
+    JSON.parse(localStorage.getItem("persist:auth")).user
+  );
+  const currency = currencySelect ? currencySelect : user.currency;
 
   return (
     <div>
       {isLoading && <Loader />}
       <Formik
-        initialValues={{
-          type: "",
-          date: today,
-          time: currentTime,
-          category: "",
-          sum: "",
-          comment: "",
-        }}
-        onSubmit={handleSubmit}
+        initialValues={initialValues}
+        onSubmit={onSubmit}
         validationSchema={validationTransactionSchema}
       >
         {({ values, setFieldValue }) => (
@@ -79,6 +60,7 @@ const TransactionForm = () => {
               <div className={css.transactionType}>
                 <label className={css.customRadioLabel}>
                   <input
+                    className={css.inputRadio}
                     type="radio"
                     name="type"
                     value="expenses"
@@ -88,7 +70,7 @@ const TransactionForm = () => {
                       setFieldValue("type", value);
                       dispatch(setTransactionRadioType(value));
                     }}
-                    className={css.inputRadio}
+                    disabled={isDisabled}
                   />
                   <span className={css.radioIcon}>
                     {values.type === "expenses" ? (
@@ -102,6 +84,7 @@ const TransactionForm = () => {
 
                 <label className={css.customRadioLabel}>
                   <input
+                    className={css.inputRadio}
                     type="radio"
                     name="type"
                     value="incomes"
@@ -111,7 +94,7 @@ const TransactionForm = () => {
                       setFieldValue("type", value);
                       dispatch(setTransactionRadioType(value));
                     }}
-                    className={css.inputRadio}
+                    disabled={isDisabled}
                   />
                   <span className={css.radioIcon}>
                     {values.type === "incomes" ? (
@@ -140,8 +123,9 @@ const TransactionForm = () => {
                       <CustomDatePicker
                         className={clsx(css.input)}
                         field={field}
+                        id={dateId}
                         form={form}
-                        icon={<FiCalendar />}
+                        icon={<FiCalendar className={css.dateTimeIcon} />}
                       />
                     )}
                   </Field>
@@ -152,17 +136,35 @@ const TransactionForm = () => {
                   />
                 </div>
 
+                {/* <div className={css.inputWrapper}>
+                  <label className={css.label} htmlFor={timeId}>
+                    Time
+                  </label>
+                  <Field
+                    className={css.input}
+                    type="time"
+                    name="time"
+                    id={timeId}
+                  />
+                  <ErrorMessage
+                    className={css.error}
+                    name="time"
+                    component="div"
+                  />
+                </div> */}
                 <div className={css.inputWrapper}>
                   <label className={css.label} htmlFor={timeId}>
                     Time
                   </label>
 
-                  <Field name="date">
+                  <Field name="time">
                     {({ field, form }) => (
                       <CustomTimePicker
                         className={clsx(css.input)}
                         field={field}
+                        id={timeId}
                         form={form}
+                        icon={<FaRegClock className={css.dateTimeIcon} />}
                       />
                     )}
                   </Field>
@@ -173,6 +175,7 @@ const TransactionForm = () => {
                   />
                 </div>
               </div>
+
               <CategoryField setFieldValue={setFieldValue} id={categoryId} />
 
               <div className={css.inputWrapper}>
@@ -180,12 +183,13 @@ const TransactionForm = () => {
                   Sum
                 </label>
                 <Field
-                  className={css.input}
+                  className={`${css.input} ${css.sumInput}`}
                   type="number"
                   name="sum"
                   placeholder="Entert the sum"
                   id={sumId}
                 />
+                <p className={css.currency}>{currency.toUpperCase()}</p>
                 <ErrorMessage
                   className={css.error}
                   name="sum"
@@ -214,7 +218,7 @@ const TransactionForm = () => {
               </div>
 
               <Button type="submit" size="small" variant="confirm">
-                Add
+                {buttonText}
               </Button>
             </Form>
           </>

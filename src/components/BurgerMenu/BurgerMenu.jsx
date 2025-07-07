@@ -47,7 +47,7 @@ const BurgerMenu = ({
           </button>
         </div>
         <div className={style.transactionsHistoryNavWrap}>
-          <TransactionsHistoryNav onNavigate={onClose} />
+          <TransactionsHistoryNav wrapperClassName={style.navInBurger} />
         </div>
       </div>
     </div>

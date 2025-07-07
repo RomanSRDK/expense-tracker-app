@@ -1,40 +1,64 @@
 import { GoPerson } from "react-icons/go";
 import { FiLogOut } from "react-icons/fi";
 import style from "./UserPanel.module.css";
-import { logOut } from "../../redux/auth/operations";
-import { useDispatch } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import LogoutModal from "../LogoutModal/LogoutModal";
+import UserSetsModal from "../UserSetsModal/UserSetsModal";
 
-const UserPanel = ({ onOpenModal }) => {
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
+const UserPanel = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
-  //handle
-  const logoutHandle = () => {
-    dispatch(logOut());
-    navigate("/");
+  //handlers
+  const handleOpenLogoutModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseLogoutModal = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleOpenProfileModal = () => {
+    setIsProfileModalOpen(true);
+  };
+
+  const handleCloseProfileModal = () => {
+    setIsProfileModalOpen(false);
   };
 
   //JSX
   return (
-    <ul className={style.userPanel}>
-      <li>
-        <button className={style.userPanelBtn} onClick={onOpenModal}>
-          <span>
-            <GoPerson className={style.userPanelIcon} size={16} />
-          </span>
-          Profile settings
-        </button>
-      </li>
-      <li>
-        <button className={style.userPanelBtn} onClick={logoutHandle}>
-          <span>
-            <FiLogOut className={style.userPanelIcon} size={16} />
-          </span>
-          Log out
-        </button>
-      </li>
-    </ul>
+    <>
+      <ul className={style.userPanel}>
+        <li>
+          <button
+            className={style.userPanelBtn}
+            onClick={handleOpenProfileModal}
+          >
+            <span>
+              <GoPerson className={style.userPanelIcon} size={16} />
+            </span>
+            Profile settings
+          </button>
+        </li>
+        <li>
+          <button
+            className={style.userPanelBtn}
+            onClick={handleOpenLogoutModal}
+          >
+            <span>
+              <FiLogOut className={style.userPanelIcon} size={16} />
+            </span>
+            Log out
+          </button>
+        </li>
+      </ul>
+
+      {isProfileModalOpen && (
+        <UserSetsModal closeModal={handleCloseProfileModal} />
+      )}
+      {isModalOpen && <LogoutModal onCancel={handleCloseLogoutModal} />}
+    </>
   );
 };
 

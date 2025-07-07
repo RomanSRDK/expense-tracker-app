@@ -7,7 +7,7 @@
   border-radius: 20px;
   width: 335px;
   height: 381px;
-  margin: 29px 20px 20px 20px;
+  margin: 20px auto;
 }
 
 @media screen and (min-resolution: 192dpi) {

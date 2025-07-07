@@ -17,3 +17,7 @@
   letter-spacing: -0.02em;
   color: rgba(250, 250, 250, 0.4);
 }
+
+.sharedWrapper {
+  width: 575px;
+}

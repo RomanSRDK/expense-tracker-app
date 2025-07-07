@@ -3,16 +3,19 @@
   align-items: center;
   justify-content: center;
 }
+
 .header {
   display: flex;
   justify-content: center;
   padding-top: 20px;
   padding-bottom: 20px;
 }
+
 .barsContainer {
   display: flex;
   align-items: center;
 }
+
 .authDesktop {
   display: flex;
   align-items: center;
@@ -20,6 +23,7 @@
   padding-top: 24px;
   padding-bottom: 24px;
 }
+
 @media screen and (max-width: 768px) {
   .headerContainer {
     padding-top: 24px;
@@ -36,6 +40,9 @@
   .authDesktop {
     padding-top: 24px;
     padding-bottom: 24px;
+  }
+  .brgBtn {
+    padding-left: 300px;
   }
 }
 @media screen and (min-width: 768px) {

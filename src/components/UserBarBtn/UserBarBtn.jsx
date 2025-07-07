@@ -1,18 +1,25 @@
+import defaultAvatar from "../../pictures/avatar.png";
 import { useEffect, useRef, useState } from "react";
 import UserPanel from "../UserPanel/UserPanel";
 import { IoChevronUp } from "react-icons/io5";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import clsx from "clsx";
 import css from "./UserBarBtn.module.css";
 
 import { selectUserAvatar, selectUserName } from "../../redux/user/selectors";
+import { fetchUserInfo } from "../../redux/user/operations";
 
 const UserBarBtn = ({ onOpenModal, onOpenLogoutModal }) => {
+  const dispatch = useDispatch();
   const [isUserPanelOpen, setIsUserPanelOpen] = useState(false);
   const containerRef = useRef(null);
 
-  const avatarUrl = useSelector(selectUserAvatar);
-  const userName = useSelector(selectUserName);
+  const avatarUrlState = useSelector(selectUserAvatar);
+  const userNameState = useSelector(selectUserName);
+
+  useEffect(() => {
+    dispatch(fetchUserInfo());
+  }, [dispatch]);
 
   const toggleUserPanel = () => setIsUserPanelOpen((prevState) => !prevState);
 
@@ -32,22 +39,20 @@ const UserBarBtn = ({ onOpenModal, onOpenLogoutModal }) => {
     };
   }, [isUserPanelOpen]);
 
+  const displayAvatar = avatarUrlState || defaultAvatar;
+
   return (
     <div className={css.userBarBtnContainer} ref={containerRef}>
       <button
         className={clsx(css.userBarBtn, isUserPanelOpen && css.open)}
         onClick={toggleUserPanel}
       >
-        {avatarUrl ? (
-          <img
-            className={css.userBarBtnAvatar}
-            src={avatarUrl}
-            alt="user avatar"
-          />
-        ) : (
-          <span className={css.userBarDefAvatar}>{userName[0]}</span>
-        )}
-        <span className={css.userBarBtnName}>{userName}</span>
+        <img
+          className={css.userBarBtnAvatar}
+          src={displayAvatar}
+          alt="user avatar"
+        />
+        <span className={css.userBarBtnName}>{userNameState}</span>
         <span className={css.userBarBtnIconWrap}>
           <IoChevronUp className={css.userBarBtnIcon} size={20} />
         </span>

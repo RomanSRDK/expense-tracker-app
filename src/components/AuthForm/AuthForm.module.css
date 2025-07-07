@@ -10,7 +10,7 @@
   margin-bottom: 24px;
 }
 
-.form input {
+.input {
   display: block;
   border: 1px solid rgba(250, 250, 250, 0.2);
   border-radius: 12px;
@@ -18,6 +18,7 @@
   height: 48px;
   padding-left: 18px;
   color: #fafafa;
+  outline: none;
 
   font-weight: 400;
   font-size: 16px;
@@ -27,13 +28,22 @@
   transition: border 250ms ease-in-out;
 }
 
+.input_invalid {
+  border-color: #e74a3b;
+}
+
+.input_valid,
 .form input:hover,
 .form input:focus {
   border: 1px solid #0ef387;
 }
 
+.incorrect_icon {
+  fill: #e74a3b;
+}
+
+.incorrect_entry,
 .toggle_password {
-  /* color: rgb(0, 255, 64); */
   position: absolute;
   top: 16px;
   right: 18px;
@@ -64,6 +74,11 @@
   padding-left: 18px;
   color: red;
   font-size: 14px;
+}
+
+.form .success {
+  color: #097b45;
+  fill: #097b45;
 }
 
 .sign_box {

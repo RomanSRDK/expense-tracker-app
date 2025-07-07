@@ -20,24 +20,6 @@ const clearAuthHeader = () => {
 };
 
 /*
- * POST @ /auth/register
- * body: { name, email, password }
- */
-export const register = createAsyncThunk(
-  "auth/register",
-  async (credentials, thunkAPI) => {
-    try {
-      const res = await instance.post("/auth/register", credentials);
-      // After successful registration, add the token to the HTTP header
-      setAuthHeader(res.data.accessToken);
-      return res.data;
-    } catch (error) {
-      return thunkAPI.rejectWithValue(error.message);
-    }
-  }
-);
-
-/*
  * POST @ /auth/login
  * body: { email, password }
  */
@@ -47,9 +29,46 @@ export const logIn = createAsyncThunk(
     try {
       const res = await instance.post("/auth/login", credentials);
       // After successful login, add the token to the HTTP header
+
       setAuthHeader(res.data.accessToken);
+
       return res.data;
     } catch (error) {
+      if (error.response?.status === 403 || error.response?.status === 400) {
+        return thunkAPI.rejectWithValue(
+          "Access is prohibited: Incorrect password or login"
+        );
+      }
+      return thunkAPI.rejectWithValue(error.message);
+    }
+  }
+);
+
+/*
+ * POST @ /auth/register
+ * body: { name, email, password }
+ */
+export const register = createAsyncThunk(
+  "auth/register",
+  async (credentials, thunkAPI) => {
+    try {
+      await instance.post("/auth/register", credentials);
+
+      const data = await thunkAPI
+        .dispatch(
+          logIn({
+            email: credentials.email,
+            password: credentials.password,
+          })
+        )
+        .unwrap();
+      return data;
+    } catch (error) {
+      if (error.response?.status === 400 || error.response?.status === 409) {
+        return thunkAPI.rejectWithValue(
+          "Invalid request body  or Provided email already exists"
+        );
+      }
       return thunkAPI.rejectWithValue(error.message);
     }
   }
@@ -71,13 +90,34 @@ export const refreshUser = createAsyncThunk(
       // If there is no token, exit without performing any request
       return thunkAPI.rejectWithValue("No session info for refresh");
     }
+    // try {
+    //   // If there is a token, add it to the HTTP header and perform the request
+    //   setAuthHeader(refreshToken);
+    //   const res = await instance.post("/auth/refresh", { sid });
+    //   setAuthHeader(res.data.accessToken);
+    //   return res.data;
+    // } catch (error) {
+    //   return thunkAPI.rejectWithValue(error.message);
+    // }
+
     try {
-      // If there is a token, add it to the HTTP header and perform the request
-      setAuthHeader(refreshToken);
-      const res = await instance.post("/auth/refresh", { sid });
+      // Створюємо окремий запит без використання instance
+      const res = await axios.post(
+        "https://expense-tracker.b.goit.study/api/auth/refresh",
+        { sid },
+        {
+          headers: {
+            Authorization: `Bearer ${refreshToken}`, // Використовуємо refreshToken
+          },
+        }
+      );
+
+      // Встановлюємо новий accessToken
       setAuthHeader(res.data.accessToken);
       return res.data;
     } catch (error) {
+      // Очищаємо токен при помилці
+      clearAuthHeader();
       return thunkAPI.rejectWithValue(error.message);
     }
   }

@@ -1,49 +1,92 @@
 import { ErrorMessage, Field, Form, Formik } from "formik";
 import s from "./AuthForm.module.css";
-import { useState } from "react";
+import { useId, useState } from "react";
 import { FiEyeOff, FiEye } from "react-icons/fi";
+import { AiFillCloseCircle } from "react-icons/ai";
+import { IoIosCheckmarkCircle } from "react-icons/io";
+import clsx from "clsx";
 
 const AuthForm = ({ mode, onSubmit, validationSchema, buttonLabel }) => {
   const [showPassword, setShowPassword] = useState(false);
 
+  const nameId = useId();
+  const emailId = useId();
+  const passId = useId();
+
   const togglePassword = () => {
     setShowPassword((prev) => !prev);
   };
-  //JSX
+
+  const handleResetInput = (setFieldValue) => {
+    setFieldValue("email", "");
+  };
+
   return (
-    <>
-      <Formik
-        initialValues={{ name: "", email: "", password: "" }}
-        onSubmit={onSubmit}
-        validationSchema={validationSchema}
-      >
+    <Formik
+      initialValues={{ name: "", email: "", password: "" }}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
+      {({ setFieldValue, errors, touched, values }) => (
         <Form className={s.form} autoComplete="off">
           {mode === "register" && (
             <div className={s.field_wrap}>
-              <label htmlFor="name"></label>
-              <Field type="name" name="name" placeholder="Name" />
+              <label htmlFor={nameId}></label>
+              <Field
+                type="name"
+                name="name"
+                placeholder="Name"
+                id={nameId}
+                className={clsx(
+                  s.input,
+                  touched.password && errors.password && s.input_invalid,
+                  touched.password && !errors.password && s.input_valid
+                )}
+              />
               <ErrorMessage name="name" component="span" />
             </div>
           )}
 
           <div className={s.field_wrap}>
-            <label htmlFor="email"></label>
+            <label htmlFor={emailId}></label>
             <Field
+              id={emailId}
               type="email"
               name="email"
               placeholder="Email"
               autoComplete="off"
+              className={clsx(
+                s.input,
+                touched.password && errors.password && s.input_invalid,
+                touched.password && !errors.password && s.input_valid
+              )}
             />
+            {/* Show if incorrect */}
+            {touched.email && errors.email && values.email && (
+              <button
+                type="button"
+                className={s.incorrect_entry}
+                onClick={() => handleResetInput(setFieldValue)}
+              >
+                <AiFillCloseCircle className={s.incorrect_icon} />
+              </button>
+            )}
             <ErrorMessage name="email" component="span" />
           </div>
 
           <div className={s.field_wrap}>
-            <label htmlFor="password"></label>
+            <label htmlFor={passId}></label>
             <Field
+              id={passId}
               type={showPassword ? "text" : "password"}
               name="password"
               placeholder="Password"
               autoComplete="new-password"
+              className={clsx(
+                s.input,
+                touched.password && errors.password && s.input_invalid,
+                touched.password && !errors.password && s.input_valid
+              )}
             />
 
             <button
@@ -51,10 +94,19 @@ const AuthForm = ({ mode, onSubmit, validationSchema, buttonLabel }) => {
               type="button"
               onClick={togglePassword}
             >
-              {showPassword ? <FiEye /> : <FiEyeOff />}
+              {touched.password && !errors.password ? (
+                <IoIosCheckmarkCircle className={s.success} />
+              ) : showPassword ? (
+                <FiEye />
+              ) : (
+                <FiEyeOff />
+              )}
             </button>
 
             <ErrorMessage name="password" component="span" />
+            {touched.password && !errors.password && (
+              <span className={s.success}>Password is secure</span>
+            )}
           </div>
 
           <div className={s.sign_box}>
@@ -68,13 +120,13 @@ const AuthForm = ({ mode, onSubmit, validationSchema, buttonLabel }) => {
             )}
             {mode === "login" && (
               <p>
-                Already have account? <a href="/register">Sign Up</a>
+                Don't have an account? <a href="/register">Sign Up</a>
               </p>
             )}
           </div>
         </Form>
-      </Formik>
-    </>
+      )}
+    </Formik>
   );
 };
 

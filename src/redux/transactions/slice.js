@@ -4,6 +4,7 @@ import {
   addTransaction,
   deleteTransaction,
   updateTransaction,
+  getQueryTransactions,
 } from "./operations";
 
 const handlePending = (state) => {
@@ -20,9 +21,11 @@ const initialState = {
   items: [],
   isLoading: false,
   error: null,
-  modalIsOpen: false,
+  categoriesModalIsOpen: false,
   selectedType: "all",
   selectedRadioType: "",
+  transactionToEdit: {},
+  editModalIsOpen: false,
 };
 
 const transactionsSlice = createSlice({
@@ -30,10 +33,10 @@ const transactionsSlice = createSlice({
   initialState,
   reducers: {
     openCategoriesModal(state) {
-      state.modalIsOpen = true;
+      state.categoriesModalIsOpen = true;
     },
     closeCategoriesModal(state) {
-      state.modalIsOpen = false;
+      state.categoriesModalIsOpen = false;
     },
     setTransactionType(state, { payload }) {
       state.selectedType = payload;
@@ -47,6 +50,18 @@ const transactionsSlice = createSlice({
     clearTransactionRadioType(state) {
       state.selectedRadioType = "all";
     },
+    openTransactionsEditModal(state) {
+      state.editModalIsOpen = true;
+    },
+    closeTransactionsEditModal(state) {
+      state.editModalIsOpen = false;
+    },
+    setTransactionToEdit(state, { payload }) {
+      state.transactionToEdit = payload;
+    },
+    clearTransactionToEdit(state) {
+      state.transactionToEdit = {};
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -56,6 +71,20 @@ const transactionsSlice = createSlice({
         state.items = action.payload;
       })
       .addCase(getAllTransactions.rejected, handleRejected)
+
+      // Отримання обраних транзакцій
+      .addCase(getQueryTransactions.pending, (state) => {
+        state.isLoading = true;
+        state.error = null;
+      })
+      .addCase(getQueryTransactions.fulfilled, (state, action) => {
+        state.isLoading = false;
+        state.items = action.payload;
+      })
+      .addCase(getQueryTransactions.rejected, (state, action) => {
+        state.isLoading = false;
+        state.error = action.payload;
+      })
 
       .addCase(addTransaction.pending, handlePending)
       .addCase(addTransaction.fulfilled, (state) => {
@@ -84,5 +113,9 @@ export const {
   clearTransactionType,
   setTransactionRadioType,
   clearTransactionRadioType,
+  openTransactionsEditModal,
+  closeTransactionsEditModal,
+  setTransactionToEdit,
+  clearTransactionToEdit,
 } = transactionsSlice.actions;
 export const transactionsReducer = transactionsSlice.reducer;

@@ -41,7 +41,9 @@ const Header = () => {
   }, []);
 
   const toggleBurger = () => {
+    // console.log("toggleBurger called");
     if (!isModalOpen) {
+      // console.log("Burger toggle clicked");
       setIsBurgerOpen((prev) => !prev);
     }
   };
@@ -63,12 +65,12 @@ const Header = () => {
     setIsLogoutModalOpen(true);
   };
 
-  const closeLogoutModal = () => setIsLogoutModalOpen(false);
+  // const closeLogoutModal = () => setIsLogoutModalOpen(false);
 
-  const confirmLogout = () => {
-    // dispatch(logOut());
-    closeLogoutModal();
-  };
+  // const confirmLogout = () => {
+  //   dispatch(logOut());
+  //   closeLogoutModal();
+  // };
 
   return (
     <div className={s.headerContainer}>
@@ -94,23 +96,22 @@ const Header = () => {
             {(isMobile || isTablet) && (
               <div>
                 <BurgerMenuBtn onClick={toggleBurger} />
-                {isBurgerOpen && (
-                  <BurgerMenu
-                    isBurgerOpen={isBurgerOpen}
-                    onClose={closeBurger}
-                    onOpenModal={handleOpenModal}
-                    onOpenLogoutModal={openLogoutModal}
-                  />
-                )}
+                <span>DEBUG: Burger button visible</span>
+                <BurgerMenu
+                  isBurgerOpen={isBurgerOpen}
+                  onClose={closeBurger}
+                  onOpenModal={handleOpenModal}
+                  onOpenLogoutModal={openLogoutModal}
+                />
               </div>
             )}
           </>
         )}
-        {isModalOpen && <UserSetsModal toggleUserModal={setIsModalOpen} />}
+        {isModalOpen && <UserSetsModal />}
         {isLogoutModalOpen && (
           <LogoutConfirmModal
-            onConfirm={confirmLogout}
-            onCancel={closeLogoutModal}
+          // onConfirm={confirmLogout}
+          // onCancel={closeLogoutModal}
           />
         )}
       </header>

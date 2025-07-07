@@ -18,16 +18,13 @@
   height: 477px;
   border-radius: 30px;
   background-color: rgba(23, 23, 25, 1);
-  padding: 24px;
 }
 
 .closeButton {
   position: absolute;
   top: 20px;
   right: 20px;
-  font-size: 24px;
   color: #fafafa;
-  line-height: 0;
 }
 
 .closeButton:hover,
@@ -38,8 +35,13 @@
 .title {
   font-size: 28px;
   font-weight: var(--font-weight-regular);
-  margin-top: 40px;
-  margin-left: 40px;
+}
+
+.avatarContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 40px auto;
 }
 
 .avatarImage {
@@ -47,58 +49,66 @@
   height: 100px;
   border-radius: 50%;
   object-fit: cover;
-  margin: 38px auto 20px;
-  display: block;
-  border: 2px solid #2a2a2a;
 }
 
 .buttonsGroup {
   display: flex;
+  gap: 8px;
+  margin-top: 20px;
 }
 
-.selectButton {
-  background-color: #2a2a2a;
+.uploadPhoto {
+  background-color: rgba(41, 41, 43, 1);
   color: #fafafa;
-  border: none;
-  border-radius: 16px;
-  padding: 10px 16px;
-  margin: 8px 4px;
-  font-size: 14px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+  border-radius: 40px;
+  padding: 8px 16px;
+  font-size: 12px;
 }
 
-select {
+.removePhoto {
+  background-color: rgba(41, 41, 43, 1);
+  color: #fafafa;
+  border-radius: 40px;
+  padding: 8px 16px;
+  font-size: 12px;
+}
+
+.identityAndCurrency {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.currencySelector {
   background-color: transparent;
-  color: #fafafa;
-  border: 1px solid #3a3a3a;
+  border: 1px solid rgba(250, 250, 250, 0.4);
   border-radius: 16px;
-  padding: 12px;
-  width: 100%;
-  margin-top: 16px;
+  padding-left: 18px;
+  color: #fafafa;
+  width: 124px;
+  height: 48px;
   font-size: 16px;
   appearance: none;
 }
 
-input[type="text"] {
+.userName {
   background-color: transparent;
-  color: #fafafa;
-  border: 1px solid #3a3a3a;
+  border: 1px solid rgba(250, 250, 250, 0.4);
   border-radius: 16px;
-  padding: 12px;
-  width: 100%;
-  margin-top: 16px;
+  padding-left: 18px;
+  color: #fafafa;
+  width: 293px;
+  height: 48px;
   font-size: 16px;
 }
 
-/* Специальная кнопка сохранения */
 .saveButton {
-  background-color: #0ef387;
-  color: #000000;
-  font-weight: 500;
-  margin-top: 24px;
-  width: 100%;
-  border-radius: 16px;
-  padding: 12px;
+  background-color: var(--color-primary);
+  color: #0c0d0d;
+  font-weight: var(--font-weight-regular);
   font-size: 16px;
+  margin-top: 20px;
+  width: 100%;
+  border-radius: 40px;
+  padding: 14px;
 }

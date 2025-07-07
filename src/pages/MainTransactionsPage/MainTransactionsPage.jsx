@@ -1,54 +1,55 @@
-import React, { useEffect, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getAllTransactions } from '../../redux/transactions/operations';
-import { getCategories } from '../../redux/categories/operations';
-import { selectAllTransactions } from '../../redux/transactions/selectors';
-import { selectCategoriesList } from '../../redux/categories/selectors';
-import { generateCategoryColors } from '../../utils/colorGenerator';
-import { calculateCategorySpending } from '../../utils/analyticsUtils';
-
-import MainTransactionsHeader from '../../components/MainTransactionsHeader/MainTransactionsHeader';
-import TransactionsTotalAmount from '../../components/TransactionsTotalAmount/TransactionsTotalAmount';
-import TransactionsChart from '../../components/TransactionsChart/TransactionsChart';
+import React, { useEffect, useMemo } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  addTransaction,
+  getAllTransactions,
+} from "../../redux/transactions/operations";
+import { selectAllTransactions } from "../../redux/transactions/selectors";
+import { selectCategoriesList } from "../../redux/categories/selectors";
+import { generateCategoryColors } from "../../utils/colorGenerator";
+import { calculateCategorySpending } from "../../utils/analyticsUtils";
+import TransactionsTotalAmount from "../../components/TransactionsTotalAmount/TransactionsTotalAmount";
+import TransactionsChart from "../../components/TransactionsChart/TransactionsChart";
 import TransactionForm from "../../components/TransactionForm/TransactionForm";
-import styles from './MainTransactionsPage.module.css';
+import Container from "../../components/Container/Container";
+import Section from "../../components/Section/Section";
+import styles from "./MainTransactionsPage.module.css";
+import toast from "react-hot-toast";
+import { clearCategory } from "../../redux/categories/slice";
+import {
+  clearTransactionRadioType,
+  clearTransactionType,
+} from "../../redux/transactions/slice";
 
 const MainTransactionsPage = () => {
   const dispatch = useDispatch();
 
-  // --- ШАГ 1: Проверяем, что приходит из Redux ---
   const allTransactions = useSelector(selectAllTransactions);
-  const { expenses: expenseCategories = [] } = useSelector(selectCategoriesList) || {};
-  
-  console.log('--- ШАГ 1: ДАННЫЕ ИЗ REDUX ---');
-  console.log('Сырые транзакции из Redux:', allTransactions);
-  console.log('Сырые категории расходов из Redux:', expenseCategories);
-  console.log('---------------------------------');
+  const { expenses: expenseCategories = [] } =
+    useSelector(selectCategoriesList) || {};
 
   useEffect(() => {
     dispatch(getAllTransactions());
-    dispatch(getCategories());
   }, [dispatch]);
 
   const summaryData = useMemo(() => {
-    console.log('--- ШАГ 2: НАЧИНАЕМ РАСЧЕТ summaryData ---');
     if (!allTransactions || allTransactions.length === 0) {
-      console.log('Расчет прерван: транзакций нет.');
       return { expenseSummary: 0, incomeSummary: 0, categoriesSummary: [] };
     }
-    
+
     const expenseSummary = allTransactions
-      .filter(t => t.type && t.type.toLowerCase() === 'expenses')
+      .filter((t) => t.type && t.type.toLowerCase() === "expenses")
       .reduce((sum, t) => sum + t.sum, 0);
 
     const incomeSummary = allTransactions
-      .filter(t => t.type && t.type.toLowerCase() === 'incomes')
+      .filter((t) => t.type && t.type.toLowerCase() === "incomes")
       .reduce((sum, t) => sum + t.sum, 0);
-      
-    const categoriesSummary = calculateCategorySpending(allTransactions, expenseCategories, 'expenses');
-    
-    console.log('Результат расчетов:', { expenseSummary, incomeSummary, categoriesSummary });
-    console.log('------------------------------------');
+
+    const categoriesSummary = calculateCategorySpending(
+      allTransactions,
+      expenseCategories,
+      "expenses"
+    );
 
     return { expenseSummary, incomeSummary, categoriesSummary };
   }, [allTransactions, expenseCategories]);
@@ -57,18 +58,39 @@ const MainTransactionsPage = () => {
     return generateCategoryColors(expenseCategories);
   }, [expenseCategories]);
 
-  // --- ШАГ 3: Проверяем, что передается в компонент графика ---
-  console.log('--- ШАГ 3: ПРОПСЫ ДЛЯ ГРАФИКА ---');
-  console.log('expenseData (для графика):', summaryData.categoriesSummary);
-  console.log('totalExpense (для графика):', summaryData.expenseSummary);
-  console.log('--------------------------------');
+  const handleSubmit = async (values, { resetForm }) => {
+    try {
+      await dispatch(addTransaction(values)).unwrap();
+      toast.success("Transaction added");
+      dispatch(clearCategory());
+      dispatch(clearTransactionType());
+      dispatch(clearTransactionRadioType());
+      resetForm();
+    } catch {
+      toast.error("Something went wrong, please try different data.");
+    }
+  };
+
+  const today = new Date().toISOString().split("T")[0];
+  const currentTime = new Date();
+  const hours = currentTime.getHours().toString().padStart(2, "0");
+  const minutes = currentTime.getMinutes().toString().padStart(2, "0");
+  const formattedTime = `${hours}:${minutes}`;
+  const formInitialValues = {
+    type: "",
+    date: today,
+    time: formattedTime,
+    category: "",
+    sum: "",
+    comment: "",
+  };
+
+  const buttonText = "Add";
 
   return (
-    <>
-      <MainTransactionsHeader />
-      <div className={styles.pageWrapper}>
-        
-        <main className={styles.mainContent}>
+    <Container>
+      <Section>
+        <div className={styles.pageWrapper}>
           <section className={styles.infoSection}>
             <h1 className={styles.infoHeader}>Expense Log</h1>
             <p className={styles.infoText}>
@@ -85,13 +107,18 @@ const MainTransactionsPage = () => {
               categoryColors={categoryColors}
             />
           </section>
-          
+
           <section className={styles.formSection}>
-            <TransactionForm />
+            <TransactionForm
+              onSubmit={handleSubmit}
+              initialValues={formInitialValues}
+              buttonText={buttonText}
+              isDisabled={false}
+            />
           </section>
-        </main>
-      </div>
-    </>
+        </div>
+      </Section>
+    </Container>
   );
 };
 

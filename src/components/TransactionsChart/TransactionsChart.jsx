@@ -1,13 +1,19 @@
 import React from 'react';
+import { useSelector } from 'react-redux'; // 1. Импортируем useSelector
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { selectCurrency } from '../../redux/user/selectors'; // 2. Импортируем селектор валюты
+import { getCurrencySymbol } from '../../utils/currencyUtils'; // 3. Импортируем утилиту
 import styles from './TransactionsChart.module.css';
 
 const TransactionsChart = ({ expenseData, totalExpense, categoryColors }) => {
+  const currencyCode = useSelector(selectCurrency);
+  const currencySymbol = getCurrencySymbol(currencyCode);
+
   if (!expenseData || expenseData.length === 0 || !totalExpense) {
     return (
       <div className={styles.chartWrapper}>
         <h3 className={styles.chartTitle}>Expense Statistics</h3>
-        <div className={styles.emptyState}>Нет данных о расходах за этот период.</div>
+        <div className={styles.emptyState}>No data for this period.</div>
       </div>
     );
   }
@@ -20,22 +26,19 @@ const TransactionsChart = ({ expenseData, totalExpense, categoryColors }) => {
   return (
     <div className={styles.chartWrapper}>
       <h3 className={styles.chartTitle}>Expense Statistics</h3>
-      <div className={styles.contentContainer}>
-        {/* Контейнер для графика */}
+      <div className={styles.contentContainer}> 
         <div className={styles.chartContainer}>
           <ResponsiveContainer width="100%" height="100%">
             <PieChart>
               <Pie
-                data={chartData}
-                // ВАЖНО: Возвращаем эти свойства для создания полукруга
+                data={chartData} 
                 startAngle={180}
                 endAngle={0}
                 innerRadius="130%"
                 outerRadius="200%"
                 paddingAngle={2}
                 dataKey="total"
-                nameKey="name"
-                // Позиционируем полукруг внизу контейнера
+                nameKey="name" 
                 cx="50%"
                 cy="100%"
               >
@@ -46,7 +49,7 @@ const TransactionsChart = ({ expenseData, totalExpense, categoryColors }) => {
             </PieChart>
           </ResponsiveContainer>
           <div className={styles.totalAmountInChart}>
-            ₴{totalExpense.toFixed(2)}
+           {currencySymbol}{totalExpense.toFixed(2)}
           </div>
         </div>
 
