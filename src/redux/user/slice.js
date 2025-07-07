@@ -25,9 +25,18 @@ const slice = createSlice({
         state.user.avatarUrl = avatarUrl;
         state.user.currency = currency;
       })
+      .addCase(updatesAvatar.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(updatesAvatar.fulfilled, (state, action) => {
         state.isLoading = false;
         state.user.avatarUrl = action.payload.avatarUrl;
+      })
+      .addCase(updatesAvatar.rejected, (state) => {
+        state.isLoading = false;
+      })
+      .addCase(removeUsersAvatar.pending, (state) => {
+        state.isLoading = true;
       })
       .addCase(removeUsersAvatar.fulfilled, (state, action) => {
         state.isLoading = false;
