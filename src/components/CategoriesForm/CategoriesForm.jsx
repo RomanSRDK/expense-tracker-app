@@ -7,8 +7,9 @@ import { validationCategorySchema } from "../../validation/validation";
 import { selectTransactionType } from "../../redux/transactions/selectors";
 import { addCategory } from "../../redux/categories/operations";
 import css from "./CategoriesForm.module.css";
+import CategoriesCustomSelect from "../CategoriesCustomSelect/CategoriesCustomSelect";
 
-const CategoriesForm = () => {
+const CategoriesForm = ({ isDisabled }) => {
   const dispatch = useDispatch();
   const textId = useId();
   const selectedTransactionType = useSelector(selectTransactionType);
@@ -27,6 +28,12 @@ const CategoriesForm = () => {
     } catch {
       toast.error("Something went wrong");
     }
+  };
+
+  const typeNames = {
+    all: "All categories",
+    expenses: "Expenses",
+    incomes: "Incomes",
   };
 
   return (
@@ -57,11 +64,19 @@ const CategoriesForm = () => {
               />
               <ErrorMessage className={css.error} name="text" component="div" />
             </div>
-
-            <Field className={css.select} as="select" name="category">
-              <option value="incomes">Incomes</option>
-              <option value="expenses">Expenses</option>
-            </Field>
+            {isDisabled ? (
+              <p className={css.categpryToAdd}>
+                {typeNames[selectedTransactionType] || selectedTransactionType}
+              </p>
+            ) : (
+              <>
+                <CategoriesCustomSelect />
+                <Field className={css.select} as="select" name="category">
+                  <option value="incomes">Incomes</option>
+                  <option value="expenses">Expenses</option>
+                </Field>
+              </>
+            )}
 
             <Button
               className={css.button}

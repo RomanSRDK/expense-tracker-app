@@ -115,10 +115,6 @@
   color: var(--color-secondary);
 }
 
-.react-datepicker-popper {
-  transform: translate(-15px, 83px) !important;
-}
-
 ._input_1avcx_67 react-datepicker-ignore-onclickoutside {
   font-size: 14px;
   padding: 12px 14px !important;
@@ -129,9 +125,5 @@
     padding: 12px 18px;
     font-size: 16px;
     line-height: 1.5;
-  }
-
-  .react-datepicker-popper {
-    transform: translate(-62px, 83px) !important;
   }
 }
