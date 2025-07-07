@@ -17,11 +17,15 @@ import Section from "../../components/Section/Section";
 import Loader from "../../components/Loader/Loader";
 import styles from "./MainTransactionsPage.module.css";
 import toast from "react-hot-toast";
-import { clearCategory } from "../../redux/categories/slice";
+import {
+  clearCategoriesList,
+  clearCategory,
+} from "../../redux/categories/slice";
 import {
   clearTransactionRadioType,
   clearTransactionType,
 } from "../../redux/transactions/slice";
+import styles from "./MainTransactionsPage.module.css";
 
 const MainTransactionsPage = () => {
   const dispatch = useDispatch();
@@ -75,6 +79,7 @@ const isTransactionsLoading = useSelector(selectTransactionsIsLoading);
       dispatch(clearCategory());
       dispatch(clearTransactionType());
       dispatch(clearTransactionRadioType());
+      dispatch(clearCategoriesList());
       resetForm();
     } catch {
       toast.error("Something went wrong, please try different data.");
