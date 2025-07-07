@@ -123,7 +123,7 @@ const TransactionForm = ({
                     Date
                   </label>
 
-                  <Field name="date">
+                  <Field name="date" className={css.input}>
                     {({ field, form }) => (
                       <CustomDatePicker
                         className={clsx(css.input)}
@@ -178,7 +178,9 @@ const TransactionForm = ({
                   placeholder="Entert the sum"
                   id={sumId}
                 />
-                <p className={css.currency}>{currency.toUpperCase()}</p>
+                <p className={css.currency}>
+                  {currency ? currency.toUpperCase() : ""}
+                </p>
                 <ErrorMessage
                   className={css.error}
                   name="sum"

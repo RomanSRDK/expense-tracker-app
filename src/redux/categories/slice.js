@@ -28,6 +28,9 @@ const categoriesSlice = createSlice({
     cancelEditCategory(state) {
       state.categotyToEdit = null;
     },
+    clearCategoriesList(state) {
+      state.categoriesList = [];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -109,6 +112,7 @@ export const {
   clearCategory,
   setSelectedCategoryType,
   clearSelectedCategoryType,
+  clearCategoriesList,
 } = categoriesSlice.actions;
 
 export const categoriesReducer = categoriesSlice.reducer;
