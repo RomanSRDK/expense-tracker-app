@@ -8,32 +8,51 @@ const RefreshTokenInterceptor = () => {
   useEffect(() => {
     const interceptor = instance.interceptors.response.use(
       (response) => {
-        // console.log("Response success:", response.config.url);
         return response;
       },
       async (error) => {
-        // console.log(
-        //   "Response error:",
-        //   error.config?.url,
-        //   error.response?.status
-        // );
+        console.log(
+          "Response error:",
+          error.config?.url,
+          error.response?.status
+        );
         const originalRequest = error.config;
 
         if (error.response?.status === 401 && !originalRequest._retry) {
           originalRequest._retry = true;
 
           if (originalRequest.url.includes("/auth/refresh")) {
+            localStorage.removeItem("token");
+            localStorage.removeItem("refreshToken");
+            window.location.href = "/login";
             return Promise.reject(error);
           }
 
           try {
             const result = await dispatch(refreshUser()).unwrap();
-            // Оновлюємо заголовок оригінального запиту
-            originalRequest.headers.Authorization = `Bearer ${result.accessToken}`;
 
-            // Повторюємо оригінальний запит
-            return instance(originalRequest);
+            // Check whether a new token has been received
+            if (result.accessToken || result.token) {
+              const newToken = result.accessToken || result.token;
+
+              originalRequest.headers.Authorization = `Bearer ${newToken}`;
+              instance.defaults.headers.common[
+                "Authorization"
+              ] = `Bearer ${newToken}`;
+
+              return instance(originalRequest);
+            }
+
+            return Promise.reject(new Error("No access token received"));
           } catch (refreshError) {
+            console.error("Token refresh failed:", refreshError);
+
+            localStorage.removeItem("token");
+            localStorage.removeItem("refreshToken");
+
+            // Перенаправляємо на login
+            window.location.href = "/login";
+
             return Promise.reject(refreshError);
           }
         }
