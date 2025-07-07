@@ -1,8 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux'; // 1. Импортируем useSelector
 import { PieChart, Pie, Cell, ResponsiveContainer } from 'recharts';
+import { selectCurrency } from '../../redux/user/selectors'; // 2. Импортируем селектор валюты
+import { getCurrencySymbol } from '../../utils/currencyUtils'; // 3. Импортируем утилиту
 import styles from './TransactionsChart.module.css';
 
 const TransactionsChart = ({ expenseData, totalExpense, categoryColors }) => {
+  const currencyCode = useSelector(selectCurrency);
+  const currencySymbol = getCurrencySymbol(currencyCode);
+
   if (!expenseData || expenseData.length === 0 || !totalExpense) {
     return (
       <div className={styles.chartWrapper}>
@@ -43,7 +49,7 @@ const TransactionsChart = ({ expenseData, totalExpense, categoryColors }) => {
             </PieChart>
           </ResponsiveContainer>
           <div className={styles.totalAmountInChart}>
-            ₴{totalExpense.toFixed(2)}
+           {currencySymbol}{totalExpense.toFixed(2)}
           </div>
         </div>
 
