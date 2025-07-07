@@ -1,13 +1,14 @@
 .wrapper {
   display: flex;
+  flex-direction: column;
   gap: 24px;
   font-family: var(--font-base);
   font-weight: var(--font-weight-regular);
 }
 
-@media (max-width: 768px) {
+@media (min-width: 768px) {
   .wrapper {
-    flex-direction: column;
+    flex-direction: row;
   }
 }
 
@@ -51,4 +52,10 @@
   font-weight: var(--font-weight-bold);
   font-size: 24px;
   color: var(--color-text);
+}
+
+@media screen and (min-width: 1440px) {
+  .totalBlock {
+    width: 303px;
+  }
 }
