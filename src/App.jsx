@@ -30,6 +30,7 @@ function App() {
     if (refreshToken) {
       dispatch(refreshUser());
     }
+    // eslint-disable-next-line
   }, [dispatch]);
 
   //JSX
