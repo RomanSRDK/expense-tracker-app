@@ -30,82 +30,96 @@ const clearTokensFromStorage = () => {
  * POST @ /auth/login
  * body: { email, password }
  */
-export const logIn = createAsyncThunk("auth/login", async (credentials, thunkAPI) => {
-  try {
-    const res = await instance.post("/auth/login", credentials);
-    // After successful login, add the token to the HTTP header
-    setAuthHeader(res.data.accessToken);
-    saveTokensToStorage(res.data);
-    return res.data;
-  } catch (error) {
-    if (error.response?.status === 403 || error.response?.status === 400) {
-      return thunkAPI.rejectWithValue("Access is prohibited: Incorrect password or login");
+export const logIn = createAsyncThunk(
+  "auth/login",
+  async (credentials, thunkAPI) => {
+    try {
+      const res = await instance.post("/auth/login", credentials);
+      // After successful login, add the token to the HTTP header
+      setAuthHeader(res.data.accessToken);
+      saveTokensToStorage(res.data);
+      return res.data;
+    } catch (error) {
+      if (error.response?.status === 403 || error.response?.status === 400) {
+        return thunkAPI.rejectWithValue(
+          "Access is prohibited: Incorrect password or login"
+        );
+      }
+      return thunkAPI.rejectWithValue(error.message);
     }
-    return thunkAPI.rejectWithValue(error.message);
   }
-});
+);
 
 /*
  * POST @ /auth/register
  * body: { name, email, password }
  */
-export const register = createAsyncThunk("auth/register", async (credentials, thunkAPI) => {
-  try {
-    await instance.post("/auth/register", credentials);
+export const register = createAsyncThunk(
+  "auth/register",
+  async (credentials, thunkAPI) => {
+    try {
+      await instance.post("/auth/register", credentials);
 
-    const data = await thunkAPI
-      .dispatch(
-        logIn({
-          email: credentials.email,
-          password: credentials.password,
-        })
-      )
-      .unwrap();
-    return data;
-  } catch (error) {
-    if (error.response?.status === 400 || error.response?.status === 409) {
-      return thunkAPI.rejectWithValue("Invalid request body  or Provided email already exists");
+      const data = await thunkAPI
+        .dispatch(
+          logIn({
+            email: credentials.email,
+            password: credentials.password,
+          })
+        )
+        .unwrap();
+      return data;
+    } catch (error) {
+      if (error.response?.status === 400 || error.response?.status === 409) {
+        return thunkAPI.rejectWithValue(
+          "Invalid request body  or Provided email already exists"
+        );
+      }
+      return thunkAPI.rejectWithValue(error.message);
     }
-    return thunkAPI.rejectWithValue(error.message);
   }
-});
+);
 
 /*
  * GET @ /auth/refresh
  * headers: Authorization: Bearer token
  */
-export const refreshUser = createAsyncThunk("auth/refresh", async (_, thunkAPI) => {
-  const state = thunkAPI.getState();
-  const refreshToken = state.auth.refreshToken || localStorage.getItem("refreshToken");
-  const sid = state.auth.sid || localStorage.getItem("sid");
+export const refreshUser = createAsyncThunk(
+  "auth/refresh",
+  async (_, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const refreshToken =
+      state.auth.refreshToken || localStorage.getItem("refreshToken");
+    const sid = state.auth.sid || localStorage.getItem("sid");
 
-  if (!refreshToken || !sid) {
-    return thunkAPI.rejectWithValue("No session info for refresh");
-  }
-
-  try {
-    const res = await axios.post(
-      "https://expense-tracker.b.goit.study/api/auth/refresh",
-      { sid },
-      {
-        headers: {
-          Authorization: `Bearer ${refreshToken}`,
-        },
-      }
-    );
-
-    if (res.data.accessToken) {
-      setAuthHeader(res.data.accessToken);
-      return res.data;
-    } else {
-      throw new Error("No access token received");
+    if (!refreshToken || !sid) {
+      return thunkAPI.rejectWithValue("No session info for refresh");
     }
-  } catch (error) {
-    clearAuthHeader();
-    clearTokensFromStorage();
-    return thunkAPI.rejectWithValue(error.response?.data || error.message);
+
+    try {
+      const res = await axios.post(
+        "https://expense-tracker.b.goit.study/api/auth/refresh",
+        { sid },
+        {
+          headers: {
+            Authorization: `Bearer ${refreshToken}`,
+          },
+        }
+      );
+
+      if (res.data.accessToken) {
+        setAuthHeader(res.data.accessToken);
+        return res.data;
+      } else {
+        throw new Error("No access token received");
+      }
+    } catch (error) {
+      clearAuthHeader();
+      clearTokensFromStorage();
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
+    }
   }
-});
+);
 
 /*
  * POST @ /users/logout

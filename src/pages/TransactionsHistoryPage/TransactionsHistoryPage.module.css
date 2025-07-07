@@ -1,34 +1,74 @@
-/* Этот класс-обертка центрирует контент по горизонтали и вертикали */
+/* Этот класс-обертка центрирует контент */
 .pageWrapper {
   display: flex;
   justify-content: center;
-  align-items: flex-start; /* Выравниваем по верху, а не по центру */
+  align-items: flex-start;
   padding: 20px;
 }
 
+/* Этот класс ограничивает максимальную ширину контента */
 .mainContent {
   width: 100%;
+  max-width: 1240px;
 }
+
+/* ========================================================== */
+/* НОВЫЕ СТИЛИ ДЛЯ ХЕДЕРА СТРАНИЦЫ                           */
+/* ========================================================== */
+.pageHeader {
+  display: flex;
+  justify-content: space-between; /* Распределяет элементы по краям */
+  align-items: center; /* Выравнивает по вертикали */
+  margin-bottom: 24px; /* Отступ до таблицы с транзакциями */
+}
+
+.headerInfo {
+  max-width: 50%; /* Ограничиваем ширину блока с текстом */
+}
+
+.infoHeader {
+  font-family: var(--font-base);
+  font-weight: var(--font-weight-regular);
+  font-size: 38px;
+  color: var(--color-text);
+  margin-bottom: 12px;
+}
+
+.infoText {
+  font-family: var(--font-base);
+  font-weight: var(--font-weight-regular);
+  font-size: 16px;
+  color: var(--color-secondary);
+}
+
+.headerTotals {
+  /* Стили для контейнера с суммами, если нужны */
+}
+/* ========================================================== */
 
 .transactionsWrapper {
-  width: 100%; /* Теперь он занимает всю ширину родителя (.mainContent) */
+  width: 100%;
   border-radius: 30px;
   overflow: hidden;
-  background-color: #171719; /* Добавим фон, как у других блоков */
+  background-color: #171719;
 }
 
-/* Адаптивность для планшетов */
-@media (max-width: 1439px) {
-  .mainContent {
-    max-width: 704px;
+/* Адаптивность для планшетов и мобильных */
+@media (max-width: 1023px) {
+  .pageHeader {
+    /* Ставим элементы друг под друга */
+    flex-direction: column;
+    align-items: stretch; /* Растягиваем на всю ширину */
+    gap: 24px; /* Отступ между блоками */
+  }
+
+  .headerInfo {
+    max-width: 100%;
+    text-align: center; /* Центрируем текст на мобильных */
   }
 }
 
-/* Адаптивность для мобильных */
 @media (max-width: 767px) {
-  .mainContent {
-    max-width: 335px;
-  }
   .pageWrapper {
     padding: 10px;
     padding-top: 101px;

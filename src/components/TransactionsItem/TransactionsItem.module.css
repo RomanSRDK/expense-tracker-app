@@ -5,7 +5,7 @@
 
 .wrapper {
   display: grid;
-  grid-template-columns: 80px 89px 70px 60px 95px 96px;
+  grid-template-columns: 90px 89px 70px 60px 95px 96px;
   align-items: center;
   color: #fff;
   min-width: 100%; /* ширина для скролу */
@@ -22,7 +22,7 @@
 }
 
 .comment {
-  max-width: 56px;
+  max-width: 90px;
 }
 
 .date {
@@ -69,6 +69,28 @@
   display: none;
 }
 
+.categoryName {
+  display: flex;
+  max-width: 85px;
+  padding-left: 25px;
+  position: relative;
+}
+
+.icon {
+  position: absolute;
+  left: 0px;
+  font-size: 18px;
+  color: #00ffb2;
+}
+
+.categoryText {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  display: block;
+  max-width: 100%;
+}
+
 @media (min-width: 768px) {
   .container {
     padding: 20px 32px;
@@ -85,6 +107,10 @@
   .date {
     max-width: 74px;
   }
+
+  .categoryName {
+    max-width: 85px;
+  }
 }
 
 @media (min-width: 1440px) {
@@ -93,11 +119,11 @@
   }
 
   .wrapper {
-    grid-template-columns: 100px 200px 180px 150px 220px 180px;
+    grid-template-columns: 120px 200px 180px 150px 220px 180px;
   }
 
   .comment {
-    max-width: 123px;
+    max-width: 160px;
   }
 
   .date {
@@ -113,5 +139,9 @@
 
   .delete {
     padding: 14px 32px;
+  }
+
+  .categoryName {
+    max-width: 100px;
   }
 }

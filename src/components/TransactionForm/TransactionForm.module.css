@@ -40,9 +40,8 @@
 .radioIcon {
   margin-right: 8px;
 }
-
-.customRadioLabel input:disabled + .radioIcon .iconOff {
-  opacity: 1;
+.customRadioLabel:hover input:disabled + .radioIcon .iconOff {
+  color: #29292b;
 }
 
 .iconOn {
@@ -123,6 +122,10 @@
 .dateTime {
   display: flex;
   gap: 20px;
+}
+
+.dateTimeIcon {
+  color: var(--color-primary);
 }
 
 .inputWrapper {

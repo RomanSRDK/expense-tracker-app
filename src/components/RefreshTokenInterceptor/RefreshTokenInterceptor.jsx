@@ -11,7 +11,11 @@ const RefreshTokenInterceptor = () => {
         return response;
       },
       async (error) => {
-        console.log("Response error:", error.config?.url, error.response?.status);
+        console.log(
+          "Response error:",
+          error.config?.url,
+          error.response?.status
+        );
         const originalRequest = error.config;
 
         if (error.response?.status === 401 && !originalRequest._retry) {
@@ -32,7 +36,9 @@ const RefreshTokenInterceptor = () => {
               const newToken = result.accessToken || result.token;
 
               originalRequest.headers.Authorization = `Bearer ${newToken}`;
-              instance.defaults.headers.common["Authorization"] = `Bearer ${newToken}`;
+              instance.defaults.headers.common[
+                "Authorization"
+              ] = `Bearer ${newToken}`;
 
               return instance(originalRequest);
             }

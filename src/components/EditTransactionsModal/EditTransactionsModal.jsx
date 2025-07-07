@@ -49,10 +49,6 @@ const EditTransactionsModal = () => {
       await dispatch(updateTransaction(values)).unwrap();
       toast.success("Transaction edited");
       resetValueForm();
-//       dispatch(clearCategory());
-//       dispatch(clearTransactionType());
-//       dispatch(clearTransactionRadioType());
-//       dispatch(clearTransactionToEdit());
       resetForm();
       dispatch(closeTransactionsEditModal());
     } catch {
@@ -70,8 +66,6 @@ const EditTransactionsModal = () => {
       onClick={() => {
         dispatch(closeTransactionsEditModal());
         resetValueForm();
-//         dispatch(clearTransactionToEdit());
-
       }}
     >
       <div className={css.modal} onClick={(e) => e.stopPropagation()}>
@@ -81,7 +75,6 @@ const EditTransactionsModal = () => {
           onClick={() => {
             dispatch(closeTransactionsEditModal());
             resetValueForm();
-//             dispatch(clearTransactionToEdit());
           }}
         >
           <CgClose className={css.closeIcon} />

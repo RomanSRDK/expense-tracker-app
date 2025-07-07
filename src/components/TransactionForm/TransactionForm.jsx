@@ -3,8 +3,11 @@ import { IoMdRadioButtonOff, IoMdRadioButtonOn } from "react-icons/io";
 import { useId } from "react";
 import { validationTransactionSchema } from "../../validation/validation";
 import { useDispatch, useSelector } from "react-redux";
-import { setTransactionRadioType } from "../../redux/transactions/slice";
-import { FiCalendar } from "react-icons/fi";
+import {
+  setTransactionRadioType,
+  setTransactionType,
+} from "../../redux/transactions/slice";
+import { FiCalendar, FiClock } from "react-icons/fi";
 import {
   selectCategoriesModalIsOpen,
   selectIsLoading,
@@ -20,6 +23,7 @@ import Button from "../Button/Button";
 import clsx from "clsx";
 import css from "./TransactionForm.module.css";
 import "react-datepicker/dist/react-datepicker.css";
+import { FaRegClock } from "react-icons/fa6";
 
 const TransactionForm = ({
   onSubmit,
@@ -68,6 +72,7 @@ const TransactionForm = ({
                       const value = e.target.value;
                       setFieldValue("type", value);
                       dispatch(setTransactionRadioType(value));
+                      dispatch(setTransactionType(value));
                     }}
                     disabled={isDisabled}
                   />
@@ -92,6 +97,7 @@ const TransactionForm = ({
                       const value = e.target.value;
                       setFieldValue("type", value);
                       dispatch(setTransactionRadioType(value));
+                      dispatch(setTransactionType(value));
                     }}
                     disabled={isDisabled}
                   />
@@ -124,7 +130,7 @@ const TransactionForm = ({
                         field={field}
                         id={dateId}
                         form={form}
-                        icon={<FiCalendar />}
+                        icon={<FiCalendar className={css.dateTimeIcon} />}
                       />
                     )}
                   </Field>
@@ -139,31 +145,15 @@ const TransactionForm = ({
                   <label className={css.label} htmlFor={timeId}>
                     Time
                   </label>
-                  <Field
-                    className={css.input}
-                    type="time"
-                    name="time"
-                    id={timeId}
-                  />
-                  <ErrorMessage
-                    className={css.error}
-                    name="time"
-                    component="div"
-                  />
-                </div>
-                {/* <div className={css.inputWrapper}>
-                  <label className={css.label} htmlFor={timeId}>
-                    Time
-                  </label>
 
-                  <Field name="date">
+                  <Field name="time">
                     {({ field, form }) => (
                       <CustomTimePicker
-                        id={timeId}
                         className={clsx(css.input)}
                         field={field}
+                        id={timeId}
                         form={form}
-                        icon={<FaRegClock className="clock_icon" />}
+                        icon={<FaRegClock className={css.dateTimeIcon} />}
                       />
                     )}
                   </Field>
@@ -172,7 +162,7 @@ const TransactionForm = ({
                     name="time"
                     component="div"
                   />
-                </div> */}
+                </div>
               </div>
 
               <CategoryField setFieldValue={setFieldValue} id={categoryId} />

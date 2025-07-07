@@ -52,6 +52,8 @@ function App() {
     <>
       <RefreshTokenInterceptor />
 
+      <RefreshTokenInterceptor />
+
       <Layout>
         <div className="pageWrapper">
           <Routes>

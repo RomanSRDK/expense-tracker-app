@@ -1,15 +1,14 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import { FiCalendar } from "react-icons/fi";
 import "./datepicker-overrides.css";
 
 const CustomDatePicker = ({
   className,
-  field, //  Formik
-  form, //  Formik
-  selectedDate, // useState
-  onChange, // useState
-  ...rest // додаткові пропси
+  field,
+  form,
+  selectedDate,
+  onChange,
+  ...rest
 }) => {
   const isFormik = !!field && !!form;
 
