@@ -31,7 +31,6 @@ const CategoriesForm = ({ isDisabled }) => {
   };
 
   const typeNames = {
-    all: "All categories",
     expenses: "Expenses",
     incomes: "Incomes",
   };
@@ -49,45 +48,52 @@ const CategoriesForm = ({ isDisabled }) => {
         onSubmit={handleSubmit}
         validationSchema={validationCategorySchema}
       >
-        <Form>
-          <div className={css.formWrapper}>
-            <div className={css.inputWrapper}>
-              <label className={css.label} htmlFor={textId}>
-                New Category
-              </label>
-              <Field
-                className={css.categoryInput}
-                type="text"
-                name="text"
-                placeholder="Enter the text"
-                id={textId}
-              />
-              <ErrorMessage className={css.error} name="text" component="div" />
-            </div>
-            {isDisabled ? (
-              <p className={css.categpryToAdd}>
-                {typeNames[selectedTransactionType] || selectedTransactionType}
-              </p>
-            ) : (
-              <>
-                <CategoriesCustomSelect />
-                <Field className={css.select} as="select" name="category">
-                  <option value="incomes">Incomes</option>
-                  <option value="expenses">Expenses</option>
-                </Field>
-              </>
-            )}
+        {({ setFieldValue, values }) => (
+          <Form>
+            <div className={css.formWrapper}>
+              <div className={css.inputWrapper}>
+                <label className={css.label} htmlFor={textId}>
+                  New Category
+                </label>
+                <Field
+                  className={css.categoryInput}
+                  type="text"
+                  name="text"
+                  placeholder="Enter the text"
+                  id={textId}
+                />
+                <ErrorMessage
+                  className={css.error}
+                  name="text"
+                  component="div"
+                />
+              </div>
+              {isDisabled ? (
+                <p className={css.categpryToAdd}>
+                  {typeNames[selectedTransactionType] ||
+                    selectedTransactionType}
+                </p>
+              ) : (
+                <>
+                  <CategoriesCustomSelect
+                    value={values.category}
+                    setFieldValue={setFieldValue}
+                    name="category"
+                  />
+                </>
+              )}
 
-            <Button
-              className={css.button}
-              type="submit"
-              size="small"
-              variant="confirm"
-            >
-              Add
-            </Button>
-          </div>
-        </Form>
+              <Button
+                className={css.button}
+                type="submit"
+                size="small"
+                variant="confirm"
+              >
+                Add
+              </Button>
+            </div>
+          </Form>
+        )}
       </Formik>
     </div>
   );

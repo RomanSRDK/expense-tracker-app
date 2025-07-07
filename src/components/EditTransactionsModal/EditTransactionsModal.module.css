@@ -46,18 +46,10 @@
   color: var(--color-secondary);
 }
 
-.react-datepicker-popper {
-  transform: translate(-15px, 83px) !important;
-}
-
 @media screen and (min-width: 768px) {
   .modal {
     padding: 40px 20px;
     width: 500px;
     height: 599px;
-  }
-
-  .react-datepicker-popper {
-    transform: translate(-62px, 83px) !important;
   }
 }
