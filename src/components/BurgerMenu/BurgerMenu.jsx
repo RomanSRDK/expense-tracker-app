@@ -36,6 +36,7 @@ const BurgerMenu = ({
       <div className={style.burgerMenu}>
         <div className={style.burgerCloseUserBtnBar}>
           <UserBarBtn
+            onClose={onClose}
             onOpenModal={() => {
               onOpenModal();
               onClose();
@@ -47,7 +48,6 @@ const BurgerMenu = ({
           </button>
         </div>
         <div className={style.transactionsHistoryNavWrap}>
-          <TransactionsHistoryNav wrapperClassName={style.navInBurger} />
           <TransactionsHistoryNav
             wrapperClassName={style.navInBurger}
             onClose={onClose}

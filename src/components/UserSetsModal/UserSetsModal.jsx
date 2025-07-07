@@ -2,6 +2,7 @@ import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectCurrency,
+  selectIsLoading,
   selectUserAvatar,
   selectUserName,
 } from "../../redux/user/selectors";
@@ -14,14 +15,17 @@ import {
 import { useEffect, useRef, useState } from "react";
 import defaultAvatar from "../../pictures/avatar.png";
 import { IoCloseOutline } from "react-icons/io5";
+import toast from "react-hot-toast";
 import css from "./UserSetsModal.module.css";
+import { CircleLoader } from "react-spinners";
 
-function UserSetsModal({ closeModal }) {
+function UserSetsModal({ closeModal, onClose }) {
   const dispatch = useDispatch();
 
   const avatarUrl = useSelector(selectUserAvatar);
   const userName = useSelector(selectUserName);
   const currency = useSelector(selectCurrency);
+  const isLoading = useSelector(selectIsLoading);
 
   const inputRef = useRef(null);
 
@@ -64,6 +68,14 @@ function UserSetsModal({ closeModal }) {
   }, [dispatch]);
 
   useEffect(() => {
+    if (window.innerWidth >= 1440) {
+      return;
+    } else {
+      onClose();
+    }
+  }, [onClose]);
+
+  useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
         closeModal();
@@ -88,7 +100,15 @@ function UserSetsModal({ closeModal }) {
     const formData = new FormData();
     formData.append("avatar", file);
 
-    dispatch(updatesAvatar(formData));
+    dispatch(updatesAvatar(formData))
+      .unwrap()
+      .catch(() => {
+        toast.error("Oops! This file is too big. The limit is 1.6 MB", {
+          icon: "🙈",
+          duration: 4000,
+          position: "top-center",
+        });
+      });
   };
 
   const handleButtonClick = () => {
@@ -113,12 +133,19 @@ function UserSetsModal({ closeModal }) {
         </button>
         <h2 className={css.title}>Profile settings</h2>
         <div className={css.avatarContainer}>
-          <img
-            src={avatarUrl || defaultAvatar}
-            alt="User avatar"
-            className={css.avatarImage}
-          />
-
+          {isLoading ? (
+            <CircleLoader
+              size={100}
+              color={"var(--color-primary) "}
+              speedMultiplier={2}
+            />
+          ) : (
+            <img
+              src={avatarUrl || defaultAvatar}
+              alt="User avatar"
+              className={css.avatarImage}
+            />
+          )}
           <input
             type="file"
             accept="image/*"
