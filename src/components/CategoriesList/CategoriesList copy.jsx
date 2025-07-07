@@ -15,7 +15,7 @@ const CategoriesList = () => {
   const filteredCategories = useSelector(selectFilteredCategories);
   const selectedTransactionType = useSelector(selctsetTransactionType);
 
-  console.log(filteredCategories);
+  // console.log(filteredCategories);
 
   const handleSubmit = ({ id, name, type }) => {
     dispatch(setCategory({ id, name, type }));
