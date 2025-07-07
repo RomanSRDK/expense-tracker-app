@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsRefreshing } from "./redux/auth/selectors";
+import { selectIsRefreshing, selectRefreshToken } from "./redux/auth/selectors";
 import { refreshUser } from "./redux/auth/operations";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
 import Loader from "./components/Loader/Loader";
@@ -9,7 +9,7 @@ import Layout from "./components/Layout/Layout";
 import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./App.css";
-import RefreshingUser from "./components/RefreshingUser/RefreshingUser";
+import RefreshTokenInterceptor from "./components/RefreshTokenInterceptor/RefreshTokenInterceptor";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
@@ -20,14 +20,16 @@ const MainTransactionsPage = lazy(() =>
 const TransactionsHistoryPage = lazy(() =>
   import("./pages/TransactionsHistoryPage/TransactionsHistoryPage")
 );
-// const NotFoundPage = lazy(() => import("./pages/NotFoundPage/NotFoundPage"));
 
 function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
+  const refreshToken = useSelector(selectRefreshToken);
 
   useEffect(() => {
-    dispatch(refreshUser());
+    if (refreshToken) {
+      dispatch(refreshUser());
+    }
   }, [dispatch]);
 
   //JSX
@@ -35,6 +37,8 @@ function App() {
     <Loader />
   ) : (
     <>
+      <RefreshTokenInterceptor />
+
       <Layout>
         <div className="pageWrapper">
           <Routes>
