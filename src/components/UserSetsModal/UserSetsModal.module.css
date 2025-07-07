@@ -109,7 +109,7 @@
 
 .currencySelector:hover,
 .currencySelector:focus {
-  border-color: var(--color-primary-hover);
+  border-color: #eaeaea;
 }
 
 .currencySelector option {
@@ -133,13 +133,12 @@
   height: 42px;
   font-size: 14px;
   font-weight: var(--font-weight-regular);
-  cursor: pointer;
   outline: none;
 }
 
 .userName:hover,
 .userName:focus {
-  border-color: var(--color-primary-hover);
+  border-color: #eaeaea;
 }
 
 .saveButton {
@@ -157,6 +156,12 @@
 
 .saveButton:hover {
   background-color: #0cc96e;
+}
+
+.saveButton:disabled {
+  background-color: #e6a4a4;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 @media (min-width: 768px) {
@@ -205,6 +210,3 @@
     transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
   }
 }
-
-/* @media (min-width: 1440px) {
-} */

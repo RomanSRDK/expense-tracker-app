@@ -16,8 +16,9 @@ import { useEffect, useRef, useState } from "react";
 import defaultAvatar from "../../pictures/avatar.png";
 import { IoCloseOutline } from "react-icons/io5";
 import toast from "react-hot-toast";
-import css from "./UserSetsModal.module.css";
 import { CircleLoader } from "react-spinners";
+import css from "./UserSetsModal.module.css";
+import clsx from "clsx";
 
 function UserSetsModal({ closeModal, onClose }) {
   const dispatch = useDispatch();
@@ -137,7 +138,7 @@ function UserSetsModal({ closeModal, onClose }) {
           {isLoading ? (
             <CircleLoader
               size={100}
-              color={"var(--color-primary) "}
+              color={"var(--color-primary)"}
               speedMultiplier={2}
             />
           ) : (
@@ -182,7 +183,13 @@ function UserSetsModal({ closeModal, onClose }) {
             onChange={handleNameChange}
           />
         </div>
-        <button className={css.saveButton} onClick={handleSave}>
+        <button
+          className={clsx(css.saveButton, {
+            [css.disabled]: editedUserName.trim().length < 2,
+          })}
+          onClick={handleSave}
+          disabled={editedUserName.trim().length < 2}
+        >
           Save
         </button>
       </div>
