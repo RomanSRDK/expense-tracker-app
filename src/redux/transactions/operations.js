@@ -1,18 +1,18 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { instance } from "../auth/operations"; // <-- Импортируем instance
-import toast from "react-hot-toast";
+import { createAsyncThunk } from '@reduxjs/toolkit';
+import { instance } from '../auth/operations'; // <-- Импортируем instance
+import toast from 'react-hot-toast';
 
 /**
  * Получает ВСЕ транзакции (и доходы, и расходы)
  */
 export const getAllTransactions = createAsyncThunk(
-  "transactions/getAll",
+  'transactions/getAll',
   async (_, { rejectWithValue }) => {
     try {
       // Делаем два запроса и объединяем результаты
       const [incomesResponse, expensesResponse] = await Promise.all([
-        instance.get("/transactions/incomes"),
-        instance.get("/transactions/expenses"),
+        instance.get('/transactions/incomes'),
+        instance.get('/transactions/expenses'),
       ]);
       return [...incomesResponse.data, ...expensesResponse.data];
     } catch (error) {
@@ -25,10 +25,10 @@ export const getAllTransactions = createAsyncThunk(
  * Создает новую транзакцию
  */
 export const addTransaction = createAsyncThunk(
-  "transactions/addTransaction",
+  'transactions/addTransaction',
   async (transactionData, { dispatch, rejectWithValue }) => {
     try {
-      const { data } = await instance.post("/transactions", transactionData);
+      const { data } = await instance.post('/transactions', transactionData);
       dispatch(getAllTransactions()); // Обновляем список транзакций
       return data;
     } catch (error) {
@@ -41,7 +41,7 @@ export const addTransaction = createAsyncThunk(
  * Удаляет транзакцию
  */
 export const deleteTransaction = createAsyncThunk(
-  "transactions/deleteTransaction",
+  'transactions/deleteTransaction',
   async (transactionId, { dispatch, rejectWithValue }) => {
     try {
       await instance.delete(`/transactions/${transactionId}`);
@@ -57,14 +57,14 @@ export const deleteTransaction = createAsyncThunk(
  * Обновляет транзакцию
  */
 export const updateTransaction = createAsyncThunk(
-  "transactions/updateTransaction",
+  'transactions/updateTransaction',
   async ({ type, id, ...updateData }, { dispatch, rejectWithValue }) => {
     try {
       const { data } = await instance.patch(
         `/transactions/${type}/${id}`,
         updateData
       );
-      dispatch(getAllTransactions()); // Обновляем список
+      dispatch(getQueryTransactions(type)); // Обновляем список
       return data;
     } catch (error) {
       return rejectWithValue(error.message);
@@ -76,13 +76,13 @@ export const updateTransaction = createAsyncThunk(
  Отримуємо транзакції за обраним типом користувача @route GET /transactions
  */
 export const getQueryTransactions = createAsyncThunk(
-  "transactions/getQuery",
+  'transactions/getQuery',
   async (type, { rejectWithValue }) => {
     try {
       const response = await instance.get(`/transactions/${type}`);
       return response.data;
     } catch (error) {
-      toast.error("Failed to fetch transactions. Please try again.");
+      toast.error('Failed to fetch transactions. Please try again.');
       return rejectWithValue(error.message);
     }
   }
