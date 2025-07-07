@@ -16,7 +16,7 @@ import defaultAvatar from "../../pictures/avatar.png";
 import { IoCloseOutline } from "react-icons/io5";
 import css from "./UserSetsModal.module.css";
 
-function UserSetsModal({ closeModal }) {
+function UserSetsModal({ closeModal, onClose }) {
   const dispatch = useDispatch();
 
   const avatarUrl = useSelector(selectUserAvatar);
@@ -62,6 +62,14 @@ function UserSetsModal({ closeModal }) {
   useEffect(() => {
     dispatch(fetchUserInfo());
   }, [dispatch]);
+
+  useEffect(() => {
+    if (window.innerWidth >= 1440) {
+      return;
+    } else {
+      onClose();
+    }
+  }, [onClose]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
