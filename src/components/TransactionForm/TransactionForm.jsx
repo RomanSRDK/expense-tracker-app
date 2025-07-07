@@ -178,7 +178,9 @@ const TransactionForm = ({
                   placeholder="Entert the sum"
                   id={sumId}
                 />
-                <p className={css.currency}>{currency.toUpperCase()}</p>
+                <p className={css.currency}>
+                  {currency ? currency.toUpperCase() : "USD"}
+                </p>
                 <ErrorMessage
                   className={css.error}
                   name="sum"
