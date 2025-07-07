@@ -25,3 +25,21 @@
   li.react-datepicker__time-list-item--selected {
   background-color: #040404;
 }
+
+.time-picker-wrapper {
+  position: relative;
+}
+
+.time-picker-input {
+  padding-right: 30px;
+}
+
+.time-picker-icon {
+  position: absolute;
+  top: 50%;
+  right: 10px;
+  transform: translateY(-50%);
+  font-size: 18px;
+  pointer-events: none;
+  color: #0ef387;
+}
