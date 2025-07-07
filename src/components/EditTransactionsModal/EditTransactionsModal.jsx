@@ -19,7 +19,6 @@ import TransactionForm from "../TransactionForm/TransactionForm";
 const EditTransactionsModal = () => {
   const dispatch = useDispatch();
   const TransactionToEdit = useSelector(selectTransactionToEdit);
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const resetValueForm = () => {
     dispatch(clearCategory());

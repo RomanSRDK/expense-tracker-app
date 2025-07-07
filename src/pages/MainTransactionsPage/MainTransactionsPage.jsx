@@ -76,7 +76,6 @@ const MainTransactionsPage = () => {
   const hours = currentTime.getHours().toString().padStart(2, "0");
   const minutes = currentTime.getMinutes().toString().padStart(2, "0");
   const formattedTime = `${hours}:${minutes}`;
-
   const formInitialValues = {
     type: "",
     date: today,

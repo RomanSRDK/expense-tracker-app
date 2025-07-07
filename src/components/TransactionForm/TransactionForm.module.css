@@ -40,7 +40,6 @@
 .radioIcon {
   margin-right: 8px;
 }
-
 .customRadioLabel:hover input:disabled + .radioIcon .iconOff {
   color: #29292b;
 }
