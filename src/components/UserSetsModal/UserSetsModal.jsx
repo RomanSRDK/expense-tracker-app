@@ -1,5 +1,6 @@
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useMedia } from "react-use";
 import {
   selectCurrency,
   selectIsLoading,
@@ -22,6 +23,7 @@ import clsx from "clsx";
 
 function UserSetsModal({ closeModal, onClose }) {
   const dispatch = useDispatch();
+  const isTablet = useMedia("(min-width: 768px)");
 
   const avatarUrl = useSelector(selectUserAvatar);
   const userName = useSelector(selectUserName);
@@ -84,8 +86,10 @@ function UserSetsModal({ closeModal, onClose }) {
       }
     };
     document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
     };
   }, [closeModal]);
 
@@ -137,7 +141,7 @@ function UserSetsModal({ closeModal, onClose }) {
         <div className={css.avatarContainer}>
           {isLoading ? (
             <CircleLoader
-              size={100}
+              size={isTablet ? 100 : 80}
               color={"var(--color-primary)"}
               speedMultiplier={2}
             />
@@ -159,7 +163,13 @@ function UserSetsModal({ closeModal, onClose }) {
             <button onClick={handleButtonClick} className={css.uploadPhoto}>
               Upload new photo
             </button>
-            <button onClick={handleRemovePhoto} className={css.removePhoto}>
+            <button
+              onClick={handleRemovePhoto}
+              className={clsx(css.removePhoto, {
+                [css.disabled]: avatarUrl === defaultAvatar || !avatarUrl,
+              })}
+              disabled={avatarUrl === defaultAvatar || !avatarUrl}
+            >
               Remove
             </button>
           </div>
