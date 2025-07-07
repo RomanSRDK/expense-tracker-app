@@ -42,10 +42,10 @@ export const addTransaction = createAsyncThunk(
  */
 export const deleteTransaction = createAsyncThunk(
   'transactions/deleteTransaction',
-  async (transactionId, { dispatch, rejectWithValue }) => {
+  async ({ type, transactionId }, { dispatch, rejectWithValue }) => {
     try {
       await instance.delete(`/transactions/${transactionId}`);
-      dispatch(getAllTransactions()); // Обновляем список
+      dispatch(getQueryTransactions(type)); // Обновляем список
       return transactionId;
     } catch (error) {
       return rejectWithValue(error.message);
