@@ -3,7 +3,10 @@ import { IoMdRadioButtonOff, IoMdRadioButtonOn } from "react-icons/io";
 import { useId } from "react";
 import { validationTransactionSchema } from "../../validation/validation";
 import { useDispatch, useSelector } from "react-redux";
-import { setTransactionRadioType } from "../../redux/transactions/slice";
+import {
+  setTransactionRadioType,
+  setTransactionType,
+} from "../../redux/transactions/slice";
 import { FiCalendar, FiClock } from "react-icons/fi";
 import {
   selectCategoriesModalIsOpen,
@@ -69,6 +72,7 @@ const TransactionForm = ({
                       const value = e.target.value;
                       setFieldValue("type", value);
                       dispatch(setTransactionRadioType(value));
+                      dispatch(setTransactionType(value));
                     }}
                     disabled={isDisabled}
                   />
@@ -93,6 +97,7 @@ const TransactionForm = ({
                       const value = e.target.value;
                       setFieldValue("type", value);
                       dispatch(setTransactionRadioType(value));
+                      dispatch(setTransactionType(value));
                     }}
                     disabled={isDisabled}
                   />
@@ -136,22 +141,6 @@ const TransactionForm = ({
                   />
                 </div>
 
-                {/* <div className={css.inputWrapper}>
-                  <label className={css.label} htmlFor={timeId}>
-                    Time
-                  </label>
-                  <Field
-                    className={css.input}
-                    type="time"
-                    name="time"
-                    id={timeId}
-                  />
-                  <ErrorMessage
-                    className={css.error}
-                    name="time"
-                    component="div"
-                  />
-                </div> */}
                 <div className={css.inputWrapper}>
                   <label className={css.label} htmlFor={timeId}>
                     Time

@@ -1,9 +1,9 @@
-import React from 'react';
-import Logo from '../Logo/Logo';
-import TransactionsHistoryNav from '../TransactionsHistoryNav/TransactionsHistoryNav';
-import BurgerMenuBtn from '../BurgerMenuBtn/BurgerMenuBtn';
-import UserBarBtn from '../UserBarBtn/UserBarBtn';
-import styles from './MainTransactionsHeader.module.css';
+import React from "react";
+import Logo from "../Logo/Logo";
+import TransactionsHistoryNav from "../TransactionsHistoryNav/TransactionsHistoryNav";
+import BurgerMenuBtn from "../BurgerMenuBtn/BurgerMenuBtn";
+import UserBarBtn from "../UserBarBtn/UserBarBtn";
+import styles from "./MainTransactionsHeader.module.css";
 
 const MainTransactionsHeader = () => {
   return (

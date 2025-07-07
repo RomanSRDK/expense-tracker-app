@@ -69,6 +69,11 @@ const categoriesSlice = createSlice({
       .addCase(addCategory.fulfilled, (state, { payload }) => {
         state.isLoading = false;
         state.error = null;
+        // !!!!!
+        if (!state.categoriesList[payload.type]) {
+          state.categoriesList[payload.type] = [];
+        }
+
         state.categoriesList[payload.type].push(payload);
       })
       .addCase(addCategory.rejected, (state, { payload }) => {
