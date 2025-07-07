@@ -5,10 +5,19 @@ import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/auth/operations";
 import s from "./LogoutModal.module.css";
 import { useEffect } from "react";
+import { createPortal } from "react-dom";
 
-const LogoutModal = ({ onCancel }) => {
+const LogoutModal = ({ onCancel, onClose }) => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    if (window.innerWidth >= 1440) {
+      return;
+    } else {
+      onClose();
+    }
+  }, [onClose]);
 
   useEffect(() => {
     const handleKeyDown = (e) => {
@@ -50,7 +59,7 @@ const LogoutModal = ({ onCancel }) => {
   };
 
   //JSX
-  return (
+  return createPortal(
     <div
       className={s.overlay}
       role="dialog"
@@ -74,7 +83,8 @@ const LogoutModal = ({ onCancel }) => {
           </button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
 

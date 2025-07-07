@@ -36,6 +36,7 @@ const BurgerMenu = ({
       <div className={style.burgerMenu}>
         <div className={style.burgerCloseUserBtnBar}>
           <UserBarBtn
+            onClose={onClose}
             onOpenModal={() => {
               onOpenModal();
               onClose();
