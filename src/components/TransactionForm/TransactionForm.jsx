@@ -20,6 +20,7 @@ import Button from "../Button/Button";
 import clsx from "clsx";
 import css from "./TransactionForm.module.css";
 import "react-datepicker/dist/react-datepicker.css";
+import { FaRegClock } from "react-icons/fa6";
 
 const TransactionForm = ({
   onSubmit,
@@ -135,7 +136,7 @@ const TransactionForm = ({
                   />
                 </div>
 
-                <div className={css.inputWrapper}>
+                {/* <div className={css.inputWrapper}>
                   <label className={css.label} htmlFor={timeId}>
                     Time
                   </label>
@@ -150,8 +151,8 @@ const TransactionForm = ({
                     name="time"
                     component="div"
                   />
-                </div>
-                {/* <div className={css.inputWrapper}>
+                </div> */}
+                <div className={css.inputWrapper}>
                   <label className={css.label} htmlFor={timeId}>
                     Time
                   </label>
@@ -172,7 +173,7 @@ const TransactionForm = ({
                     name="time"
                     component="div"
                   />
-                </div> */}
+                </div>
               </div>
 
               <CategoryField setFieldValue={setFieldValue} id={categoryId} />
