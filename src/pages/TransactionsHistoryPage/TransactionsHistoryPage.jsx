@@ -19,22 +19,6 @@ function TransactionsHistoryPage() {
           {/* 2. Добавляем контейнер для контента */}
           <main className={s.mainContent}>
             {/* 3. Вся логика страницы теперь внутри этого контейнера */}
-            <section className={s.infoSection}>
-              <h1 className={s.infoHeader}>Expense Log</h1>
-              <p className={s.infoText}>
-                Capture and organize every penny spent with ease! A clear view
-                of your financial habits at your fingertips.
-              </p>
-              <TransactionsTotalAmount
-                totalIncome={summaryData.incomeSummary}
-                totalExpense={summaryData.expenseSummary}
-              />
-              <TransactionsChart
-                expenseData={summaryData.categoriesSummary}
-                totalExpense={summaryData.expenseSummary}
-                categoryColors={categoryColors}
-              />
-            </section>
             <div className={s.transactionsWrapper}>
               <TransactionsSearchTools
                 earchQuery={searchQuery}
