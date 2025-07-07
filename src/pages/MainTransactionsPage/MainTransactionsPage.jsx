@@ -4,8 +4,14 @@ import {
   addTransaction,
   getAllTransactions,
 } from "../../redux/transactions/operations";
-import { selectAllTransactions, selectIsLoading as selectTransactionsIsLoading } from "../../redux/transactions/selectors";
-import { selectCategoriesList, selectIsLoading as selectCategoriesIsLoading } from "../../redux/categories/selectors";
+import {
+  selectAllTransactions,
+  selectIsLoading as selectTransactionsIsLoading,
+} from "../../redux/transactions/selectors";
+import {
+  selectCategoriesList,
+  selectIsLoading as selectCategoriesIsLoading,
+} from "../../redux/categories/selectors";
 import { generateCategoryColors } from "../../utils/colorGenerator";
 import { getCategories } from "../../redux/categories/operations";
 import { calculateCategorySpending } from "../../utils/analyticsUtils";
@@ -25,22 +31,21 @@ import {
   clearTransactionRadioType,
   clearTransactionType,
 } from "../../redux/transactions/slice";
-import styles from "./MainTransactionsPage.module.css";
 
 const MainTransactionsPage = () => {
   const dispatch = useDispatch();
 
   // 2. Создаем состояние для отслеживания типа транзакции
-  const [transactionType, setTransactionType] = useState('expenses'); // По умолчанию 'expenses'
+  const [transactionType, setTransactionType] = useState("expenses"); // По умолчанию 'expenses'
 
   const allTransactions = useSelector(selectAllTransactions);
   const { expenses: expenseCategories = [], incomes: incomeCategories = [] } =
     useSelector(selectCategoriesList) || {};
-const isTransactionsLoading = useSelector(selectTransactionsIsLoading);
+  const isTransactionsLoading = useSelector(selectTransactionsIsLoading);
   const isCategoriesLoading = useSelector(selectCategoriesIsLoading);
   useEffect(() => {
     dispatch(getAllTransactions());
-     dispatch(getCategories());
+    dispatch(getCategories());
   }, [dispatch]);
 
   const summaryData = useMemo(() => {
@@ -57,7 +62,8 @@ const isTransactionsLoading = useSelector(selectTransactionsIsLoading);
       .reduce((sum, t) => sum + t.sum, 0);
 
     // 3. Выбираем, какие категории и данные использовать, в зависимости от transactionType
-    const categoriesForChart = transactionType === 'incomes' ? incomeCategories : expenseCategories;
+    const categoriesForChart =
+      transactionType === "incomes" ? incomeCategories : expenseCategories;
     const categoriesSummary = calculateCategorySpending(
       allTransactions,
       categoriesForChart,
@@ -68,7 +74,8 @@ const isTransactionsLoading = useSelector(selectTransactionsIsLoading);
   }, [allTransactions, expenseCategories, incomeCategories, transactionType]); // <-- Добавляем зависимости
 
   const categoryColors = useMemo(() => {
-    const categoriesForChart = transactionType === 'incomes' ? incomeCategories : expenseCategories;
+    const categoriesForChart =
+      transactionType === "incomes" ? incomeCategories : expenseCategories;
     return generateCategoryColors(categoriesForChart);
   }, [expenseCategories, incomeCategories, transactionType]);
 
@@ -101,7 +108,7 @@ const isTransactionsLoading = useSelector(selectTransactionsIsLoading);
   };
 
   const buttonText = "Add";
- if (isTransactionsLoading || isCategoriesLoading) {
+  if (isTransactionsLoading || isCategoriesLoading) {
     return <Loader />;
   }
   return (
@@ -111,7 +118,7 @@ const isTransactionsLoading = useSelector(selectTransactionsIsLoading);
           <section className={styles.infoSection}>
             {/* 5. Заголовок теперь зависит от transactionType */}
             <h1 className={styles.infoHeader}>
-              {transactionType === 'incomes' ? 'Income Log' : 'Expense Log'}
+              {transactionType === "incomes" ? "Income Log" : "Expense Log"}
             </h1>
             <p className={styles.infoText}>
               Capture and organize every penny spent with ease! A clear view of
@@ -123,9 +130,13 @@ const isTransactionsLoading = useSelector(selectTransactionsIsLoading);
             />
             {/* 6. График теперь отображает данные в зависимости от transactionType */}
             <TransactionsChart
-            type={transactionType}
+              type={transactionType}
               expenseData={summaryData.categoriesSummary}
-              totalExpense={transactionType === 'incomes' ? summaryData.incomeSummary : summaryData.expenseSummary}
+              totalExpense={
+                transactionType === "incomes"
+                  ? summaryData.incomeSummary
+                  : summaryData.expenseSummary
+              }
               categoryColors={categoryColors}
             />
           </section>
