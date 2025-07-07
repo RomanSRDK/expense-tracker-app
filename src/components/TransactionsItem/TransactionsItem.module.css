@@ -97,7 +97,7 @@
   }
 
   .wrapper {
-    grid-template-columns: 100px 120px 100px 90px 120px 100px;
+    grid-template-columns: 100px 120px 100px 90px 110px 100px;
   }
 
   .comment {
