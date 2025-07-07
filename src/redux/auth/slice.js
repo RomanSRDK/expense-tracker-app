@@ -26,6 +26,7 @@ const authSlice = createSlice({
         state.refreshToken = action.payload.refreshToken;
         state.sid = action.payload.sid;
         state.isLoggedIn = true;
+        state.isRefreshing = false;
       })
       .addCase(logIn.fulfilled, (state, action) => {
         state.user = action.payload.user;
@@ -33,6 +34,7 @@ const authSlice = createSlice({
         state.refreshToken = action.payload.refreshToken;
         state.sid = action.payload.sid;
         state.isLoggedIn = true;
+        state.isRefreshing = false;
       })
       .addCase(refreshUser.pending, (state) => {
         state.isRefreshing = true;
@@ -45,6 +47,7 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(refreshUser.rejected, (state) => {
+        state.user = { name: null, email: null };
         state.isRefreshing = false;
       })
       .addCase(logOut.fulfilled, (state) => {
@@ -53,6 +56,7 @@ const authSlice = createSlice({
         state.refreshToken = null;
         state.sid = null;
         state.isLoggedIn = false;
+        state.isRefreshing = false;
       });
   },
 });

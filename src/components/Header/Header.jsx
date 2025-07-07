@@ -41,9 +41,9 @@ const Header = () => {
   }, []);
 
   const toggleBurger = () => {
-    console.log("toggleBurger called");
+    // console.log("toggleBurger called");
     if (!isModalOpen) {
-      console.log("Burger toggle clicked");
+      // console.log("Burger toggle clicked");
       setIsBurgerOpen((prev) => !prev);
     }
   };

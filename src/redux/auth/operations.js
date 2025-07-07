@@ -90,13 +90,34 @@ export const refreshUser = createAsyncThunk(
       // If there is no token, exit without performing any request
       return thunkAPI.rejectWithValue("No session info for refresh");
     }
+    // try {
+    //   // If there is a token, add it to the HTTP header and perform the request
+    //   setAuthHeader(refreshToken);
+    //   const res = await instance.post("/auth/refresh", { sid });
+    //   setAuthHeader(res.data.accessToken);
+    //   return res.data;
+    // } catch (error) {
+    //   return thunkAPI.rejectWithValue(error.message);
+    // }
+
     try {
-      // If there is a token, add it to the HTTP header and perform the request
-      setAuthHeader(refreshToken);
-      const res = await instance.post("/auth/refresh", { sid });
+      // Створюємо окремий запит без використання instance
+      const res = await axios.post(
+        "https://expense-tracker.b.goit.study/api/auth/refresh",
+        { sid },
+        {
+          headers: {
+            Authorization: `Bearer ${refreshToken}`, // Використовуємо refreshToken
+          },
+        }
+      );
+
+      // Встановлюємо новий accessToken
       setAuthHeader(res.data.accessToken);
       return res.data;
     } catch (error) {
+      // Очищаємо токен при помилці
+      clearAuthHeader();
       return thunkAPI.rejectWithValue(error.message);
     }
   }

@@ -46,11 +46,11 @@ function RegisterPage() {
   };
 
   //clear incorect email
-  const handleResetInput = (e) => {
-    console.log(e.target);
+  // const handleResetInput = (e) => {
+  //   console.log(e.target);
 
-    console.log(45);
-  };
+  //   console.log(45);
+  // };
 
   //JSX
   return (
@@ -68,7 +68,7 @@ function RegisterPage() {
         onSubmit={handleSubmit}
         validationSchema={registerSchema}
         buttonLabel="Sign Up"
-        handleResetInput={handleResetInput}
+        // handleResetInput={handleResetInput}
       />
     </div>
   );
