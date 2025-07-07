@@ -47,11 +47,25 @@ const authSlice = createSlice({
         state.isRefreshing = false;
       })
       .addCase(refreshUser.rejected, (state) => {
-        state.user = { name: null, email: null };
+        state.user = {
+          name: null,
+          email: null,
+          avatarUrl: null,
+          currency: "uah",
+          categories: { incomes: [] },
+          transactionsTotal: { incomes: 0, expenses: 0 },
+        };
         state.isRefreshing = false;
       })
       .addCase(logOut.fulfilled, (state) => {
-        state.user = { name: null, email: null };
+        state.user = {
+          name: null,
+          email: null,
+          avatarUrl: null,
+          currency: "uah",
+          categories: { incomes: [] },
+          transactionsTotal: { incomes: 0, expenses: 0 },
+        };
         state.token = null;
         state.refreshToken = null;
         state.sid = null;
