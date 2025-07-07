@@ -72,14 +72,14 @@ const MainTransactionsHeader = () => {
         </div>
       </header>
  
-      {isBurgerOpen && (
+      
         <BurgerMenu
           isBurgerOpen={isBurgerOpen}
           onClose={closeBurger}
           onOpenModal={openUserModal}
           onOpenLogoutModal={openLogoutModal}
         />
-      )}
+      
       
       {isUserModalOpen && <UserSetsModal closeModal={closeUserModal} />}
       
