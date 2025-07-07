@@ -13,13 +13,16 @@ import TransactionsChart from "../../components/TransactionsChart/TransactionsCh
 import TransactionForm from "../../components/TransactionForm/TransactionForm";
 import Container from "../../components/Container/Container";
 import Section from "../../components/Section/Section";
-import styles from "./MainTransactionsPage.module.css";
 import toast from "react-hot-toast";
-import { clearCategory } from "../../redux/categories/slice";
+import {
+  clearCategoriesList,
+  clearCategory,
+} from "../../redux/categories/slice";
 import {
   clearTransactionRadioType,
   clearTransactionType,
 } from "../../redux/transactions/slice";
+import styles from "./MainTransactionsPage.module.css";
 
 const MainTransactionsPage = () => {
   const dispatch = useDispatch();
@@ -65,6 +68,7 @@ const MainTransactionsPage = () => {
       dispatch(clearCategory());
       dispatch(clearTransactionType());
       dispatch(clearTransactionRadioType());
+      dispatch(clearCategoriesList());
       resetForm();
     } catch {
       toast.error("Something went wrong, please try different data.");

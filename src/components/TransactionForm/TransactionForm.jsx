@@ -123,7 +123,7 @@ const TransactionForm = ({
                     Date
                   </label>
 
-                  <Field name="date">
+                  <Field name="date" className={css.input}>
                     {({ field, form }) => (
                       <CustomDatePicker
                         className={clsx(css.input)}

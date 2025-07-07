@@ -33,7 +33,7 @@ const CustomDatePicker = ({
       onChange={handleChange}
       dateFormat="MM/dd/yyyy"
       showIcon
-      placeholderText="Select a date"
+      placeholderText="mm/dd/yyyy"
       {...rest}
     />
   );
