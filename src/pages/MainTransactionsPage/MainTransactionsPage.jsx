@@ -72,12 +72,15 @@ const MainTransactionsPage = () => {
   };
 
   const today = new Date().toISOString().split("T")[0];
-  const currentTime = new Date().toISOString().split("T")[1].slice(0, 5);
+  const currentTime = new Date();
+  const hours = currentTime.getHours().toString().padStart(2, "0");
+  const minutes = currentTime.getMinutes().toString().padStart(2, "0");
+  const formattedTime = `${hours}:${minutes}`;
 
   const formInitialValues = {
     type: "",
     date: today,
-    time: currentTime,
+    time: formattedTime,
     category: "",
     sum: "",
     comment: "",

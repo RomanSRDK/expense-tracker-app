@@ -4,7 +4,7 @@ import { useId } from "react";
 import { validationTransactionSchema } from "../../validation/validation";
 import { useDispatch, useSelector } from "react-redux";
 import { setTransactionRadioType } from "../../redux/transactions/slice";
-import { FiCalendar } from "react-icons/fi";
+import { FiCalendar, FiClock } from "react-icons/fi";
 import {
   selectCategoriesModalIsOpen,
   selectIsLoading,
@@ -125,7 +125,7 @@ const TransactionForm = ({
                         field={field}
                         id={dateId}
                         form={form}
-                        icon={<FiCalendar />}
+                        icon={<FiCalendar className={css.dateTimeIcon} />}
                       />
                     )}
                   </Field>
@@ -141,14 +141,14 @@ const TransactionForm = ({
                     Time
                   </label>
 
-                  <Field name="date">
+                  <Field name="time">
                     {({ field, form }) => (
                       <CustomTimePicker
-                        id={timeId}
                         className={clsx(css.input)}
                         field={field}
+                        id={timeId}
                         form={form}
-                        icon={<FaRegClock className="clock_icon" />}
+                        icon={<FaRegClock className={css.dateTimeIcon} />}
                       />
                     )}
                   </Field>
