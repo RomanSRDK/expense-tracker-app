@@ -96,6 +96,11 @@
     padding: 28px 20px 40px 20px;
   }
 
+  .chartContainer {
+    flex: 1;
+    max-height: 200px;
+  }
+
   .chartTitle {
     margin-bottom: 54px;
   }

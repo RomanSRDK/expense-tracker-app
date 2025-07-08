@@ -6,9 +6,13 @@ import {
 } from "../../redux/transactions/operations";
 import {
   selectAllTransactions,
+  selectIsLoading,
   selectSelectedRadioType,
 } from "../../redux/transactions/selectors";
-import { selectCategoriesList } from "../../redux/categories/selectors";
+import {
+  selectCategoriesList,
+  selectIsLoadingForChart,
+} from "../../redux/categories/selectors";
 import { generateCategoryColors } from "../../utils/colorGenerator";
 import { calculateCategorySpending } from "../../utils/analyticsUtils";
 import TransactionsTotalAmount from "../../components/TransactionsTotalAmount/TransactionsTotalAmount";
@@ -32,6 +36,8 @@ const MainTransactionsPage = () => {
 
   const allTransactions = useSelector(selectAllTransactions);
   const selectedRadioType = useSelector(selectSelectedRadioType);
+  const transactionsLoading = useSelector(selectIsLoading);
+  const categoriesLoading = useSelector(selectIsLoadingForChart);
   const normalizedRadioType =
     selectedRadioType === "all" ? "expenses" : selectedRadioType;
 
@@ -139,16 +145,27 @@ const MainTransactionsPage = () => {
               totalIncome={summaryData.incomeSummary}
               totalExpense={summaryData.expenseSummary}
             />
-            <TransactionsChart
-              type={normalizedRadioType}
-              expenseData={summaryData.categoriesSummary}
-              totalExpense={
-                normalizedRadioType === "incomes"
-                  ? summaryData.incomeSummary
-                  : summaryData.expenseSummary
-              }
-              categoryColors={categoryColors}
-            />
+            {transactionsLoading && categoriesLoading ? (
+              <div className={styles.chartWrapper}>
+                <h3 className={styles.chartTitle}>
+                  {selectedRadioType === "incomes"
+                    ? "Income Statistics"
+                    : "Expense Statistics"}
+                </h3>
+                <div className={styles.emptyState}>Lasding data.</div>
+              </div>
+            ) : (
+              <TransactionsChart
+                type={normalizedRadioType}
+                expenseData={summaryData.categoriesSummary}
+                totalExpense={
+                  normalizedRadioType === "incomes"
+                    ? summaryData.incomeSummary
+                    : summaryData.expenseSummary
+                }
+                categoryColors={categoryColors}
+              />
+            )}
           </section>
 
           <section className={styles.formSection}>

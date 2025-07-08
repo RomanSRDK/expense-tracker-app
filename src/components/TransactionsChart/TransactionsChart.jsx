@@ -3,6 +3,7 @@ import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { selectCurrency } from "../../redux/user/selectors"; // 2. Импортируем селектор валюты
 import { getCurrencySymbol } from "../../utils/currencyUtils"; // 3. Импортируем утилиту
 import styles from "./TransactionsChart.module.css";
+import { selectSelectedRadioType } from "../../redux/transactions/selectors";
 
 const TransactionsChart = ({
   type,
@@ -12,11 +13,16 @@ const TransactionsChart = ({
 }) => {
   const currencyCode = useSelector(selectCurrency);
   const currencySymbol = getCurrencySymbol(currencyCode);
+  const selectedRadioType = useSelector(selectSelectedRadioType);
 
   if (!expenseData || expenseData.length === 0 || !totalExpense) {
     return (
       <div className={styles.chartWrapper}>
-        <h3 className={styles.chartTitle}>Expense Statistics</h3>
+        <h3 className={styles.chartTitle}>
+          {selectedRadioType === "incomes"
+            ? "Income Statistics"
+            : "Expense Statistics"}
+        </h3>
         <div className={styles.emptyState}>No data for this type.</div>
       </div>
     );
