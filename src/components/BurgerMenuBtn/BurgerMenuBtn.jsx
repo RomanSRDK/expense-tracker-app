@@ -1,7 +1,6 @@
 import { HiOutlineMenuAlt4 } from "react-icons/hi";
 import style from "./BurgerMenuBtn.module.css";
 
-
 const BurgerMenuBtn = ({ onClick }) => {
   return (
     <button type="button" className={style.burgerMenuBtn} onClick={onClick}>

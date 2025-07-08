@@ -45,13 +45,6 @@ function RegisterPage() {
     actions.resetForm();
   };
 
-  //clear incorect email
-  // const handleResetInput = (e) => {
-  //   console.log(e.target);
-
-  //   console.log(45);
-  // };
-
   //JSX
   return (
     <div className={s.sharedWrapper}>
@@ -68,7 +61,6 @@ function RegisterPage() {
         onSubmit={handleSubmit}
         validationSchema={registerSchema}
         buttonLabel="Sign Up"
-        // handleResetInput={handleResetInput}
       />
     </div>
   );

@@ -1,6 +1,6 @@
 import toast from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
-
+import { IoClose } from "react-icons/io5";
 import { useDispatch } from "react-redux";
 import { logOut } from "../../redux/auth/operations";
 import s from "./LogoutModal.module.css";
@@ -84,6 +84,14 @@ const LogoutModal = ({ onCancel, onClose }) => {
             Cancel
           </button>
         </div>
+
+        <button
+          className={s.close_btn}
+          type="button"
+          onClick={() => onCancel(false)}
+        >
+          <IoClose className={s.close_icon} />
+        </button>
       </div>
     </div>,
     document.body
