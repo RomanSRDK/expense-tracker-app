@@ -1,5 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { lazy, useEffect } from "react";
+import { lazy, useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   selectIsRefreshing,
@@ -33,6 +33,8 @@ function App() {
   const refreshToken = useSelector(selectRefreshToken);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
+  const hasRefreshed = useRef(false);
+
   useEffect(() => {
     const storedRefreshToken =
       localStorage.getItem("refreshToken") || refreshToken;
@@ -43,7 +45,7 @@ function App() {
   }, [dispatch, refreshToken, isLoggedIn]);
 
   // Show Lader While there is a refresh or if there is a token but the user is not yet enrolling
-  if (isRefreshing || (refreshToken && !isLoggedIn)) {
+  if (isRefreshing || (refreshToken && !isLoggedIn && !hasRefreshed.current)) {
     return <Loader />;
   }
 
@@ -52,8 +54,6 @@ function App() {
     <Loader />
   ) : (
     <>
-      <RefreshTokenInterceptor />
-
       <RefreshTokenInterceptor />
 
       <Layout>

@@ -24,9 +24,9 @@ const loginSchema = Yup.object().shape({
 function LoginPage() {
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = async (values, actions) => {
     try {
-      dispatch(
+      await dispatch(
         logIn({
           email: values.email,
           password: values.password,
