@@ -13,7 +13,6 @@
 
 .modal {
   position: relative;
-  overflow: hidden;
   background-color: var(--color-bg-secondary);
   padding: 35px 20px;
   border-radius: 30px;
@@ -43,7 +42,7 @@
 }
 
 .closeButton:hover {
-  color: var(--color-secondary);
+  color: var(--color-primary);
 }
 
 @media screen and (min-width: 768px) {

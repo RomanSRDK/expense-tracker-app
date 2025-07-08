@@ -96,12 +96,6 @@
     padding: 28px 20px 40px 20px;
   }
 
-  .chartContainer {
-    position: relative;
-    flex: 3;
-    height: 200px;
-  }
-
   .chartTitle {
     margin-bottom: 54px;
   }
@@ -115,15 +109,10 @@
   }
 
   .categoriesList {
+    margin-top: auto;
     flex: none;
     width: 100%;
     height: 118px;
-    overflow-y: auto;
-    scrollbar-width: thin;
-    scrollbar-color: #444446 var(--color-bg);
-    list-style: none;
-    padding: 0;
-    margin: 0;
     display: flex;
     flex-direction: column;
     gap: 12px;

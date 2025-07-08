@@ -49,15 +49,15 @@ const CategoriesForm = ({ isDisabled }) => {
     incomes: "Incomes",
   };
 
+  const initialCategory =
+    selectedTransactionType === "all" ? "expenses" : selectedTransactionType;
+
   return (
     <div>
       <Formik
         initialValues={{
           text: "",
-          category:
-            selectedTransactionType === "all"
-              ? "incomes"
-              : selectedTransactionType,
+          category: initialCategory,
         }}
         onSubmit={handleSubmit}
         validationSchema={validationCategorySchema}
@@ -89,11 +89,18 @@ const CategoriesForm = ({ isDisabled }) => {
                 </p>
               ) : (
                 <>
-                  <CategoriesCustomSelect
-                    value={values.category}
-                    setFieldValue={setFieldValue}
-                    name="category"
-                  />
+                  {selectedTransactionType === "all" ? (
+                    <CategoriesCustomSelect
+                      value={values.category}
+                      setFieldValue={setFieldValue}
+                      name="category"
+                    />
+                  ) : (
+                    <p className={css.categpryToAdd}>
+                      {typeNames[selectedTransactionType] ||
+                        selectedTransactionType}
+                    </p>
+                  )}
                 </>
               )}
 
