@@ -52,6 +52,9 @@ const CategoriesForm = ({ isDisabled }) => {
   const initialCategory =
     selectedTransactionType === "all" ? "expenses" : selectedTransactionType;
 
+  const initialCategory =
+    selectedTransactionType === "all" ? "expenses" : selectedTransactionType;
+
   return (
     <div>
       <Formik
@@ -103,6 +106,7 @@ const CategoriesForm = ({ isDisabled }) => {
                     //   {typeNames[selectedTransactionType] ||
                     //     selectedTransactionType}
                     // </p>
+
                   )}
                 </>
               )}
