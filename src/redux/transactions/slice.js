@@ -48,7 +48,7 @@ const transactionsSlice = createSlice({
       state.selectedRadioType = payload;
     },
     clearTransactionRadioType(state) {
-      state.selectedRadioType = "all";
+      state.selectedRadioType = "";
     },
     openTransactionsEditModal(state) {
       state.editModalIsOpen = true;

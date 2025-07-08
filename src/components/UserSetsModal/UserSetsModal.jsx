@@ -1,5 +1,6 @@
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useMedia } from "react-use";
 import {
   selectCurrency,
   selectIsLoading,
@@ -16,11 +17,13 @@ import { useEffect, useRef, useState } from "react";
 import defaultAvatar from "../../pictures/avatar.png";
 import { IoCloseOutline } from "react-icons/io5";
 import toast from "react-hot-toast";
-import css from "./UserSetsModal.module.css";
 import { CircleLoader } from "react-spinners";
+import css from "./UserSetsModal.module.css";
+import clsx from "clsx";
 
 function UserSetsModal({ closeModal, onClose }) {
   const dispatch = useDispatch();
+  const isTablet = useMedia("(min-width: 768px)");
 
   const avatarUrl = useSelector(selectUserAvatar);
   const userName = useSelector(selectUserName);
@@ -67,6 +70,7 @@ function UserSetsModal({ closeModal, onClose }) {
     dispatch(fetchUserInfo());
   }, [dispatch]);
 
+  // useEffect для скрытия бургера
   useEffect(() => {
     if (window.innerWidth >= 1440) {
       return;
@@ -82,8 +86,10 @@ function UserSetsModal({ closeModal, onClose }) {
       }
     };
     document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
     };
   }, [closeModal]);
 
@@ -135,8 +141,8 @@ function UserSetsModal({ closeModal, onClose }) {
         <div className={css.avatarContainer}>
           {isLoading ? (
             <CircleLoader
-              size={100}
-              color={"var(--color-primary) "}
+              size={isTablet ? 100 : 80}
+              color={"var(--color-primary)"}
               speedMultiplier={2}
             />
           ) : (
@@ -157,7 +163,13 @@ function UserSetsModal({ closeModal, onClose }) {
             <button onClick={handleButtonClick} className={css.uploadPhoto}>
               Upload new photo
             </button>
-            <button onClick={handleRemovePhoto} className={css.removePhoto}>
+            <button
+              onClick={handleRemovePhoto}
+              className={clsx(css.removePhoto, {
+                [css.disabled]: avatarUrl === defaultAvatar || !avatarUrl,
+              })}
+              disabled={avatarUrl === defaultAvatar || !avatarUrl}
+            >
               Remove
             </button>
           </div>
@@ -181,7 +193,13 @@ function UserSetsModal({ closeModal, onClose }) {
             onChange={handleNameChange}
           />
         </div>
-        <button className={css.saveButton} onClick={handleSave}>
+        <button
+          className={clsx(css.saveButton, {
+            [css.disabled]: editedUserName.trim().length < 2,
+          })}
+          onClick={handleSave}
+          disabled={editedUserName.trim().length < 2}
+        >
           Save
         </button>
       </div>

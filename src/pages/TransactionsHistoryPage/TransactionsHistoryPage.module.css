@@ -40,7 +40,6 @@
   font-size: 16px;
   color: var(--color-secondary);
 }
-
 .transactionsWrapper {
   width: 100%;
   border-radius: 30px;
@@ -59,7 +58,15 @@
     max-width: 100%;
     text-align: left;
   }
-}
 
-@media screen and (min-width: 1440px) {
+  .pageHeader {
+  display: flex; 
+  margin-bottom: 40px; /* Отступ до таблицы с транзакциями */
+}
+}
+@media (max-width: 767px) {
+  .pageWrapper {
+    padding: 10px;
+     
+  }
 }

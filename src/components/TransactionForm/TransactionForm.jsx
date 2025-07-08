@@ -30,6 +30,7 @@ const TransactionForm = ({
   initialValues,
   buttonText,
   isDisabled,
+  onTypeChange,
 }) => {
   const isModalOpen = useSelector(selectCategoriesModalIsOpen);
   const isLoading = useSelector(selectIsLoading);
@@ -71,6 +72,7 @@ const TransactionForm = ({
                     onChange={(e) => {
                       const value = e.target.value;
                       setFieldValue("type", value);
+                      if (onTypeChange) onTypeChange(value);
                       dispatch(setTransactionRadioType(value));
                       dispatch(setTransactionType(value));
                     }}
@@ -96,6 +98,7 @@ const TransactionForm = ({
                     onChange={(e) => {
                       const value = e.target.value;
                       setFieldValue("type", value);
+                      if (onTypeChange) onTypeChange(value);
                       dispatch(setTransactionRadioType(value));
                       dispatch(setTransactionType(value));
                     }}
