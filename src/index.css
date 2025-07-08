@@ -44,6 +44,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #444446 var(--color-bg);
+}
+
 li {
   list-style: none;
 }
