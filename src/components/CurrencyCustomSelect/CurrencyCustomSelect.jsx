@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { IoChevronUp } from "react-icons/io5";
+import { IoChevronDown } from "react-icons/io5";
 import clsx from "clsx";
 import css from "./CurrencyCustomSelect.module.css";
 
@@ -45,7 +45,7 @@ const CurrencyCustomSelect = ({ value, onChange }) => {
       >
         <div className={css.title}>{currency[value] || value}</div>
         <span className={css.iconWrap}>
-          <IoChevronUp className={css.icon} />
+          <IoChevronDown className={css.icon} />
         </span>
       </button>
 

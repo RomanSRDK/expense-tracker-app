@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { IoChevronUp } from "react-icons/io5";
+import { IoChevronDown } from "react-icons/io5";
 import clsx from "clsx";
 import css from "./CategoriesCustomSelect.module.css";
 
@@ -49,7 +49,7 @@ const CategoriesCustomSelect = ({ value, setFieldValue, name }) => {
           {typeNames[displayValue] || displayValue}
         </div>
         <span className={css.iconWrap}>
-          <IoChevronUp className={css.icon} size={12} />
+          <IoChevronDown className={css.icon} size={12} />
         </span>
       </button>
 
