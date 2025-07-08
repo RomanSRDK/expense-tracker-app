@@ -1,9 +1,9 @@
-import React from 'react';
-import { useSelector } from 'react-redux'; // 1. Импортируем useSelector
-import { HiMiniArrowUpRight, HiMiniArrowDownLeft } from 'react-icons/hi2'; 
-import { selectCurrency } from '../../redux/user/selectors'; // 2. Импортируем селектор валюты
-import { getCurrencySymbol } from '../../utils/currencyUtils'; // 3. Импортируем утилиту
-import styles from './TransactionsTotalAmount.module.css';
+import React from "react";
+import { useSelector } from "react-redux"; // 1. Импортируем useSelector
+import { HiMiniArrowUpRight, HiMiniArrowDownLeft } from "react-icons/hi2";
+import { selectCurrency } from "../../redux/user/selectors"; // 2. Импортируем селектор валюты
+import { getCurrencySymbol } from "../../utils/currencyUtils"; // 3. Импортируем утилиту
+import styles from "./TransactionsTotalAmount.module.css";
 
 const TransactionsTotalAmount = ({ totalIncome = 0, totalExpense = 0 }) => {
   // 4. Получаем код текущей валюты из Redux
@@ -14,14 +14,16 @@ const TransactionsTotalAmount = ({ totalIncome = 0, totalExpense = 0 }) => {
   const formatCurrency = (amount) => {
     const validAmount = amount || 0;
     // 6. Используем динамический символ вместо "₴"
-    return `${currencySymbol} ${validAmount.toLocaleString('uk-UA', { minimumFractionDigits: 2 })}`;
+    return `${currencySymbol} ${validAmount.toLocaleString("uk-UA", {
+      minimumFractionDigits: 2,
+    })}`;
   };
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.totalBlock}>
         <div className={`${styles.iconWrapper} ${styles.iconWrapperExpense}`}>
-            <HiMiniArrowUpRight />
+          <HiMiniArrowUpRight />
         </div>
         <div className={styles.info}>
           <h3>Total Income</h3>
@@ -30,7 +32,7 @@ const TransactionsTotalAmount = ({ totalIncome = 0, totalExpense = 0 }) => {
       </div>
       <div className={styles.totalBlock}>
         <div className={`${styles.iconWrapper} ${styles.iconWrapperIncome}`}>
-            <HiMiniArrowDownLeft />
+          <HiMiniArrowDownLeft />
         </div>
         <div className={styles.info}>
           <h3>Total Expenses</h3>

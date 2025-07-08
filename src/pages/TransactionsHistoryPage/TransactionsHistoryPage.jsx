@@ -42,7 +42,6 @@ function TransactionsHistoryPage() {
 
   const headerText =
     transactionsType === 'incomes' ? 'Income Log' : 'Expense Log';
-
   return (
     <Container>
       <Section>
