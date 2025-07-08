@@ -32,6 +32,7 @@ const UserPanel = ({ onClose }) => {
       <ul className={style.userPanel}>
         <li>
           <button
+            aria-lable="button to open settings window"
             className={style.userPanelBtn}
             onClick={handleOpenProfileModal}
           >
@@ -43,6 +44,7 @@ const UserPanel = ({ onClose }) => {
         </li>
         <li>
           <button
+            aria-lable="button to open log out window"
             className={style.userPanelBtn}
             onClick={handleOpenLogoutModal}
           >

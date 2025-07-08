@@ -134,10 +134,10 @@ const MainTransactionsPage = () => {
       <Section>
         <div className={styles.pageWrapper}>
           <section className={styles.infoSection}>
-            <h1 className={styles.infoHeader}>
+            <h1 className={styles.infoHeader} tabIndex={0}>
               {selectedRadioType === "incomes" ? "Income Log" : "Expense Log"}
             </h1>
-            <p className={styles.infoText}>
+            <p className={styles.infoText} tabIndex={0}>
               Capture and organize every penny spent with ease! A clear view of
               your financial habits at your fingertips.
             </p>
@@ -168,7 +168,7 @@ const MainTransactionsPage = () => {
             )}
           </section>
 
-          <section className={styles.formSection}>
+          <section className={styles.formSection} tabIndex={0}>
             <TransactionForm
               onSubmit={handleSubmit}
               initialValues={formInitialValues}

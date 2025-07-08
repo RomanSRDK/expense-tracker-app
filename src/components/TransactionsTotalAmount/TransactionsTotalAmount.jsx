@@ -21,7 +21,7 @@ const TransactionsTotalAmount = ({ totalIncome = 0, totalExpense = 0 }) => {
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.totalBlock}>
+      <div className={styles.totalBlock} tabIndex={0}>
         <div className={`${styles.iconWrapper} ${styles.iconWrapperExpense}`}>
           <HiMiniArrowUpRight />
         </div>
@@ -30,7 +30,7 @@ const TransactionsTotalAmount = ({ totalIncome = 0, totalExpense = 0 }) => {
           <p>{formatCurrency(totalIncome)}</p>
         </div>
       </div>
-      <div className={styles.totalBlock}>
+      <div className={styles.totalBlock} tabIndex={0}>
         <div className={`${styles.iconWrapper} ${styles.iconWrapperIncome}`}>
           <HiMiniArrowDownLeft />
         </div>

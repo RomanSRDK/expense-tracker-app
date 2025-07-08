@@ -130,7 +130,7 @@ const TransactionForm = ({
                 />
               </div>
 
-              <div className={css.dateTime}>
+              <div className={css.dateTime} tabIndex={0}>
                 <div className={css.inputWrapper}>
                   <label className={css.label} htmlFor={dateId}>
                     Date
