@@ -50,9 +50,7 @@ function App() {
   }
 
   //JSX
-  return isRefreshing ? (
-    <Loader />
-  ) : (
+  return (
     <>
       <RefreshTokenInterceptor />
 
