@@ -1,4 +1,3 @@
-import React from "react";
 import { useSelector } from "react-redux"; // 1. Импортируем useSelector
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 import { selectCurrency } from "../../redux/user/selectors"; // 2. Импортируем селектор валюты
