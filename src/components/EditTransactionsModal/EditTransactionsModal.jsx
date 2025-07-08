@@ -84,6 +84,7 @@ const EditTransactionsModal = () => {
           initialValues={TransactionToEdit}
           buttonText={buttonText}
           isDisabled={true}
+          isNavigate={false}
         />
       </div>
     </div>,

@@ -9,20 +9,29 @@ import { setCategory, setEditCategory } from "../../redux/categories/slice";
 import {
   closeCategoriesModal,
   setTransactionRadioType,
+  setTransactionType,
 } from "../../redux/transactions/slice";
 import css from "./CategoriesList.module.css";
 import { selectTransactionType } from "../../redux/transactions/selectors";
+import { useNavigate, useParams } from "react-router-dom";
 
-const CategoriesList = () => {
+const CategoriesList = ({ isNavigate }) => {
   const dispatch = useDispatch();
   const filteredCategories = useSelector(selectFilteredCategories);
   const selectedTransactionType = useSelector(selectTransactionType);
   const showTitles = selectedTransactionType === "all";
 
+  const { transactionsType } = useParams();
+  const navigate = useNavigate();
+
   const handleSubmit = ({ id, name, type }) => {
     dispatch(setCategory({ id, name, type }));
+    dispatch(setTransactionType(type));
     dispatch(setTransactionRadioType(type));
     dispatch(closeCategoriesModal());
+    if (isNavigate && transactionsType !== type) {
+      navigate(`/transactions/${type}`);
+    }
   };
 
   const handleDelete = async ({ id, type, name }) => {

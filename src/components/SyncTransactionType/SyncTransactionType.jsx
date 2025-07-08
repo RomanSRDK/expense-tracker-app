@@ -4,7 +4,7 @@ import { useFormikContext } from "formik";
 import { clearCategory } from "../../redux/categories/slice";
 import { selectCategory } from "../../redux/categories/selectors";
 import {
-  setTransactionType,
+  // setTransactionType,
   clearTransactionType,
 } from "../../redux/transactions/slice";
 import {
@@ -21,11 +21,11 @@ const SyncTransactionType = () => {
   const selectedRadioType = useSelector(selectSelectedRadioType);
   const selectedCategory = useSelector(selectCategory);
 
-  useEffect(() => {
-    if (values.type && values.type !== selectedTransactionType) {
-      dispatch(setTransactionType(values.type));
-    }
-  }, [values.type, selectedTransactionType, dispatch]);
+  // useEffect(() => {
+  //   if (values.type && values.type !== selectedTransactionType) {
+  //     dispatch(setTransactionType(values.type));
+  //   }
+  // }, [values.type, selectedTransactionType, dispatch]);
 
   useEffect(() => {
     if (selectedRadioType && selectedRadioType !== values.type) {

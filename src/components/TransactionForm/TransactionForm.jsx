@@ -24,6 +24,7 @@ import clsx from "clsx";
 import css from "./TransactionForm.module.css";
 import "react-datepicker/dist/react-datepicker.css";
 import { FaRegClock } from "react-icons/fa6";
+import { useNavigate } from "react-router-dom";
 
 const TransactionForm = ({
   onSubmit,
@@ -31,6 +32,7 @@ const TransactionForm = ({
   buttonText,
   isDisabled,
   onTypeChange,
+  isNavigate,
 }) => {
   const isModalOpen = useSelector(selectCategoriesModalIsOpen);
   const isLoading = useSelector(selectIsLoading);
@@ -43,6 +45,7 @@ const TransactionForm = ({
   const commentId = useId();
 
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const user = JSON.parse(
     JSON.parse(localStorage.getItem("persist:auth")).user
@@ -75,6 +78,9 @@ const TransactionForm = ({
                       if (onTypeChange) onTypeChange(value);
                       dispatch(setTransactionRadioType(value));
                       dispatch(setTransactionType(value));
+                      if (isNavigate) {
+                        navigate(`/transactions/${value}`);
+                      }
                     }}
                     disabled={isDisabled}
                   />
@@ -101,6 +107,9 @@ const TransactionForm = ({
                       if (onTypeChange) onTypeChange(value);
                       dispatch(setTransactionRadioType(value));
                       dispatch(setTransactionType(value));
+                      if (isNavigate) {
+                        navigate(`/transactions/${value}`);
+                      }
                     }}
                     disabled={isDisabled}
                   />
@@ -113,6 +122,7 @@ const TransactionForm = ({
                   </span>
                   Income
                 </label>
+
                 <ErrorMessage
                   className={css.error}
                   name="transactionType"
@@ -218,7 +228,10 @@ const TransactionForm = ({
           </>
         )}
       </Formik>
-      {isModalOpen && <CategoriesModal isDisabled={isDisabled} />}
+
+      {isModalOpen && (
+        <CategoriesModal isDisabled={isDisabled} isNavigate={isNavigate} />
+      )}
     </div>
   );
 };

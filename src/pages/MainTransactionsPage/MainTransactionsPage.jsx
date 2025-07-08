@@ -18,9 +18,14 @@ import Container from "../../components/Container/Container";
 import Section from "../../components/Section/Section";
 import toast from "react-hot-toast";
 import { clearCategory } from "../../redux/categories/slice";
-import { clearTransactionType } from "../../redux/transactions/slice";
+import {
+  clearTransactionType,
+  setTransactionRadioType,
+  setTransactionType,
+} from "../../redux/transactions/slice";
 import styles from "./MainTransactionsPage.module.css";
 import { getCategories } from "../../redux/categories/operations";
+import { useParams } from "react-router-dom";
 
 const MainTransactionsPage = () => {
   const dispatch = useDispatch();
@@ -90,8 +95,18 @@ const MainTransactionsPage = () => {
   const hours = currentTime.getHours().toString().padStart(2, "0");
   const minutes = currentTime.getMinutes().toString().padStart(2, "0");
   const formattedTime = `${hours}:${minutes}`;
+
+  const { transactionsType } = useParams();
+
+  const initialType = transactionsType === undefined ? "all" : transactionsType;
+
+  useEffect(() => {
+    dispatch(setTransactionRadioType(initialType));
+    dispatch(setTransactionType(initialType));
+  }, [dispatch, initialType]);
+
   const formInitialValues = {
-    type: "",
+    type: initialType,
     date: today,
     time: formattedTime,
     category: "",
@@ -135,6 +150,7 @@ const MainTransactionsPage = () => {
               initialValues={formInitialValues}
               buttonText={buttonText}
               isDisabled={false}
+              isNavigate={true}
             />
           </section>
         </div>
