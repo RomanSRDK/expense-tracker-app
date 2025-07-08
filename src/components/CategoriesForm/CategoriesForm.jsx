@@ -44,10 +44,10 @@ const CategoriesForm = ({ isDisabled }) => {
     }
   };
 
-  const typeNames = {
-    expenses: "Expenses",
-    incomes: "Incomes",
-  };
+  // const typeNames = {
+  //   expenses: "Expenses",
+  //   incomes: "Incomes",
+  // };
 
   const initialCategory =
     selectedTransactionType === "all" ? "expenses" : selectedTransactionType;
@@ -83,11 +83,12 @@ const CategoriesForm = ({ isDisabled }) => {
                 />
               </div>
               {isDisabled ? (
-                <p className={css.categpryToAdd}>
-                  {typeNames[selectedTransactionType] ||
-                    selectedTransactionType}
-                </p>
+                <></>
               ) : (
+                // <p className={css.categpryToAdd}>
+                //   {typeNames[selectedTransactionType] ||
+                //     selectedTransactionType}
+                // </p>
                 <>
                   {selectedTransactionType === "all" ? (
                     <CategoriesCustomSelect
@@ -96,10 +97,12 @@ const CategoriesForm = ({ isDisabled }) => {
                       name="category"
                     />
                   ) : (
-                    <p className={css.categpryToAdd}>
-                      {typeNames[selectedTransactionType] ||
-                        selectedTransactionType}
-                    </p>
+                    <></>
+
+                    // <p className={css.categpryToAdd}>
+                    //   {typeNames[selectedTransactionType] ||
+                    //     selectedTransactionType}
+                    // </p>
                   )}
                 </>
               )}

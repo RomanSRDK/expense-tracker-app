@@ -70,7 +70,7 @@ const CategoriesModal = ({ isDisabled, isNavigate }) => {
               {typeNames[selectedTransactionType] || selectedTransactionType}
             </h2>
           ) : (
-            <TransactionsCustomSelect />
+            <TransactionsCustomSelect isNavigate={isNavigate} />
           )}
         </div>
         <CategoriesList isNavigate={isNavigate} />
