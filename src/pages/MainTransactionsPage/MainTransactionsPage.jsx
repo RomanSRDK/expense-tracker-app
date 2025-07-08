@@ -18,12 +18,10 @@ import Container from "../../components/Container/Container";
 import Section from "../../components/Section/Section";
 import toast from "react-hot-toast";
 import { clearCategory } from "../../redux/categories/slice";
-import {
-  clearTransactionRadioType,
-  clearTransactionType,
-} from "../../redux/transactions/slice";
+import { clearTransactionType } from "../../redux/transactions/slice";
 import styles from "./MainTransactionsPage.module.css";
 import { getCategories } from "../../redux/categories/operations";
+import { useParams } from "react-router-dom";
 
 const MainTransactionsPage = () => {
   const dispatch = useDispatch();
@@ -82,7 +80,6 @@ const MainTransactionsPage = () => {
       toast.success("Transaction added");
       dispatch(clearCategory());
       dispatch(clearTransactionType());
-      dispatch(clearTransactionRadioType());
       resetForm();
     } catch {
       toast.error("Something went wrong, please try different data.");
