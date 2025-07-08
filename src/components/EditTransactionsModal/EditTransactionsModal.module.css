@@ -15,10 +15,10 @@
   position: relative;
   overflow: hidden;
   background-color: var(--color-bg-secondary);
-  padding: 40px;
+  padding: 35px 20px;
   border-radius: 30px;
-  width: 500px;
-  height: 599px;
+  width: 335px;
+  height: 556px;
   border: 1px solid rgba(250, 250, 250, 0.1);
   display: flex;
   flex-direction: column;
@@ -44,4 +44,12 @@
 
 .closeButton:hover {
   color: var(--color-secondary);
+}
+
+@media screen and (min-width: 768px) {
+  .modal {
+    padding: 40px;
+    width: 500px;
+    height: 599px;
+  }
 }

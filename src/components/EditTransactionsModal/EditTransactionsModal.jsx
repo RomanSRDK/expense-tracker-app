@@ -12,7 +12,6 @@ import toast from "react-hot-toast";
 import { clearCategory } from "../../redux/categories/slice";
 import { updateTransaction } from "../../redux/transactions/operations";
 import { selectTransactionToEdit } from "../../redux/transactions/selectors";
-import EditTransactionForm from "../EditTransactionForm/EditTransactionForm";
 import css from "./EditTransactionsModal.module.css";
 import TransactionForm from "../TransactionForm/TransactionForm";
 

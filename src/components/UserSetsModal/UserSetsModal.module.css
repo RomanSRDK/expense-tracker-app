@@ -13,9 +13,9 @@
 
 .modal {
   position: relative;
-  padding: 40px 40px 60px 40px;
-  width: 500px;
-  height: 477px;
+  padding: 40px 20px 60px 20px;
+  width: 335px;
+  height: 445px;
   border-radius: 30px;
   background-color: rgba(23, 23, 25, 1);
 }
@@ -33,7 +33,7 @@
 }
 
 .title {
-  font-size: 28px;
+  font-size: 24px;
   font-weight: var(--font-weight-regular);
 }
 
@@ -45,8 +45,8 @@
 }
 
 .avatarImage {
-  width: 100px;
-  height: 100px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -63,6 +63,12 @@
   border-radius: 40px;
   padding: 8px 16px;
   font-size: 12px;
+  font-weight: var(--font-weight-regular);
+  transition: all 250ms ease-in-out;
+}
+
+.uploadPhoto:hover {
+  background-color: rgba(61, 61, 63, 1);
 }
 
 .removePhoto {
@@ -71,6 +77,18 @@
   border-radius: 40px;
   padding: 8px 16px;
   font-size: 12px;
+  font-weight: var(--font-weight-regular);
+  transition: all 250ms ease-in-out;
+}
+
+.removePhoto:hover {
+  background-color: rgba(61, 61, 63, 1);
+}
+
+.removePhoto:disabled {
+  background-color: #4a4a4d;
+  opacity: 0.5;
+  cursor: not-allowed;
 }
 
 .identityAndCurrency {
@@ -79,36 +97,77 @@
   gap: 8px;
 }
 
-.currencySelector {
-  background-color: transparent;
-  border: 1px solid rgba(250, 250, 250, 0.4);
-  border-radius: 16px;
-  padding-left: 18px;
-  color: #fafafa;
-  width: 124px;
-  height: 48px;
-  font-size: 16px;
-  appearance: none;
-}
-
 .userName {
   background-color: transparent;
   border: 1px solid rgba(250, 250, 250, 0.4);
-  border-radius: 16px;
-  padding-left: 18px;
+  border-radius: 12px;
+  padding-left: 14px;
   color: #fafafa;
-  width: 293px;
-  height: 48px;
-  font-size: 16px;
+  width: 192px;
+  height: 42px;
+  font-size: 14px;
+  font-weight: var(--font-weight-regular);
+  outline: none;
+}
+
+.userName:hover,
+.userName:focus {
+  border-color: #eaeaea;
 }
 
 .saveButton {
   background-color: var(--color-primary);
   color: #0c0d0d;
   font-weight: var(--font-weight-regular);
-  font-size: 16px;
+  font-size: 14px;
   margin-top: 20px;
   width: 100%;
   border-radius: 40px;
   padding: 14px;
+  transition: all 250ms ease-in-out;
+}
+
+.saveButton:hover {
+  background-color: #0cc96e;
+}
+
+.saveButton:disabled {
+  background-color: #e6a4a4;
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+@media (min-width: 768px) {
+  .modal {
+    padding: 40px 40px 60px 40px;
+    width: 500px;
+    height: 477px;
+  }
+
+  .title {
+    font-size: 28px;
+  }
+
+  .avatarImage {
+    width: 100px;
+    height: 100px;
+  }
+
+  .userName {
+    border-radius: 16px;
+    padding-left: 18px;
+    width: 293px;
+    height: 48px;
+    font-size: 16px;
+  }
+
+  .saveButton {
+    font-size: 16px;
+    margin-top: 20px;
+    width: 100%;
+    border-radius: 40px;
+    padding: 14px;
+    transition-property: background-color;
+    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  }
 }

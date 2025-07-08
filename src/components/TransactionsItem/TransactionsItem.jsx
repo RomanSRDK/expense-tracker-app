@@ -48,7 +48,13 @@ const TransactionsItem = ({ id, sum, date, time, comment, category, type }) => {
     dispatch(openTransactionsEditModal());
     dispatch(setTransactionType(type));
     dispatch(setTransactionRadioType(type));
-    dispatch(setCategory({ id: category._id, name: category.categoryName }));
+    dispatch(
+      setCategory({
+        id: category._id,
+        name: category.categoryName,
+        type: type,
+      })
+    );
   };
 
   const handleDelete = () => {

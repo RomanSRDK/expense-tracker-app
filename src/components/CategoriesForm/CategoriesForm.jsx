@@ -7,11 +7,14 @@ import { validationCategorySchema } from "../../validation/validation";
 import { selectTransactionType } from "../../redux/transactions/selectors";
 import { addCategory } from "../../redux/categories/operations";
 import css from "./CategoriesForm.module.css";
+import CategoriesCustomSelect from "../CategoriesCustomSelect/CategoriesCustomSelect";
+import { selectCategoriesList } from "../../redux/categories/selectors";
 
-const CategoriesForm = () => {
+const CategoriesForm = ({ isDisabled }) => {
   const dispatch = useDispatch();
   const textId = useId();
   const selectedTransactionType = useSelector(selectTransactionType);
+  const categoriesList = useSelector(selectCategoriesList);
 
   const handleSubmit = async (values, { resetForm }) => {
     const payload = {
@@ -20,6 +23,18 @@ const CategoriesForm = () => {
         values.text.trim().charAt(0).toUpperCase() +
         values.text.trim().slice(1),
     };
+
+    const categoryExists = categoriesList[payload.type]?.some(
+      (category) =>
+        category.categoryName.toLowerCase() ===
+        payload.categoryName.toLowerCase()
+    );
+
+    if (categoryExists) {
+      toast.error(`Category "${payload.categoryName}" already exists`);
+      return;
+    }
+
     try {
       await dispatch(addCategory(payload)).unwrap();
       toast.success(`Category "${payload.categoryName}" was added`);
@@ -27,6 +42,11 @@ const CategoriesForm = () => {
     } catch {
       toast.error("Something went wrong");
     }
+  };
+
+  const typeNames = {
+    expenses: "Expenses",
+    incomes: "Incomes",
   };
 
   return (
@@ -42,37 +62,52 @@ const CategoriesForm = () => {
         onSubmit={handleSubmit}
         validationSchema={validationCategorySchema}
       >
-        <Form>
-          <div className={css.formWrapper}>
-            <div className={css.inputWrapper}>
-              <label className={css.label} htmlFor={textId}>
-                New Category
-              </label>
-              <Field
-                className={css.categoryInput}
-                type="text"
-                name="text"
-                placeholder="Enter the text"
-                id={textId}
-              />
-              <ErrorMessage className={css.error} name="text" component="div" />
+        {({ setFieldValue, values }) => (
+          <Form>
+            <div className={css.formWrapper}>
+              <div className={css.inputWrapper}>
+                <label className={css.label} htmlFor={textId}>
+                  New Category
+                </label>
+                <Field
+                  className={css.categoryInput}
+                  type="text"
+                  name="text"
+                  placeholder="Enter the text"
+                  id={textId}
+                />
+                <ErrorMessage
+                  className={css.error}
+                  name="text"
+                  component="div"
+                />
+              </div>
+              {isDisabled ? (
+                <p className={css.categpryToAdd}>
+                  {typeNames[selectedTransactionType] ||
+                    selectedTransactionType}
+                </p>
+              ) : (
+                <>
+                  <CategoriesCustomSelect
+                    value={values.category}
+                    setFieldValue={setFieldValue}
+                    name="category"
+                  />
+                </>
+              )}
+
+              <Button
+                className={css.button}
+                type="submit"
+                size="small"
+                variant="confirm"
+              >
+                Add
+              </Button>
             </div>
-
-            <Field className={css.select} as="select" name="category">
-              <option value="incomes">Incomes</option>
-              <option value="expenses">Expenses</option>
-            </Field>
-
-            <Button
-              className={css.button}
-              type="submit"
-              size="small"
-              variant="confirm"
-            >
-              Add
-            </Button>
-          </div>
-        </Form>
+          </Form>
+        )}
       </Formik>
     </div>
   );

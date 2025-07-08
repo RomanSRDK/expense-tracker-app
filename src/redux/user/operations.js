@@ -22,7 +22,9 @@ export const updatesAvatar = createAsyncThunk(
       // console.log(data);
       return data;
     } catch (error) {
-      return ThunkAPI.rejectWithValue(error);
+      return ThunkAPI.rejectWithValue({
+        message: error.message,
+      });
     }
   }
 );

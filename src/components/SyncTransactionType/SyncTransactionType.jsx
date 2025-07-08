@@ -36,10 +36,11 @@ const SyncTransactionType = () => {
   useEffect(() => {
     const typeChanged = prevType.current && prevType.current !== values.type;
 
-    const categorySelected =
-      selectedCategory && Object.keys(selectedCategory).length > 0;
-
-    if (typeChanged && categorySelected) {
+    if (
+      typeChanged &&
+      selectedCategory.type &&
+      selectedRadioType !== selectedCategory.type
+    ) {
       dispatch(clearCategory());
 
       if (selectedTransactionType !== "all") {
@@ -48,7 +49,13 @@ const SyncTransactionType = () => {
     }
 
     prevType.current = values.type;
-  }, [values.type, dispatch, selectedTransactionType, selectedCategory]);
+  }, [
+    values.type,
+    dispatch,
+    selectedTransactionType,
+    selectedCategory,
+    selectedRadioType,
+  ]);
 
   return null;
 };

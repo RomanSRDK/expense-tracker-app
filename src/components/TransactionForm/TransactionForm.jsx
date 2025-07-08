@@ -7,7 +7,7 @@ import {
   setTransactionRadioType,
   setTransactionType,
 } from "../../redux/transactions/slice";
-import { FiCalendar, FiClock } from "react-icons/fi";
+import { FiCalendar } from "react-icons/fi";
 import {
   selectCategoriesModalIsOpen,
   selectIsLoading,
@@ -30,6 +30,7 @@ const TransactionForm = ({
   initialValues,
   buttonText,
   isDisabled,
+  onTypeChange,
 }) => {
   const isModalOpen = useSelector(selectCategoriesModalIsOpen);
   const isLoading = useSelector(selectIsLoading);
@@ -71,6 +72,7 @@ const TransactionForm = ({
                     onChange={(e) => {
                       const value = e.target.value;
                       setFieldValue("type", value);
+                      if (onTypeChange) onTypeChange(value);
                       dispatch(setTransactionRadioType(value));
                       dispatch(setTransactionType(value));
                     }}
@@ -96,6 +98,7 @@ const TransactionForm = ({
                     onChange={(e) => {
                       const value = e.target.value;
                       setFieldValue("type", value);
+                      if (onTypeChange) onTypeChange(value);
                       dispatch(setTransactionRadioType(value));
                       dispatch(setTransactionType(value));
                     }}
@@ -123,7 +126,7 @@ const TransactionForm = ({
                     Date
                   </label>
 
-                  <Field name="date">
+                  <Field name="date" className={css.input}>
                     {({ field, form }) => (
                       <CustomDatePicker
                         className={clsx(css.input)}
@@ -178,7 +181,9 @@ const TransactionForm = ({
                   placeholder="Entert the sum"
                   id={sumId}
                 />
-                <p className={css.currency}>{currency.toUpperCase()}</p>
+                <p className={css.currency}>
+                  {currency ? currency.toUpperCase() : ""}
+                </p>
                 <ErrorMessage
                   className={css.error}
                   name="sum"
@@ -213,7 +218,7 @@ const TransactionForm = ({
           </>
         )}
       </Formik>
-      {isModalOpen && <CategoriesModal />}
+      {isModalOpen && <CategoriesModal isDisabled={isDisabled} />}
     </div>
   );
 };

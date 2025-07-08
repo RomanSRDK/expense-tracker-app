@@ -1,7 +1,9 @@
 import { createPortal } from "react-dom";
 import { useDispatch, useSelector } from "react-redux";
+import { useMedia } from "react-use";
 import {
   selectCurrency,
+  selectIsLoading,
   selectUserAvatar,
   selectUserName,
 } from "../../redux/user/selectors";
@@ -14,14 +16,20 @@ import {
 import { useEffect, useRef, useState } from "react";
 import defaultAvatar from "../../pictures/avatar.png";
 import { IoCloseOutline } from "react-icons/io5";
+import toast from "react-hot-toast";
+import { CircleLoader } from "react-spinners";
 import css from "./UserSetsModal.module.css";
+import clsx from "clsx";
+import CurrencyCustomSelect from "../CurrencyCustomSelect/CurrencyCustomSelect";
 
 function UserSetsModal({ closeModal, onClose }) {
   const dispatch = useDispatch();
+  const isTablet = useMedia("(min-width: 768px)");
 
   const avatarUrl = useSelector(selectUserAvatar);
   const userName = useSelector(selectUserName);
   const currency = useSelector(selectCurrency);
+  const isLoading = useSelector(selectIsLoading);
 
   const inputRef = useRef(null);
 
@@ -45,8 +53,8 @@ function UserSetsModal({ closeModal, onClose }) {
   };
 
   // Обработчик изменения валюты
-  const handleCurrencyChange = (e) => {
-    setEditedCurrency(e.target.value);
+  const handleCurrencyChange = (newCurrency) => {
+    setEditedCurrency(newCurrency);
   };
 
   const handleSave = () => {
@@ -63,6 +71,15 @@ function UserSetsModal({ closeModal, onClose }) {
     dispatch(fetchUserInfo());
   }, [dispatch]);
 
+  // useEffect для скрытия бургера
+  useEffect(() => {
+    if (window.innerWidth >= 1440) {
+      return;
+    } else {
+      onClose();
+    }
+  }, [onClose]);
+
   useEffect(() => {
     if (window.innerWidth >= 1440) {
       return;
@@ -78,8 +95,10 @@ function UserSetsModal({ closeModal, onClose }) {
       }
     };
     document.addEventListener("keydown", handleKeyDown);
+    document.body.style.overflow = "hidden";
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
+      document.body.style.overflow = "";
     };
   }, [closeModal]);
 
@@ -96,7 +115,15 @@ function UserSetsModal({ closeModal, onClose }) {
     const formData = new FormData();
     formData.append("avatar", file);
 
-    dispatch(updatesAvatar(formData));
+    dispatch(updatesAvatar(formData))
+      .unwrap()
+      .catch(() => {
+        toast.error("Oops! This file is too big. The limit is 1.6 MB", {
+          icon: "🙈",
+          duration: 4000,
+          position: "top-center",
+        });
+      });
   };
 
   const handleButtonClick = () => {
@@ -121,12 +148,19 @@ function UserSetsModal({ closeModal, onClose }) {
         </button>
         <h2 className={css.title}>Profile settings</h2>
         <div className={css.avatarContainer}>
-          <img
-            src={avatarUrl || defaultAvatar}
-            alt="User avatar"
-            className={css.avatarImage}
-          />
-
+          {isLoading ? (
+            <CircleLoader
+              size={isTablet ? 100 : 80}
+              color={"var(--color-primary)"}
+              speedMultiplier={2}
+            />
+          ) : (
+            <img
+              src={avatarUrl || defaultAvatar}
+              alt="User avatar"
+              className={css.avatarImage}
+            />
+          )}
           <input
             type="file"
             accept="image/*"
@@ -138,22 +172,24 @@ function UserSetsModal({ closeModal, onClose }) {
             <button onClick={handleButtonClick} className={css.uploadPhoto}>
               Upload new photo
             </button>
-            <button onClick={handleRemovePhoto} className={css.removePhoto}>
+            <button
+              onClick={handleRemovePhoto}
+              className={clsx(css.removePhoto, {
+                [css.disabled]: avatarUrl === defaultAvatar || !avatarUrl,
+              })}
+              disabled={avatarUrl === defaultAvatar || !avatarUrl}
+            >
               Remove
             </button>
           </div>
         </div>
         <div className={css.identityAndCurrency}>
-          <select
-            name="currency"
+          <CurrencyCustomSelect
+            className={css.currencySelector}
             value={editetCurrency}
             onChange={handleCurrencyChange}
-            className={css.currencySelector}
-          >
-            <option value="uah">₴ UAH</option>
-            <option value="usd">$ USD</option>
-            <option value="eur">€ EUR</option>
-          </select>
+          />
+
           <input
             type="text"
             name="username"
@@ -162,7 +198,13 @@ function UserSetsModal({ closeModal, onClose }) {
             onChange={handleNameChange}
           />
         </div>
-        <button className={css.saveButton} onClick={handleSave}>
+        <button
+          className={clsx(css.saveButton, {
+            [css.disabled]: editedUserName.trim().length < 2,
+          })}
+          onClick={handleSave}
+          disabled={editedUserName.trim().length < 2}
+        >
           Save
         </button>
       </div>

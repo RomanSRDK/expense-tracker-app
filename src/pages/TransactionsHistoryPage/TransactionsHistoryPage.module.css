@@ -40,12 +40,6 @@
   font-size: 16px;
   color: var(--color-secondary);
 }
-
-.headerTotals {
-  /* Стили для контейнера с суммами, если нужны */
-}
-/* ========================================================== */
-
 .transactionsWrapper {
   width: 100%;
   border-radius: 30px;
@@ -53,24 +47,26 @@
   background-color: #171719;
 }
 
-/* Адаптивность для планшетов и мобильных */
-@media (max-width: 1023px) {
+@media (max-width: 1439px) {
   .pageHeader {
-    /* Ставим элементы друг под друга */
     flex-direction: column;
-    align-items: stretch; /* Растягиваем на всю ширину */
-    gap: 24px; /* Отступ между блоками */
+    align-items: stretch;
+    gap: 24px;
   }
 
   .headerInfo {
     max-width: 100%;
-    text-align: center; /* Центрируем текст на мобильных */
+    text-align: left;
   }
-}
 
+  .pageHeader {
+  display: flex; 
+  margin-bottom: 40px; /* Отступ до таблицы с транзакциями */
+}
+}
 @media (max-width: 767px) {
   .pageWrapper {
     padding: 10px;
-    padding-top: 101px;
+     
   }
 }
