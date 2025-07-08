@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useState } from 'react'; // <-- 1. Импортируем useState
 import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom'; 
+import { useParams } from 'react-router-dom';
 import MainTransactionsHeader from '../../components/MainTransactionsHeader/MainTransactionsHeader';
 import TransactionsList from '../../components/TransactionsList/TransactionsList';
 import TransactionsSearchTools from '../../components/TransactionsSearchTools/TransactionsSearchTools';
@@ -14,7 +14,7 @@ import s from './TransactionsHistoryPage.module.css';
 function TransactionsHistoryPage() {
   const dispatch = useDispatch();
   const allTransactions = useSelector(selectAllTransactions);
-  const { transactionsType } = useParams(); 
+  const { transactionsType } = useParams();
 
   // <-- 2. Добавляем состояние для фильтров -->
   const [searchQuery, setSearchQuery] = useState('');
@@ -28,7 +28,7 @@ function TransactionsHistoryPage() {
     if (!allTransactions || allTransactions.length === 0) {
       return { expenseSummary: 0, incomeSummary: 0 };
     }
-    
+
     const expenseSummary = allTransactions
       .filter(t => t.type && t.type.toLowerCase() === 'expenses')
       .reduce((sum, t) => sum + t.sum, 0);
@@ -40,20 +40,20 @@ function TransactionsHistoryPage() {
     return { expenseSummary, incomeSummary };
   }, [allTransactions]);
 
-  const headerText = transactionsType === 'incomes' ? 'Income Log' : 'Expense Log';
+  const headerText =
+    transactionsType === 'incomes' ? 'Income Log' : 'Expense Log';
 
   return (
     <Container>
       <Section>
         <div className={s.pageWrapper}>
           <main className={s.mainContent}>
-            
             <header className={s.pageHeader}>
               <div className={s.headerInfo}>
                 <h1 className={s.infoHeader}>{headerText}</h1>
                 <p className={s.infoText}>
-                  Capture and organize every penny spent with ease! A clear view of
-                  your financial habits at your fingertips.
+                  Capture and organize every penny spent with ease! A clear view
+                  of your financial habits at your fingertips.
                 </p>
               </div>
               <div className={s.headerTotals}>
