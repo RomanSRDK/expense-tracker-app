@@ -86,7 +86,6 @@ const MainTransactionsPage = () => {
       dispatch(clearCategory());
       dispatch(clearTransactionType());
       dispatch(clearTransactionRadioType());
-      dispatch(clearCategoriesList());
       resetForm();
     } catch {
       toast.error("Something went wrong, please try different data.");
