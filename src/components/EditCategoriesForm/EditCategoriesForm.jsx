@@ -49,7 +49,7 @@ const EditCategoriesForm = () => {
                 className={css.input}
                 type="text"
                 name="text"
-                placeholder="Enter the text"
+                placeholder="Enter the category"
                 id={textId}
               />
               <ErrorMessage className={css.error} name="text" component="div" />

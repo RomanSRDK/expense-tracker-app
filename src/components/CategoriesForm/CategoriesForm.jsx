@@ -73,7 +73,7 @@ const CategoriesForm = ({ isDisabled }) => {
                   className={css.categoryInput}
                   type="text"
                   name="text"
-                  placeholder="Enter the text"
+                  placeholder="Enter the category"
                   id={textId}
                 />
                 <ErrorMessage
