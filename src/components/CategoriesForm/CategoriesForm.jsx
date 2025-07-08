@@ -8,11 +8,13 @@ import { selectTransactionType } from "../../redux/transactions/selectors";
 import { addCategory } from "../../redux/categories/operations";
 import css from "./CategoriesForm.module.css";
 import CategoriesCustomSelect from "../CategoriesCustomSelect/CategoriesCustomSelect";
+import { selectCategoriesList } from "../../redux/categories/selectors";
 
 const CategoriesForm = ({ isDisabled }) => {
   const dispatch = useDispatch();
   const textId = useId();
   const selectedTransactionType = useSelector(selectTransactionType);
+  const categoriesList = useSelector(selectCategoriesList);
 
   const handleSubmit = async (values, { resetForm }) => {
     const payload = {
@@ -21,6 +23,18 @@ const CategoriesForm = ({ isDisabled }) => {
         values.text.trim().charAt(0).toUpperCase() +
         values.text.trim().slice(1),
     };
+
+    const categoryExists = categoriesList[payload.type]?.some(
+      (category) =>
+        category.categoryName.toLowerCase() ===
+        payload.categoryName.toLowerCase()
+    );
+
+    if (categoryExists) {
+      toast.error(`Category "${payload.categoryName}" already exists`);
+      return;
+    }
+
     try {
       await dispatch(addCategory(payload)).unwrap();
       toast.success(`Category "${payload.categoryName}" was added`);
