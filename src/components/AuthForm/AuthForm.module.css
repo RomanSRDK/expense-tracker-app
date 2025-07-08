@@ -78,9 +78,9 @@
   font-size: 14px;
 }
 
+.form .success,
 .form .success_icon {
   color: #097b45;
-  fill: #097b45;
 }
 
 .btn_sign_up + p {
