@@ -157,6 +157,7 @@
 }
 
 .error {
+  color: var(--color-error);
   font-size: 10px;
   position: absolute;
   bottom: -14px;

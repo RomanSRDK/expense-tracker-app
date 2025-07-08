@@ -3,7 +3,10 @@ import { LuPen } from 'react-icons/lu';
 import { FaRegTrashAlt } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { selectCurrency } from '../../redux/user/selectors';
-import { deleteTransaction } from '../../redux/transactions/operations';
+import {
+  deleteTransaction,
+  getAllTransactions,
+} from '../../redux/transactions/operations';
 import toast from 'react-hot-toast';
 import {
   openTransactionsEditModal,
@@ -64,9 +67,10 @@ const TransactionsItem = ({ id, sum, date, time, comment, category, type }) => {
     );
   };
 
-  const handleDelete = () => {
+  const handleDelete = async () => {
     try {
-      dispatch(deleteTransaction({ type, transactionId: id })).unwrap();
+      await dispatch(deleteTransaction({ type, transactionId: id })).unwrap();
+      dispatch(getAllTransactions());
       toast.success('Transaction deleted successfully');
     } catch {
       toast.error('Something went wrong');

@@ -41,6 +41,7 @@
 }
 
 .error {
+  color: var(--color-error);
   font-size: 12px;
   position: absolute;
   bottom: -15px;
