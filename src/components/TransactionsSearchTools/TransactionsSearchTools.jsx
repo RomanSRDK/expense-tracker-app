@@ -32,7 +32,6 @@ const TransactionsSearchTools = ({
           id={dateId}
           className={s.datePicker}
           placeholderText="dd/mm/yyyy"
-          dateFormat="dd/MM/yyyy"
           selectedDate={selectedDate}
           onChange={(date) => setSelectedDate(date)}
           icon={<FiCalendar className={s.calendar_icon} />}

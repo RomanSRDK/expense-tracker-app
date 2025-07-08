@@ -90,11 +90,18 @@ const MainTransactionsPage = () => {
     }
   };
 
-  const today = new Date().toISOString().split("T")[0];
+  // const today = new Date().toISOString().split("T")[0];
+
   const currentTime = new Date();
   const hours = currentTime.getHours().toString().padStart(2, "0");
   const minutes = currentTime.getMinutes().toString().padStart(2, "0");
   const formattedTime = `${hours}:${minutes}`;
+
+  const currentDate = new Date();
+  const year = currentDate.getFullYear();
+  const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+  const day = currentDate.getDate().toString().padStart(2, "0");
+  const formattedDate = `${year}-${month}-${day}`;
 
   const { transactionsType } = useParams();
 
@@ -107,7 +114,7 @@ const MainTransactionsPage = () => {
 
   const formInitialValues = {
     type: initialType,
-    date: today,
+    date: formattedDate,
     time: formattedTime,
     category: "",
     sum: "",

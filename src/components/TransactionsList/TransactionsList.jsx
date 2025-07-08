@@ -1,18 +1,18 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { useEffect } from 'react';
-import TransactionsItem from '../TransactionsItem/TransactionsItem';
-import s from './TransactionsList.module.css';
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import TransactionsItem from "../TransactionsItem/TransactionsItem";
+import s from "./TransactionsList.module.css";
 
 import {
   selectIsLoading,
   selectError,
   selectQueryTransactions,
-} from '../../redux/transactions/selectors';
+} from "../../redux/transactions/selectors";
 
-import { getQueryTransactions } from '../../redux/transactions/operations';
-import Loader from '../Loader/Loader';
-import { useLocation } from 'react-router-dom';
-import toast from 'react-hot-toast';
+import { getQueryTransactions } from "../../redux/transactions/operations";
+import Loader from "../Loader/Loader";
+import { useLocation } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const TransactionsList = ({ searchQuery, selectedDate }) => {
   const dispatch = useDispatch();
@@ -20,9 +20,9 @@ const TransactionsList = ({ searchQuery, selectedDate }) => {
 
   // Функція щоб дістати тип з URL
   const getTransactionTypeFromURL = () => {
-    const path = location.pathname.split('/').filter(Boolean);
+    const path = location.pathname.split("/").filter(Boolean);
     const last = path[path.length - 1];
-    return last === 'incomes' || last === 'expenses' ? last : 'all';
+    return last === "incomes" || last === "expenses" ? last : "all";
   };
 
   const transactionType = getTransactionTypeFromURL();
@@ -32,16 +32,17 @@ const TransactionsList = ({ searchQuery, selectedDate }) => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
-  const formatDateLocal = date => {
-    const year = date.getFullYear();
-    const month = (date.getMonth() + 1).toString().padStart(2, '0'); // Місяці від 0 до 11
-    const day = date.getDate().toString().padStart(2, '0');
+  const formatDateLocal = (date) => {
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = (d.getMonth() + 1).toString().padStart(2, "0"); // Місяці від 0 до 11
+    const day = d.getDate().toString().padStart(2, "0");
 
     return `${year}-${month}-${day}`;
   };
 
   useEffect(() => {
-    if (transactionType !== 'all') {
+    if (transactionType !== "all") {
       let queryParam = transactionType;
       if (selectedDate) {
         const formattedDate = formatDateLocal(selectedDate);
@@ -49,20 +50,20 @@ const TransactionsList = ({ searchQuery, selectedDate }) => {
       }
       dispatch(getQueryTransactions(queryParam))
         .unwrap()
-        .then(data => {
+        .then((data) => {
           if (Array.isArray(data) && data.length === 0) {
             // toast.error("There are no transactions for the selected date.");
             // dispatch(getQueryTransactions(transactionType));
           }
         })
         .catch(() => {
-          toast.error('Error loading transactions');
+          toast.error("Error loading transactions");
         });
     }
   }, [dispatch, transactionType, selectedDate, location]);
 
   const filteredTransactions = searchQuery.trim()
-    ? transactions.filter(query =>
+    ? transactions.filter((query) =>
         query.comment.toLowerCase().includes(searchQuery.toLowerCase())
       )
     : transactions;

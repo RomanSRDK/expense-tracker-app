@@ -28,9 +28,9 @@ const registerSchema = Yup.object().shape({
 function RegisterPage() {
   const dispatch = useDispatch();
 
-  const handleSubmit = async (values, actions) => {
+  const handleSubmit = (values, actions) => {
     try {
-      await dispatch(
+      dispatch(
         register({
           name: values.name,
           email: values.email,
