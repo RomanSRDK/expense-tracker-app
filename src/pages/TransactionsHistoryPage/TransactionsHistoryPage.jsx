@@ -1,14 +1,16 @@
-import { useEffect, useMemo, useState } from "react"; // <-- 1. Импортируем useState
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import TransactionsList from "../../components/TransactionsList/TransactionsList";
-import TransactionsSearchTools from "../../components/TransactionsSearchTools/TransactionsSearchTools";
-import TransactionsTotalAmount from "../../components/TransactionsTotalAmount/TransactionsTotalAmount";
-import { getAllTransactions } from "../../redux/transactions/operations";
-import { selectAllTransactions } from "../../redux/transactions/selectors";
-import Container from "../../components/Container/Container";
-import Section from "../../components/Section/Section";
-import s from "./TransactionsHistoryPage.module.css";
+import { useEffect, useMemo, useState } from 'react'; // <-- 1. Импортируем useState
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import MainTransactionsHeader from '../../components/MainTransactionsHeader/MainTransactionsHeader';
+import TransactionsList from '../../components/TransactionsList/TransactionsList';
+import TransactionsSearchTools from '../../components/TransactionsSearchTools/TransactionsSearchTools';
+import TransactionsTotalAmount from '../../components/TransactionsTotalAmount/TransactionsTotalAmount';
+import { getAllTransactions } from '../../redux/transactions/operations';
+import { selectAllTransactions } from '../../redux/transactions/selectors';
+import Container from '../../components/Container/Container';
+import Section from '../../components/Section/Section';
+import s from './TransactionsHistoryPage.module.css';
+
 
 function TransactionsHistoryPage() {
   const dispatch = useDispatch();
@@ -40,8 +42,7 @@ function TransactionsHistoryPage() {
   }, [allTransactions]);
 
   const headerText =
-    transactionsType === "incomes" ? "Income Log" : "Expense Log";
-
+    transactionsType === 'incomes' ? 'Income Log' : 'Expense Log';
   return (
     <Container>
       <Section>
