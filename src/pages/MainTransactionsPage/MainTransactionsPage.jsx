@@ -17,10 +17,7 @@ import TransactionForm from "../../components/TransactionForm/TransactionForm";
 import Container from "../../components/Container/Container";
 import Section from "../../components/Section/Section";
 import toast from "react-hot-toast";
-import {
-  clearCategoriesList,
-  clearCategory,
-} from "../../redux/categories/slice";
+import { clearCategory } from "../../redux/categories/slice";
 import {
   clearTransactionRadioType,
   clearTransactionType,
