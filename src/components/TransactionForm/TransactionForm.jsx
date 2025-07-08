@@ -130,7 +130,7 @@ const TransactionForm = ({
                         field={field}
                         id={dateId}
                         form={form}
-                        icon={<FiCalendar className={css.dateTimeIcon} />}
+                        icon={<FiCalendar className={css.dateDateIcon} />}
                       />
                     )}
                   </Field>

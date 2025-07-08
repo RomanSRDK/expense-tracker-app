@@ -1,20 +1,20 @@
-import { useDispatch } from 'react-redux';
-import { LuPen } from 'react-icons/lu';
-import { FaRegTrashAlt } from 'react-icons/fa';
-import { useSelector } from 'react-redux';
-import { selectCurrency } from '../../redux/user/selectors';
-import { deleteTransaction } from '../../redux/transactions/operations';
-import toast from 'react-hot-toast';
+import { useDispatch } from "react-redux";
+import { LuPen } from "react-icons/lu";
+import { FaRegTrashAlt } from "react-icons/fa";
+import { useSelector } from "react-redux";
+import { selectCurrency } from "../../redux/user/selectors";
+import { deleteTransaction } from "../../redux/transactions/operations";
+import toast from "react-hot-toast";
 import {
   openTransactionsEditModal,
   setTransactionRadioType,
   setTransactionToEdit,
   setTransactionType,
-} from '../../redux/transactions/slice';
-import { selectIsOpenTransactionEdit } from '../../redux/transactions/selectors';
-import EditTransactionsModal from '../EditTransactionsModal/EditTransactionsModal';
-import s from './TransactionsItem.module.css';
-import { setCategory } from '../../redux/categories/slice';
+} from "../../redux/transactions/slice";
+import { selectIsOpenTransactionEdit } from "../../redux/transactions/selectors";
+import EditTransactionsModal from "../EditTransactionsModal/EditTransactionsModal";
+import s from "./TransactionsItem.module.css";
+import { setCategory } from "../../redux/categories/slice";
 import {
   FaHome,
   FaUtensils,
@@ -22,7 +22,7 @@ import {
   FaCar,
   FaCartPlus,
   FaQuestionCircle,
-} from 'react-icons/fa';
+} from "react-icons/fa";
 
 const TransactionsItem = ({ id, sum, date, time, comment, category, type }) => {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ const TransactionsItem = ({ id, sum, date, time, comment, category, type }) => {
   const isEditingTransaction = useSelector(selectIsOpenTransactionEdit);
 
   const user = JSON.parse(
-    JSON.parse(localStorage.getItem('persist:auth')).user
+    JSON.parse(localStorage.getItem("persist:auth")).user
   );
   const currency = currencySelect ? currencySelect : user.currency;
 
@@ -54,17 +54,17 @@ const TransactionsItem = ({ id, sum, date, time, comment, category, type }) => {
   const handleDelete = () => {
     try {
       dispatch(deleteTransaction({ type, transactionId: id })).unwrap();
-      toast.success('Transaction deleted successfully');
+      toast.success("Transaction deleted successfully");
     } catch {
-      toast.error('Something went wrong');
+      toast.error("Something went wrong");
     }
   };
 
   // Функція, щоб отримати день тижня з дати у вигляді рядка
-  const getWeekday = dateString => {
-    if (!dateString) return '';
+  const getWeekday = (dateString) => {
+    if (!dateString) return "";
     const dateObj = new Date(dateString);
-    const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+    const weekdays = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
     return weekdays[dateObj.getDay()];
   };
 
@@ -80,8 +80,8 @@ const TransactionsItem = ({ id, sum, date, time, comment, category, type }) => {
     Other: <FaQuestionCircle />,
   };
 
-  const categoryName = category?.categoryName || 'Other';
-  const icon = categoryIcons[categoryName] || categoryIcons['Other'];
+  const categoryName = category?.categoryName || "Other";
+  const icon = categoryIcons[categoryName] || categoryIcons["Other"];
 
   return (
     <>

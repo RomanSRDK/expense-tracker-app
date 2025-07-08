@@ -22,7 +22,11 @@ const AuthForm = ({ mode, onSubmit, validationSchema, buttonLabel }) => {
   };
 
   return (
-    <Formik initialValues={{ name: "", email: "", password: "" }} onSubmit={onSubmit} validationSchema={validationSchema}>
+    <Formik
+      initialValues={{ name: "", email: "", password: "" }}
+      onSubmit={onSubmit}
+      validationSchema={validationSchema}
+    >
       {({ setFieldValue, errors, touched, values }) => (
         <Form className={s.form} autoComplete="off">
           <div className={s.input_wrapper}>
@@ -59,7 +63,11 @@ const AuthForm = ({ mode, onSubmit, validationSchema, buttonLabel }) => {
               />
               {/* Show if incorrect */}
               {touched.email && errors.email && values.email && (
-                <button type="button" className={s.incorrect_entry} onClick={() => handleResetInput(setFieldValue)}>
+                <button
+                  type="button"
+                  className={s.incorrect_entry}
+                  onClick={() => handleResetInput(setFieldValue)}
+                >
                   <AiFillCloseCircle className={s.incorrect_icon} />
                 </button>
               )}
@@ -80,7 +88,11 @@ const AuthForm = ({ mode, onSubmit, validationSchema, buttonLabel }) => {
                   touched.password && !errors.password && s.input_valid
                 )}
               />
-              <button className={s.toggle_password} type="button" onClick={togglePassword}>
+              <button
+                className={s.toggle_password}
+                type="button"
+                onClick={togglePassword}
+              >
                 {touched.password && !errors.password ? (
                   <IoIosCheckmarkCircle className={s.success_icon} />
                 ) : showPassword ? (
@@ -90,7 +102,9 @@ const AuthForm = ({ mode, onSubmit, validationSchema, buttonLabel }) => {
                 )}
               </button>
               <ErrorMessage name="password" component="span" />
-              {touched.password && !errors.password && <span className={s.success}>Password is secure</span>}
+              {touched.password && !errors.password && (
+                <span className={s.success}>Password is secure</span>
+              )}
             </div>
           </div>
 

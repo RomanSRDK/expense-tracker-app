@@ -60,7 +60,13 @@ const LogoutModal = ({ onCancel, onClose }) => {
 
   //JSX
   return createPortal(
-    <div className={s.overlay} role="dialog" aria-modal="true" tabIndex={-1} onClick={handleOverlayClick}>
+    <div
+      className={s.overlay}
+      role="dialog"
+      aria-modal="true"
+      tabIndex={-1}
+      onClick={handleOverlayClick}
+    >
       <div className={s.wrapper} onClick={(e) => e.stopPropagation()}>
         <p>Are you sure you want to log out?!</p>
         <div className={s.button_wrap}>
@@ -68,12 +74,20 @@ const LogoutModal = ({ onCancel, onClose }) => {
             Log Out
           </button>
 
-          <button className={s.cancel_btn} type="button" onClick={() => onCancel(false)}>
+          <button
+            className={s.cancel_btn}
+            type="button"
+            onClick={() => onCancel(false)}
+          >
             Cancel
           </button>
         </div>
 
-        <button className={s.close_btn} type="button" onClick={() => onCancel(false)}>
+        <button
+          className={s.close_btn}
+          type="button"
+          onClick={() => onCancel(false)}
+        >
           <IoClose className={s.close_icon} />
         </button>
       </div>
