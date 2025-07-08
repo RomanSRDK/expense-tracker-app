@@ -14,6 +14,7 @@ const Logo = () => {
   return (
     <Link to={destination} className={styles.logoLink}>
       <img
+        aria-lable="link to main"
         src={logoIconUrl}
         alt="Expense Tracker Icon"
         className={styles.logoIcon}
