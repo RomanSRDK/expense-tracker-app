@@ -43,11 +43,15 @@ const BurgerMenu = ({
             }}
             onOpenLogoutModal={onOpenLogoutModal}
           />
-          <button onClick={onClose} className={style.closeBtn}>
+          <button
+            onClick={onClose}
+            className={style.closeBtn}
+            aria-label="button to close mobile menu"
+          >
             <RiCloseLargeLine className={style.closeBtnIcon} />
           </button>
         </div>
-        <div className={style.transactionsHistoryNavWrap}> 
+        <div className={style.transactionsHistoryNavWrap}>
           <TransactionsHistoryNav
             wrapperClassName={style.navInBurger}
             onClose={onClose}

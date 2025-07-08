@@ -72,11 +72,17 @@ const LogoutModal = ({ onCancel, onClose }) => {
       <div className={s.wrapper} onClick={(e) => e.stopPropagation()}>
         <p>Are you sure you want to log out?!</p>
         <div className={s.button_wrap}>
-          <button className={s.logout_btn} type="button" onClick={handleLogout}>
+          <button
+            aria-lable="button to log out "
+            className={s.logout_btn}
+            type="button"
+            onClick={handleLogout}
+          >
             Log Out
           </button>
 
           <button
+            aria-lable="button to cancel operatoin"
             className={s.cancel_btn}
             type="button"
             onClick={() => onCancel(false)}
@@ -86,6 +92,7 @@ const LogoutModal = ({ onCancel, onClose }) => {
         </div>
 
         <button
+          aria-lable="button to cancel operatoin"
           className={s.close_btn}
           type="button"
           onClick={() => onCancel(false)}
