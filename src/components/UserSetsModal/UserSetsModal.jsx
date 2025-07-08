@@ -81,6 +81,14 @@ function UserSetsModal({ closeModal, onClose }) {
   }, [onClose]);
 
   useEffect(() => {
+    if (window.innerWidth >= 1440) {
+      return;
+    } else {
+      onClose();
+    }
+  }, [onClose]);
+
+  useEffect(() => {
     const handleKeyDown = (e) => {
       if (e.key === "Escape") {
         closeModal();

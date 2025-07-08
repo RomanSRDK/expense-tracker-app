@@ -27,7 +27,6 @@
   .authLayout {
     flex-direction: row;
     align-items: flex-start;
-    justify-content: center;
     gap: 54px;
   }
 
