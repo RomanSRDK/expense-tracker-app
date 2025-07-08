@@ -11,14 +11,13 @@ import Container from '../../components/Container/Container';
 import Section from '../../components/Section/Section';
 import s from './TransactionsHistoryPage.module.css';
 
-
 function TransactionsHistoryPage() {
   const dispatch = useDispatch();
   const allTransactions = useSelector(selectAllTransactions);
   const { transactionsType } = useParams();
 
   // <-- 2. Добавляем состояние для фильтров -->
-  const [searchQuery, setSearchQuery] = useState("");
+  const [searchQuery, setSearchQuery] = useState('');
   const [selectedDate, setSelectedDate] = useState(null);
 
   useEffect(() => {
@@ -31,11 +30,11 @@ function TransactionsHistoryPage() {
     }
 
     const expenseSummary = allTransactions
-      .filter((t) => t.type && t.type.toLowerCase() === "expenses")
+      .filter(t => t.type && t.type.toLowerCase() === 'expenses')
       .reduce((sum, t) => sum + t.sum, 0);
 
     const incomeSummary = allTransactions
-      .filter((t) => t.type && t.type.toLowerCase() === "incomes")
+      .filter(t => t.type && t.type.toLowerCase() === 'incomes')
       .reduce((sum, t) => sum + t.sum, 0);
 
     return { expenseSummary, incomeSummary };
