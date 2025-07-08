@@ -14,6 +14,8 @@ import RestrictedRoute from "./components/RestrictedRoute/RestrictedRoute";
 import PrivateRoute from "./components/PrivateRoute/PrivateRoute";
 import "./App.css";
 import RefreshTokenInterceptor from "./components/RefreshTokenInterceptor/RefreshTokenInterceptor";
+import TransactionsChecker from "./components/TransactionsTypeChecker/TransactionsChecker";
+import TransactionsHistoryChecker from "./components/TransactionsTypeChecker/TransactionsHistoryChecker";
 
 const WelcomePage = lazy(() => import("./pages/WelcomePage/WelcomePage"));
 const RegisterPage = lazy(() => import("./pages/RegisterPage/RegisterPage"));
@@ -57,13 +59,20 @@ function App() {
       <Layout>
         <div className="pageWrapper">
           <Routes>
-            <Route element={<SharedLayout />}>
+            <Route
+              element={
+                <RestrictedRoute
+                  redirectTo="/transactions/expenses"
+                  component={<SharedLayout />}
+                />
+              }
+            >
               <Route index element={<WelcomePage />} />
               <Route
                 path="/register"
                 element={
                   <RestrictedRoute
-                    redirectTo="/transactions"
+                    redirectTo="/transactions/expenses"
                     component={<RegisterPage />}
                   />
                 }
@@ -72,35 +81,48 @@ function App() {
                 path="/login"
                 element={
                   <RestrictedRoute
-                    redirectTo="/transactions"
+                    redirectTo="/transactions/expenses"
                     component={<LoginPage />}
                   />
                 }
               />
             </Route>
+
             <Route
-              path="/transactions"
+              path="/transactions/:transactionsType"
               element={
                 <PrivateRoute
-                  redirectTo="/"
-                  component={<MainTransactionsPage />}
+                  redirectTo="/login"
+                  component={
+                    <TransactionsChecker Component={MainTransactionsPage} />
+                  }
                 />
               }
             />
+
             <Route
               path="/transactions/history/:transactionsType"
               element={
                 <PrivateRoute
                   redirectTo="/login"
-                  component={<TransactionsHistoryPage />}
+                  component={
+                    <TransactionsHistoryChecker
+                      Component={TransactionsHistoryPage}
+                    />
+                  }
                 />
               }
             />
+
             <Route
               path="/transactions/history"
               element={<Navigate to="/transactions/history/expenses" />}
             />
-            <Route path="*" element={<Navigate to="/transactions" />} />
+
+            <Route
+              path="*"
+              element={<Navigate to="/transactions/expensess" />}
+            />
           </Routes>
         </div>
       </Layout>
