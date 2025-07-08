@@ -29,6 +29,7 @@
 }
 
 .categoriesList {
+  overflow: hidden;
   overflow-y: auto;
   scrollbar-width: thin;
   scrollbar-color: #444446 var(--color-bg);
@@ -95,13 +96,23 @@
     padding: 28px 20px 40px 20px;
   }
 
+  .chartContainer {
+    position: relative;
+    flex: 3;
+    height: 200px;
+  }
+
   .chartTitle {
     margin-bottom: 54px;
   }
 
-  /* .contentContainer {
+  .contentContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
     gap: 42px;
-  } */
+  }
 
   .categoriesList {
     flex: none;
