@@ -13,7 +13,6 @@
 
 .modal {
   position: relative;
-  overflow: hidden;
   background-color: var(--color-bg-secondary);
   padding: 40px 0;
   border-radius: 30px;
@@ -51,6 +50,9 @@
   font-size: 24px;
   letter-spacing: -0.02em;
   color: var(--color-text);
+}
+
+.onlyTitle {
   margin-bottom: 18px;
 }
 

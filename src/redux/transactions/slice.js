@@ -23,7 +23,7 @@ const initialState = {
   error: null,
   categoriesModalIsOpen: false,
   selectedType: "all",
-  selectedRadioType: "",
+  selectedRadioType: "all",
   transactionToEdit: {},
   editModalIsOpen: false,
 };

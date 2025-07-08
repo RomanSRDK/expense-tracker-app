@@ -13,9 +13,10 @@ import {
 import Loader from "../Loader/Loader";
 import { closeCategoriesModal } from "../../redux/transactions/slice";
 import EditCategoriesForm from "../EditCategoriesForm/EditCategoriesForm";
+import TransactionsCustomSelect from "../TransactionsCustomSelect/TransactionsCustomSelect";
 import css from "./CategoriesModal.module.css";
 
-const CategoriesModal = () => {
+const CategoriesModal = ({ isDisabled }) => {
   const dispatch = useDispatch();
   const selectedTransactionType = useSelector(selectTransactionType);
   const isLoading = useSelector(selectIsLoading);
@@ -64,13 +65,21 @@ const CategoriesModal = () => {
           <CgClose className={css.closeIcon} />
         </button>
         <div className={css.modalContainer}>
-          <h2 className={css.title}>
-            {typeNames[selectedTransactionType] || selectedTransactionType}
-          </h2>
+          {isDisabled ? (
+            <h2 className={`${css.title} ${css.onlyTitle}`}>
+              {typeNames[selectedTransactionType] || selectedTransactionType}
+            </h2>
+          ) : (
+            <TransactionsCustomSelect />
+          )}
         </div>
         <CategoriesList />
         <div className={`${css.modalContainer} ${css.form}`}>
-          {categoryToEdit ? <EditCategoriesForm /> : <CategoriesForm />}
+          {categoryToEdit ? (
+            <EditCategoriesForm />
+          ) : (
+            <CategoriesForm isDisabled={isDisabled} />
+          )}
         </div>
       </div>
     </div>,

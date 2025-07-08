@@ -7,7 +7,7 @@ import {
   setTransactionRadioType,
   setTransactionType,
 } from "../../redux/transactions/slice";
-import { FiCalendar, FiClock } from "react-icons/fi";
+import { FiCalendar } from "react-icons/fi";
 import {
   selectCategoriesModalIsOpen,
   selectIsLoading,
@@ -218,7 +218,7 @@ const TransactionForm = ({
           </>
         )}
       </Formik>
-      {isModalOpen && <CategoriesModal />}
+      {isModalOpen && <CategoriesModal isDisabled={isDisabled} />}
     </div>
   );
 };
