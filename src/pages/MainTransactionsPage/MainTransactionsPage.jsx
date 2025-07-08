@@ -21,8 +21,6 @@ import { clearCategory } from "../../redux/categories/slice";
 import { clearTransactionType } from "../../redux/transactions/slice";
 import styles from "./MainTransactionsPage.module.css";
 import { getCategories } from "../../redux/categories/operations";
-import { useParams } from "react-router-dom";
-import CurrencyCustomSelect from "../../components/CurrencyCustomSelect/CurrencyCustomSelect";
 
 const MainTransactionsPage = () => {
   const dispatch = useDispatch();

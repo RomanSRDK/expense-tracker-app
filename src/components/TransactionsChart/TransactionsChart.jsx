@@ -18,7 +18,7 @@ const TransactionsChart = ({
     return (
       <div className={styles.chartWrapper}>
         <h3 className={styles.chartTitle}>Expense Statistics</h3>
-        <div className={styles.emptyState}>No data for this period.</div>
+        <div className={styles.emptyState}>No data for this type.</div>
       </div>
     );
   }
