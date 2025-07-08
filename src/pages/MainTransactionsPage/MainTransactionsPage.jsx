@@ -31,7 +31,7 @@ const MainTransactionsPage = () => {
   const allTransactions = useSelector(selectAllTransactions);
   const selectedRadioType = useSelector(selectSelectedRadioType);
   const normalizedRadioType =
-    selectedRadioType === "" ? "incomes" : selectedRadioType;
+    selectedRadioType === "all" ? "expenses" : selectedRadioType;
 
   const { expenses: expenseCategories = [], incomes: incomeCategories = [] } =
     useSelector(selectCategoriesList) || {};
