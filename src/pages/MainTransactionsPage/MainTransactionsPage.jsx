@@ -4,7 +4,10 @@ import {
   addTransaction,
   getAllTransactions,
 } from "../../redux/transactions/operations";
-import { selectAllTransactions } from "../../redux/transactions/selectors";
+import {
+  selectAllTransactions,
+  selectSelectedRadioType,
+} from "../../redux/transactions/selectors";
 import { selectCategoriesList } from "../../redux/categories/selectors";
 import { generateCategoryColors } from "../../utils/colorGenerator";
 import { calculateCategorySpending } from "../../utils/analyticsUtils";
@@ -23,16 +26,22 @@ import {
   clearTransactionType,
 } from "../../redux/transactions/slice";
 import styles from "./MainTransactionsPage.module.css";
+import { getCategories } from "../../redux/categories/operations";
 
 const MainTransactionsPage = () => {
   const dispatch = useDispatch();
 
   const allTransactions = useSelector(selectAllTransactions);
-  const { expenses: expenseCategories = [] } =
+  const selectedRadioType = useSelector(selectSelectedRadioType);
+  const normalizedRadioType =
+    selectedRadioType === "" ? "incomes" : selectedRadioType;
+
+  const { expenses: expenseCategories = [], incomes: incomeCategories = [] } =
     useSelector(selectCategoriesList) || {};
 
   useEffect(() => {
     dispatch(getAllTransactions());
+    dispatch(getCategories());
   }, [dispatch]);
 
   const summaryData = useMemo(() => {
@@ -48,18 +57,27 @@ const MainTransactionsPage = () => {
       .filter((t) => t.type && t.type.toLowerCase() === "incomes")
       .reduce((sum, t) => sum + t.sum, 0);
 
+    const categoriesForChart =
+      normalizedRadioType === "expenses" ? expenseCategories : incomeCategories;
     const categoriesSummary = calculateCategorySpending(
       allTransactions,
-      expenseCategories,
-      "expenses"
+      categoriesForChart,
+      normalizedRadioType
     );
 
     return { expenseSummary, incomeSummary, categoriesSummary };
-  }, [allTransactions, expenseCategories]);
+  }, [
+    allTransactions,
+    expenseCategories,
+    incomeCategories,
+    normalizedRadioType,
+  ]);
 
   const categoryColors = useMemo(() => {
-    return generateCategoryColors(expenseCategories);
-  }, [expenseCategories]);
+    const categoriesForChart =
+      normalizedRadioType === "expenses" ? expenseCategories : incomeCategories;
+    return generateCategoryColors(categoriesForChart);
+  }, [expenseCategories, incomeCategories, normalizedRadioType]);
 
   const handleSubmit = async (values, { resetForm }) => {
     try {
@@ -96,7 +114,9 @@ const MainTransactionsPage = () => {
       <Section>
         <div className={styles.pageWrapper}>
           <section className={styles.infoSection}>
-            <h1 className={styles.infoHeader}>Expense Log</h1>
+            <h1 className={styles.infoHeader}>
+              {selectedRadioType === "incomes" ? "Income Log" : "Expense Log"}
+            </h1>
             <p className={styles.infoText}>
               Capture and organize every penny spent with ease! A clear view of
               your financial habits at your fingertips.
@@ -106,8 +126,13 @@ const MainTransactionsPage = () => {
               totalExpense={summaryData.expenseSummary}
             />
             <TransactionsChart
+              type={normalizedRadioType}
               expenseData={summaryData.categoriesSummary}
-              totalExpense={summaryData.expenseSummary}
+              totalExpense={
+                normalizedRadioType === "incomes"
+                  ? summaryData.incomeSummary
+                  : summaryData.expenseSummary
+              }
               categoryColors={categoryColors}
             />
           </section>
