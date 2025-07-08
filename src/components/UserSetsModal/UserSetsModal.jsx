@@ -117,9 +117,16 @@ function UserSetsModal({ closeModal, onClose }) {
 
     dispatch(updatesAvatar(formData))
       .unwrap()
+      .then(() => {
+        toast.success("Avatar updated successfully!", {
+          icon: "👌🏻",
+          duration: 4000,
+          position: "top-center",
+        });
+      })
       .catch(() => {
         toast.error("Oops! This file is too big. The limit is 1.6 MB", {
-          icon: "🙈",
+          icon: "😕",
           duration: 4000,
           position: "top-center",
         });
@@ -133,7 +140,15 @@ function UserSetsModal({ closeModal, onClose }) {
   };
 
   const handleRemovePhoto = () => {
-    dispatch(removeUsersAvatar());
+    dispatch(removeUsersAvatar())
+      .unwrap()
+      .then(() => {
+        toast.success("Avatar removed", {
+          icon: "👤",
+          duration: 4000,
+          position: "top-center",
+        });
+      });
   };
 
   return createPortal(
