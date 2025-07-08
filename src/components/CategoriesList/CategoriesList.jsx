@@ -20,7 +20,7 @@ const CategoriesList = () => {
   const showTitles = selectedTransactionType === "all";
 
   const handleSubmit = ({ id, name, type }) => {
-    dispatch(setCategory({ id, name }));
+    dispatch(setCategory({ id, name, type }));
     dispatch(setTransactionRadioType(type));
     dispatch(closeCategoriesModal());
   };

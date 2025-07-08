@@ -5,7 +5,7 @@
 
 .titles {
   display: grid;
-  grid-template-columns: 80px 89px 70px 60px 95px 96px;
+  grid-template-columns: 90px 89px 70px 60px 95px 96px;
   padding: 20px 20px;
   font-weight: 400;
   color: rgba(250, 250, 250, 0.4);
@@ -17,6 +17,7 @@
   display: flex;
   flex-direction: column;
   min-width: 550px; /* ширина для скролу */
+  padding-right: 10px;
 }
 
 @media (min-width: 768px) {
@@ -27,7 +28,7 @@
 
   .titles {
     padding: 20px 32px;
-    grid-template-columns: 100px 120px 100px 90px 120px 100px;
+    grid-template-columns: 100px 120px 100px 90px 110px 100px;
   }
 
   .items {
@@ -67,7 +68,7 @@
 @media (min-width: 1440px) {
   .titles {
     padding: 20px 40px;
-    grid-template-columns: 100px 200px 180px 150px 220px 180px;
+    grid-template-columns: 120px 200px 180px 150px 220px 180px;
   }
 
   .items {

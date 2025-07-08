@@ -1,6 +1,6 @@
 .layoutWrapper {
   display: flex;
-  flex-direction: column; /* Stacked by default */
+  flex-direction: column;
 }
 
 .imageContainer {
@@ -14,7 +14,7 @@
 /* Tablet */
 @media screen and (min-width: 768px) {
   .layoutWrapper {
-    flex-direction: column; /* Still stacked */
+    flex-direction: column;
   }
 
   .imageContainer {

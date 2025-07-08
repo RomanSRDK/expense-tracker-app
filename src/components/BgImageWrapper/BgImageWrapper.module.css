@@ -22,7 +22,6 @@
     background-image: url("./BgImage/tab.webp");
     width: 704px;
     height: 482px;
-    margin: 10px 32px 32px 32px;
   }
 }
 @media screen and (min-width: 768px) and (min-resolution: 192dpi) {

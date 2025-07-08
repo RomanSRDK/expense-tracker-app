@@ -8,7 +8,7 @@
   flex-direction: column;
   margin-bottom: 8px;
   font-weight: 400;
-  font-size: 16px;
+  font-size: 14px;
   letter-spacing: -0.02em;
   color: var(--color-primary);
 }
@@ -19,17 +19,23 @@
   outline: transparent;
   border: 1px solid rgba(250, 250, 250, 0.2);
   border-radius: 12px;
-  height: 48px;
-  padding: 12px 250px 12px 18px;
+  height: 42px;
+  padding: 12px 165px 12px 18px;
   color: var(--color-text);
 }
 
+.categoryInput::placeholder {
+  font-size: 14px;
+  line-height: 1.3;
+}
+
 .button {
-  width: 110px;
-  height: 47px;
+  width: 70px;
+  height: 41px;
   position: absolute;
   top: 50%;
   right: 3px;
+  font-size: 14px;
   transform: translateY(-21.5%);
   border-radius: 12px;
 }
@@ -38,14 +44,25 @@
   font-size: 12px;
   position: absolute;
   bottom: -15px;
+  padding: 0 15px;
+}
+
+.categpryToAdd {
+  position: absolute;
+  top: 50%;
+  right: 90px;
+  font-size: 14px;
+  line-height: 1.3;
+  transform: translateY(16%);
+  color: var(--color-secondary);
 }
 
 .select {
-  height: 47px;
-  width: 110px;
+  width: 70px;
+  height: 41px;
   position: absolute;
   top: 50%;
-  right: 122px;
+  right: 85px;
   text-align: center;
   transform: translateY(-21.5%);
   background-color: #29292b;
@@ -55,7 +72,7 @@
   transition: var(--animation);
   outline: transparent;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 11px;
   letter-spacing: -0.02em;
   cursor: pointer;
 }
@@ -66,7 +83,7 @@
 
 .select option {
   padding: 10px;
-  font-size: 12px;
+  font-size: 12px !important;
   background-color: #171719;
   color: var(--color-text);
   border: 1px solid rgba(250, 250, 250, 0.2);
@@ -75,4 +92,42 @@
 
 .select option:hover {
   background-color: rgba(0, 0, 0, 0.2);
+}
+
+@media screen and (min-width: 768px) {
+  .label {
+    font-size: 16px;
+  }
+
+  .categoryInput {
+    height: 48px;
+    font-size: 16px;
+    line-height: 1.5;
+    padding: 12px 250px 12px 18px;
+  }
+
+  .button {
+    width: 110px;
+    font-size: 16px;
+    height: 47px;
+  }
+
+  .categoryInput::placeholder {
+    font-size: 16px;
+    line-height: 1.5;
+  }
+
+  .categpryToAdd {
+    right: 140px;
+    font-size: 16px;
+    line-height: 1.5;
+    transform: translateY(5%);
+  }
+
+  .select {
+    width: 110px;
+    height: 47px;
+    right: 122px;
+    font-size: 16px;
+  }
 }

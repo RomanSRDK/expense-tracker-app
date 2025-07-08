@@ -5,18 +5,25 @@ export const instance = axios.create({
   baseURL: "https://expense-tracker.b.goit.study/api/",
 });
 
-//  Test
-//  some@gmail.com
-//  qwer1234
-
-// Utility to add JWT
+// Utility to add / remove JWT
 export const setAuthHeader = (token) => {
   instance.defaults.headers.common.Authorization = `Bearer ${token}`;
 };
 
-// Utility to remove JWT
 const clearAuthHeader = () => {
   instance.defaults.headers.common.Authorization = "";
+};
+
+const saveTokensToStorage = (data) => {
+  localStorage.setItem("accessToken", data.accessToken);
+  localStorage.setItem("refreshToken", data.refreshToken);
+  localStorage.setItem("sid", data.sid);
+};
+
+const clearTokensFromStorage = () => {
+  localStorage.removeItem("accessToken");
+  localStorage.removeItem("refreshToken");
+  localStorage.removeItem("sid");
 };
 
 /*
@@ -29,9 +36,8 @@ export const logIn = createAsyncThunk(
     try {
       const res = await instance.post("/auth/login", credentials);
       // After successful login, add the token to the HTTP header
-
       setAuthHeader(res.data.accessToken);
-
+      saveTokensToStorage(res.data);
       return res.data;
     } catch (error) {
       if (error.response?.status === 403 || error.response?.status === 400) {
@@ -81,44 +87,36 @@ export const register = createAsyncThunk(
 export const refreshUser = createAsyncThunk(
   "auth/refresh",
   async (_, thunkAPI) => {
-    // Reading the token from the state via getState()
     const state = thunkAPI.getState();
-    const refreshToken = state.auth.refreshToken;
-    const sid = state.auth.sid;
+    const refreshToken =
+      state.auth.refreshToken || localStorage.getItem("refreshToken");
+    const sid = state.auth.sid || localStorage.getItem("sid");
 
     if (!refreshToken || !sid) {
-      // If there is no token, exit without performing any request
       return thunkAPI.rejectWithValue("No session info for refresh");
     }
-    // try {
-    //   // If there is a token, add it to the HTTP header and perform the request
-    //   setAuthHeader(refreshToken);
-    //   const res = await instance.post("/auth/refresh", { sid });
-    //   setAuthHeader(res.data.accessToken);
-    //   return res.data;
-    // } catch (error) {
-    //   return thunkAPI.rejectWithValue(error.message);
-    // }
 
     try {
-      // Створюємо окремий запит без використання instance
       const res = await axios.post(
         "https://expense-tracker.b.goit.study/api/auth/refresh",
         { sid },
         {
           headers: {
-            Authorization: `Bearer ${refreshToken}`, // Використовуємо refreshToken
+            Authorization: `Bearer ${refreshToken}`,
           },
         }
       );
 
-      // Встановлюємо новий accessToken
-      setAuthHeader(res.data.accessToken);
-      return res.data;
+      if (res.data.accessToken) {
+        setAuthHeader(res.data.accessToken);
+        return res.data;
+      } else {
+        throw new Error("No access token received");
+      }
     } catch (error) {
-      // Очищаємо токен при помилці
       clearAuthHeader();
-      return thunkAPI.rejectWithValue(error.message);
+      clearTokensFromStorage();
+      return thunkAPI.rejectWithValue(error.response?.data || error.message);
     }
   }
 );
@@ -130,11 +128,13 @@ export const refreshUser = createAsyncThunk(
 export const logOut = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
   try {
     const state = thunkAPI.getState();
-    const token = state.auth.token;
+    const token = state.auth.token || localStorage.getItem("accessToken");
     setAuthHeader(token);
     await instance.get("/auth/logout");
     // After a successful logout, remove the token from the HTTP header
     clearAuthHeader();
+    clearTokensFromStorage();
+    return { success: true };
   } catch (error) {
     return thunkAPI.rejectWithValue(error.message);
   }

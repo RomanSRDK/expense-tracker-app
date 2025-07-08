@@ -3,7 +3,7 @@
   font-size: 12px;
   color: var(--color-secondary);
   margin-bottom: 9px;
-  padding: 0 40px;
+  padding: 0 20px;
 }
 
 .list {
@@ -33,7 +33,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 40px;
+  padding: 0 20px;
   width: 100%;
 }
 
@@ -45,7 +45,7 @@
 }
 
 .category {
-  font-size: 16px;
+  font-size: 14px;
 }
 
 .type {
@@ -78,4 +78,21 @@
 .item:hover .buttons {
   opacity: 1;
   pointer-events: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .category {
+    font-size: 16px;
+  }
+
+  .wrapper {
+    padding: 0 40px;
+  }
+
+  .title {
+    padding: 0 40px;
+  }
+}
+
+@media screen and (min-width: 1440px) {
 }

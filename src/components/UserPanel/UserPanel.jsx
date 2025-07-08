@@ -5,7 +5,7 @@ import { useState } from "react";
 import LogoutModal from "../LogoutModal/LogoutModal";
 import UserSetsModal from "../UserSetsModal/UserSetsModal";
 
-const UserPanel = () => {
+const UserPanel = ({ onClose }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
 
@@ -59,9 +59,11 @@ const UserPanel = () => {
       </ul>
 
       {isProfileModalOpen && (
-        <UserSetsModal closeModal={handleCloseProfileModal} />
+        <UserSetsModal onClose={onClose} closeModal={handleCloseProfileModal} />
       )}
-      {isModalOpen && <LogoutModal onCancel={handleCloseLogoutModal} />}
+      {isModalOpen && (
+        <LogoutModal onClose={onClose} onCancel={handleCloseLogoutModal} />
+      )}
     </>
   );
 };

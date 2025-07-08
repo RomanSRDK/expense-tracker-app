@@ -1,7 +1,11 @@
 import { Navigate, Route, Routes } from "react-router-dom";
 import { lazy, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { selectIsRefreshing, selectRefreshToken } from "./redux/auth/selectors";
+import {
+  selectIsRefreshing,
+  selectRefreshToken,
+  selectIsLoggedIn,
+} from "./redux/auth/selectors";
 import { refreshUser } from "./redux/auth/operations";
 import SharedLayout from "./components/SharedLayout/SharedLayout";
 import Loader from "./components/Loader/Loader";
@@ -25,19 +29,29 @@ function App() {
   const dispatch = useDispatch();
   const isRefreshing = useSelector(selectIsRefreshing);
   const refreshToken = useSelector(selectRefreshToken);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   useEffect(() => {
-    if (refreshToken) {
+    const storedRefreshToken =
+      localStorage.getItem("refreshToken") || refreshToken;
+
+    if (storedRefreshToken && !isLoggedIn) {
       dispatch(refreshUser());
     }
-    // eslint-disable-next-line
-  }, [dispatch]);
+  }, [dispatch, refreshToken, isLoggedIn]);
+
+  // Show Lader While there is a refresh or if there is a token but the user is not yet enrolling
+  if (isRefreshing || (refreshToken && !isLoggedIn)) {
+    return <Loader />;
+  }
 
   //JSX
   return isRefreshing ? (
     <Loader />
   ) : (
     <>
+      <RefreshTokenInterceptor />
+
       <RefreshTokenInterceptor />
 
       <Layout>

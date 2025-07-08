@@ -9,7 +9,7 @@ import css from "./UserBarBtn.module.css";
 import { selectUserAvatar, selectUserName } from "../../redux/user/selectors";
 import { fetchUserInfo } from "../../redux/user/operations";
 
-const UserBarBtn = ({ onOpenModal, onOpenLogoutModal }) => {
+const UserBarBtn = ({ onOpenModal, onOpenLogoutModal, onClose }) => {
   const dispatch = useDispatch();
   const [isUserPanelOpen, setIsUserPanelOpen] = useState(false);
   const containerRef = useRef(null);
@@ -62,6 +62,7 @@ const UserBarBtn = ({ onOpenModal, onOpenLogoutModal }) => {
 
       {isUserPanelOpen && (
         <UserPanel
+          onClose={onClose}
           onOpenModal={onOpenModal}
           onOpenLogoutModal={onOpenLogoutModal}
         />
