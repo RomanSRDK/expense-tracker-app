@@ -8,9 +8,11 @@ import {
 import { FaChevronDown } from "react-icons/fa";
 import css from "./TransactionsCustomSelect.module.css";
 import clsx from "clsx";
+import { useNavigate } from "react-router-dom";
 
-const TransactionsCustomSelect = () => {
+const TransactionsCustomSelect = ({ isNavigate }) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const selectedTransactionType = useSelector(selectTransactionType);
   const containerRef = useRef(null);
@@ -39,7 +41,13 @@ const TransactionsCustomSelect = () => {
 
   const handleOptionClick = (value) => {
     dispatch(setTransactionType(value));
-    dispatch(setTransactionRadioType(value));
+    if (value !== "all") {
+      dispatch(setTransactionRadioType(value));
+      if (isNavigate) {
+        navigate(`/transactions/${value}`);
+      }
+    }
+
     setIsDropdownOpen(false);
   };
 

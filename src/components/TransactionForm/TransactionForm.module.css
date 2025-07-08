@@ -163,12 +163,6 @@
   padding: 0px 15px;
 }
 
-@media screen and (max-width: 768px) {
-  .dateDateIcon {
-    display: none;
-  }
-}
-
 @media screen and (min-width: 768px) {
   .input {
     padding: 12px 18px;

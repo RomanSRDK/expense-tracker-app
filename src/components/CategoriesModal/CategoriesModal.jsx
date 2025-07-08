@@ -16,7 +16,7 @@ import EditCategoriesForm from "../EditCategoriesForm/EditCategoriesForm";
 import TransactionsCustomSelect from "../TransactionsCustomSelect/TransactionsCustomSelect";
 import css from "./CategoriesModal.module.css";
 
-const CategoriesModal = ({ isDisabled }) => {
+const CategoriesModal = ({ isDisabled, isNavigate }) => {
   const dispatch = useDispatch();
   const selectedTransactionType = useSelector(selectTransactionType);
   const isLoading = useSelector(selectIsLoading);
@@ -70,10 +70,10 @@ const CategoriesModal = ({ isDisabled }) => {
               {typeNames[selectedTransactionType] || selectedTransactionType}
             </h2>
           ) : (
-            <TransactionsCustomSelect />
+            <TransactionsCustomSelect isNavigate={isNavigate} />
           )}
         </div>
-        <CategoriesList />
+        <CategoriesList isNavigate={isNavigate} />
         <div className={`${css.modalContainer} ${css.form}`}>
           {categoryToEdit ? (
             <EditCategoriesForm />

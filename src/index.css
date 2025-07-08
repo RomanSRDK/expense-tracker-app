@@ -15,6 +15,15 @@
   --header-height: 91px;
 }
 
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0px 1000px transparent inset !important;
+  box-shadow: 0 0 0px 1000px #1e1e1e inset !important;
+  -webkit-text-fill-color: #fafafa !important;
+  transition: background-color 9999s ease-in-out 0s; /* Chrome fix */
+}
+
 html {
   box-sizing: border-box;
   font-family: var(--font-base);
@@ -42,6 +51,11 @@ body {
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #444446 var(--color-bg);
 }
 
 li {
