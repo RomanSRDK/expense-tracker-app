@@ -43,6 +43,7 @@ const TransactionsCustomSelect = ({ isNavigate }) => {
     dispatch(setTransactionType(value));
     if (value !== "all") {
       dispatch(setTransactionRadioType(value));
+      console.log("isNavigate", isNavigate);
       if (isNavigate) {
         navigate(`/transactions/${value}`);
       }
