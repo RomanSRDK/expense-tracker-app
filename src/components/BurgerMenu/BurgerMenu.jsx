@@ -42,7 +42,12 @@ const BurgerMenu = ({
             }}
             onOpenLogoutModal={onOpenLogoutModal}
           />
-          <button onClick={onClose} className={style.closeBtn}>
+          <button
+            onClick={onClose}
+            className={style.closeBtn}
+            type="button"
+            aria-label="Close menu"
+          >
             <RiCloseLargeLine className={style.closeBtnIcon} />
           </button>
         </div>

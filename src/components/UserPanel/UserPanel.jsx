@@ -34,6 +34,8 @@ const UserPanel = () => {
           <button
             className={style.userPanelBtn}
             onClick={handleOpenProfileModal}
+            type="button"
+            aria-label="Open profile settings"
           >
             <span>
               <GoPerson className={style.userPanelIcon} size={16} />
@@ -45,6 +47,8 @@ const UserPanel = () => {
           <button
             className={style.userPanelBtn}
             onClick={handleOpenLogoutModal}
+            type="button"
+            aria-label="Open logout modal"
           >
             <span>
               <FiLogOut className={style.userPanelIcon} size={16} />

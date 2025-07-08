@@ -46,6 +46,8 @@ const UserBarBtn = ({ onOpenModal, onOpenLogoutModal }) => {
       <button
         className={clsx(css.userBarBtn, isUserPanelOpen && css.open)}
         onClick={toggleUserPanel}
+        type="button"
+        aria-label="Open user settings"
       >
         <img
           className={css.userBarBtnAvatar}
