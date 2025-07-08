@@ -72,10 +72,13 @@
   background-color: #0ebb69;
 }
 
-.form span {
+.field_wrap span {
+  position: absolute;
+  bottom: -14px;
+  left: 0;
   padding-left: 18px;
-  color: #e74a3b;
-  font-size: 14px;
+  color: red;
+  font-size: 12px;
 }
 
 .form .success,
