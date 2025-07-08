@@ -20,6 +20,7 @@ import toast from "react-hot-toast";
 import { CircleLoader } from "react-spinners";
 import css from "./UserSetsModal.module.css";
 import clsx from "clsx";
+import CurrencyCustomSelect from "../CurrencyCustomSelect/CurrencyCustomSelect";
 
 function UserSetsModal({ closeModal, onClose }) {
   const dispatch = useDispatch();
@@ -52,8 +53,8 @@ function UserSetsModal({ closeModal, onClose }) {
   };
 
   // Обработчик изменения валюты
-  const handleCurrencyChange = (e) => {
-    setEditedCurrency(e.target.value);
+  const handleCurrencyChange = (newCurrency) => {
+    setEditedCurrency(newCurrency);
   };
 
   const handleSave = () => {
@@ -175,16 +176,12 @@ function UserSetsModal({ closeModal, onClose }) {
           </div>
         </div>
         <div className={css.identityAndCurrency}>
-          <select
-            name="currency"
+          <CurrencyCustomSelect
+            className={css.currencySelector}
             value={editetCurrency}
             onChange={handleCurrencyChange}
-            className={css.currencySelector}
-          >
-            <option value="uah">₴ UAH</option>
-            <option value="usd">$ USD</option>
-            <option value="eur">€ EUR</option>
-          </select>
+          />
+
           <input
             type="text"
             name="username"

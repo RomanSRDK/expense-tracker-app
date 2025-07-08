@@ -13,7 +13,6 @@
 
 .modal {
   position: relative;
-  overflow: hidden;
   background-color: var(--color-bg-secondary);
   padding: 40px 0;
   border-radius: 30px;

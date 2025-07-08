@@ -1,10 +1,7 @@
 .customSelect {
-  position: absolute;
+  position: relative;
   cursor: pointer;
   width: 70px;
-  transform: translateY(-20%);
-  top: 50%;
-  right: 85px;
 }
 
 .openButton {
@@ -17,19 +14,21 @@
 
   text-align: center;
 
-  background-color: #29292b;
-  border: 1px solid rgba(250, 250, 250, 0.2);
+  background-color: transparent;
+  border: 1px solid rgba(250, 250, 250, 0.4);
   border-radius: 12px;
-  outline: transparent;
-  font-weight: 400;
-  font-size: 12px;
-  letter-spacing: -0.02em;
+  color: var(--color-text);
+  width: 98px;
+  height: 42px;
+  font-size: 14px;
+  appearance: none;
+  outline: none;
   cursor: pointer;
-  transition: var(--animation);
+  transition: 250ms ease-in-out;
 }
 
 .openButton:hover {
-  border: 1px solid var(--color-primary);
+  border-color: #eaeaea;
 }
 
 .openButton:hover .icon {
@@ -37,9 +36,11 @@
 }
 
 .icon {
+  height: 18px;
+  width: 18px;
   color: var(--color-primary);
   overflow: hidden;
-  transition: transform 300ms ease, color var(--animation);
+  transition: transform 300ms ease, color 250ms ease-in-out;
 }
 
 .openButton.open .icon {
@@ -51,7 +52,7 @@
   align-items: center;
   justify-content: center;
   font-weight: 400;
-  font-size: 9px;
+  font-size: 14px;
   letter-spacing: -0.02em;
   color: var(--color-text);
 }
@@ -64,19 +65,19 @@
 .dropdown {
   cursor: pointer;
   position: absolute;
-  top: -180%;
+  top: 120%;
   overflow: hidden;
   width: 122px;
   z-index: 999;
-  background-color: var(--color-bg-secondary);
+  background-color: rgba(250, 250, 250, 0.1);
   border: 1px solid rgba(250, 250, 250, 0.3);
   border-radius: 12px;
-  transition: var(--animation);
-  opacity: 0.97;
+  opacity: 0.96;
+  transition: 250ms ease-in-out;
 }
 
 .dropdown:hover {
-  border: 1px solid var(--color-primary);
+  border: 1px solid #eaeaea;
 }
 
 .option {
@@ -92,15 +93,17 @@
 
 @media screen and (min-width: 768px) {
   .customSelect {
+    width: 124px;
+    height: 48px;
+
     width: 110px;
-    transform: translateY(-20.5%);
-    top: 50%;
-    right: 122px;
+    transform: translateY(0%);
   }
 
   .openButton {
-    width: 110px;
-    height: 47px;
+    border-radius: 16px;
+    width: 124px;
+    height: 48px;
     gap: 8px;
   }
 
@@ -108,11 +111,12 @@
     font-size: 16px;
   }
 
-  .option {
-    font-size: 16px;
+  .dropdown {
+    top: 110%;
   }
 
-  .dropdown {
-    top: 120%;
+  .icon {
+    height: 20px;
+    width: 20px;
   }
 }
