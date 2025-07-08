@@ -65,14 +65,8 @@
 }
 
 .button:hover,
-.button:hover {
+.button:focus {
   color: var(--color-primary);
-}
-
-.item .buttons {
-  opacity: 0;
-  pointer-events: none;
-  transition: var(--animation);
 }
 
 .item:hover .buttons {
@@ -94,5 +88,10 @@
   }
 }
 
-@media screen and (min-width: 1440px) {
+@media screen and (min-width: 1023px) {
+  .item .buttons {
+    opacity: 0;
+    pointer-events: none;
+    transition: var(--animation);
+  }
 }
