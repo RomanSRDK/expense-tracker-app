@@ -18,6 +18,10 @@
   height: 445px;
   border-radius: 30px;
   background-color: rgba(23, 23, 25, 1);
+
+  border: 1px solid rgba(250, 250, 250, 0.1);
+  box-shadow: rgba(50, 50, 93, 0.4) 0px 8px 20px -2px,
+    rgba(0, 0, 0, 0.45) 0px 6px 10px -3px;
 }
 
 .closeButton {
@@ -135,6 +139,13 @@
   background-color: #e6a4a4;
   opacity: 0.5;
   cursor: not-allowed;
+}
+
+@media screen and (max-width: 375px) {
+  .modal {
+    width: 90%;
+    padding: 40px 20px 60px 20px;
+  }
 }
 
 @media (min-width: 768px) {
