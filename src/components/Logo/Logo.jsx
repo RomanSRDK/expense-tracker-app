@@ -15,7 +15,7 @@ const Logo = () => {
     <Link
       to={destination}
       className={styles.logoLink}
-      aria-lable="link to main"
+      aria-label="link to main"
     >
       <img
         src={logoIconUrl}
