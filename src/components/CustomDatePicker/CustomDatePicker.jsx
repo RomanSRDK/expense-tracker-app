@@ -14,7 +14,7 @@ const CustomDatePicker = ({
 
   const selected = isFormik
     ? field.value
-      ? new Date(field.value)
+      ? new Date(`${field.value}T12:00:00`)
       : null
     : selectedDate;
 
