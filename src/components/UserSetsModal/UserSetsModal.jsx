@@ -215,10 +215,15 @@ function UserSetsModal({ closeModal, onClose }) {
         </div>
         <button
           className={clsx(css.saveButton, {
-            [css.disabled]: editedUserName.trim().length < 2,
+            [css.disabled]:
+              editedUserName.trim().length < 2 ||
+              editedUserName.trim().length >= 32,
           })}
           onClick={handleSave}
-          disabled={editedUserName.trim().length < 2}
+          disabled={
+            editedUserName.trim().length < 2 ||
+            editedUserName.trim().length >= 32
+          }
         >
           Save
         </button>
