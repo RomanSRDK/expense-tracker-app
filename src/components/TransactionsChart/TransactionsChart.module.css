@@ -19,12 +19,13 @@
 .contentContainer {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 32px;
 }
 
 .chartContainer {
   position: relative;
-  flex: 3;
+  max-width: 100%;
   height: 200px;
 }
 
@@ -35,9 +36,9 @@
   scrollbar-color: #444446 var(--color-bg);
   height: 190px;
   list-style: none;
-  padding: 0;
+  padding-right: 12px;
   margin: 0;
-  flex: 1;
+  width: 189px;
   display: flex;
   flex-direction: column;
   gap: 12px;
@@ -115,9 +116,9 @@
 
   .categoriesList {
     margin-top: auto;
-    flex: none;
     width: 100%;
     height: 118px;
+    width: 267px;
     display: flex;
     flex-direction: column;
     gap: 12px;
