@@ -19,6 +19,16 @@ const CustomDatePicker = ({
     : selectedDate;
 
   const handleChange = (date) => {
+    if (!date) {
+      const emptyString = "";
+      if (isFormik) {
+        form.setFieldValue(field.name, emptyString);
+      } else {
+        onChange?.(emptyString);
+      }
+      return;
+    }
+
     const year = date.getFullYear();
     const month = (date.getMonth() + 1).toString().padStart(2, "0");
     const day = date.getDate().toString().padStart(2, "0");

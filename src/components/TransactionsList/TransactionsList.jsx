@@ -32,22 +32,11 @@ const TransactionsList = ({ searchQuery, selectedDate }) => {
   const isLoading = useSelector(selectIsLoading);
   const error = useSelector(selectError);
 
-  const formatDateLocal = (date) => {
-    if (!date) return "";
-    const d = new Date(date);
-    const year = d.getFullYear();
-    const month = (d.getMonth() + 1).toString().padStart(2, "0"); // Місяці від 0 до 11
-    const day = d.getDate().toString().padStart(2, "0");
-
-    return `${year}-${month}-${day}`;
-  };
-
   useEffect(() => {
     if (transactionType !== "all") {
       let queryParam = transactionType;
       if (selectedDate) {
-        const formattedDate = formatDateLocal(selectedDate);
-        queryParam = `${transactionType}?date=${formattedDate}`;
+        queryParam = `${transactionType}?date=${selectedDate}`;
       }
       dispatch(getQueryTransactions(queryParam))
         .unwrap()
