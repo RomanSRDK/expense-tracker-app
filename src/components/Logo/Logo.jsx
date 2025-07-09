@@ -18,7 +18,6 @@ const Logo = () => {
       aria-lable="link to main"
     >
       <img
-        aria-lable="link to main"
         src={logoIconUrl}
         alt="Expense Tracker Icon"
         className={styles.logoIcon}
