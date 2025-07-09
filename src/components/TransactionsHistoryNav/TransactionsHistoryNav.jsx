@@ -14,6 +14,7 @@ const TransactionsHistoryNav = ({ wrapperClassName, onClose }) => {
     // 3. Объединяем стандартный класс .nav с тем, что пришел из пропсов
     <nav className={clsx(styles.nav, wrapperClassName)}>
       <NavLink
+        aria-label="link to transactions history expenses"
         to="/transactions/history/expenses"
         className={({ isActive }) =>
           isActive ? `${styles.link} ${styles.activeLink}` : styles.link
@@ -23,6 +24,7 @@ const TransactionsHistoryNav = ({ wrapperClassName, onClose }) => {
         All Expense
       </NavLink>
       <NavLink
+        aria-label="link to transactions history incomes"
         to="/transactions/history/incomes"
         className={({ isActive }) =>
           isActive ? `${styles.link} ${styles.activeLink}` : styles.link

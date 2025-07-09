@@ -64,6 +64,7 @@ const AuthForm = ({ mode, onSubmit, validationSchema, buttonLabel }) => {
               {/* Show if incorrect */}
               {touched.email && errors.email && values.email && (
                 <button
+                  aria-label="button to reset field"
                   type="button"
                   className={s.incorrect_entry}
                   onClick={() => handleResetInput(setFieldValue)}
@@ -89,6 +90,7 @@ const AuthForm = ({ mode, onSubmit, validationSchema, buttonLabel }) => {
                 )}
               />
               <button
+                aria-label="button to show password"
                 className={s.toggle_password}
                 type="button"
                 onClick={togglePassword}
@@ -109,17 +111,27 @@ const AuthForm = ({ mode, onSubmit, validationSchema, buttonLabel }) => {
           </div>
 
           <div className={s.sign_box}>
-            <button className={s.btn_sign_up} type="submit">
+            <button
+              aria-label="button to submit"
+              className={s.btn_sign_up}
+              type="submit"
+            >
               {buttonLabel}
             </button>
             {mode === "register" && (
               <p>
-                Already have account? <a href="/login">Sign In</a>
+                Already have account?{" "}
+                <a href="/login" aria-label="link to login page">
+                  Sign In
+                </a>
               </p>
             )}
             {mode === "login" && (
               <p>
-                Don't have an account? <a href="/register">Sign Up</a>
+                Don't have an account?{" "}
+                <a href="/register" aria-label="link to register page">
+                  Sign Up
+                </a>
               </p>
             )}
           </div>

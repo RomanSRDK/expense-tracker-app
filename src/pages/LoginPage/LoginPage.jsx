@@ -24,9 +24,9 @@ const loginSchema = Yup.object().shape({
 function LoginPage() {
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = async (values, actions) => {
     try {
-      dispatch(
+      await dispatch(
         logIn({
           email: values.email,
           password: values.password,
@@ -44,8 +44,8 @@ function LoginPage() {
   return (
     <div className={s.sharedWrapper}>
       <div className={s.content_box}>
-        <h2>Sign In</h2>
-        <p>
+        <h2 tabIndex={0}>Sign In</h2>
+        <p tabIndex={0}>
           Welcome back to effortless expense tracking! Your financial dashboard
           awaits.
         </p>

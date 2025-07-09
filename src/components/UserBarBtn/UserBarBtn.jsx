@@ -44,6 +44,7 @@ const UserBarBtn = ({ onOpenModal, onOpenLogoutModal, onClose }) => {
   return (
     <div className={css.userBarBtnContainer} ref={containerRef}>
       <button
+        aria-label="button to open settings"
         className={clsx(css.userBarBtn, isUserPanelOpen && css.open)}
         onClick={toggleUserPanel}
       >

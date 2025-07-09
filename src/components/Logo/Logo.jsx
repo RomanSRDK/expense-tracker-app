@@ -12,7 +12,11 @@ const Logo = () => {
   const destination = isLoggedIn ? "/transactions/expenses" : "/";
 
   return (
-    <Link to={destination} className={styles.logoLink}>
+    <Link
+      to={destination}
+      className={styles.logoLink}
+      aria-label="link to main"
+    >
       <img
         src={logoIconUrl}
         alt="Expense Tracker Icon"

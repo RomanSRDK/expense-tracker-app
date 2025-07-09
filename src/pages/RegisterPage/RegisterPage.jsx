@@ -28,9 +28,9 @@ const registerSchema = Yup.object().shape({
 function RegisterPage() {
   const dispatch = useDispatch();
 
-  const handleSubmit = (values, actions) => {
+  const handleSubmit = async (values, actions) => {
     try {
-      dispatch(
+      await dispatch(
         register({
           name: values.name,
           email: values.email,
@@ -49,8 +49,8 @@ function RegisterPage() {
   return (
     <div className={s.sharedWrapper}>
       <div className={s.content_box}>
-        <h2>Sign Up</h2>
-        <p>
+        <h2 tabIndex={0}>Sign Up</h2>
+        <p tabIndex={0}>
           Step into a world of hassle-free expense management! Your journey
           towards financial mastery begins here.
         </p>

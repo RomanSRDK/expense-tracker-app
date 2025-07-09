@@ -38,7 +38,7 @@
 }
 
 .input_invalid {
-  border-color: #e74a3b;
+  border-color: var(--color-error);
 }
 
 .input_valid,
@@ -48,7 +48,7 @@
 }
 
 .incorrect_icon {
-  fill: #e74a3b;
+  fill: var(--color-error);
 }
 
 .btn_sign_up {
@@ -72,10 +72,13 @@
   background-color: #0ebb69;
 }
 
-.form span {
+.field_wrap span {
+  position: absolute;
+  bottom: -14px;
+  left: 0;
   padding-left: 18px;
   color: red;
-  font-size: 14px;
+  font-size: 12px;
 }
 
 .form .success,

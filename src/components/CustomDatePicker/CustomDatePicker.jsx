@@ -1,7 +1,6 @@
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./datepicker-overrides.css";
-
 const CustomDatePicker = ({
   className,
   field,
@@ -11,13 +10,11 @@ const CustomDatePicker = ({
   ...rest
 }) => {
   const isFormik = !!field && !!form;
-
   const selected = isFormik
     ? field.value
-      ? new Date(field.value)
+      ? new Date(`${field.value}T12:00:00`)
       : null
     : selectedDate;
-
   const handleChange = (date) => {
     if (isFormik) {
       form.setFieldValue(field.name, date.toISOString().split("T")[0]);
@@ -25,7 +22,6 @@ const CustomDatePicker = ({
       onChange?.(date);
     }
   };
-
   return (
     <DatePicker
       className={className}
@@ -38,5 +34,4 @@ const CustomDatePicker = ({
     />
   );
 };
-
 export default CustomDatePicker;
