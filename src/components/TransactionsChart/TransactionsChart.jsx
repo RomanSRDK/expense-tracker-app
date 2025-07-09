@@ -35,7 +35,7 @@ const TransactionsChart = ({
       <h3 className={styles.chartTitle}>{chartTitle}</h3>
       <div className={styles.contentContainer}>
         <div className={styles.chartContainer}>
-          <ResponsiveContainer width="100%" height="100%">
+          <ResponsiveContainer width="100%" aspect={2}>
             <PieChart>
               <Pie
                 data={chartData}
