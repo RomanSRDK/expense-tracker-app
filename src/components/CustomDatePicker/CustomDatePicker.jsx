@@ -14,17 +14,31 @@ const CustomDatePicker = ({
 
   const selected = isFormik
     ? field.value
-      ? new Date(`${field.value}T12:00:00`)
+      ? new Date(field.value)
       : null
     : selectedDate;
 
   const handleChange = (date) => {
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, "0");
+    const day = date.getDate().toString().padStart(2, "0");
+    const dateString = `${year}-${month}-${day}`;
+
     if (isFormik) {
-      form.setFieldValue(field.name, date.toISOString().split("T")[0]);
+      form.setFieldValue(field.name, dateString);
     } else {
-      onChange?.(date);
+      onChange?.(dateString);
     }
   };
+
+  // const handleChange = (date) => {
+  //   const custom = date.toISOString().split("T")[0];
+  //   if (isFormik) {
+  //     form.setFieldValue(field.name, custom);
+  //   } else {
+  //     onChange?.(date);
+  //   }
+  // };
 
   return (
     <DatePicker

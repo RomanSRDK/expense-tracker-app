@@ -2,13 +2,14 @@ import { ErrorMessage, Field, Form, Formik } from "formik";
 import { useDispatch, useSelector } from "react-redux";
 import { useId } from "react";
 import toast from "react-hot-toast";
-import Button from "../Button/Button";
 import { validationCategorySchema } from "../../validation/validation";
 import { selectTransactionType } from "../../redux/transactions/selectors";
-import { addCategory } from "../../redux/categories/operations";
-import css from "./CategoriesForm.module.css";
-import CategoriesCustomSelect from "../CategoriesCustomSelect/CategoriesCustomSelect";
 import { selectCategoriesList } from "../../redux/categories/selectors";
+import { addCategory } from "../../redux/categories/operations";
+import CategoriesCustomSelect from "../CategoriesCustomSelect/CategoriesCustomSelect";
+import SyncToCategoriesForm from "../SyncToCategoriesForm/SyncToCategoriesForm";
+import Button from "../Button/Button";
+import css from "./CategoriesForm.module.css";
 
 const CategoriesForm = ({ isDisabled }) => {
   const dispatch = useDispatch();
@@ -44,11 +45,6 @@ const CategoriesForm = ({ isDisabled }) => {
     }
   };
 
-  // const typeNames = {
-  //   expenses: "Expenses",
-  //   incomes: "Incomes",
-  // };
-
   const initialCategory =
     selectedTransactionType === "all" ? "expenses" : selectedTransactionType;
 
@@ -63,60 +59,47 @@ const CategoriesForm = ({ isDisabled }) => {
         validationSchema={validationCategorySchema}
       >
         {({ setFieldValue, values }) => (
-          <Form>
-            <div className={css.formWrapper}>
-              <div className={css.inputWrapper}>
-                <label className={css.label} htmlFor={textId}>
-                  New Category
-                </label>
-                <Field
-                  className={css.categoryInput}
-                  type="text"
-                  name="text"
-                  placeholder="Enter the category"
-                  id={textId}
-                />
-                <ErrorMessage
-                  className={css.error}
-                  name="text"
-                  component="div"
-                />
+          <>
+            <SyncToCategoriesForm />
+            <Form>
+              <div className={css.formWrapper}>
+                <div className={css.inputWrapper}>
+                  <label className={css.label} htmlFor={textId}>
+                    New Category
+                  </label>
+                  <Field
+                    className={css.categoryInput}
+                    type="text"
+                    name="text"
+                    placeholder="Enter the category"
+                    id={textId}
+                  />
+                  <ErrorMessage
+                    className={css.error}
+                    name="text"
+                    component="div"
+                  />
+                </div>
+
+                {!isDisabled && selectedTransactionType === "all" && (
+                  <CategoriesCustomSelect
+                    value={values.category}
+                    setFieldValue={setFieldValue}
+                    name="category"
+                  />
+                )}
+
+                <Button
+                  className={css.button}
+                  type="submit"
+                  size="small"
+                  variant="confirm"
+                >
+                  Add
+                </Button>
               </div>
-              {isDisabled ? (
-                <></>
-              ) : (
-                // <p className={css.categpryToAdd}>
-                //   {typeNames[selectedTransactionType] ||
-                //     selectedTransactionType}
-                // </p>
-                <>
-                  {selectedTransactionType === "all" ? (
-                    <CategoriesCustomSelect
-                      value={values.category}
-                      setFieldValue={setFieldValue}
-                      name="category"
-                    />
-                  ) : (
-                    <></>
-
-                    // <p className={css.categpryToAdd}>
-                    //   {typeNames[selectedTransactionType] ||
-                    //     selectedTransactionType}
-                    // </p>
-                  )}
-                </>
-              )}
-
-              <Button
-                className={css.button}
-                type="submit"
-                size="small"
-                variant="confirm"
-              >
-                Add
-              </Button>
-            </div>
-          </Form>
+            </Form>
+          </>
         )}
       </Formik>
     </div>

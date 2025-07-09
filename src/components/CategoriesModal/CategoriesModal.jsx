@@ -40,9 +40,9 @@ const CategoriesModal = ({ isDisabled, isNavigate }) => {
 
     return () => {
       document.removeEventListener("keydown", handleKeyDown);
-      document.body.style.overflow = "";
+      if (!isDisabled) document.body.style.overflow = "";
     };
-  }, [dispatch]);
+  }, [isDisabled, dispatch]);
 
   useEffect(() => {
     dispatch(getCategories());

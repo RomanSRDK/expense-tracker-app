@@ -1,3 +1,40 @@
+/* Charts */
+.chartWrapper {
+  padding: 24px;
+  background-color: #171719;
+  border-radius: 30px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  font-family: var(--font-base, "Open Sans", sans-serif);
+  color: var(--color-text, #fafafa);
+  height: 287px;
+}
+
+.chartTitle {
+  margin: 0 0 20px 0;
+  font-size: 16px;
+  text-align: left;
+  font-weight: var(--font-weight-regular); /* UNIFIED */
+  color: var(--color-secondary);
+}
+
+.emptyState {
+  text-align: center;
+  color: var(--color-secondary);
+  padding: 40px 0;
+}
+
+@media screen and (max-width: 767px) {
+  .chartWrapper {
+    height: 471px;
+    padding: 28px 20px 40px 20px;
+  }
+
+  .chartTitle {
+    margin-bottom: 54px;
+  }
+}
+
+/* Main styles */
 .pageWrapper {
   display: flex;
   justify-content: center;
