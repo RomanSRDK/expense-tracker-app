@@ -3,7 +3,13 @@ import { IoChevronDown } from "react-icons/io5";
 import clsx from "clsx";
 import css from "./CategoriesCustomSelect.module.css";
 
-const CategoriesCustomSelect = ({ value, setFieldValue, name }) => {
+const CategoriesCustomSelect = ({
+  value,
+  setFieldValue,
+  name,
+  errors,
+  touched,
+}) => {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const containerRef = useRef(null);
 
@@ -33,7 +39,7 @@ const CategoriesCustomSelect = ({ value, setFieldValue, name }) => {
     setIsDropdownOpen(false);
   };
 
-  const displayValue = value === "all" ? "incomes" : value;
+  const hasError = touched?.[name] && errors?.[name];
 
   return (
     <div className={css.customSelect} ref={containerRef}>
@@ -45,8 +51,8 @@ const CategoriesCustomSelect = ({ value, setFieldValue, name }) => {
           togglePanel();
         }}
       >
-        <div className={css.title}>
-          {typeNames[displayValue] || displayValue}
+        <div className={clsx(css.title, !value && css.placeholder)}>
+          {value ? typeNames[value] : "Choose..."}
         </div>
         <span className={css.iconWrap}>
           <IoChevronDown className={css.icon} size={12} />
@@ -66,6 +72,7 @@ const CategoriesCustomSelect = ({ value, setFieldValue, name }) => {
           ))}
         </div>
       )}
+      {hasError && <div className={css.error}>{errors[name]}</div>}
     </div>
   );
 };
