@@ -21,4 +21,5 @@ export const validationCategorySchema = Yup.object({
     .required("Category is required")
     .min(2, "Too short")
     .max(16, "Max 16"),
+  category: Yup.string().required("Type is required"),
 });

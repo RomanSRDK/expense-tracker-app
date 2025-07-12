@@ -10,7 +10,7 @@ const SyncToCategoriesForm = () => {
   useEffect(() => {
     if (selectedTransactionType && selectedTransactionType !== "all") {
       setFieldValue("category", selectedTransactionType);
-    }
+    } else setFieldValue("category", "");
   }, [selectedTransactionType, setFieldValue]);
 
   return null;
